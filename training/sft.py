@@ -18,6 +18,17 @@ python -m training.sft \\
     --config training/configs/llama_3_1b.yaml \\
     --epochs 5 \\
     --lr 1e-4
+
+Gated models (Llama on HF)
+-------------------------
+`meta-llama/*` requires (1) accepting the license on the model page and
+(2) authentication. On HPC, set a token in the job environment, e.g.:
+
+    export HF_TOKEN="$(cat ~/.hf_token)"   # or your site's secret injection
+
+Alternatively run `huggingface-cli login` once so
+`~/.cache/huggingface/token` exists on shared / home storage, or set
+`HF_HOME` to that cache. Without this, downloads fail with 401 / GatedRepoError.
 """
 
 from __future__ import annotations
@@ -59,6 +70,39 @@ logging.basicConfig(
 logger = logging.getLogger("got.sft")
 
 
+def _is_local_main_process() -> bool:
+    """True if this is the only process or LOCAL_RANK 0 (under torchrun)."""
+    lr = int(os.environ.get("LOCAL_RANK", "-1"))
+    return lr in (-1, 0)
+
+
+def _hf_token_configured() -> bool:
+    if os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN"):
+        return True
+    try:
+        from huggingface_hub import get_token
+
+        return bool(get_token())
+    except Exception:
+        return False
+
+
+def _maybe_warn_hf_gated_model(model_id: str) -> None:
+    """Llama (and similar) need HF login; fail early with a clear message."""
+    mid = model_id.lower()
+    if "meta-llama" not in mid:
+        return
+    if _hf_token_configured():
+        return
+    logger.error(
+        "Hugging Face auth missing for gated model %r. Accept the license at "
+        "https://huggingface.co/%s then set HF_TOKEN or run huggingface-cli login "
+        "(see docstring at top of training/sft.py).",
+        model_id,
+        model_id,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Config loading
 # ---------------------------------------------------------------------------
@@ -91,6 +135,7 @@ def setup_tokenizer(model_name: str, special_tokens: list[str] | None = None):
     tokenizer = AutoTokenizer.from_pretrained(
         model_name,
         trust_remote_code=True,
+        token=True,
     )
 
     # Ensure pad token exists
@@ -123,6 +168,7 @@ def setup_model(model_name: str, tokenizer, lora_config: dict):
     if local_rank == -1:
         load_kw["device_map"] = "auto"
 
+    load_kw["token"] = True
     model = AutoModelForCausalLM.from_pretrained(model_name, **load_kw)
 
     # Resize embeddings if we added special tokens
@@ -203,6 +249,8 @@ def train(config: dict):
     # Seed
     seed = train_cfg.get("seed", 42)
     set_seed(seed)
+
+    _maybe_warn_hf_gated_model(model_cfg["name"])
 
     # Tokenizer
     special_tokens = config.get("special_tokens", [CORRECTION_TOKEN])
@@ -312,7 +360,8 @@ def main():
     config = load_config(args.config)
     config = merge_cli_overrides(config, args)
 
-    logger.info(f"Config: {config}")
+    if _is_local_main_process():
+        logger.info(f"Config: {config}")
     train(config)
 
 
