@@ -29,15 +29,34 @@ Gated models (Llama on HF)
 Alternatively run `huggingface-cli login` once so
 `~/.cache/huggingface/token` exists on shared / home storage, or set
 `HF_HOME` to that cache. Without this, downloads fail with 401 / GatedRepoError.
+
+Disk quota (HPC)
+----------------
+If downloads fail with ``OSError: [Errno 122] Disk quota exceeded``, your default
+cache (often under ``$HOME/.cache/huggingface``) is full or too small. Put the
+hub cache on scratch *before* ``torchrun``::
+
+    export HF_HUB_CACHE=/sfs/weka/scratch/$USER/hf_hub
+    mkdir -p "$HF_HUB_CACHE"
+
+Or pass ``--hf-hub-cache /path/to/scratch/hf_hub``. This also avoids four ranks
+writing hub temp files at once (the script serializes hub downloads under a file
+lock when using ``torchrun``).
 """
 
 from __future__ import annotations
 
 import argparse
+import contextlib
 import logging
 import os
 import sys
 from pathlib import Path
+
+try:
+    import fcntl
+except ImportError:
+    fcntl = None  # type: ignore[assignment]
 
 import yaml
 import torch
@@ -103,6 +122,46 @@ def _maybe_warn_hf_gated_model(model_id: str) -> None:
     )
 
 
+def _hub_cache_dir() -> Path:
+    return Path(
+        os.environ.get(
+            "HF_HUB_CACHE",
+            str(Path.home() / ".cache" / "huggingface" / "hub"),
+        )
+    )
+
+
+@contextlib.contextmanager
+def _serialized_hub_downloads():
+    """One rank at a time for hub I/O (avoids quota blow-ups and tmp races)."""
+    lr = int(os.environ.get("LOCAL_RANK", "-1"))
+    if lr == -1 or fcntl is None:
+        yield
+        return
+    cache_root = _hub_cache_dir()
+    cache_root.mkdir(parents=True, exist_ok=True)
+    lock_path = cache_root / ".got_sft_hub_download.lock"
+    fd = os.open(str(lock_path), os.O_CREAT | os.O_RDWR, 0o644)
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX)
+        yield
+    finally:
+        fcntl.flock(fd, fcntl.LOCK_UN)
+        os.close(fd)
+
+
+def _apply_hf_hub_cache(config: dict) -> None:
+    """Set HF_HUB_CACHE from config or CLI (see merge_cli_overrides)."""
+    raw = config.get("hf_hub_cache")
+    if not raw:
+        return
+    path = Path(os.path.expandvars(str(raw))).expanduser().resolve()
+    path.mkdir(parents=True, exist_ok=True)
+    os.environ["HF_HUB_CACHE"] = str(path)
+    if _is_local_main_process():
+        logger.info("HF_HUB_CACHE=%s", path)
+
+
 # ---------------------------------------------------------------------------
 # Config loading
 # ---------------------------------------------------------------------------
@@ -123,6 +182,8 @@ def merge_cli_overrides(config: dict, args: argparse.Namespace) -> dict:
         config["training"]["batch_size"] = args.batch_size
     if args.output_dir is not None:
         config["training"]["output_dir"] = args.output_dir
+    if getattr(args, "hf_hub_cache", None):
+        config["hf_hub_cache"] = args.hf_hub_cache
     return config
 
 
@@ -132,11 +193,12 @@ def merge_cli_overrides(config: dict, args: argparse.Namespace) -> dict:
 
 def setup_tokenizer(model_name: str, special_tokens: list[str] | None = None):
     """Load tokenizer and add any special tokens."""
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_name,
-        trust_remote_code=True,
-        token=True,
-    )
+    with _serialized_hub_downloads():
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_name,
+            trust_remote_code=True,
+            token=True,
+        )
 
     # Ensure pad token exists
     if tokenizer.pad_token is None:
@@ -169,7 +231,8 @@ def setup_model(model_name: str, tokenizer, lora_config: dict):
         load_kw["device_map"] = "auto"
 
     load_kw["token"] = True
-    model = AutoModelForCausalLM.from_pretrained(model_name, **load_kw)
+    with _serialized_hub_downloads():
+        model = AutoModelForCausalLM.from_pretrained(model_name, **load_kw)
 
     # Resize embeddings if we added special tokens
     if len(tokenizer) > model.config.vocab_size:
@@ -250,6 +313,7 @@ def train(config: dict):
     seed = train_cfg.get("seed", 42)
     set_seed(seed)
 
+    _apply_hf_hub_cache(config)
     _maybe_warn_hf_gated_model(model_cfg["name"])
 
     # Tokenizer
@@ -352,6 +416,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lr", type=float, default=None)
     parser.add_argument("--batch-size", type=int, default=None, dest="batch_size")
     parser.add_argument("--output-dir", default=None, dest="output_dir")
+    parser.add_argument(
+        "--hf-hub-cache",
+        default=None,
+        dest="hf_hub_cache",
+        help="Directory for Hugging Face hub cache (sets HF_HUB_CACHE). Use scratch on HPC.",
+    )
     return parser.parse_args()
 
 
