@@ -9,6 +9,10 @@ Usage
 # From repo root:
 python -m training.sft --config training/configs/llama_3_1b.yaml
 
+# 4 GPUs (DDP) on one node:
+torchrun --standalone --nnodes=1 --nproc_per_node=4 -m training.sft \\
+    --config training/configs/llama_3_1b.yaml
+
 # Or with CLI overrides:
 python -m training.sft \\
     --config training/configs/llama_3_1b.yaml \\
@@ -109,12 +113,17 @@ def setup_model(model_name: str, tokenizer, lora_config: dict):
     """Load model, resize embeddings, apply LoRA."""
     logger.info(f"Loading model: {model_name}")
 
-    model = AutoModelForCausalLM.from_pretrained(
-        model_name,
-        torch_dtype=torch.bfloat16,
-        device_map="auto",
-        trust_remote_code=True,
-    )
+    # DDP (torchrun): one full replica per rank — do not use device_map="auto".
+    # Single process: device_map="auto" is fine for multi-GPU single-node sharding.
+    local_rank = int(os.environ.get("LOCAL_RANK", "-1"))
+    load_kw: dict = {
+        "torch_dtype": torch.bfloat16,
+        "trust_remote_code": True,
+    }
+    if local_rank == -1:
+        load_kw["device_map"] = "auto"
+
+    model = AutoModelForCausalLM.from_pretrained(model_name, **load_kw)
 
     # Resize embeddings if we added special tokens
     if len(tokenizer) > model.config.vocab_size:
