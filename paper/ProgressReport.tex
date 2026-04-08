@@ -1,0 +1,200 @@
+%%
+%% Graph of Thoughts Progress Report
+%% ACM sigplan format, 2-column
+%%
+\documentclass[sigplan,screen]{acmart}
+
+\setlength{\marginparwidth}{2cm}
+\usepackage[disable]{todonotes}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+\setcopyright{acmlicensed}
+\copyrightyear{2026}
+\acmYear{2026}
+\acmDOI{XXXXXXX.XXXXXXX}
+
+\acmConference[CS Capstone '26]{University of Virginia Computer Science Capstone}{Feb 23, 2026}{Charlottesville, VA}
+\acmISBN{978-1-4503-XXXX-X/2026/02}
+
+\settopmatter{printacmref=false}
+
+%% Reduce overfull/underfull box warnings in tight two-column layout
+\sloppy
+\raggedbottom
+\tolerance=10000
+\emergencystretch=3em
+\hbadness=10000
+\vbadness=10000
+\vfuzz=10000pt
+\hfuzz=10000pt
+
+\begin{document}
+
+\title{Graph of Thoughts: Improving LLM's by Decoupling Logic from Memory}
+
+\author{Jonas Lee}
+\email{uhz7mq@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\author{Neil Morgan}
+\email{fwz8ya@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\author{Abhinav Pappu}
+\email{mzu9pt@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\author{Paris Phan}
+\email{auj4yx@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\author{Andrew Thepvongs}
+\email{htf6dp@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\renewcommand{\shortauthors}{Lee et al.}
+
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10010147.10010178.10010205.10010208</concept_id>
+  <concept_desc>Computing methodologies~Natural language processing</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10003752.10003766.10003771</concept_id>
+  <concept_desc>Theory of computation~Graph algorithms analysis</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[300]{Computing methodologies~Natural language processing}
+\ccsdesc[300]{Theory of computation~Graph algorithms analysis}
+
+\keywords{large language models, graph algorithms, reasoning, supervised fine-tuning}
+
+\maketitle
+
+\section{Introduction and Project Refresher}
+
+Current Large Language Models (LLMs) fundamentally struggle with multi-step deterministic graph reasoning. When prompted to trace algorithms like BFS or Dijkstra's, models frequently succumb to ``state drift''~\cite{got2024}, in which small errors within early steps compound to the point where the model begins hallucinating an entirely new graph.
+
+To address this, the Graph of Thoughts (GoT) framework proposes decoupling the model's logic capabilities from its memory constraints~\cite{besta2024got}. By utilizing a deterministic, non-neural state executor to manage the ground-truth graph state, the LLM is restricted strictly to predicting the optimal next algorithmic operation based on the induced local subgraph.
+
+Our core deliverables are:
+\begin{itemize}
+    \item A robust synthetic trace generation pipeline for graph algorithms.
+    \item A model fine-tuned via Supervised Fine-Tuning (SFT) and negative sampling to interact seamlessly with a deterministic external state.
+    \item A comprehensive benchmarking suite demonstrating GoT's superiority over standard Chain of Thought (CoT)~\cite{wei2022cot}, primarily focusing on operational accuracy, state consistency, and structural generalization.
+\end{itemize}
+
+\section{Progress to Date}
+
+\subsection{Infrastructure and Dataset Generation}
+
+Our primary infrastructure and software architecture are fully initialized. We have implemented Python-based deterministic solvers for Breadth-First Search (BFS), Depth-First Search (DFS), and Dijkstra's algorithm. These solvers feature step-by-step state logging and graph-language token linearization, functioning as the foundational state executors for our training pipeline. A PyTorch-based SFT pipeline utilizing LoRA~\cite{hu2022lora} for Llama 3.1B has also been successfully integrated on our GPU compute clusters.
+
+Our most significant milestone is the complete generation of our large-scale JSON training datasets. We successfully generated deterministic algorithm traces across four primary network topologies: Erd\H{o}s--R\'{e}nyi graphs, Barab\'{a}si--Albert (scale-free) graphs, Random Trees, and Grids. Furthermore, we implemented and generated adversarial traces including high-girth cycles, bottlenecks, and bridge graphs to ensure robust training.
+
+We have integrated our evaluation frameworks with NLGraph~\cite{nlgraph2024} and GLBench~\cite{glbench2024} to process these datasets under standard CoT paradigms, supplying us with benchmark failures to evaluate our GoT model against.
+
+\subsection{Generalization and Compute}
+
+An important open question concerns generalization across graph scales. Our current training examples are limited to graphs of size $n = 10$--$20$ nodes, and it remains to be seen whether models trained at this scale are capable of generalizing to substantially larger graphs. If generalization proves insufficient, we will expand our training examples to approximately $n = 200$ nodes and rerun the SFT pipeline accordingly. In terms of evaluation order, we plan to test using the Llama model first before proceeding to Qwen, as Llama imposes a lower GPU memory footprint and allows for faster iteration. Should Llama-based testing fail to meet our quality thresholds, we will reevaluate our methods and training procedures before committing additional resources. Given the computational intensity of our full pipeline, these experiments require access to High-Performance Computing (HPC) infrastructure, to which we have recently acquired access, though we have not yet had the opportunity to begin runs.
+
+\section{Preliminary Results and Observations}
+
+Initial testing has focused on confirming our SFT pipeline and verifying that the model can learn the specialized graph-linearization syntax (e.g., $(u)-[w]\rightarrow(v)$). Our early training runs natively support Teacher Forcing on correct states, successfully preventing the compounding errors that normally plague long traces during the optimization phase.
+
+Anecdotally, our tests on the CoT baseline datasets revealed that high-girth topologies cause immediate and catastrophic failure in standard LLM reasoning. Without external state management, the models quickly hallucinate shortcut edges that bridge long cycles. For example, when evaluating a DFS trace on a 20-node cycle:
+\begin{itemize}
+    \item \textbf{CoT Output (Failed):} \textit{``Since we visited node 4, we observe neighbors [5, 19]. I will traverse to 19...''} (Hallucinating a non-existent chordal edge).
+    \item \textbf{GoT Output (Preliminary):} \textit{``Current Subgraph: (4)-[1]->(5). Target Operation: TRAVERSE(5).''} (Enforced by state executor bounds).
+\end{itemize}
+
+\section{Updated Timeline and Next Steps}
+
+Our immediate next steps heading toward the May 4 deadline include:
+\begin{itemize}
+    \item \textbf{Model Scaling:} Transitioning our SFT configuration from Llama 3.1B to Qwen 2.5 7B Instruct~\cite{qwen2024}.
+    \item \textbf{Negative Sampling:} Activating our broken-trace injection pipeline to train the model to output the \texttt{CORRECTION} token upon detecting errors.
+    \item \textbf{Comprehensive Evaluation:} Running zero-shot structural generalization assessments (training on Erd\H{o}s--R\'{e}nyi, testing on Barab\'{a}si--Albert) and generating path-length vs.\ accuracy degradation plots using both GLBench and NLGraph.
+\end{itemize}
+
+Regarding schedule adjustments, data pipeline development and teacher-forcing integration required slightly more time than projected. Consequently, we are condensing our evaluation block (originally Weeks 6--8) by running our zero-shot transfer tests and faithfulness audits in parallel across multiple compute instances.
+
+\section{Conclusion and Requests for Feedback}
+
+Overall, the project remains very healthy and on track. The core software infrastructure is complete, the theoretical decoupling model is functional in early training phases, and we possess the requisite datasets to complete the full scope of our evaluation metrics.
+
+At this juncture, we actively seek the committee's feedback on our stress-testing suite. Specifically, we would appreciate insight on whether relying entirely on LoRA adapters for our zero-shot structural generalization tests might inappropriately bias the model's capacity to extrapolate graph policies, compared to undertaking a more computationally expensive full-parameter fine-tuning.
+
+\begin{thebibliography}{9}
+
+\bibitem{got2024}
+Maciej Besta, Nils Blach, Ales Kubicek, Robert Gerstenberger, Michal Podstawski, Lukas Gianinazzi, Joanna Gajda, Tomasz Lehmann, Hubert Niewiadomski, Piotr Nyczyk, and Torsten Hoefler.
+\newblock Graph of thoughts: Solving elaborate problems with large language models.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial Intelligence}, 2024.
+
+\bibitem{besta2024got}
+Maciej Besta et~al.
+\newblock Reasoning on graphs with large language models via graph-structured prompting.
+\newblock \emph{arXiv preprint arXiv:2406.05673}, 2024.
+
+\bibitem{wei2022cot}
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed Chi, Quoc Le, and Denny Zhou.
+\newblock Chain-of-thought prompting elicits reasoning in large language models.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2022.
+
+\bibitem{hu2022lora}
+Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu Chen.
+\newblock LoRA: Low-rank adaptation of large language models.
+\newblock In \emph{International Conference on Learning Representations}, 2022.
+
+\bibitem{nlgraph2024}
+Yiming Wang, Zhuosheng Zhang, and Rui Wang.
+\newblock Can language models solve graph problems in natural language?
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2024.
+
+\bibitem{glbench2024}
+Zhikai Chen, Haitao Mao, Jingzhe Liu, Yu Song, Bingheng Li, Wei Jin, Bahare Fatemi, Anton Tsitsulin, Bryan Perozzi, Hui Liu, and Jiliang Tang.
+\newblock GLBench: A comprehensive benchmark for graph with large language models.
+\newblock \emph{arXiv preprint arXiv:2407.00869}, 2024.
+
+\bibitem{qwen2024}
+Qwen Team.
+\newblock Qwen2.5 technical report.
+\newblock \emph{arXiv preprint arXiv:2412.15115}, 2024.
+
+\end{thebibliography}
+
+\end{document}

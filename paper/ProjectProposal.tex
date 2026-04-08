@@ -1,0 +1,834 @@
+%%
+%% This is file `sample-sigplan.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `all,proceedings,bibtex,sigplan')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-sigplan.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+%%
+%% The first command in your LaTeX source must be the \documentclass
+%% command.
+%%
+%% For submission and review of your manuscript please change the
+%% command to \documentclass[manuscript, screen, review]{acmart}.
+%%
+%% When submitting camera ready or to TAPS, please change the command
+%% to \documentclass[sigconf]{acmart} or whichever template is required
+%% for your publication.
+%%
+%%
+\documentclass[sigplan,screen]{acmart}
+% For inline notes during drafting
+\setlength{\marginparwidth}{2cm}
+\usepackage[disable]{todonotes}
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+\setcopyright{acmlicensed}
+\copyrightyear{2018}
+\acmYear{2018}
+\acmDOI{XXXXXXX.XXXXXXX}
+%% These commands are for a PROCEEDINGS abstract or paper.
+\acmConference[Conference acronym 'XX]{Make sure to enter the correct
+  conference title from your right9s confirmation email}{Feb 23,
+  2026}{Charlottesville, VA}
+%%
+%%  Uncomment \acmBooktitle if the title of the proceedings is different
+%%  from ``Proceedings of ...''!
+%%
+%%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+%%  June 03--05, 2018, Woodstock, NY}
+\acmISBN{978-1-4503-XXXX-X/2018/06}
+
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% For managing citations, it is recommended to use bibliography
+%% files in BibTeX format.
+%%
+%% You can then either use BibTeX with the ACM-Reference-Format style,
+%% or BibLaTeX with the acmnumeric or acmauthoryear sytles, that include
+%% support for advanced citation of software artefact from the
+%% biblatex-software package, also separately available on CTAN.
+%%
+%% Look at the sample-*-biblatex.tex files for templates showcasing
+%% the biblatex styles.
+%%
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+\settopmatter{printacmref=true, printccs=true}
+% Keep ACM reference format enabled (required); avoid suppressing the permission footnote
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Graph of Thoughts: Improving LLM's by Decoupling Logic from Memory}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+
+\author{Jonas Lee}
+\email{uhz7mq@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\author{Neil Morgan}
+\email{fwz8ya@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\author{Abhinav Pappu}
+\email{mzu9pt@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\author{Paris Phan}
+\email{auj4yx@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+\author{Andrew Thepvongs}
+\email{htf6dp@virginia.edu}
+\affiliation{%
+  \institution{University of Virginia}
+  \city{Charlottesville}
+  \state{Virginia}
+  \country{USA}
+}
+
+
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+\renewcommand{\shortauthors}{Lee et al.}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+% \begin{abstract}
+%  TODO: Write Abstract
+% \end{abstract}
+
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10010147.10010178.10010205.10010208</concept_id>
+  <concept_desc>Computing methodologies~Natural language processing</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10003752.10003766.10003771</concept_id>
+  <concept_desc>Theory of computation~Graph algorithms analysis</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[300]{Computing methodologies~Natural language processing}
+\ccsdesc[300]{Theory of computation~Graph algorithms analysis}
+
+\ccsdesc[300]{Computing methodologies~Natural language processing}
+\ccsdesc[300]{Theory of computation~Graph algorithms analysis}
+
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{large language models, graph algorithms, reasoning, supervised fine-tuning}
+
+% The following helps reduce spurious overfull/underfull box warnings in tightly
+% constrained two-column layouts without changing the ACM formatting.
+\sloppy
+\raggedbottom
+%\pretolerance=10000
+\tolerance=10000
+\emergencystretch=3em
+\hbadness=10000
+\vbadness=10000
+\vfuzz=10000pt
+\hfuzz=10000pt
+\vfuzz=10000pt
+\hfuzz=10000pt
+
+\maketitle
+
+\section{Introduction}
+Large Language Models (LLMs) have demonstrated remarkable capabilities across a wide array of natural language understanding, generation, and zero-shot reasoning tasks. However, their ability to perform rigorous, multi-step algorithmic reasoning remains a significant open challenge. This deficiency is particularly evident in graph-based algorithmic problems, such as Breadth-First Search (BFS), Depth-First Search (DFS), and Dijkstra’s algorithm, which require precise, iterative updates to achieve a complex global state.
+
+\section{Prior Work}
+The problem of enabling Large Language Models (LLMs) to perform complex algorithmic reasoning, particularly on graph structures, has been approached from several directions in recent literature. A fundamental challenge is that LLMs traditionally attempt to "remember" the entire graph within a linear text buffer. As the input graph grows, the model's internal representation often deforms, leading to a breakdown in reasoning.
+
+\subsection{Chain of Thought Prompting}
+One of the most prominent methods for improving LLM reasoning is Chain of Thought (CoT) prompting \cite{wei2022chain}. CoT encourages models to generate intermediate reasoning steps before arriving at a final answer, effectively simulating a step-by-step cognitive process. However, when applied to long-form graph reasoning, CoT exhibits significant limitations. As the sequence of operations extends, the "mental map" of the model deforms. Models relying solely on CoT often suffer from the "Lost in the Middle" phenomenon, where they struggle to attend to tokens located in the center of long contexts \cite{liu2023lost}. Consequently, if an LLM makes a minor logic error early in the sequence, the error compounds over time, leading to severe state drift. In these cases, the CoT model often gets lost in cycles or hallucinates an entirely different graph structure rather than systematically and correctly tracking the problem space.
+
+\subsection{Tool-Augmented Language Models}
+To circumvent the inherent memory and arithmetic limitations of LLMs, recent literature has explored tool-augmented models, most notably Toolformer \cite{schick2023toolformer}. Toolformer and similar architectures grant the LLM the ability to call external APIs or deterministic calculators to offload tasks. While assigning a graph problem to an external solver with an API call guarantees accuracy on the final output, it completely bypasses the reasoning process rather than enhancing the model's initial capabilities. Simply calling an API maintains the "Black Box" nature of the model, offering no alignment between the LLM's internal attention and the mathematical structure of the graph. Training the LLM directly on intermediate state updates via Supervised Fine-Tuning (SFT) is often more robust than API offloading because it teaches the model to act as an active logic controller that makes decisions based on the current local neighborhood.
+
+\subsection{Decoupling Decision Making and Memory}
+Addressing these deficiencies requires a model shift for the LLM from purely textual reasoning to one with structured state management. Our proposed Graph of Thoughts (GoT) methodology builds upon the existing literature by explicitly decoupling logic from memory. While prior works attempt to force the LLM to handle both processing and state retention, our approach isolates the LLM to act strictly as the CPU (Logic). Simultaneously, a deterministic, non-neural module acts as the RAM (Memory), maintaining the ground-truth state of the graph, such as visited nodes and current distances. By supervising the LLM on these intermediate state updates, we hope to eliminate the compounding errors seen in standard CoT approaches and force a tighter alignment with the actual algorithmic structure, allowing the model to recover from logic errors without the state collapsing.
+
+\section{Methods}
+To elicit more accurate answers on deterministic graph problems (e.g., DFS, BFS, Dijkstra's), we propose using a small, strong open-source LLM with solid reasoning capabilities, such as Qwen 2.5 7B Instruct or Llama 3.1B. Our goal is to imitate chain-of-reasoning approaches by having the LLM generate an intermediate representation at each step of an algorithmic reasoning problem, which we can compare against a deterministic solver.
+\subsection{Subgraph/State Generation}
+To explicitly generate intermediate representations at every step of an algorithmic problem, we first clarify terminology. In algorithms such as BFS or Dijkstra's, the most natural object to track is the algorithmic state (e.g., visited set, queue/frontier, distances, and parent pointers), which may induce a subgraph (e.g., explored edges or a predecessor/shortest-path tree).
+
+We therefore define, at step $t$:
+\begin{itemize}
+  \item $s_t$: the algorithmic state at step $t$
+  \item $H_t$: the induced subgraph (e.g., predecessor tree / explored edges) derived from $s_t$
+  \item $o_t$: the operation (action) taken at step $t$ that maps $s_{t-1} \rightarrow s_t$
+\end{itemize}
+
+With this notation, the model can be trained to predict either the next state $s_t$, the induced subgraph $H_t$, the operation $o_t$, or some structured combination (e.g., outputting $o_t$ plus the updated $H_t$). We intend to attempt three approaches to generate these intermediate representations:
+\begin{itemize}
+  \item \textbf{Prompt forcing:} Prompt the LLM to generate a subgraph at each step of the algorithm.
+  \item \textbf{Supervised fine-tuning (SFT):} Fine-tune the LLM exclusively on data generated by a deterministic graph-solver script that explicitly emits subgraphs.
+  \item \textbf{Decoding-level forcing:} Constrain decoding to ensure the output is in a valid subgraph representation.
+\end{itemize}
+With some combination of these three approaches, we aim to enable the LLM to generate intermediate subgraphs for complex algorithmic problems, analogous to how chain-of-thought prompting produces intermediate ``thoughts.''
+\subsection{Fine-Tuning Approach}
+When fine-tuning, we aim to teach the model a general policy for updating the state over time. Between each step, an operation is applied to the previous state to advance the algorithm. We plan to train our model with token-level cross-entropy loss:
+\begin{equation}
+  \mathcal{L}_{\mathrm{SFT}} = -\sum_{t=1}^{T} \log p_{\theta}(y_t \mid x, y_{<t})
+\end{equation}
+\begin{itemize}
+  \item $x$: the prompt (graph + query + instructions)
+  \item $y_t$: the target token (operation) at position $t$ in the desired output
+\end{itemize}
+\subsection{Datasets}
+The datasets we will use for SFT training and evaluation will be synthetically generated random graphs with optimal steps produced by a deterministic solver. To improve robustness, we will generate multiple graph families, including:
+\begin{itemize}
+  \item Erd\H{o}s--R\'enyi graphs
+  \item Barab\'asi--Albert graphs
+  \item Tree graphs
+  \item Grid graphs
+\end{itemize}
+
+
+
+\section{Evaluation \& Metrics}
+% TODO: talk about prior evaluation benchmarks such as: NLGraph (Algorithmic Reasoning), GLBench, etc. 
+To evaluate the efficacy of our GoT framework, we can perform various assessments. Our study will focus on three specific areas for benchmark: operational accuracy, state consistency, and structural generalisation at scale. These metrics are designed to measure how effectively the LLM functions within the graph structure.
+
+\subsection{Performance Metrics}
+  \begin{enumerate}
+    \item \textbf{Operation Accuracy} \\
+      This metric aims to measure the model's ability to correctly identify the next algorithmic step. This represents the 'logical' ability of our model, being able to correctly identify and execute based upon the current local neighbourhood and state. For example, in Dijkstra's algorithm, this would be identifying the neighbour with the lowest cumulative weight within all constraints. For our results, a value of $90\%$ is considered successful.
+    \item \textbf{State Consistency} \\
+      State consistency is defined as the alignment between the LLM's internal ''reasoning'' and the determinstic ''ground truth'' maintained in the state executor. A high consistency value indicates that the model is successfully aligning its internal attention with the mathematical structure of the graph.
+    \item \textbf{Structural Generalisation} \\
+      This benchmark evaluates the model's ability to scale past small graph patterns. We test the model on graphs that increase in size by orders of magnitude as compared to those used during the supervised fine-tuning phase to ensure that the LLM model has learned a general policy rather than simply the small graph patterns.
+  \end{enumerate}
+
+\subsection{Comparative Benchmarking}
+  To prove the decoupling of logic from memory, we will benchmark GoT against standard Chain of Thought (CoT) prompting across the following dimensions.
+  \begin{enumerate}
+    \item We will utilise NLGraph for general algorithmic reasoning evaluation and GLBench to assess baseline graph capabilities in current LLMs.
+    \item Standard CoT models often experience 'state drift,' in which small errors within early steps compound to the point where the model begins hallucinating an entirely new graph. We will plto accuracy against our path length to demonstrate difference in GoT to CoT.
+    \item We will compare the efficiency of standard full-graph representations, which often hit context limits, with our sparse state tracking and graph-language linearisation.
+  \end{enumerate}
+
+\subsection{Robustness}
+  In consideration of robustness and reliability, we design a stress-testing suite for GoT, designed to prove performance during rigorous, multi-step reasoning scenarios. This phase of testing may provide more detail in real world performance and efficacy, past simpler pattern matching during development and testing.
+  \begin{enumerate}
+    \item By training on random graphs and testing on scale-free graphs, we can verify the model logic is distribution-agnostic.
+    \item In an effort to reduce the 'black box' nature of typical graph reasoning, we will test comparisons between natural language outputs and determine any contradictions within the state executor. This phase of testing may also reveal key insights into how we may interpret typical graph reasoning.
+    \item Specific graph topologies may be especially challenging for our model due to path memory, such as graphs containing bridges, bottle necks, or graphs of high-girth. Testing these edge cases in environment will further improve reliability of GoT.
+    \item Another high-interest goal is using GoT for negative sampling recovery. Given broken traces, we will evaluate the model's ability to recorrect and provide a fixed output, proving it can recover from logic errors without the state collapsing, a key feature to prevent catastrophic failure.
+  \end{enumerate}
+
+
+\section{Timeline}
+
+Our project consists of four phases spanning ten weeks, concluding by May 4, 2026:  
+
+
+
+
+%% The reference section is generated automatically by BibTeX from the
+%% .bib file. We keep the ACM reference format.
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{sample-base}
+
+\end{document}
+
+\section{Modifications}
+
+Modifying the template --- including but not limited to: adjusting
+margins, typeface sizes, line spacing, paragraph and list definitions,
+and the use of the \verb|\vspace| command to manually adjust the
+vertical spacing between elements of your work --- is not allowed.
+
+{\bfseries Your document will be returned to you for revision if
+  modifications are discovered.}
+
+\section{Typefaces}
+
+The ``\verb|acmart|'' document class requires the use of the
+``Libertine'' typeface family. Your \TeX\ installation should include
+this set of packages. Please do not substitute other typefaces. The
+``\verb|lmodern|'' and ``\verb|ltimes|'' packages should not be used,
+as they will override the built-in typeface families.
+
+\section{Title Information}
+
+The title of your work should use capital letters appropriately -
+\url{https://capitalizemytitle.com/} has useful rules for
+capitalization. Use the {\verb|title|} command to define the title of
+your work. If your work has a subtitle, define it with the
+{\verb|subtitle|} command.  Do not insert line breaks in your title.
+
+If your title is lengthy, you must define a short version to be used
+in the page headers, to prevent overlapping text. The \verb|title|
+command has a ``short title'' parameter:
+\begin{verbatim}
+  \title[short title]{full title}
+\end{verbatim}
+
+\section{Authors and Affiliations}
+
+Each author must be defined separately for accurate metadata
+identification.  As an exception, multiple authors may share one
+affiliation. Authors' names should not be abbreviated; use full first
+names wherever possible. Include authors' e-mail addresses whenever
+possible.
+
+Grouping authors' names or e-mail addresses, or providing an ``e-mail
+alias,'' as shown below, is not acceptable:
+\begin{verbatim}
+  \author{Brooke Aster, David Mehldau}
+  \email{dave,judy,steve@university.edu}
+  \email{firstname.lastname@phillips.org}
+\end{verbatim}
+
+The \verb|authornote| and \verb|authornotemark| commands allow a note
+to apply to multiple authors --- for example, if the first two authors
+of an article contributed equally to the work.
+
+If your author list is lengthy, you must define a shortened version of
+the list of authors to be used in the page headers, to prevent
+overlapping text. The following command should be placed just after
+the last \verb|\author{}| definition:
+\begin{verbatim}
+  \renewcommand{\shortauthors}{McCartney, et al.}
+\end{verbatim}
+Omitting this command will force the use of a concatenated list of all
+of the authors' names, which may result in overlapping text in the
+page headers.
+
+The article template's documentation, available at
+\url{https://www.acm.org/publications/proceedings-template}, has a
+complete explanation of these commands and tips for their effective
+use.
+
+Note that authors' addresses are mandatory for journal articles.
+
+\section{Rights Information}
+
+Authors of any work published by ACM will need to complete a rights
+form. Depending on the kind of work, and the rights management choice
+made by the author, this may be copyright transfer, permission,
+license, or an OA (open access) agreement.
+
+Regardless of the rights management choice, the author will receive a
+copy of the completed rights form once it has been submitted. This
+form contains \LaTeX\ commands that must be copied into the source
+document. When the document source is compiled, these commands and
+their parameters add formatted text to several areas of the final
+document:
+\begin{itemize}
+\item the ``ACM Reference Format'' text on the first page.
+\item the ``rights management'' text on the first page.
+\item the conference information in the page header(s).
+\end{itemize}
+
+Rights information is unique to the work; if you are preparing several
+works for an event, make sure to use the correct set of commands with
+each of the works.
+
+The ACM Reference Format text is required for all articles over one
+page in length, and is optional for one-page articles (abstracts).
+
+\section{CCS Concepts and User-Defined Keywords}
+
+Two elements of the ``acmart'' document class provide powerful
+taxonomic tools for you to help readers find your work in an online
+search.
+
+The ACM Computing Classification System ---
+\url{https://www.acm.org/publications/class-2012} --- is a set of
+classifiers and concepts that describe the computing
+discipline. Authors can select entries from this classification
+system, via \url{https://dl.acm.org/ccs/ccs.cfm}, and generate the
+commands to be included in the \LaTeX\ source.
+
+User-defined keywords are a comma-separated list of words and phrases
+of the authors' choosing, providing a more flexible way of describing
+the research being presented.
+
+CCS concepts and user-defined keywords are required for for all
+articles over two pages in length, and are optional for one- and
+two-page articles (or abstracts).
+
+\section{Sectioning Commands}
+
+Your work should use standard \LaTeX\ sectioning commands:
+\verb|\section|, \verb|\subsection|, \verb|\subsubsection|,
+\verb|\paragraph|, and \verb|\subparagraph|. The sectioning levels up to
+\verb|\subsusection| should be numbered; do not remove the numbering
+from the commands.
+
+Simulating a sectioning command by setting the first word or words of
+a paragraph in boldface or italicized text is {\bfseries not allowed.}
+
+Below are examples of sectioning commands.
+
+\subsection{Subsection}
+\label{sec:subsection}
+
+This is a subsection.
+
+\subsubsection{Subsubsection}
+\label{sec:subsubsection}
+
+This is a subsubsection.
+
+\paragraph{Paragraph}
+
+This is a paragraph.
+
+\subparagraph{Subparagraph}
+
+This is a subparagraph.
+
+\section{Tables}
+
+The ``\verb|acmart|'' document class includes the ``\verb|booktabs|''
+package --- \url{https://ctan.org/pkg/booktabs} --- for preparing
+high-quality tables.
+
+Table captions are placed {\itshape above} the table.
+
+Because tables cannot be split across pages, the best placement for
+them is typically the top of the page nearest their initial cite.  To
+ensure this proper ``floating'' placement of tables, use the
+environment \textbf{table} to enclose the table's contents and the
+table caption.  The contents of the table itself must go in the
+\textbf{tabular} environment, to be aligned properly in rows and
+columns, with the desired horizontal and vertical rules.  Again,
+detailed instructions on \textbf{tabular} material are found in the
+\textit{\LaTeX\ User's Guide}.
+
+Immediately following this sentence is the point at which
+Table~\ref{tab:freq} is included in the input file; compare the
+placement of the table here with the table in the printed output of
+this document.
+
+\begin{table}
+  \caption{Frequency of Special Characters}
+  \label{tab:freq}
+  \begin{tabular}{ccl}
+    \toprule
+    Non-English or Math&Frequency&Comments\\
+    \midrule
+    \O & 1 in 1,000& For Swedish names\\
+    $\pi$ & 1 in 5& Common in math\\
+    \$ & 4 in 5 & Used in business\\
+    $\Psi^2_1$ & 1 in 40,000& Unexplained usage\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+To set a wider table, which takes up the whole width of the page's
+live area, use the environment \textbf{table*} to enclose the table's
+contents and the table caption.  As with a single-column table, this
+wide table will ``float'' to a location deemed more
+desirable. Immediately following this sentence is the point at which
+Table~\ref{tab:commands} is included in the input file; again, it is
+instructive to compare the placement of the table here with the table
+in the printed output of this document.
+
+\begin{table*}
+  \caption{Some Typical Commands}
+  \label{tab:commands}
+  \begin{tabular}{ccl}
+    \toprule
+    Command &A Number & Comments\\
+    \midrule
+    \texttt{{\char'134}author} & 100& Author \\
+    \texttt{{\char'134}table}& 300 & For tables\\
+    \texttt{{\char'134}table*}& 400& For wider tables\\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+Always use midrule to separate table header rows from data rows, and
+use it only for this purpose. This enables assistive technologies to
+recognise table headers and support their users in navigating tables
+more easily.
+
+\section{Math Equations}
+You may want to display math equations in three distinct styles:
+inline, numbered or non-numbered display.  Each of the three are
+discussed in the next sections.
+
+\subsection{Inline (In-text) Equations}
+A formula that appears in the running text is called an inline or
+in-text formula.  It is produced by the \textbf{math} environment,
+which can be invoked with the usual
+\texttt{{\char'134}begin\,\ldots{\char'134}end} construction or with
+the short form \texttt{\$\,\ldots\$}. You can use any of the symbols
+and structures, from $\alpha$ to $\omega$, available in
+\LaTeX~\cite{Lamport:LaTeX}; this section will simply show a few
+examples of in-text equations in context. Notice how this equation:
+\begin{math}
+  \lim_{n\rightarrow \infty}x=0
+\end{math},
+set here in in-line math style, looks slightly different when
+set in display style.  (See next section).
+
+\subsection{Display Equations}
+A numbered display equation---one set off by vertical space from the
+text and centered horizontally---is produced by the \textbf{equation}
+environment. An unnumbered display equation is produced by the
+\textbf{displaymath} environment.
+
+Again, in either environment, you can use any of the symbols and
+structures available in \LaTeX\@; this section will just give a couple
+of examples of display equations in context.  First, consider the
+equation, shown as an inline equation above:
+\begin{equation}
+  \lim_{n\rightarrow \infty}x=0
+\end{equation}
+Notice how it is formatted somewhat differently in
+the \textbf{displaymath}
+environment.  Now, we'll enter an unnumbered equation:
+\begin{displaymath}
+  \sum_{i=0}^{\infty} x + 1
+\end{displaymath}
+and follow it with another numbered equation:
+\begin{equation}
+  \sum_{i=0}^{\infty}x_i=\int_{0}^{\pi+2} f
+\end{equation}
+just to demonstrate \LaTeX's able handling of numbering.
+
+\section{Figures}
+
+The ``\verb|figure|'' environment should be used for figures. One or
+more images can be placed within a figure. If your figure contains
+third-party material, you must clearly identify it as such, as shown
+in the example below.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{sample-franklin}
+  \caption{1907 Franklin Model D roadster. Photograph by Harris \&
+    Ewing, Inc. [Public domain], via Wikimedia
+    Commons. (\url{https://goo.gl/VLCRBB}).}
+  \Description{A woman and a girl in white dresses sit in an open car.}
+\end{figure}
+
+Your figures should contain a caption which describes the figure to
+the reader.
+
+Figure captions are placed {\itshape below} the figure.
+
+Every figure should also have a figure description unless it is purely
+decorative. These descriptions convey what’s in the image to someone
+who cannot see it. They are also used by search engine crawlers for
+indexing images, and when images cannot be loaded.
+
+A figure description must be unformatted plain text less than 2000
+characters long (including spaces).  {\bfseries Figure descriptions
+  should not repeat the figure caption – their purpose is to capture
+  important information that is not already provided in the caption or
+  the main text of the paper.} For figures that convey important and
+complex new information, a short text description may not be
+adequate. More complex alternative descriptions can be placed in an
+appendix and referenced in a short figure description. For example,
+provide a data table capturing the information in a bar chart, or a
+structured list representing a graph.  For additional information
+regarding how best to write figure descriptions and why doing this is
+so important, please see
+\url{https://www.acm.org/publications/taps/describing-figures/}.
+
+\subsection{The ``Teaser Figure''}
+
+A ``teaser figure'' is an image, or set of images in one figure, that
+are placed after all author and affiliation information, and before
+the body of the article, spanning the page. If you wish to have such a
+figure in your article, place the command immediately before the
+\verb|\maketitle| command:
+\begin{verbatim}
+  \begin{teaserfigure}
+    \includegraphics[width=\textwidth]{sampleteaser}
+    \caption{figure caption}
+    \Description{figure description}
+  \end{teaserfigure}
+\end{verbatim}
+
+\section{Citations and Bibliographies}
+
+The use of \BibTeX\ for the preparation and formatting of one's
+references is strongly recommended. Authors' names should be complete
+--- use full first names (``Donald E. Knuth'') not initials
+(``D. E. Knuth'') --- and the salient identifying features of a
+reference should be included: title, year, volume, number, pages,
+article DOI, etc.
+
+The bibliography is included in your source document with these two
+commands, placed just before the \verb|\end{document}| command:
+\begin{verbatim}
+  \bibliographystyle{ACM-Reference-Format}
+  \bibliography{bibfile}
+\end{verbatim}
+where ``\verb|bibfile|'' is the name, without the ``\verb|.bib|''
+suffix, of the \BibTeX\ file.
+
+Citations and references are numbered by default. A small number of
+ACM publications have citations and references formatted in the
+``author year'' style; for these exceptions, please include this
+command in the {\bfseries preamble} (before the command
+``\verb|\begin{document}|'') of your \LaTeX\ source:
+\begin{verbatim}
+  \citestyle{acmauthoryear}
+\end{verbatim}
+
+
+  Some examples.  A paginated journal article \cite{Abril07}, an
+  enumerated journal article \cite{Cohen07}, a reference to an entire
+  issue \cite{JCohen96}, a monograph (whole book) \cite{Kosiur01}, a
+  monograph/whole book in a series (see 2a in spec. document)
+  \cite{Harel79}, a divisible-book such as an anthology or compilation
+  \cite{Editor00} followed by the same example, however we only output
+  the series if the volume number is given \cite{Editor00a} (so
+  Editor00a's series should NOT be present since it has no vol. no.),
+  a chapter in a divisible book \cite{Spector90}, a chapter in a
+  divisible book in a series \cite{Douglass98}, a multi-volume work as
+  book \cite{Knuth97}, a couple of articles in a proceedings (of a
+  conference, symposium, workshop for example) (paginated proceedings
+  article) \cite{Andler79, Hagerup1993}, a proceedings article with
+  all possible elements \cite{Smith10}, an example of an enumerated
+  proceedings article \cite{VanGundy07}, an informally published work
+  \cite{Harel78}, a couple of preprints \cite{Bornmann2019,
+    AnzarootPBM14}, a doctoral dissertation \cite{Clarkson85}, a
+  master's thesis: \cite{anisi03}, an online document / world wide web
+  resource \cite{Thornburg01, Ablamowicz07, Poker06}, a video game
+  (Case 1) \cite{Obama08} and (Case 2) \cite{Novak03} and \cite{Lee05}
+  and (Case 3) a patent \cite{JoeScientist001}, work accepted for
+  publication \cite{rous08}, 'YYYYb'-test for prolific author
+  \cite{SaeediMEJ10} and \cite{SaeediJETC10}. Other cites might
+  contain 'duplicate' DOI and URLs (some SIAM articles)
+  \cite{Kirschmer:2010:AEI:1958016.1958018}. Boris / Barbara Beeton:
+  multi-volume works as books \cite{MR781536} and \cite{MR781537}. A
+  presentation~\cite{Reiser2014}. An article under
+  review~\cite{Baggett2025}. A
+  couple of citations with DOIs:
+  \cite{2004:ITE:1009386.1010128,Kirschmer:2010:AEI:1958016.1958018}. Online
+  citations: \cite{TUGInstmem, Thornburg01, CTANacmart}.
+  Artifacts: \cite{R} and \cite{UMassCitations}.
+
+\section{Acknowledgments}
+
+Identification of funding sources and other support, and thanks to
+individuals and groups that assisted in the research and the
+preparation of the work should be included in an acknowledgment
+section, which is placed just before the reference section in your
+document.
+
+This section has a special environment:
+\begin{verbatim}
+  \begin{acks}
+  ...
+  \end{acks}
+\end{verbatim}
+so that the information contained therein can be more easily collected
+during the article metadata extraction phase, and to ensure
+consistency in the spelling of the section heading.
+
+Authors should not prepare this section as a numbered or unnumbered {\verb|\section|}; please use the ``{\verb|acks|}'' environment.
+
+\section{Appendices}
+
+If your work needs an appendix, add it before the
+``\verb|\end{document}|'' command at the conclusion of your source
+document.
+
+Start the appendix with the ``\verb|appendix|'' command:
+\begin{verbatim}
+  \appendix
+\end{verbatim}
+and note that in the appendix, sections are lettered, not
+numbered. This document has two appendices, demonstrating the section
+and subsection identification method.
+
+\section{Multi-language papers}
+
+Papers may be written in languages other than English or include
+titles, subtitles, keywords and abstracts in different languages (as a
+rule, a paper in a language other than English should include an
+English title and an English abstract).  Use \verb|language=...| for
+every language used in the paper.  The last language indicated is the
+main language of the paper.  For example, a French paper with
+additional titles and abstracts in English and German may start with
+the following command
+\begin{verbatim}
+\documentclass[sigconf, language=english, language=german,
+               language=french]{acmart}
+\end{verbatim}
+
+The title, subtitle, keywords and abstract will be typeset in the main
+language of the paper.  The commands \verb|\translatedXXX|, \verb|XXX|
+begin title, subtitle and keywords, can be used to set these elements
+in the other languages.  The environment \verb|translatedabstract| is
+used to set the translation of the abstract.  These commands and
+environment have a mandatory first argument: the language of the
+second argument.  See \verb|sample-sigconf-i13n.tex| file for examples
+of their usage.
+
+\section{SIGCHI Extended Abstracts}
+
+The ``\verb|sigchi-a|'' template style (available only in \LaTeX\ and
+not in Word) produces a landscape-orientation formatted article, with
+a wide left margin. Three environments are available for use with the
+``\verb|sigchi-a|'' template style, and produce formatted output in
+the margin:
+\begin{description}
+\item[\texttt{sidebar}:]  Place formatted text in the margin.
+\item[\texttt{marginfigure}:] Place a figure in the margin.
+\item[\texttt{margintable}:] Place a table in the margin.
+\end{description}
+
+%%
+%% The acknowledgments section is defined using the "acks" environment
+%% (and NOT an unnumbered section). This ensures the proper
+%% identification of the section in the article metadata, and the
+%% consistent spelling of the heading.
+\begin{acks}
+To Robert, for the bagels and explaining CMYK and color spaces.
+\end{acks}
+
+%%
+%% The next two lines define the bibliography style to be used, and
+%% the bibliography file.
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{sample-base}
+
+
+%%
+%% If your work has an appendix, this is the place to put it.
+\appendix
+
+\section{Research Methods}
+
+\subsection{Part One}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+malesuada, quam in pulvinar varius, metus nunc fermentum urna, id
+sollicitudin purus odio sit amet enim. Aliquam ullamcorper eu ipsum
+vel mollis. Curabitur quis dictum nisl. Phasellus vel semper risus, et
+lacinia dolor. Integer ultricies commodo sem nec semper.
+
+\subsection{Part Two}
+
+Etiam commodo feugiat nisl pulvinar pellentesque. Etiam auctor sodales
+ligula, non varius nibh pulvinar semper. Suspendisse nec lectus non
+ipsum convallis congue hendrerit vitae sapien. Donec at laoreet
+eros. Vivamus non purus placerat, scelerisque diam eu, cursus
+ante. Etiam aliquam tortor auctor efficitur mattis.
+
+\section{Online Resources}
+
+Nam id fermentum dui. Suspendisse sagittis tortor a nulla mollis, in
+pulvinar ex pretium. Sed interdum orci quis metus euismod, et sagittis
+enim maximus. Vestibulum gravida massa ut felis suscipit
+congue. Quisque mattis elit a risus ultrices commodo venenatis eget
+dui. Etiam sagittis eleifend elementum.
+
+Nam interdum magna at lectus dignissim, ac dignissim lorem
+rhoncus. Maecenas eu arcu ac neque placerat aliquam. Nunc pulvinar
+massa et mattis lacinia.
+
+\end{document}
+\endinput
+%%
+%% End of file `sample-sigplan.tex'.
