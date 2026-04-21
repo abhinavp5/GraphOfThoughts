@@ -1,0 +1,4384 @@
+[
+  {
+    "graph": "(0)->(1) (0)->(9) (1)->(3) (1)->(9) (2)->(3) (2)->(4) (2)->(8) (3)->(7) (3)->(9) (4)->(5) (4)->(9) (5)->(8) (6)->(9)",
+    "algorithm": "bfs",
+    "source": 2,
+    "steps": [
+      {
+        "step": 0,
+        "operation": "enqueue(2)",
+        "state": {
+          "visited": [],
+          "frontier": [
+            2
+          ],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 1,
+        "operation": "set_parent(2, None)",
+        "state": {
+          "visited": [],
+          "frontier": [
+            2
+          ],
+          "distances": {},
+          "parent": {
+            "2": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 2,
+        "operation": "dequeue(2)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "2": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 3,
+        "operation": "visit(2)",
+        "state": {
+          "visited": [
+            2
+          ],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "2": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 4,
+        "operation": "enqueue(3)",
+        "state": {
+          "visited": [
+            2
+          ],
+          "frontier": [
+            3
+          ],
+          "distances": {},
+          "parent": {
+            "2": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 5,
+        "operation": "set_parent(3, 2)",
+        "state": {
+          "visited": [
+            2
+          ],
+          "frontier": [
+            3
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 6,
+        "operation": "enqueue(4)",
+        "state": {
+          "visited": [
+            2
+          ],
+          "frontier": [
+            3,
+            4
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 7,
+        "operation": "set_parent(4, 2)",
+        "state": {
+          "visited": [
+            2
+          ],
+          "frontier": [
+            3,
+            4
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 8,
+        "operation": "enqueue(8)",
+        "state": {
+          "visited": [
+            2
+          ],
+          "frontier": [
+            3,
+            4,
+            8
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 9,
+        "operation": "set_parent(8, 2)",
+        "state": {
+          "visited": [
+            2
+          ],
+          "frontier": [
+            3,
+            4,
+            8
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 10,
+        "operation": "dequeue(3)",
+        "state": {
+          "visited": [
+            2
+          ],
+          "frontier": [
+            4,
+            8
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 11,
+        "operation": "visit(3)",
+        "state": {
+          "visited": [
+            2,
+            3
+          ],
+          "frontier": [
+            4,
+            8
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 12,
+        "operation": "enqueue(1)",
+        "state": {
+          "visited": [
+            2,
+            3
+          ],
+          "frontier": [
+            4,
+            8,
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 13,
+        "operation": "set_parent(1, 3)",
+        "state": {
+          "visited": [
+            2,
+            3
+          ],
+          "frontier": [
+            4,
+            8,
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 14,
+        "operation": "enqueue(7)",
+        "state": {
+          "visited": [
+            2,
+            3
+          ],
+          "frontier": [
+            4,
+            8,
+            1,
+            7
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 15,
+        "operation": "set_parent(7, 3)",
+        "state": {
+          "visited": [
+            2,
+            3
+          ],
+          "frontier": [
+            4,
+            8,
+            1,
+            7
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 16,
+        "operation": "enqueue(9)",
+        "state": {
+          "visited": [
+            2,
+            3
+          ],
+          "frontier": [
+            4,
+            8,
+            1,
+            7,
+            9
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 17,
+        "operation": "set_parent(9, 3)",
+        "state": {
+          "visited": [
+            2,
+            3
+          ],
+          "frontier": [
+            4,
+            8,
+            1,
+            7,
+            9
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 18,
+        "operation": "dequeue(4)",
+        "state": {
+          "visited": [
+            2,
+            3
+          ],
+          "frontier": [
+            8,
+            1,
+            7,
+            9
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 19,
+        "operation": "visit(4)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4
+          ],
+          "frontier": [
+            8,
+            1,
+            7,
+            9
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 20,
+        "operation": "enqueue(5)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4
+          ],
+          "frontier": [
+            8,
+            1,
+            7,
+            9,
+            5
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 21,
+        "operation": "set_parent(5, 4)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4
+          ],
+          "frontier": [
+            8,
+            1,
+            7,
+            9,
+            5
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 22,
+        "operation": "dequeue(8)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4
+          ],
+          "frontier": [
+            1,
+            7,
+            9,
+            5
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 23,
+        "operation": "visit(8)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8
+          ],
+          "frontier": [
+            1,
+            7,
+            9,
+            5
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 24,
+        "operation": "dequeue(1)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8
+          ],
+          "frontier": [
+            7,
+            9,
+            5
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 25,
+        "operation": "visit(1)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1
+          ],
+          "frontier": [
+            7,
+            9,
+            5
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 26,
+        "operation": "enqueue(0)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1
+          ],
+          "frontier": [
+            7,
+            9,
+            5,
+            0
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 27,
+        "operation": "set_parent(0, 1)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1
+          ],
+          "frontier": [
+            7,
+            9,
+            5,
+            0
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 28,
+        "operation": "dequeue(7)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1
+          ],
+          "frontier": [
+            9,
+            5,
+            0
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 29,
+        "operation": "visit(7)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7
+          ],
+          "frontier": [
+            9,
+            5,
+            0
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 30,
+        "operation": "dequeue(9)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7
+          ],
+          "frontier": [
+            5,
+            0
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 31,
+        "operation": "visit(9)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9
+          ],
+          "frontier": [
+            5,
+            0
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 32,
+        "operation": "enqueue(6)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9
+          ],
+          "frontier": [
+            5,
+            0,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 33,
+        "operation": "set_parent(6, 9)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9
+          ],
+          "frontier": [
+            5,
+            0,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1",
+            "6": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ],
+          [
+            9,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 34,
+        "operation": "dequeue(5)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9
+          ],
+          "frontier": [
+            0,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1",
+            "6": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ],
+          [
+            9,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 35,
+        "operation": "visit(5)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9,
+            5
+          ],
+          "frontier": [
+            0,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1",
+            "6": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ],
+          [
+            9,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 36,
+        "operation": "dequeue(0)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9,
+            5
+          ],
+          "frontier": [
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1",
+            "6": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ],
+          [
+            9,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 37,
+        "operation": "visit(0)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9,
+            5,
+            0
+          ],
+          "frontier": [
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1",
+            "6": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ],
+          [
+            9,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 38,
+        "operation": "dequeue(6)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9,
+            5,
+            0
+          ],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1",
+            "6": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ],
+          [
+            9,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 39,
+        "operation": "visit(6)",
+        "state": {
+          "visited": [
+            2,
+            3,
+            4,
+            8,
+            1,
+            7,
+            9,
+            5,
+            0,
+            6
+          ],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "2": null,
+            "3": "2",
+            "4": "2",
+            "8": "2",
+            "1": "3",
+            "7": "3",
+            "9": "3",
+            "5": "4",
+            "0": "1",
+            "6": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            2,
+            3,
+            null
+          ],
+          [
+            2,
+            4,
+            null
+          ],
+          [
+            2,
+            8,
+            null
+          ],
+          [
+            3,
+            1,
+            null
+          ],
+          [
+            3,
+            7,
+            null
+          ],
+          [
+            3,
+            9,
+            null
+          ],
+          [
+            4,
+            5,
+            null
+          ],
+          [
+            1,
+            0,
+            null
+          ],
+          [
+            9,
+            6,
+            null
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "graph": "(0)->(2) (0)->(7) (0)->(8) (0)->(9) (1)->(3) (1)->(5) (1)->(6) (1)->(7) (2)->(7) (3)->(4) (4)->(9) (5)->(9) (6)->(8) (7)->(8) (7)->(9) (8)->(9)",
+    "algorithm": "bfs",
+    "source": 9,
+    "steps": [
+      {
+        "step": 0,
+        "operation": "enqueue(9)",
+        "state": {
+          "visited": [],
+          "frontier": [
+            9
+          ],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 1,
+        "operation": "set_parent(9, None)",
+        "state": {
+          "visited": [],
+          "frontier": [
+            9
+          ],
+          "distances": {},
+          "parent": {
+            "9": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 2,
+        "operation": "dequeue(9)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "9": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 3,
+        "operation": "visit(9)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "9": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 4,
+        "operation": "enqueue(0)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0
+          ],
+          "distances": {},
+          "parent": {
+            "9": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 5,
+        "operation": "set_parent(0, 9)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 6,
+        "operation": "enqueue(4)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0,
+            4
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 7,
+        "operation": "set_parent(4, 9)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0,
+            4
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 8,
+        "operation": "enqueue(5)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0,
+            4,
+            5
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 9,
+        "operation": "set_parent(5, 9)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0,
+            4,
+            5
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 10,
+        "operation": "enqueue(7)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0,
+            4,
+            5,
+            7
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 11,
+        "operation": "set_parent(7, 9)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0,
+            4,
+            5,
+            7
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 12,
+        "operation": "enqueue(8)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0,
+            4,
+            5,
+            7,
+            8
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 13,
+        "operation": "set_parent(8, 9)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            0,
+            4,
+            5,
+            7,
+            8
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 14,
+        "operation": "dequeue(0)",
+        "state": {
+          "visited": [
+            9
+          ],
+          "frontier": [
+            4,
+            5,
+            7,
+            8
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 15,
+        "operation": "visit(0)",
+        "state": {
+          "visited": [
+            9,
+            0
+          ],
+          "frontier": [
+            4,
+            5,
+            7,
+            8
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 16,
+        "operation": "enqueue(2)",
+        "state": {
+          "visited": [
+            9,
+            0
+          ],
+          "frontier": [
+            4,
+            5,
+            7,
+            8,
+            2
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 17,
+        "operation": "set_parent(2, 0)",
+        "state": {
+          "visited": [
+            9,
+            0
+          ],
+          "frontier": [
+            4,
+            5,
+            7,
+            8,
+            2
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 18,
+        "operation": "dequeue(4)",
+        "state": {
+          "visited": [
+            9,
+            0
+          ],
+          "frontier": [
+            5,
+            7,
+            8,
+            2
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 19,
+        "operation": "visit(4)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4
+          ],
+          "frontier": [
+            5,
+            7,
+            8,
+            2
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 20,
+        "operation": "enqueue(3)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4
+          ],
+          "frontier": [
+            5,
+            7,
+            8,
+            2,
+            3
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 21,
+        "operation": "set_parent(3, 4)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4
+          ],
+          "frontier": [
+            5,
+            7,
+            8,
+            2,
+            3
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 22,
+        "operation": "dequeue(5)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4
+          ],
+          "frontier": [
+            7,
+            8,
+            2,
+            3
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 23,
+        "operation": "visit(5)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5
+          ],
+          "frontier": [
+            7,
+            8,
+            2,
+            3
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 24,
+        "operation": "enqueue(1)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5
+          ],
+          "frontier": [
+            7,
+            8,
+            2,
+            3,
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 25,
+        "operation": "set_parent(1, 5)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5
+          ],
+          "frontier": [
+            7,
+            8,
+            2,
+            3,
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 26,
+        "operation": "dequeue(7)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5
+          ],
+          "frontier": [
+            8,
+            2,
+            3,
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 27,
+        "operation": "visit(7)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7
+          ],
+          "frontier": [
+            8,
+            2,
+            3,
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 28,
+        "operation": "dequeue(8)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7
+          ],
+          "frontier": [
+            2,
+            3,
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 29,
+        "operation": "visit(8)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8
+          ],
+          "frontier": [
+            2,
+            3,
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 30,
+        "operation": "enqueue(6)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8
+          ],
+          "frontier": [
+            2,
+            3,
+            1,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 31,
+        "operation": "set_parent(6, 8)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8
+          ],
+          "frontier": [
+            2,
+            3,
+            1,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 32,
+        "operation": "dequeue(2)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8
+          ],
+          "frontier": [
+            3,
+            1,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 33,
+        "operation": "visit(2)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8,
+            2
+          ],
+          "frontier": [
+            3,
+            1,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 34,
+        "operation": "dequeue(3)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8,
+            2
+          ],
+          "frontier": [
+            1,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 35,
+        "operation": "visit(3)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8,
+            2,
+            3
+          ],
+          "frontier": [
+            1,
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 36,
+        "operation": "dequeue(1)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8,
+            2,
+            3
+          ],
+          "frontier": [
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 37,
+        "operation": "visit(1)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8,
+            2,
+            3,
+            1
+          ],
+          "frontier": [
+            6
+          ],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 38,
+        "operation": "dequeue(6)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8,
+            2,
+            3,
+            1
+          ],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 39,
+        "operation": "visit(6)",
+        "state": {
+          "visited": [
+            9,
+            0,
+            4,
+            5,
+            7,
+            8,
+            2,
+            3,
+            1,
+            6
+          ],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "9": null,
+            "0": "9",
+            "4": "9",
+            "5": "9",
+            "7": "9",
+            "8": "9",
+            "2": "0",
+            "3": "4",
+            "1": "5",
+            "6": "8"
+          }
+        },
+        "induced_subgraph": [
+          [
+            9,
+            0,
+            null
+          ],
+          [
+            9,
+            4,
+            null
+          ],
+          [
+            9,
+            5,
+            null
+          ],
+          [
+            9,
+            7,
+            null
+          ],
+          [
+            9,
+            8,
+            null
+          ],
+          [
+            0,
+            2,
+            null
+          ],
+          [
+            4,
+            3,
+            null
+          ],
+          [
+            5,
+            1,
+            null
+          ],
+          [
+            8,
+            6,
+            null
+          ]
+        ]
+      }
+    ]
+  }
+]
