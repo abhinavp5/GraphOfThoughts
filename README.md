@@ -33,7 +33,7 @@ families, algorithms (BFS, DFS, Dijkstra), and trace lengths.
 
 
 
-## Setup
+## Development & Testing
 
 Requires Python 3.11. The ML stack (torch + transformers + peft + accelerate)
 is cross-platform; `bitsandbytes` is only needed for 4-bit quantization on
@@ -45,12 +45,7 @@ conda activate got
 pip install -r requirements.txt
 ```
 
-
-
-
-## Functions
-
-### smoke-test for inference scaffolding
+### smoke-test for inference scaffolding (for testing functionality)
 
 test to validate graph reconstruction, prompt-building, and the
 State-Executor-in-the-loop by replaying gold operations through the
@@ -59,6 +54,25 @@ pipeline:
 ```bash
 python scripts/smoke_test_inference.py data/traces/<test_bfs.json>
 ```
+
+
+## Functions
+
+
+### Generate a dataset
+
+```bash
+python -m data.generators.generate_dataset \
+  --algorithm bfs \
+  --family erdos_renyi \
+  --n 20 --count 1000 \
+  --out data/traces/train_bfs_er.json \
+  --seed 42
+```
+
+Families: `erdos_renyi`, `barabasi_albert`, `random_tree`, `grid`,
+`bridge`, `bottleneck`, `high_girth`. For Dijkstra traces, add `--weighted`.
+
 
 ### Running the full pipeline
 
@@ -95,21 +109,6 @@ Each run writes three artefacts to `out/`:
 - the model's predictions JSON
 - the metrics JSON
 
-
-
-### Generate a dataset
-
-```bash
-python -m data.generators.generate_dataset \
-  --algorithm bfs \
-  --family erdos_renyi \
-  --n 20 --count 1000 \
-  --out data/traces/train_bfs_er.json \
-  --seed 42
-```
-
-Families: `erdos_renyi`, `barabasi_albert`, `random_tree`, `grid`,
-`bridge`, `bottleneck`, `high_girth`. For Dijkstra traces, add `--weighted`.
 
 
 ### Evaluation: Operation accuracy
