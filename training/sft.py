@@ -53,6 +53,8 @@ import os
 import sys
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 try:
     import fcntl
 except ImportError:
@@ -87,6 +89,14 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger("got.sft")
+
+
+def _load_dotenv_if_present() -> None:
+    # Make local runs "just work" with a repo-root .env.
+    # (No-op if the file isn't there.)
+    repo_root = Path(__file__).resolve().parents[1]
+    dotenv_path = repo_root / ".env"
+    load_dotenv(dotenv_path=dotenv_path, override=False)
 
 
 def _is_local_main_process() -> bool:
@@ -337,6 +347,11 @@ def train(config: dict):
     os.makedirs(output_dir, exist_ok=True)
 
     # Training arguments
+    report_to = train_cfg.get("report_to")
+    if report_to is None:
+        # If the user configured WANDB_PROJECT (e.g. via .env), enable W&B by default.
+        report_to = "wandb" if os.environ.get("WANDB_PROJECT") else "none"
+    run_name = train_cfg.get("run_name", None)
     training_args = TrainingArguments(
         output_dir=output_dir,
         num_train_epochs=train_cfg.get("epochs", 3),
@@ -356,7 +371,8 @@ def train(config: dict):
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
         greater_is_better=False,
-        report_to="none",  # set to "wandb" if you have wandb configured
+        report_to=report_to,  # e.g. "wandb"
+        run_name=run_name,
         seed=seed,
         dataloader_pin_memory=True,
         remove_unused_columns=False,
@@ -426,6 +442,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main():
+    _load_dotenv_if_present()
     args = parse_args()
     config = load_config(args.config)
     config = merge_cli_overrides(config, args)
