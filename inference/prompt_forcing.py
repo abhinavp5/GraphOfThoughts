@@ -39,6 +39,42 @@ from training.teacher_forcing import (
 )
 
 
+def build_few_shot_messages(
+    graph_str: str,
+    algorithm: str,
+    source,
+    demos: list[dict],
+) -> list[dict]:
+    """
+    Build a chat message list with N demo (user, assistant) pairs prepended
+    to the target user message.
+
+    Each demo dict must have the full trace schema:
+        {graph, algorithm, source, steps: [...]}
+
+    Returns a list suitable for `tokenizer.apply_chat_template(..., add_generation_prompt=True)`.
+    The caller then appends `build_partial_completion(trace)` to prime the model.
+    """
+    # Target prompt gives us [system, user_target]
+    base = format_prompt(graph_str, algorithm, source)
+    system_msg = base[0]
+    target_user = base[1]
+
+    messages: list[dict] = [system_msg]
+    for demo in demos:
+        demo_base = format_prompt(demo["graph"], demo["algorithm"], demo["source"])
+        demo_user = demo_base[1]
+        demo_assistant = {
+            "role": "assistant",
+            "content": format_trace_completion(demo["steps"]),
+        }
+        messages.append(demo_user)
+        messages.append(demo_assistant)
+
+    messages.append(target_user)
+    return messages
+
+
 def format_step_line(step: dict) -> str:
     """Render one step as the 3-line block used during training."""
     return (
@@ -75,5 +111,6 @@ __all__ = [
     "format_prompt",
     "format_step_line",
     "build_partial_completion",
+    "build_few_shot_messages",
     "extract_operation",
 ]

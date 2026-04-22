@@ -46,6 +46,7 @@ import networkx as nx
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from inference.prompt_forcing import (
+    build_few_shot_messages,
     build_partial_completion,
     extract_operation,
     format_prompt,
@@ -194,6 +195,7 @@ def run_one_sample(
     correction_id: Optional[int],
     max_steps: Optional[int] = None,
     teacher_forced: bool = True,
+    demos: Optional[list[dict]] = None,
     verbose: bool = False,
 ) -> list[dict]:
     """
@@ -216,7 +218,11 @@ def run_one_sample(
 
     G = reconstruct_graph(graph_str)
     executor = StateExecutor(G, source)
-    messages = format_prompt(graph_str, algorithm, source)
+
+    if demos:
+        messages = build_few_shot_messages(graph_str, algorithm, source, demos)
+    else:
+        messages = format_prompt(graph_str, algorithm, source)
 
     budget = max_steps if max_steps is not None else gold_len
 
@@ -309,6 +315,13 @@ def parse_args() -> argparse.Namespace:
                     help="Apply the model's (possibly wrong) op to the state "
                          "executor. Default is teacher-forced: gold ops drive "
                          "state while the model's prediction is scored.")
+    ap.add_argument("--few-shot", type=int, default=0,
+                    help="Prepend N demo (user, assistant) pairs sampled from "
+                         "the trace file before the target query. Teaches the "
+                         "output grammar in-context so untrained base models "
+                         "can be evaluated for reasoning ability (default: 0).")
+    ap.add_argument("--few-shot-seed", type=int, default=42,
+                    help="RNG seed for demo sampling (default: 42).")
     ap.add_argument("--verbose", action="store_true")
     return ap.parse_args()
 
@@ -338,15 +351,33 @@ def main() -> None:
 
     samples = dataset[: args.limit] if args.limit else dataset
 
+    # Demo sampling for few-shot. Demos come from the full dataset, excluding
+    # the current target sample so we never leak the answer.
+    import random
+    demo_rng = random.Random(args.few_shot_seed)
+
     predictions = []
     for i, sample in enumerate(samples):
         if args.verbose:
+            tag = f"few-shot={args.few_shot}" if args.few_shot else "zero-shot"
             print(f"[{i + 1}/{len(samples)}] {sample['algorithm']} "
-                  f"source={sample['source']} gold_len={len(sample['steps'])}")
+                  f"source={sample['source']} gold_len={len(sample['steps'])} ({tag})")
+
+        demos = None
+        if args.few_shot > 0:
+            # Build a pool from the full dataset, drop the current target.
+            target_id = id(sample)
+            pool = [s for s in dataset if id(s) != target_id]
+            k = min(args.few_shot, len(pool))
+            if k < args.few_shot and args.verbose:
+                print(f"  [warn] requested {args.few_shot} demos, only {k} available")
+            demos = demo_rng.sample(pool, k) if k > 0 else None
+
         pred_trace = run_one_sample(
             sample, model, tokenizer, correction_id,
             max_steps=args.max_steps,
             teacher_forced=not args.free_running,
+            demos=demos,
             verbose=args.verbose,
         )
         predictions.append({
