@@ -32,6 +32,7 @@ DTYPE="${DTYPE:-auto}"
 OUT_DIR="${OUT_DIR:-out}"
 MAX_STEPS="${MAX_STEPS:-}"
 FREE_RUNNING="${FREE_RUNNING:-0}"
+FEW_SHOT="${FEW_SHOT:-0}"
 WEIGHTED_FLAG=""
 SMOKE_ONLY="${SMOKE_ONLY:-0}"
 SKIP_SMOKE="${SKIP_SMOKE:-0}"
@@ -59,6 +60,9 @@ Options (all also settable as env vars):
   -t, --dtype DT           auto | float16 | bfloat16 | float32 (default: $DTYPE)
   -o, --out-dir DIR        Output dir (default: $OUT_DIR)
       --free-running       Model's op drives state (default: teacher-forced)
+      --few-shot N         Prepend N demo traces as in-context examples so
+                           untrained base models learn the output grammar
+                           (default: 0, i.e. zero-shot)
       --weighted           Attach random edge weights (required for Dijkstra)
       --smoke-only         Only run the mock-model scaffolding test, then exit
       --skip-smoke         Skip the smoke test
@@ -104,6 +108,7 @@ while [[ $# -gt 0 ]]; do
     -t|--dtype)      DTYPE="$2"; shift 2 ;;
     -o|--out-dir)    OUT_DIR="$2"; shift 2 ;;
     --free-running)  FREE_RUNNING=1; shift ;;
+    --few-shot)      FEW_SHOT="$2"; shift 2 ;;
     --weighted)      WEIGHTED_FLAG="--weighted"; shift ;;
     --smoke-only)    SMOKE_ONLY=1; shift ;;
     --skip-smoke)    SKIP_SMOKE=1; shift ;;
@@ -160,6 +165,11 @@ if [[ "$FREE_RUNNING" == "1" ]]; then
 else
   echo "  mode:      teacher-forced (gold drives state — default)"
 fi
+if [[ "$FEW_SHOT" != "0" ]]; then
+  echo "  few-shot:  $FEW_SHOT demo trace(s) in context"
+else
+  echo "  few-shot:  disabled (zero-shot)"
+fi
 echo "  out_dir:   $OUT_DIR"
 
 # -------------------------------------------------------------------
@@ -187,7 +197,18 @@ fi
 # -------------------------------------------------------------------
 # 1. Dataset generation
 # -------------------------------------------------------------------
+# Few-shot needs at least (few_shot + 1) samples in the file so demos and
+# target never overlap. Bump COUNT if user asked for more demos than samples.
+if [[ "$FEW_SHOT" != "0" ]] && (( COUNT <= FEW_SHOT )); then
+  NEW_COUNT=$((FEW_SHOT + 1))
+  echo "[note] --few-shot $FEW_SHOT needs at least $NEW_COUNT samples; bumping --count from $COUNT to $NEW_COUNT"
+  COUNT="$NEW_COUNT"
+fi
+
 TAG="${ALGORITHM}_${FAMILY}_n${N}_c${COUNT}_s${SEED}"
+if [[ "$FEW_SHOT" != "0" ]]; then
+  TAG="${TAG}_fs${FEW_SHOT}"
+fi
 TRACE_FILE="data/traces/pipe_${TAG}.json"
 
 if [[ "$SKIP_DATA" == "1" ]] && [[ -f "$TRACE_FILE" ]]; then
@@ -221,6 +242,7 @@ INF_ARGS=(
 [[ -n "$ADAPTER" ]]     && INF_ARGS+=(--adapter "$ADAPTER")
 [[ -n "$MAX_STEPS" ]]   && INF_ARGS+=(--max-steps "$MAX_STEPS")
 [[ "$FREE_RUNNING" == "1" ]] && INF_ARGS+=(--free-running)
+[[ "$FEW_SHOT" != "0" ]] && INF_ARGS+=(--few-shot "$FEW_SHOT")
 
 python -m inference.run_inference "${INF_ARGS[@]}"
 
