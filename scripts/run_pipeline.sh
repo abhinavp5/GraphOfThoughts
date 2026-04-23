@@ -37,6 +37,9 @@ WEIGHTED_FLAG=""
 SMOKE_ONLY="${SMOKE_ONLY:-0}"
 SKIP_SMOKE="${SKIP_SMOKE:-0}"
 SKIP_DATA="${SKIP_DATA:-0}"
+NLGRAPH_INPUT="${NLGRAPH_INPUT:-}"
+GLBENCH_INPUT="${GLBENCH_INPUT:-}"
+BENCH_LIMIT="${BENCH_LIMIT:-}"
 
 usage() {
   cat <<EOF
@@ -68,6 +71,9 @@ Options (all also settable as env vars):
       --skip-smoke         Skip the smoke test
       --skip-data          Reuse existing trace file if present
   -h, --help               Show this message
+      --nlgraph-input F    Optional NLGraph JSON to evaluate via benchmark adapter
+      --glbench-input F    Optional GLBench JSON to evaluate via benchmark adapter
+      --bench-limit N      Optional sample cap for benchmark adapters
 
 Examples:
   # Zero-config baseline — base Qwen 0.5B on 5 BFS samples, teacher-forced
@@ -113,6 +119,9 @@ while [[ $# -gt 0 ]]; do
     --smoke-only)    SMOKE_ONLY=1; shift ;;
     --skip-smoke)    SKIP_SMOKE=1; shift ;;
     --skip-data)     SKIP_DATA=1; shift ;;
+    --nlgraph-input) NLGRAPH_INPUT="$2"; shift 2 ;;
+    --glbench-input) GLBENCH_INPUT="$2"; shift 2 ;;
+    --bench-limit)   BENCH_LIMIT="$2"; shift 2 ;;
     -h|--help)       usage; exit 0 ;;
     *) echo "Unknown flag: $1" >&2; usage; exit 2 ;;
   esac
@@ -171,6 +180,8 @@ else
   echo "  few-shot:  disabled (zero-shot)"
 fi
 echo "  out_dir:   $OUT_DIR"
+[[ -n "$NLGRAPH_INPUT" ]] && echo "  nlgraph:   $NLGRAPH_INPUT"
+[[ -n "$GLBENCH_INPUT" ]] && echo "  glbench:   $GLBENCH_INPUT"
 
 # -------------------------------------------------------------------
 # 0. Scaffolding smoke test (no ML deps required)
@@ -252,6 +263,46 @@ python -m inference.run_inference "${INF_ARGS[@]}"
 METRICS_FILE="$OUT_DIR/metrics_${TAG}.json"
 banner "Scoring → $METRICS_FILE"
 python -m evaluation.metrics.operation_accuracy "$PRED_FILE" --out "$METRICS_FILE"
+FAILURES_FILE="$OUT_DIR/failures_${TAG}.json"
+banner "Failure analysis → $FAILURES_FILE"
+python -m evaluation.metrics.failure_analysis "$PRED_FILE" --out "$FAILURES_FILE"
+
+# -------------------------------------------------------------------
+# 4. Optional benchmark integrations (NLGraph / GLBench)
+# -------------------------------------------------------------------
+if [[ -n "$NLGRAPH_INPUT" ]]; then
+  NL_PREFIX="$OUT_DIR/nlgraph_${TAG}"
+  banner "NLGraph benchmark → ${NL_PREFIX}_*.json"
+  NL_ARGS=(
+    --input "$NLGRAPH_INPUT"
+    --model "$MODEL"
+    --out-prefix "$NL_PREFIX"
+    --device "$DEVICE"
+    --dtype "$DTYPE"
+  )
+  [[ -n "$ADAPTER" ]] && NL_ARGS+=(--adapter "$ADAPTER")
+  [[ -n "$MAX_STEPS" ]] && NL_ARGS+=(--max-steps "$MAX_STEPS")
+  [[ -n "$BENCH_LIMIT" ]] && NL_ARGS+=(--limit "$BENCH_LIMIT")
+  [[ "$FREE_RUNNING" == "1" ]] && NL_ARGS+=(--free-running)
+  python -m evaluation.benchmarks.nlgraph "${NL_ARGS[@]}"
+fi
+
+if [[ -n "$GLBENCH_INPUT" ]]; then
+  GL_PREFIX="$OUT_DIR/glbench_${TAG}"
+  banner "GLBench benchmark → ${GL_PREFIX}_*.json"
+  GL_ARGS=(
+    --input "$GLBENCH_INPUT"
+    --model "$MODEL"
+    --out-prefix "$GL_PREFIX"
+    --device "$DEVICE"
+    --dtype "$DTYPE"
+  )
+  [[ -n "$ADAPTER" ]] && GL_ARGS+=(--adapter "$ADAPTER")
+  [[ -n "$MAX_STEPS" ]] && GL_ARGS+=(--max-steps "$MAX_STEPS")
+  [[ -n "$BENCH_LIMIT" ]] && GL_ARGS+=(--limit "$BENCH_LIMIT")
+  [[ "$FREE_RUNNING" == "1" ]] && GL_ARGS+=(--free-running)
+  python -m evaluation.benchmarks.glbench "${GL_ARGS[@]}"
+fi
 
 # -------------------------------------------------------------------
 # Done
@@ -260,3 +311,4 @@ banner "Done"
 echo "  trace file:  $TRACE_FILE"
 echo "  predictions: $PRED_FILE"
 echo "  metrics:     $METRICS_FILE"
+echo "  failures:    $FAILURES_FILE"

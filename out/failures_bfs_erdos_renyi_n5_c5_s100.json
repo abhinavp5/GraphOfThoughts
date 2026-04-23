@@ -1,0 +1,162 @@
+{
+  "n_samples": 1,
+  "total_gold_steps": 20,
+  "total_matches": 0,
+  "total_failures": 20,
+  "overall_step_accuracy": 0.0,
+  "overall_failure_rate": 1.0,
+  "samples_with_any_error": 1,
+  "mean_first_error_step": 0.0,
+  "error_type_counts": {
+    "wrong_operation": 20
+  },
+  "failure_rate_by_algorithm": {
+    "bfs": 1.0
+  },
+  "failure_rate_by_step_bucket": {
+    "early": 1.0,
+    "middle": 1.0,
+    "late": 1.0
+  },
+  "failure_rate_by_step_index": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0,
+    "4": 1.0,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0
+  },
+  "failure_rate_by_gold_operation_type": {
+    "dequeue": 1.0,
+    "enqueue": 1.0,
+    "set_parent": 1.0,
+    "visit": 1.0
+  },
+  "top_operation_confusions": [
+    {
+      "gold_operation": "enqueue(1)",
+      "predicted_operation": "Initialize the algorithm state with the given parameters.",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(1, None)",
+      "predicted_operation": "1 is added to the queue",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(1)",
+      "predicted_operation": "1 is not in frontier, so add it to frontier",
+      "count": 1
+    },
+    {
+      "gold_operation": "visit(1)",
+      "predicted_operation": "1 is not in frontier, so add it to frontier",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(0)",
+      "predicted_operation": "1 is not in frontier, so add it to frontier",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(0, 1)",
+      "predicted_operation": "1 is already in the queue, so no change needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(0)",
+      "predicted_operation": "0 is not in frontier, so add it to frontier",
+      "count": 1
+    },
+    {
+      "gold_operation": "visit(0)",
+      "predicted_operation": "1 is already in the queue, so no change needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(4)",
+      "predicted_operation": "1 is already in the queue, so no change needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(4, 0)",
+      "predicted_operation": "1 is already in the queue, so no change needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(4)",
+      "predicted_operation": "4 is the only neighbor of 0, so we can return to it.",
+      "count": 1
+    },
+    {
+      "gold_operation": "visit(4)",
+      "predicted_operation": "0 is not in frontier, so add it to frontier",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(2)",
+      "predicted_operation": "0 is not in frontier, so add it to frontier",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(2, 4)",
+      "predicted_operation": "2 is already in the queue, so no change needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(3)",
+      "predicted_operation": "2 is the only neighbor of 4 in this subgraph, so we can use it to update the distance from 4 to 2.",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(3, 4)",
+      "predicted_operation": "4 is already in the queue, so skip this step.",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(2)",
+      "predicted_operation": "4 is the only neighbor of 4 in this graph, so we can return to it.",
+      "count": 1
+    },
+    {
+      "gold_operation": "visit(2)",
+      "predicted_operation": "4 is already in the queue, so no change needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(3)",
+      "predicted_operation": "4 is already in the queue, no need to enqueue again",
+      "count": 1
+    },
+    {
+      "gold_operation": "visit(3)",
+      "predicted_operation": "1 is already in the queue, no change needed.",
+      "count": 1
+    }
+  ],
+  "per_sample": [
+    {
+      "algorithm": "bfs",
+      "source": 1,
+      "n_gold_steps": 20,
+      "n_failures": 20,
+      "step_accuracy": 0.0,
+      "first_error_step": 0,
+      "n_invalid_or_runtime_errors": 0
+    }
+  ]
+}
