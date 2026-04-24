@@ -1,0 +1,343 @@
+[pipeline] Unified log: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260423_235407.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     meta-llama/Llama-3.2-1B-Instruct
+  adapter:   checkpoints/llama-3.2-1b-got
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     5        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out
+  log_file:  out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260423_235407.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mScaffolding smoke test (mock model, no ML deps)[0m
+Loading data/traces/test_bfs.json
+Running 3 samples in mock-model mode
+  [0] enqueue(1)  (partial_len=8)
+  [1] set_parent(1, None)  (partial_len=100)
+  [2] dequeue(1)  (partial_len=208)
+  [3] visit(1)  (partial_len=306)
+  [4] enqueue(2)  (partial_len=403)
+  [5] set_parent(2, 1)  (partial_len=503)
+  [6] enqueue(3)  (partial_len=616)
+  [7] set_parent(3, 1)  (partial_len=726)
+  [8] enqueue(5)  (partial_len=857)
+  [9] set_parent(5, 1)  (partial_len=985)
+  [10] enqueue(6)  (partial_len=1135)
+  [11] set_parent(6, 1)  (partial_len=1282)
+  [12] enqueue(9)  (partial_len=1450)
+  [13] set_parent(9, 1)  (partial_len=1615)
+  [14] dequeue(2)  (partial_len=1801)
+  [15] visit(2)  (partial_len=1978)
+  [16] enqueue(0)  (partial_len=2156)
+  [17] set_parent(0, 2)  (partial_len=2339)
+  [18] dequeue(3)  (partial_len=2543)
+  [19] visit(3)  (partial_len=2738)
+  [20] enqueue(7)  (partial_len=2934)
+  [21] set_parent(7, 3)  (partial_len=3135)
+  [22] dequeue(5)  (partial_len=3357)
+  [23] visit(5)  (partial_len=3570)
+  [24] dequeue(6)  (partial_len=3784)
+  [25] visit(6)  (partial_len=3997)
+  [26] dequeue(9)  (partial_len=4211)
+  [27] visit(9)  (partial_len=4424)
+  [28] enqueue(8)  (partial_len=4638)
+  [29] set_parent(8, 9)  (partial_len=4857)
+  [30] dequeue(0)  (partial_len=5097)
+  [31] visit(0)  (partial_len=5328)
+  [32] enqueue(4)  (partial_len=5560)
+  [33] set_parent(4, 0)  (partial_len=5797)
+  [34] dequeue(7)  (partial_len=6055)
+  [35] visit(7)  (partial_len=6304)
+  [36] dequeue(8)  (partial_len=6554)
+  [37] visit(8)  (partial_len=6803)
+  [38] dequeue(4)  (partial_len=7053)
+  [39] visit(4)  (partial_len=7304)
+  sample 0: PASS  (bfs, source=1, steps=40)
+  sample 1: PASS  (bfs, source=0, steps=40)
+  sample 2: PASS  (bfs, source=6, steps=40)
+
+All samples replay cleanly. Inference scaffolding is ready for a real LLM.
+
+[1;34m==>[0m [1mDataset generation → data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json[0m
+  1/5 samples generated
+  2/5 samples generated
+  3/5 samples generated
+  4/5 samples generated
+  5/5 samples generated
+
+Saved 5 traces to data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mInference → out/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading model meta-llama/Llama-3.2-1B-Instruct + adapter checkpoints/llama-3.2-1b-got
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<00:24,  6.02it/s]Loading weights:  31%|███       | 45/146 [00:00<00:00, 202.40it/s]Loading weights:  48%|████▊     | 70/146 [00:00<00:00, 194.98it/s]Loading weights:  64%|██████▎   | 93/146 [00:00<00:00, 202.18it/s]Loading weights:  82%|████████▏ | 120/146 [00:00<00:00, 215.77it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 202.03it/s]
+The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[1/5] bfs source=2 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [1] ✗ pred='dequeue(2)'  gold='set_parent(2, None)'
+  [2] ✓ pred='dequeue(2)'  gold='dequeue(2)'
+  [3] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [4] ✓ pred='enqueue(3)'  gold='enqueue(3)'
+  [5] ✓ pred='set_parent(3, 2)'  gold='set_parent(3, 2)'
+  [6] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [7] ✓ pred='set_parent(4, 2)'  gold='set_parent(4, 2)'
+  [8] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [9] ✗ pred='dequeue(3)'  gold='set_parent(8, 2)'
+  [10] ✓ pred='dequeue(3)'  gold='dequeue(3)'
+  [11] ✗ pred='enqueue(0)'  gold='mark_visited(3)'
+  [12] ✗ pred='enqueue(0)'  gold='enqueue(1)'
+  [13] ✗ pred='enqueue(7)'  gold='set_parent(1, 3)'
+  [14] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [15] ✗ pred='enqueue(9)'  gold='set_parent(7, 3)'
+  [16] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [17] ✗ pred='enqueue(9)'  gold='set_parent(9, 3)'
+  [18] ✓ pred='dequeue(4)'  gold='dequeue(4)'
+  [19] ✗ pred='enqueue(5)'  gold='mark_visited(4)'
+  [20] ✓ pred='enqueue(5)'  gold='enqueue(5)'
+  [21] ✗ pred='enqueue(5)'  gold='set_parent(5, 4)'
+  [22] ✗ pred='enqueue(2)'  gold='dequeue(8)'
+  [23] ✗ pred='8'  gold='mark_visited(8)'
+  [24] ✗ pred='enqueue(6)'  gold='dequeue(1)'
+  [25] ✗ pred='enqueue(1)'  gold='mark_visited(1)'
+  [26] ✗ pred='enqueue(9)'  gold='enqueue(0)'
+  [27] ✓ pred='set_parent(0, 1)'  gold='set_parent(0, 1)'
+  [28] ✗ pred='enqueue(6)'  gold='dequeue(7)'
+  [29] ✗ pred='enqueue(3)'  gold='mark_visited(7)'
+  [30] ✗ pred='enqueue(3)'  gold='dequeue(9)'
+  [31] ✗ pred='enqueue(6)'  gold='mark_visited(9)'
+  [32] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [33] ✗ pred='enqueue(6)'  gold='set_parent(6, 9)'
+  [34] ✗ pred='enqueue(3)'  gold='dequeue(5)'
+  [35] ✗ pred='enqueue(8)'  gold='mark_visited(5)'
+  [36] ✗ pred='enqueue(5)'  gold='dequeue(0)'
+  [37] ✗ pred='enqueue(0)'  gold='mark_visited(0)'
+  [38] ✗ pred='enqueue(0)'  gold='dequeue(6)'
+  [39] ✗ pred='enqueue(9)'  gold='mark_visited(6)'
+[2/5] bfs source=9 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [1] ✗ pred='dequeue(9)'  gold='set_parent(9, None)'
+  [2] ✓ pred='dequeue(9)'  gold='dequeue(9)'
+  [3] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [4] ✓ pred='enqueue(0)'  gold='enqueue(0)'
+  [5] ✓ pred='set_parent(0, 9)'  gold='set_parent(0, 9)'
+  [6] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [7] ✓ pred='set_parent(4, 9)'  gold='set_parent(4, 9)'
+  [8] ✓ pred='enqueue(5)'  gold='enqueue(5)'
+  [9] ✗ pred='enqueue(7)'  gold='set_parent(5, 9)'
+  [10] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [11] ✗ pred='dequeue(7)'  gold='set_parent(7, 9)'
+  [12] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [13] ✗ pred='dequeue(0)'  gold='set_parent(8, 9)'
+  [14] ✓ pred='dequeue(0)'  gold='dequeue(0)'
+  [15] ✗ pred='enqueue(2)'  gold='mark_visited(0)'
+  [16] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [17] ✗ pred='enqueue(2)'  gold='set_parent(2, 0)'
+  [18] ✗ pred='enqueue(7)'  gold='dequeue(4)'
+  [19] ✗ pred='enqueue(3)'  gold='mark_visited(4)'
+  [20] ✗ pred='enqueue(1)'  gold='enqueue(3)'
+  [21] ✗ pred='enqueue(6)'  gold='set_parent(3, 4)'
+  [22] ✗ pred='enqueue(1)'  gold='dequeue(5)'
+  [23] ✗ pred='ellen_visited(5)'  gold='mark_visited(5)'
+  [24] ✓ pred='enqueue(1)'  gold='enqueue(1)'
+  [25] ✗ pred='enqueue(1)'  gold='set_parent(1, 5)'
+  [26] ✗ pred='enqueue(6)'  gold='dequeue(7)'
+  [27] ✗ pred='enqueue(8)'  gold='mark_visited(7)'
+  [28] ✗ pred='enqueue(8)'  gold='dequeue(8)'
+  [29] ✗ pred='enqueue(6)'  gold='mark_visited(8)'
+  [30] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [31] ✗ pred='enqueue(6)'  gold='set_parent(6, 8)'
+  [32] ✗ pred='enqueue(2)'  gold='dequeue(2)'
+  [33] ✗ pred='enqueue(2)'  gold='mark_visited(2)'
+  [34] ✗ pred='enqueue(2)'  gold='dequeue(3)'
+  [35] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [36] ✗ pred='enqueue(1)'  gold='dequeue(1)'
+  [37] ✗ pred='enqueue(1)'  gold='mark_visited(1)'
+  [38] ✗ pred='enqueue(1)'  gold='dequeue(6)'
+  [39] ✗ pred='enqueue(1)'  gold='mark_visited(6)'
+[3/5] bfs source=2 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [1] ✗ pred='dequeue(2)'  gold='set_parent(2, None)'
+  [2] ✓ pred='dequeue(2)'  gold='dequeue(2)'
+  [3] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [4] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [5] ✓ pred='set_parent(6, 2)'  gold='set_parent(6, 2)'
+  [6] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [7] ✓ pred='set_parent(8, 2)'  gold='set_parent(8, 2)'
+  [8] ✓ pred='dequeue(6)'  gold='dequeue(6)'
+  [9] ✗ pred='enqueue(7)'  gold='mark_visited(6)'
+  [10] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [11] ✓ pred='set_parent(7, 6)'  gold='set_parent(7, 6)'
+  [12] ✗ pred='enqueue(2)'  gold='dequeue(8)'
+  [13] ✗ pred='enqueue(1)'  gold='mark_visited(8)'
+  [14] ✓ pred='enqueue(1)'  gold='enqueue(1)'
+  [15] ✗ pred='enqueue(3)'  gold='set_parent(1, 8)'
+  [16] ✓ pred='enqueue(3)'  gold='enqueue(3)'
+  [17] ✗ pred='enqueue(3)'  gold='set_parent(3, 8)'
+  [18] ✗ pred='dequeue(7)'  gold='enqueue(5)'
+  [19] ✗ pred='enqueue(5)'  gold='set_parent(5, 8)'
+  [20] ✓ pred='dequeue(7)'  gold='dequeue(7)'
+  [21] ✗ pred='enqueue(6)'  gold='mark_visited(7)'
+  [22] ✗ pred='enqueue(7)'  gold='dequeue(1)'
+  [23] ✗ pred='enqueue(9)'  gold='mark_visited(1)'
+  [24] ✗ pred='enqueue(9)'  gold='enqueue(0)'
+  [25] ✓ pred='set_parent(0, 1)'  gold='set_parent(0, 1)'
+  [26] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [27] ✗ pred='enqueue(9)'  gold='set_parent(9, 1)'
+  [28] ✓ pred='dequeue(3)'  gold='dequeue(3)'
+  [29] ✗ pred='8'  gold='mark_visited(3)'
+  [30] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [31] ✗ pred='enqueue(4)'  gold='set_parent(4, 3)'
+  [32] ✗ pred='enqueue(0)'  gold='dequeue(5)'
+  [33] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [34] ✗ pred='enqueue(9)'  gold='dequeue(0)'
+  [35] ✗ pred='enqueue(0)'  gold='mark_visited(0)'
+  [36] ✗ pred='enqueue(0)'  gold='dequeue(9)'
+  [37] ✗ pred='enqueue(3)'  gold='mark_visited(9)'
+  [38] ✗ pred='enqueue(9)'  gold='dequeue(4)'
+  [39] ✗ pred='enqueue(4)'  gold='mark_visited(4)'
+[4/5] bfs source=7 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [1] ✗ pred='dequeue(7)'  gold='set_parent(7, None)'
+  [2] ✓ pred='dequeue(7)'  gold='dequeue(7)'
+  [3] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [4] ✓ pred='enqueue(5)'  gold='enqueue(5)'
+  [5] ✓ pred='set_parent(5, 7)'  gold='set_parent(5, 7)'
+  [6] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [7] ✓ pred='set_parent(8, 7)'  gold='set_parent(8, 7)'
+  [8] ✓ pred='dequeue(5)'  gold='dequeue(5)'
+  [9] ✗ pred='enqueue(1)'  gold='mark_visited(5)'
+  [10] ✗ pred='enqueue(1)'  gold='enqueue(0)'
+  [11] ✓ pred='set_parent(0, 5)'  gold='set_parent(0, 5)'
+  [12] ✓ pred='enqueue(1)'  gold='enqueue(1)'
+  [13] ✗ pred='enqueue(6)'  gold='set_parent(1, 5)'
+  [14] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [15] ✗ pred='enqueue(6)'  gold='set_parent(6, 5)'
+  [16] ✗ pred='enqueue(7)'  gold='dequeue(8)'
+  [17] ✗ pred='enqueue(3)'  gold='mark_visited(8)'
+  [18] ✓ pred='enqueue(3)'  gold='enqueue(3)'
+  [19] ✗ pred='enqueue(3)'  gold='set_parent(3, 8)'
+  [20] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [21] ✗ pred='dequeue(0)'  gold='set_parent(9, 8)'
+  [22] ✓ pred='dequeue(0)'  gold='dequeue(0)'
+  [23] ✗ pred='enqueue(6)'  gold='mark_visited(0)'
+  [24] ✗ pred='enqueue(6)'  gold='dequeue(1)'
+  [25] ✗ pred='enqueue(4)'  gold='mark_visited(1)'
+  [26] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [27] ✗ pred='enqueue(4)'  gold='set_parent(4, 1)'
+  [28] ✗ pred='enqueue(2)'  gold='dequeue(6)'
+  [29] ✗ pred='enqueue(2)'  gold='mark_visited(6)'
+  [30] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [31] ✗ pred='enqueue(2)'  gold='set_parent(2, 6)'
+  [32] ✗ pred='enqueue(5)'  gold='dequeue(3)'
+  [33] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [34] ✗ pred='enqueue(2)'  gold='dequeue(9)'
+  [35] ✗ pred='enqueue(4)'  gold='mark_visited(9)'
+  [36] ✗ pred='enqueue(4)'  gold='dequeue(4)'
+  [37] ✗ pred='enqueue(2)'  gold='mark_visited(4)'
+  [38] ✗ pred='enqueue(2)'  gold='dequeue(2)'
+  [39] ✗ pred='enqueue(2)'  gold='mark_visited(2)'
+[5/5] bfs source=0 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(0)'  gold='enqueue(0)'
+  [1] ✗ pred='dequeue(0)'  gold='set_parent(0, None)'
+  [2] ✓ pred='dequeue(0)'  gold='dequeue(0)'
+  [3] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [4] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [5] ✓ pred='set_parent(4, 0)'  gold='set_parent(4, 0)'
+  [6] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [7] ✓ pred='set_parent(7, 0)'  gold='set_parent(7, 0)'
+  [8] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [9] ✗ pred='dequeue(4)'  gold='set_parent(8, 0)'
+  [10] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [11] ✗ pred='dequeue(4)'  gold='set_parent(9, 0)'
+  [12] ✓ pred='dequeue(4)'  gold='dequeue(4)'
+  [13] ✗ pred='enqueue(3)'  gold='mark_visited(4)'
+  [14] ✓ pred='enqueue(3)'  gold='enqueue(3)'
+  [15] ✗ pred='enqueue(5)'  gold='set_parent(3, 4)'
+  [16] ✓ pred='enqueue(5)'  gold='enqueue(5)'
+  [17] ✗ pred='enqueue(5)'  gold='set_parent(5, 4)'
+  [18] ✗ pred='enqueue(0)'  gold='dequeue(7)'
+  [19] ✗ pred='enqueue(0)'  gold='mark_visited(7)'
+  [20] ✗ pred='enqueue(0)'  gold='dequeue(8)'
+  [21] ✗ pred='enqueue(9)'  gold='mark_visited(8)'
+  [22] ✗ pred='enqueue(0)'  gold='dequeue(9)'
+  [23] ✗ pred='enqueue(2)'  gold='mark_visited(9)'
+  [24] ✗ pred='enqueue(1)'  gold='enqueue(2)'
+  [25] ✗ pred='enqueue(2)'  gold='set_parent(2, 9)'
+  [26] ✗ pred='enqueue(0)'  gold='dequeue(3)'
+  [27] ✗ pred='3)->(4)'  gold='mark_visited(3)'
+  [28] ✓ pred='enqueue(1)'  gold='enqueue(1)'
+  [29] ✗ pred='enqueue(6)'  gold='set_parent(1, 3)'
+  [30] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [31] ✗ pred='enqueue(6)'  gold='set_parent(6, 3)'
+  [32] ✗ pred='enqueue(0)'  gold='dequeue(5)'
+  [33] ✗ pred='enqueue(5)'  gold='mark_visited(5)'
+  [34] ✗ pred='enqueue(5)'  gold='dequeue(2)'
+  [35] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [36] ✗ pred='enqueue(2)'  gold='dequeue(1)'
+  [37] ✗ pred='enqueue(1)'  gold='mark_visited(1)'
+  [38] ✗ pred='enqueue(1)'  gold='dequeue(6)'
+  [39] ✗ pred='enqueue(3)'  gold='mark_visited(6)'
+Saved 5 predictions to out/pred_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mScoring → out/metrics_bfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:          5
+Total steps:      200
+Step accuracy:    0.4000
+Trace accuracy:   0.0000
+Mean first-error step: 1.00
+Mean coverage:    1.0000
+
+Wrote metrics to out/metrics_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mFailure analysis → out/failures_bfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:                 5
+Total gold steps:        200
+Overall step accuracy:   0.4000
+Overall failure rate:    0.6000
+Mean first-error step:   1.00
+
+Failure rate by phase:
+   early: 0.2462
+  middle: 0.7385
+    late: 0.8000
+
+Top operation confusions:
+  mark_visited(1) -> enqueue(1) (n=3)
+  set_parent(2, None) -> dequeue(2) (n=2)
+  set_parent(5, 4) -> enqueue(5) (n=2)
+  dequeue(8) -> enqueue(2) (n=2)
+  dequeue(1) -> enqueue(6) (n=2)
+  enqueue(0) -> enqueue(9) (n=2)
+  dequeue(7) -> enqueue(6) (n=2)
+  mark_visited(0) -> enqueue(0) (n=2)
+  mark_visited(4) -> enqueue(3) (n=2)
+  dequeue(2) -> enqueue(2) (n=2)
+
+Wrote failure analysis to out/failures_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mNLGraph benchmark → out/nlgraph_bfs_erdos_renyi_n10_c5_s100_*.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<00:44,  3.27it/s]Loading weights:  39%|███▉      | 57/146 [00:00<00:00, 173.94it/s]Loading weights:  64%|██████▎   | 93/146 [00:00<00:00, 219.41it/s]Loading weights:  86%|████████▋ | 126/146 [00:00<00:00, 243.93it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 210.47it/s]
+The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/evaluation/benchmarks/nlgraph.py", line 128, in <module>
+    main()
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/evaluation/benchmarks/nlgraph.py", line 92, in main
+    pred_steps = run_one_sample(
+                 ^^^^^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/inference/run_inference.py", line 257, in run_one_sample
+    record = executor.apply(gold_op)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/solvers/state_executor.py", line 95, in apply
+    self._execute(operation)
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/solvers/state_executor.py", line 113, in _execute
+    raise ValueError(f"Unknown operation '{operation}'. VALID_OPS={set(VALID_OPS)}")
+ValueError: Unknown operation 'push(10)'. VALID_OPS={'visit', 'mark_visited', 'set_parent', 'enqueue', 'dequeue'}

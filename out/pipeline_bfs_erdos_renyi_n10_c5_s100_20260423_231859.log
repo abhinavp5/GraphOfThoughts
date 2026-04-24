@@ -1,0 +1,36 @@
+[pipeline] Unified log: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260423_231859.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     meta-llama/Llama-3.2-1B-Instruct
+  adapter:   checkpoints/llama-3.2-1b-got
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     5        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out
+  log_file:  out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260423_231859.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mScaffolding smoke test (mock model, no ML deps)[0m
+Loading data/traces/test_bfs.json
+Running 3 samples in mock-model mode
+  [0] enqueue(1)  (partial_len=8)
+  [1] set_parent(1, None)  (partial_len=100)
+  [2] dequeue(1)  (partial_len=208)
+Traceback (most recent call last):
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/scripts/smoke_test_inference.py", line 132, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/scripts/smoke_test_inference.py", line 115, in main
+    ok, errors = run_sample(sample, verbose=(i == 0))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/scripts/smoke_test_inference.py", line 75, in run_sample
+    record = executor.apply(model_op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/solvers/state_executor.py", line 89, in apply
+    self._execute(operation)
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/solvers/state_executor.py", line 107, in _execute
+    raise ValueError(f"Unknown operation '{operation}'. VALID_OPS={set(VALID_OPS)}")
+ValueError: Unknown operation 'visit(1)'. VALID_OPS={'mark_visited', 'enqueue', 'set_parent', 'dequeue'}

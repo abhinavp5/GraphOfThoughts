@@ -47,7 +47,7 @@
       },
       {
         "step": 3,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             2
@@ -266,7 +266,7 @@
       },
       {
         "step": 11,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             2,
@@ -656,7 +656,7 @@
       },
       {
         "step": 19,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             2,
@@ -906,7 +906,7 @@
       },
       {
         "step": 23,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             2,
@@ -1037,7 +1037,7 @@
       },
       {
         "step": 25,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             2,
@@ -1315,7 +1315,7 @@
       },
       {
         "step": 29,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             2,
@@ -1460,7 +1460,7 @@
       },
       {
         "step": 31,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             2,
@@ -1766,7 +1766,7 @@
       },
       {
         "step": 35,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             2,
@@ -1925,7 +1925,7 @@
       },
       {
         "step": 37,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             2,
@@ -2083,7 +2083,7 @@
       },
       {
         "step": 39,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             2,
@@ -2181,7 +2181,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "settle(2)",
+        "operation_predicted": "dequeue(2)",
         "operation_gold": "set_parent(2, None)",
         "match": false,
         "applied": true,
@@ -2217,11 +2217,11 @@
       },
       {
         "step": 3,
-        "operation_predicted": "visit(2)",
-        "operation_gold": "visit(2)",
+        "operation_predicted": "mark_visited(2)",
+        "operation_gold": "mark_visited(2)",
         "match": true,
         "applied": true,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             2
@@ -2257,9 +2257,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "settle(3)",
+        "operation_predicted": "set_parent(3, 2)",
         "operation_gold": "set_parent(3, 2)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(3, 2)",
         "state": {
@@ -2314,9 +2314,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "settle(3)",
+        "operation_predicted": "set_parent(4, 2)",
         "operation_gold": "set_parent(4, 2)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(4, 2)",
         "state": {
@@ -2468,11 +2468,11 @@
       },
       {
         "step": 11,
-        "operation_predicted": "settle(3)",
-        "operation_gold": "visit(3)",
+        "operation_predicted": "enqueue(0)",
+        "operation_gold": "mark_visited(3)",
         "match": false,
         "applied": true,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             2,
@@ -2510,7 +2510,7 @@
       },
       {
         "step": 12,
-        "operation_predicted": "etail(3)",
+        "operation_predicted": "enqueue(0)",
         "operation_gold": "enqueue(1)",
         "match": false,
         "applied": true,
@@ -2602,9 +2602,9 @@
       },
       {
         "step": 14,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "enqueue(7)",
         "operation_gold": "enqueue(7)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(7)",
         "state": {
@@ -2652,7 +2652,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "set_parent(7, 3)",
         "match": false,
         "applied": true,
@@ -2708,9 +2708,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "enqueue(9)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(9)",
         "state": {
@@ -2765,7 +2765,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "set_parent(9, 3)",
         "match": false,
         "applied": true,
@@ -2891,10 +2891,10 @@
       {
         "step": 19,
         "operation_predicted": "enqueue(5)",
-        "operation_gold": "visit(4)",
+        "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             2,
@@ -3017,7 +3017,7 @@
       },
       {
         "step": 21,
-        "operation_predicted": "parent(5) = 4",
+        "operation_predicted": "enqueue(5)",
         "operation_gold": "set_parent(5, 4)",
         "match": false,
         "applied": true,
@@ -3156,11 +3156,11 @@
       },
       {
         "step": 23,
-        "operation_predicted": "8_dequeue(8)",
-        "operation_gold": "visit(8)",
+        "operation_predicted": "8",
+        "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             2,
@@ -3226,7 +3226,7 @@
       },
       {
         "step": 24,
-        "operation_predicted": "8_dequeue(8)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "dequeue(1)",
         "match": false,
         "applied": true,
@@ -3295,11 +3295,11 @@
       },
       {
         "step": 25,
-        "operation_predicted": "enqueue(9)",
-        "operation_gold": "visit(1)",
+        "operation_predicted": "enqueue(1)",
+        "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             2,
@@ -3365,9 +3365,9 @@
       },
       {
         "step": 26,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "enqueue(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(0)",
         "state": {
@@ -3436,9 +3436,9 @@
       },
       {
         "step": 27,
-        "operation_predicted": "sets_parent(0, 1)",
+        "operation_predicted": "set_parent(0, 1)",
         "operation_gold": "set_parent(0, 1)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(0, 1)",
         "state": {
@@ -3513,9 +3513,9 @@
       },
       {
         "step": 28,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "dequeue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(7)",
         "state": {
@@ -3590,10 +3590,10 @@
       {
         "step": 29,
         "operation_predicted": "enqueue(3)",
-        "operation_gold": "visit(7)",
+        "operation_gold": "mark_visited(7)",
         "match": false,
         "applied": true,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             2,
@@ -3742,11 +3742,11 @@
       },
       {
         "step": 31,
-        "operation_predicted": "enqueue(3)",
-        "operation_gold": "visit(9)",
+        "operation_predicted": "enqueue(6)",
+        "operation_gold": "mark_visited(9)",
         "match": false,
         "applied": true,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             2,
@@ -3897,7 +3897,7 @@
       },
       {
         "step": 33,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "set_parent(6, 9)",
         "match": false,
         "applied": true,
@@ -4065,10 +4065,10 @@
       {
         "step": 35,
         "operation_predicted": "enqueue(8)",
-        "operation_gold": "visit(5)",
+        "operation_gold": "mark_visited(5)",
         "match": false,
         "applied": true,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             2,
@@ -4148,7 +4148,7 @@
       },
       {
         "step": 36,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "enqueue(5)",
         "operation_gold": "dequeue(0)",
         "match": false,
         "applied": true,
@@ -4231,11 +4231,11 @@
       },
       {
         "step": 37,
-        "operation_predicted": "enqueue(8)",
-        "operation_gold": "visit(0)",
+        "operation_predicted": "enqueue(0)",
+        "operation_gold": "mark_visited(0)",
         "match": false,
         "applied": true,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             2,
@@ -4315,7 +4315,7 @@
       },
       {
         "step": 38,
-        "operation_predicted": "enqueue(18)",
+        "operation_predicted": "enqueue(0)",
         "operation_gold": "dequeue(6)",
         "match": false,
         "applied": true,
@@ -4397,11 +4397,11 @@
       },
       {
         "step": 39,
-        "operation_predicted": "settle(6)",
-        "operation_gold": "visit(6)",
+        "operation_predicted": "enqueue(9)",
+        "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             2,
@@ -4528,7 +4528,7 @@
       },
       {
         "step": 3,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             9
@@ -4943,7 +4943,7 @@
       },
       {
         "step": 15,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             9,
@@ -5165,7 +5165,7 @@
       },
       {
         "step": 19,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             9,
@@ -5415,7 +5415,7 @@
       },
       {
         "step": 23,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             9,
@@ -5693,7 +5693,7 @@
       },
       {
         "step": 27,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             9,
@@ -5838,7 +5838,7 @@
       },
       {
         "step": 29,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             9,
@@ -6144,7 +6144,7 @@
       },
       {
         "step": 33,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             9,
@@ -6303,7 +6303,7 @@
       },
       {
         "step": 35,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             9,
@@ -6462,7 +6462,7 @@
       },
       {
         "step": 37,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             9,
@@ -6620,7 +6620,7 @@
       },
       {
         "step": 39,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             9,
@@ -6718,7 +6718,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "settle(9)",
+        "operation_predicted": "dequeue(9)",
         "operation_gold": "set_parent(9, None)",
         "match": false,
         "applied": true,
@@ -6754,11 +6754,11 @@
       },
       {
         "step": 3,
-        "operation_predicted": "visit(9)",
-        "operation_gold": "visit(9)",
+        "operation_predicted": "mark_visited(9)",
+        "operation_gold": "mark_visited(9)",
         "match": true,
         "applied": true,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             9
@@ -6794,9 +6794,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "settle(9)",
+        "operation_predicted": "set_parent(0, 9)",
         "operation_gold": "set_parent(0, 9)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(0, 9)",
         "state": {
@@ -6822,9 +6822,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "enqueue(4)",
         "operation_gold": "enqueue(4)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(4)",
         "state": {
@@ -6851,9 +6851,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "settle(0)",
+        "operation_predicted": "set_parent(4, 9)",
         "operation_gold": "set_parent(4, 9)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(4, 9)",
         "state": {
@@ -6886,9 +6886,9 @@
       },
       {
         "step": 8,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "enqueue(5)",
         "operation_gold": "enqueue(5)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(5)",
         "state": {
@@ -6922,7 +6922,7 @@
       },
       {
         "step": 9,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "enqueue(7)",
         "operation_gold": "set_parent(5, 9)",
         "match": false,
         "applied": true,
@@ -6964,9 +6964,9 @@
       },
       {
         "step": 10,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "enqueue(7)",
         "operation_gold": "enqueue(7)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(7)",
         "state": {
@@ -7056,9 +7056,9 @@
       },
       {
         "step": 12,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "enqueue(8)",
         "operation_gold": "enqueue(8)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -7217,11 +7217,11 @@
       },
       {
         "step": 15,
-        "operation_predicted": "visit(0)",
-        "operation_gold": "visit(0)",
-        "match": true,
+        "operation_predicted": "enqueue(2)",
+        "operation_gold": "mark_visited(0)",
+        "match": false,
         "applied": true,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             9,
@@ -7273,9 +7273,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "enqueue(2)",
         "operation_gold": "enqueue(2)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(2)",
         "state": {
@@ -7330,7 +7330,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "deal(4)",
+        "operation_predicted": "enqueue(2)",
         "operation_gold": "set_parent(2, 0)",
         "match": false,
         "applied": true,
@@ -7393,9 +7393,9 @@
       },
       {
         "step": 18,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "enqueue(7)",
         "operation_gold": "dequeue(4)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(4)",
         "state": {
@@ -7456,10 +7456,10 @@
       {
         "step": 19,
         "operation_predicted": "enqueue(3)",
-        "operation_gold": "visit(4)",
+        "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             9,
@@ -7518,7 +7518,7 @@
       },
       {
         "step": 20,
-        "operation_predicted": "parent(4, 0)",
+        "operation_predicted": "enqueue(1)",
         "operation_gold": "enqueue(3)",
         "match": false,
         "applied": true,
@@ -7582,7 +7582,7 @@
       },
       {
         "step": 21,
-        "operation_predicted": "parent(3) = 4",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "set_parent(3, 4)",
         "match": false,
         "applied": true,
@@ -7652,9 +7652,9 @@
       },
       {
         "step": 22,
-        "operation_predicted": "dequeue(5)",
+        "operation_predicted": "enqueue(1)",
         "operation_gold": "dequeue(5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(5)",
         "state": {
@@ -7721,11 +7721,11 @@
       },
       {
         "step": 23,
-        "operation_predicted": "settle(5)",
-        "operation_gold": "visit(5)",
+        "operation_predicted": "ellen_visited(5)",
+        "operation_gold": "mark_visited(5)",
         "match": false,
         "applied": true,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             9,
@@ -7862,7 +7862,7 @@
       },
       {
         "step": 25,
-        "operation_predicted": "sets_parent(1, 5)",
+        "operation_predicted": "enqueue(1)",
         "operation_gold": "set_parent(1, 5)",
         "match": false,
         "applied": true,
@@ -7939,9 +7939,9 @@
       },
       {
         "step": 26,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "dequeue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(7)",
         "state": {
@@ -8015,11 +8015,11 @@
       },
       {
         "step": 27,
-        "operation_predicted": "enqueue(2)",
-        "operation_gold": "visit(7)",
+        "operation_predicted": "enqueue(8)",
+        "operation_gold": "mark_visited(7)",
         "match": false,
         "applied": true,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             9,
@@ -8092,7 +8092,7 @@
       },
       {
         "step": 28,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "enqueue(8)",
         "operation_gold": "dequeue(8)",
         "match": false,
         "applied": true,
@@ -8168,11 +8168,11 @@
       },
       {
         "step": 29,
-        "operation_predicted": "settle(8)",
-        "operation_gold": "visit(8)",
+        "operation_predicted": "enqueue(6)",
+        "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             9,
@@ -8323,7 +8323,7 @@
       },
       {
         "step": 31,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "set_parent(6, 8)",
         "match": false,
         "applied": true,
@@ -8407,7 +8407,7 @@
       },
       {
         "step": 32,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "enqueue(2)",
         "operation_gold": "dequeue(2)",
         "match": false,
         "applied": true,
@@ -8491,10 +8491,10 @@
       {
         "step": 33,
         "operation_predicted": "enqueue(2)",
-        "operation_gold": "visit(2)",
+        "operation_gold": "mark_visited(2)",
         "match": false,
         "applied": true,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             9,
@@ -8574,7 +8574,7 @@
       },
       {
         "step": 34,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "enqueue(2)",
         "operation_gold": "dequeue(3)",
         "match": false,
         "applied": true,
@@ -8657,11 +8657,11 @@
       },
       {
         "step": 35,
-        "operation_predicted": "settle(3)",
-        "operation_gold": "visit(3)",
-        "match": false,
+        "operation_predicted": "mark_visited(3)",
+        "operation_gold": "mark_visited(3)",
+        "match": true,
         "applied": true,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             9,
@@ -8825,10 +8825,10 @@
       {
         "step": 37,
         "operation_predicted": "enqueue(1)",
-        "operation_gold": "visit(1)",
+        "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             9,
@@ -8990,11 +8990,11 @@
       },
       {
         "step": 39,
-        "operation_predicted": "settle(6)",
-        "operation_gold": "visit(6)",
+        "operation_predicted": "enqueue(1)",
+        "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             9,
@@ -9121,7 +9121,7 @@
       },
       {
         "step": 3,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             2
@@ -9263,7 +9263,7 @@
       },
       {
         "step": 9,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             2,
@@ -9401,7 +9401,7 @@
       },
       {
         "step": 13,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             2,
@@ -9791,7 +9791,7 @@
       },
       {
         "step": 21,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             2,
@@ -9908,7 +9908,7 @@
       },
       {
         "step": 23,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             2,
@@ -10305,7 +10305,7 @@
       },
       {
         "step": 29,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             2,
@@ -10611,7 +10611,7 @@
       },
       {
         "step": 33,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             2,
@@ -10770,7 +10770,7 @@
       },
       {
         "step": 35,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             2,
@@ -10929,7 +10929,7 @@
       },
       {
         "step": 37,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             2,
@@ -11087,7 +11087,7 @@
       },
       {
         "step": 39,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             2,
@@ -11185,7 +11185,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "settle(2)",
+        "operation_predicted": "dequeue(2)",
         "operation_gold": "set_parent(2, None)",
         "match": false,
         "applied": true,
@@ -11221,11 +11221,11 @@
       },
       {
         "step": 3,
-        "operation_predicted": "visit(2)",
-        "operation_gold": "visit(2)",
+        "operation_predicted": "mark_visited(2)",
+        "operation_gold": "mark_visited(2)",
         "match": true,
         "applied": true,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             2
@@ -11261,9 +11261,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "settle(6)",
+        "operation_predicted": "set_parent(6, 2)",
         "operation_gold": "set_parent(6, 2)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(6, 2)",
         "state": {
@@ -11289,9 +11289,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "dequeue(6)",
+        "operation_predicted": "enqueue(8)",
         "operation_gold": "enqueue(8)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -11318,9 +11318,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "settle(6)",
+        "operation_predicted": "set_parent(8, 2)",
         "operation_gold": "set_parent(8, 2)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(8, 2)",
         "state": {
@@ -11387,11 +11387,11 @@
       },
       {
         "step": 9,
-        "operation_predicted": "visit(6)",
-        "operation_gold": "visit(6)",
-        "match": true,
+        "operation_predicted": "enqueue(7)",
+        "operation_gold": "mark_visited(6)",
+        "match": false,
         "applied": true,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             2,
@@ -11458,9 +11458,9 @@
       },
       {
         "step": 11,
-        "operation_predicted": "deal(7)",
+        "operation_predicted": "set_parent(7, 6)",
         "operation_gold": "set_parent(7, 6)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(7, 6)",
         "state": {
@@ -11542,10 +11542,10 @@
       {
         "step": 13,
         "operation_predicted": "enqueue(1)",
-        "operation_gold": "visit(8)",
+        "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             2,
@@ -11583,9 +11583,9 @@
       },
       {
         "step": 14,
-        "operation_predicted": "8_set_parent(8, 2)",
+        "operation_predicted": "enqueue(1)",
         "operation_gold": "enqueue(1)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(1)",
         "state": {
@@ -11626,7 +11626,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "sets_parent(1, 8)",
+        "operation_predicted": "enqueue(3)",
         "operation_gold": "set_parent(1, 8)",
         "match": false,
         "applied": true,
@@ -11675,9 +11675,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "enqueue(3)",
         "operation_gold": "enqueue(3)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(3)",
         "state": {
@@ -11725,7 +11725,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "sets_parent(3, 8)",
+        "operation_predicted": "enqueue(3)",
         "operation_gold": "set_parent(3, 8)",
         "match": false,
         "applied": true,
@@ -11838,7 +11838,7 @@
       },
       {
         "step": 19,
-        "operation_predicted": "sets_parent(5, 8)",
+        "operation_predicted": "enqueue(5)",
         "operation_gold": "set_parent(5, 8)",
         "match": false,
         "applied": true,
@@ -11964,10 +11964,10 @@
       {
         "step": 21,
         "operation_predicted": "enqueue(6)",
-        "operation_gold": "visit(7)",
+        "operation_gold": "mark_visited(7)",
         "match": false,
         "applied": true,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             2,
@@ -12026,7 +12026,7 @@
       },
       {
         "step": 22,
-        "operation_predicted": "7::= 6",
+        "operation_predicted": "enqueue(7)",
         "operation_gold": "dequeue(1)",
         "match": false,
         "applied": true,
@@ -12088,11 +12088,11 @@
       },
       {
         "step": 23,
-        "operation_predicted": "enqueue(6)",
-        "operation_gold": "visit(1)",
+        "operation_predicted": "enqueue(9)",
+        "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             2,
@@ -12151,9 +12151,9 @@
       },
       {
         "step": 24,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "enqueue(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(0)",
         "state": {
@@ -12215,9 +12215,9 @@
       },
       {
         "step": 25,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "set_parent(0, 1)",
         "operation_gold": "set_parent(0, 1)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(0, 1)",
         "state": {
@@ -12285,9 +12285,9 @@
       },
       {
         "step": 26,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "enqueue(9)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(9)",
         "state": {
@@ -12356,7 +12356,7 @@
       },
       {
         "step": 27,
-        "operation_predicted": "sets_parent(9, 1)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "set_parent(9, 1)",
         "match": false,
         "applied": true,
@@ -12509,11 +12509,11 @@
       },
       {
         "step": 29,
-        "operation_predicted": "dequeue(5)",
-        "operation_gold": "visit(3)",
+        "operation_predicted": "8",
+        "operation_gold": "mark_visited(3)",
         "match": false,
         "applied": true,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             2,
@@ -12586,9 +12586,9 @@
       },
       {
         "step": 30,
-        "operation_predicted": "0 -> 3",
+        "operation_predicted": "enqueue(4)",
         "operation_gold": "enqueue(4)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(4)",
         "state": {
@@ -12664,7 +12664,7 @@
       },
       {
         "step": 31,
-        "operation_predicted": "sets_parent(4, 3)",
+        "operation_predicted": "enqueue(4)",
         "operation_gold": "set_parent(4, 3)",
         "match": false,
         "applied": true,
@@ -12748,7 +12748,7 @@
       },
       {
         "step": 32,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "enqueue(0)",
         "operation_gold": "dequeue(5)",
         "match": false,
         "applied": true,
@@ -12831,11 +12831,11 @@
       },
       {
         "step": 33,
-        "operation_predicted": "visit(5)",
-        "operation_gold": "visit(5)",
+        "operation_predicted": "mark_visited(5)",
+        "operation_gold": "mark_visited(5)",
         "match": true,
         "applied": true,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             2,
@@ -12999,10 +12999,10 @@
       {
         "step": 35,
         "operation_predicted": "enqueue(0)",
-        "operation_gold": "visit(0)",
+        "operation_gold": "mark_visited(0)",
         "match": false,
         "applied": true,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             2,
@@ -13082,7 +13082,7 @@
       },
       {
         "step": 36,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "enqueue(0)",
         "operation_gold": "dequeue(9)",
         "match": false,
         "applied": true,
@@ -13165,11 +13165,11 @@
       },
       {
         "step": 37,
-        "operation_predicted": "enqueue(9)",
-        "operation_gold": "visit(9)",
+        "operation_predicted": "enqueue(3)",
+        "operation_gold": "mark_visited(9)",
         "match": false,
         "applied": true,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             2,
@@ -13249,7 +13249,7 @@
       },
       {
         "step": 38,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "dequeue(4)",
         "match": false,
         "applied": true,
@@ -13332,10 +13332,10 @@
       {
         "step": 39,
         "operation_predicted": "enqueue(4)",
-        "operation_gold": "visit(4)",
+        "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             2,
@@ -13462,7 +13462,7 @@
       },
       {
         "step": 3,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             7
@@ -13604,7 +13604,7 @@
       },
       {
         "step": 9,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             7,
@@ -13938,7 +13938,7 @@
       },
       {
         "step": 17,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             7,
@@ -14293,7 +14293,7 @@
       },
       {
         "step": 23,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             7,
@@ -14424,7 +14424,7 @@
       },
       {
         "step": 25,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             7,
@@ -14702,7 +14702,7 @@
       },
       {
         "step": 29,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             7,
@@ -15008,7 +15008,7 @@
       },
       {
         "step": 33,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             7,
@@ -15167,7 +15167,7 @@
       },
       {
         "step": 35,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             7,
@@ -15326,7 +15326,7 @@
       },
       {
         "step": 37,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             7,
@@ -15484,7 +15484,7 @@
       },
       {
         "step": 39,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             7,
@@ -15618,11 +15618,11 @@
       },
       {
         "step": 3,
-        "operation_predicted": "visit(7)",
-        "operation_gold": "visit(7)",
+        "operation_predicted": "mark_visited(7)",
+        "operation_gold": "mark_visited(7)",
         "match": true,
         "applied": true,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             7
@@ -15658,9 +15658,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "settle(7)",
+        "operation_predicted": "set_parent(5, 7)",
         "operation_gold": "set_parent(5, 7)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(5, 7)",
         "state": {
@@ -15686,9 +15686,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "dequeue(5)",
+        "operation_predicted": "enqueue(8)",
         "operation_gold": "enqueue(8)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -15715,9 +15715,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "settle(5)",
+        "operation_predicted": "set_parent(8, 7)",
         "operation_gold": "set_parent(8, 7)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(8, 7)",
         "state": {
@@ -15784,11 +15784,11 @@
       },
       {
         "step": 9,
-        "operation_predicted": "visit(5)",
-        "operation_gold": "visit(5)",
-        "match": true,
+        "operation_predicted": "enqueue(1)",
+        "operation_gold": "mark_visited(5)",
+        "match": false,
         "applied": true,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             7,
@@ -15819,9 +15819,9 @@
       },
       {
         "step": 10,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "enqueue(1)",
         "operation_gold": "enqueue(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(0)",
         "state": {
@@ -15855,9 +15855,9 @@
       },
       {
         "step": 11,
-        "operation_predicted": "sets_parent(0, 5)",
+        "operation_predicted": "set_parent(0, 5)",
         "operation_gold": "set_parent(0, 5)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(0, 5)",
         "state": {
@@ -15940,7 +15940,7 @@
       },
       {
         "step": 13,
-        "operation_predicted": "sets_parent(1, 5)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "set_parent(1, 5)",
         "match": false,
         "applied": true,
@@ -16039,7 +16039,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "sets_parent(6, 5)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "set_parent(6, 5)",
         "match": false,
         "applied": true,
@@ -16095,9 +16095,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "dequeue(8)",
+        "operation_predicted": "enqueue(7)",
         "operation_gold": "dequeue(8)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(8)",
         "state": {
@@ -16151,10 +16151,10 @@
       {
         "step": 17,
         "operation_predicted": "enqueue(3)",
-        "operation_gold": "visit(8)",
+        "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             7,
@@ -16206,9 +16206,9 @@
       },
       {
         "step": 18,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "enqueue(3)",
         "operation_gold": "enqueue(3)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(3)",
         "state": {
@@ -16263,7 +16263,7 @@
       },
       {
         "step": 19,
-        "operation_predicted": "sets_parent(3, 8)",
+        "operation_predicted": "enqueue(3)",
         "operation_gold": "set_parent(3, 8)",
         "match": false,
         "applied": true,
@@ -16530,10 +16530,10 @@
       {
         "step": 23,
         "operation_predicted": "enqueue(6)",
-        "operation_gold": "visit(0)",
+        "operation_gold": "mark_visited(0)",
         "match": false,
         "applied": true,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             7,
@@ -16668,11 +16668,11 @@
       },
       {
         "step": 25,
-        "operation_predicted": "visit(1)",
-        "operation_gold": "visit(1)",
-        "match": true,
+        "operation_predicted": "enqueue(4)",
+        "operation_gold": "mark_visited(1)",
+        "match": false,
         "applied": true,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             7,
@@ -16809,7 +16809,7 @@
       },
       {
         "step": 27,
-        "operation_predicted": "sets_parent(4, 1)",
+        "operation_predicted": "enqueue(4)",
         "operation_gold": "set_parent(4, 1)",
         "match": false,
         "applied": true,
@@ -16886,9 +16886,9 @@
       },
       {
         "step": 28,
-        "operation_predicted": "dequeue(6)",
+        "operation_predicted": "enqueue(2)",
         "operation_gold": "dequeue(6)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(6)",
         "state": {
@@ -16963,10 +16963,10 @@
       {
         "step": 29,
         "operation_predicted": "enqueue(2)",
-        "operation_gold": "visit(6)",
+        "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             7,
@@ -17284,11 +17284,11 @@
       },
       {
         "step": 33,
-        "operation_predicted": "enqueue(2)",
-        "operation_gold": "visit(3)",
-        "match": false,
+        "operation_predicted": "mark_visited(3)",
+        "operation_gold": "mark_visited(3)",
+        "match": true,
         "applied": true,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             7,
@@ -17451,11 +17451,11 @@
       },
       {
         "step": 35,
-        "operation_predicted": "settle(9)",
-        "operation_gold": "visit(9)",
+        "operation_predicted": "enqueue(4)",
+        "operation_gold": "mark_visited(9)",
         "match": false,
         "applied": true,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             7,
@@ -17619,10 +17619,10 @@
       {
         "step": 37,
         "operation_predicted": "enqueue(2)",
-        "operation_gold": "visit(4)",
+        "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             7,
@@ -17785,10 +17785,10 @@
       {
         "step": 39,
         "operation_predicted": "enqueue(2)",
-        "operation_gold": "visit(2)",
+        "operation_gold": "mark_visited(2)",
         "match": false,
         "applied": true,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             7,
@@ -17915,7 +17915,7 @@
       },
       {
         "step": 3,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             0
@@ -18225,7 +18225,7 @@
       },
       {
         "step": 13,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             0,
@@ -18538,7 +18538,7 @@
       },
       {
         "step": 19,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             0,
@@ -18655,7 +18655,7 @@
       },
       {
         "step": 21,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             0,
@@ -18772,7 +18772,7 @@
       },
       {
         "step": 23,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             0,
@@ -19022,7 +19022,7 @@
       },
       {
         "step": 27,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             0,
@@ -19461,7 +19461,7 @@
       },
       {
         "step": 33,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             0,
@@ -19620,7 +19620,7 @@
       },
       {
         "step": 35,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             0,
@@ -19779,7 +19779,7 @@
       },
       {
         "step": 37,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             0,
@@ -19937,7 +19937,7 @@
       },
       {
         "step": 39,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             0,
@@ -20035,7 +20035,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "settle(0)",
+        "operation_predicted": "dequeue(0)",
         "operation_gold": "set_parent(0, None)",
         "match": false,
         "applied": true,
@@ -20071,11 +20071,11 @@
       },
       {
         "step": 3,
-        "operation_predicted": "visit(0)",
-        "operation_gold": "visit(0)",
+        "operation_predicted": "mark_visited(0)",
+        "operation_gold": "mark_visited(0)",
         "match": true,
         "applied": true,
-        "operation": "visit(0)",
+        "operation": "mark_visited(0)",
         "state": {
           "visited": [
             0
@@ -20111,9 +20111,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "settle(0)",
+        "operation_predicted": "set_parent(4, 0)",
         "operation_gold": "set_parent(4, 0)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(4, 0)",
         "state": {
@@ -20139,9 +20139,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "enqueue(7)",
         "operation_gold": "enqueue(7)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(7)",
         "state": {
@@ -20168,9 +20168,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "settle(4)",
+        "operation_predicted": "set_parent(7, 0)",
         "operation_gold": "set_parent(7, 0)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "set_parent(7, 0)",
         "state": {
@@ -20203,9 +20203,9 @@
       },
       {
         "step": 8,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "enqueue(8)",
         "operation_gold": "enqueue(8)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -20281,9 +20281,9 @@
       },
       {
         "step": 10,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "enqueue(9)",
         "operation_gold": "enqueue(9)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(9)",
         "state": {
@@ -20421,11 +20421,11 @@
       },
       {
         "step": 13,
-        "operation_predicted": "dequeue(7)",
-        "operation_gold": "visit(4)",
+        "operation_predicted": "enqueue(3)",
+        "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
-        "operation": "visit(4)",
+        "operation": "mark_visited(4)",
         "state": {
           "visited": [
             0,
@@ -20470,9 +20470,9 @@
       },
       {
         "step": 14,
-        "operation_predicted": "0_set_parent(4, 0)",
+        "operation_predicted": "enqueue(3)",
         "operation_gold": "enqueue(3)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(3)",
         "state": {
@@ -20520,7 +20520,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "enqueue(5)",
         "operation_gold": "set_parent(3, 4)",
         "match": false,
         "applied": true,
@@ -20576,9 +20576,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "enqueue(5)",
         "operation_gold": "enqueue(5)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(5)",
         "state": {
@@ -20633,7 +20633,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "enqueue(5)",
         "operation_gold": "set_parent(5, 4)",
         "match": false,
         "applied": true,
@@ -20696,9 +20696,9 @@
       },
       {
         "step": 18,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "enqueue(0)",
         "operation_gold": "dequeue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(7)",
         "state": {
@@ -20759,10 +20759,10 @@
       {
         "step": 19,
         "operation_predicted": "enqueue(0)",
-        "operation_gold": "visit(7)",
+        "operation_gold": "mark_visited(7)",
         "match": false,
         "applied": true,
-        "operation": "visit(7)",
+        "operation": "mark_visited(7)",
         "state": {
           "visited": [
             0,
@@ -20883,11 +20883,11 @@
       },
       {
         "step": 21,
-        "operation_predicted": "enqueue(0)",
-        "operation_gold": "visit(8)",
+        "operation_predicted": "enqueue(9)",
+        "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
-        "operation": "visit(8)",
+        "operation": "mark_visited(8)",
         "state": {
           "visited": [
             0,
@@ -21008,11 +21008,11 @@
       },
       {
         "step": 23,
-        "operation_predicted": "enqueue(0)",
-        "operation_gold": "visit(9)",
+        "operation_predicted": "enqueue(2)",
+        "operation_gold": "mark_visited(9)",
         "match": false,
         "applied": true,
-        "operation": "visit(9)",
+        "operation": "mark_visited(9)",
         "state": {
           "visited": [
             0,
@@ -21071,9 +21071,9 @@
       },
       {
         "step": 24,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "enqueue(1)",
         "operation_gold": "enqueue(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(2)",
         "state": {
@@ -21135,7 +21135,7 @@
       },
       {
         "step": 25,
-        "operation_predicted": "sets_parent(2, 9)",
+        "operation_predicted": "enqueue(2)",
         "operation_gold": "set_parent(2, 9)",
         "match": false,
         "applied": true,
@@ -21205,9 +21205,9 @@
       },
       {
         "step": 26,
-        "operation_predicted": "dequeue(3)",
+        "operation_predicted": "enqueue(0)",
         "operation_gold": "dequeue(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(3)",
         "state": {
@@ -21274,11 +21274,11 @@
       },
       {
         "step": 27,
-        "operation_predicted": "settle(3)",
-        "operation_gold": "visit(3)",
+        "operation_predicted": "3)->(4)",
+        "operation_gold": "mark_visited(3)",
         "match": false,
         "applied": true,
-        "operation": "visit(3)",
+        "operation": "mark_visited(3)",
         "state": {
           "visited": [
             0,
@@ -21492,9 +21492,9 @@
       },
       {
         "step": 30,
-        "operation_predicted": "dequeue(5)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "enqueue(6)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(6)",
         "state": {
@@ -21654,9 +21654,9 @@
       },
       {
         "step": 32,
-        "operation_predicted": "dequeue(5)",
+        "operation_predicted": "enqueue(0)",
         "operation_gold": "dequeue(5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(5)",
         "state": {
@@ -21738,10 +21738,10 @@
       {
         "step": 33,
         "operation_predicted": "enqueue(5)",
-        "operation_gold": "visit(5)",
+        "operation_gold": "mark_visited(5)",
         "match": false,
         "applied": true,
-        "operation": "visit(5)",
+        "operation": "mark_visited(5)",
         "state": {
           "visited": [
             0,
@@ -21821,7 +21821,7 @@
       },
       {
         "step": 34,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "enqueue(5)",
         "operation_gold": "dequeue(2)",
         "match": false,
         "applied": true,
@@ -21904,11 +21904,11 @@
       },
       {
         "step": 35,
-        "operation_predicted": "enqueue(5)",
-        "operation_gold": "visit(2)",
-        "match": false,
+        "operation_predicted": "mark_visited(2)",
+        "operation_gold": "mark_visited(2)",
+        "match": true,
         "applied": true,
-        "operation": "visit(2)",
+        "operation": "mark_visited(2)",
         "state": {
           "visited": [
             0,
@@ -21988,7 +21988,7 @@
       },
       {
         "step": 36,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "enqueue(2)",
         "operation_gold": "dequeue(1)",
         "match": false,
         "applied": true,
@@ -22071,11 +22071,11 @@
       },
       {
         "step": 37,
-        "operation_predicted": "enqueue(9)",
-        "operation_gold": "visit(1)",
+        "operation_predicted": "enqueue(1)",
+        "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
-        "operation": "visit(1)",
+        "operation": "mark_visited(1)",
         "state": {
           "visited": [
             0,
@@ -22237,11 +22237,11 @@
       },
       {
         "step": 39,
-        "operation_predicted": "settle(6)",
-        "operation_gold": "visit(6)",
+        "operation_predicted": "enqueue(3)",
+        "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
-        "operation": "visit(6)",
+        "operation": "mark_visited(6)",
         "state": {
           "visited": [
             0,

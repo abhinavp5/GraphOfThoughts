@@ -1,22 +1,22 @@
 {
   "n_samples": 5,
   "total_gold_steps": 200,
-  "total_matches": 60,
-  "total_failures": 140,
-  "overall_step_accuracy": 0.3,
-  "overall_failure_rate": 0.7,
+  "total_matches": 80,
+  "total_failures": 120,
+  "overall_step_accuracy": 0.4,
+  "overall_failure_rate": 0.6,
   "samples_with_any_error": 5,
   "mean_first_error_step": 1.0,
   "error_type_counts": {
-    "wrong_operation": 140
+    "wrong_operation": 120
   },
   "failure_rate_by_algorithm": {
-    "bfs": 0.7
+    "bfs": 0.6
   },
   "failure_rate_by_step_bucket": {
-    "early": 0.5230769230769231,
-    "middle": 0.7538461538461538,
-    "late": 0.8142857142857143
+    "early": 0.24615384615384617,
+    "middle": 0.7384615384615385,
+    "late": 0.8
   },
   "failure_rate_by_step_index": {
     "0": 0.0,
@@ -24,91 +24,101 @@
     "2": 0.0,
     "3": 0.0,
     "4": 0.0,
-    "5": 1.0,
-    "6": 0.8,
-    "7": 1.0,
-    "8": 0.4,
-    "9": 0.6,
-    "10": 0.4,
-    "11": 1.0,
-    "12": 0.6,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0,
+    "9": 1.0,
+    "10": 0.2,
+    "11": 0.6,
+    "12": 0.4,
     "13": 1.0,
-    "14": 0.6,
-    "15": 0.8,
-    "16": 0.8,
+    "14": 0.0,
+    "15": 1.0,
+    "16": 0.2,
     "17": 1.0,
-    "18": 0.4,
+    "18": 0.6,
     "19": 1.0,
     "20": 0.4,
     "21": 1.0,
-    "22": 0.6,
+    "22": 0.8,
     "23": 1.0,
-    "24": 0.4,
+    "24": 0.8,
     "25": 0.8,
-    "26": 0.2,
-    "27": 1.0,
-    "28": 0.2,
+    "26": 0.6,
+    "27": 0.8,
+    "28": 0.6,
     "29": 1.0,
-    "30": 0.6,
+    "30": 0.2,
     "31": 1.0,
-    "32": 0.6,
-    "33": 0.8,
+    "32": 0.8,
+    "33": 0.6,
     "34": 1.0,
-    "35": 1.0,
+    "35": 0.6,
     "36": 1.0,
     "37": 1.0,
     "38": 1.0,
     "39": 1.0
   },
   "failure_rate_by_gold_operation_type": {
-    "dequeue": 0.54,
-    "enqueue": 0.46,
-    "set_parent": 1.0,
-    "visit": 0.8
+    "dequeue": 0.72,
+    "enqueue": 0.14,
+    "mark_visited": 0.82,
+    "set_parent": 0.72
   },
   "top_operation_confusions": [
     {
-      "gold_operation": "visit(3)",
-      "predicted_operation": "settle(3)",
-      "count": 3
-    },
-    {
-      "gold_operation": "dequeue(8)",
-      "predicted_operation": "enqueue(2)",
-      "count": 3
-    },
-    {
-      "gold_operation": "visit(6)",
-      "predicted_operation": "settle(6)",
+      "gold_operation": "mark_visited(1)",
+      "predicted_operation": "enqueue(1)",
       "count": 3
     },
     {
       "gold_operation": "set_parent(2, None)",
-      "predicted_operation": "settle(2)",
+      "predicted_operation": "dequeue(2)",
       "count": 2
     },
     {
-      "gold_operation": "enqueue(7)",
-      "predicted_operation": "dequeue(4)",
+      "gold_operation": "set_parent(5, 4)",
+      "predicted_operation": "enqueue(5)",
       "count": 2
     },
     {
-      "gold_operation": "enqueue(9)",
-      "predicted_operation": "dequeue(4)",
+      "gold_operation": "dequeue(8)",
+      "predicted_operation": "enqueue(2)",
       "count": 2
     },
     {
-      "gold_operation": "visit(1)",
+      "gold_operation": "dequeue(1)",
+      "predicted_operation": "enqueue(6)",
+      "count": 2
+    },
+    {
+      "gold_operation": "enqueue(0)",
       "predicted_operation": "enqueue(9)",
       "count": 2
     },
     {
-      "gold_operation": "set_parent(1, 5)",
-      "predicted_operation": "sets_parent(1, 5)",
+      "gold_operation": "dequeue(7)",
+      "predicted_operation": "enqueue(6)",
       "count": 2
     },
     {
-      "gold_operation": "visit(2)",
+      "gold_operation": "mark_visited(0)",
+      "predicted_operation": "enqueue(0)",
+      "count": 2
+    },
+    {
+      "gold_operation": "mark_visited(4)",
+      "predicted_operation": "enqueue(3)",
+      "count": 2
+    },
+    {
+      "gold_operation": "dequeue(2)",
+      "predicted_operation": "enqueue(2)",
+      "count": 2
+    },
+    {
+      "gold_operation": "mark_visited(2)",
       "predicted_operation": "enqueue(2)",
       "count": 2
     },
@@ -119,23 +129,18 @@
     },
     {
       "gold_operation": "set_parent(3, 8)",
-      "predicted_operation": "sets_parent(3, 8)",
+      "predicted_operation": "enqueue(3)",
       "count": 2
     },
     {
-      "gold_operation": "enqueue(5)",
-      "predicted_operation": "dequeue(7)",
+      "gold_operation": "dequeue(5)",
+      "predicted_operation": "enqueue(0)",
       "count": 2
     },
     {
-      "gold_operation": "set_parent(3, 2)",
-      "predicted_operation": "settle(3)",
-      "count": 1
-    },
-    {
-      "gold_operation": "set_parent(4, 2)",
-      "predicted_operation": "settle(3)",
-      "count": 1
+      "gold_operation": "dequeue(9)",
+      "predicted_operation": "enqueue(0)",
+      "count": 2
     },
     {
       "gold_operation": "set_parent(8, 2)",
@@ -143,8 +148,13 @@
       "count": 1
     },
     {
+      "gold_operation": "mark_visited(3)",
+      "predicted_operation": "enqueue(0)",
+      "count": 1
+    },
+    {
       "gold_operation": "enqueue(1)",
-      "predicted_operation": "etail(3)",
+      "predicted_operation": "enqueue(0)",
       "count": 1
     },
     {
@@ -154,41 +164,31 @@
     },
     {
       "gold_operation": "set_parent(7, 3)",
-      "predicted_operation": "dequeue(7)",
+      "predicted_operation": "enqueue(9)",
       "count": 1
     },
     {
       "gold_operation": "set_parent(9, 3)",
-      "predicted_operation": "dequeue(4)",
+      "predicted_operation": "enqueue(9)",
       "count": 1
     },
     {
-      "gold_operation": "visit(4)",
+      "gold_operation": "mark_visited(4)",
       "predicted_operation": "enqueue(5)",
       "count": 1
     },
     {
-      "gold_operation": "set_parent(5, 4)",
-      "predicted_operation": "parent(5) = 4",
+      "gold_operation": "mark_visited(8)",
+      "predicted_operation": "8",
       "count": 1
     },
     {
-      "gold_operation": "visit(8)",
-      "predicted_operation": "8_dequeue(8)",
+      "gold_operation": "mark_visited(7)",
+      "predicted_operation": "enqueue(3)",
       "count": 1
     },
     {
-      "gold_operation": "dequeue(1)",
-      "predicted_operation": "8_dequeue(8)",
-      "count": 1
-    },
-    {
-      "gold_operation": "set_parent(0, 1)",
-      "predicted_operation": "sets_parent(0, 1)",
-      "count": 1
-    },
-    {
-      "gold_operation": "visit(7)",
+      "gold_operation": "dequeue(9)",
       "predicted_operation": "enqueue(3)",
       "count": 1
     }
@@ -198,8 +198,8 @@
       "algorithm": "bfs",
       "source": 2,
       "n_gold_steps": 40,
-      "n_failures": 28,
-      "step_accuracy": 0.3,
+      "n_failures": 25,
+      "step_accuracy": 0.375,
       "first_error_step": 1,
       "n_invalid_or_runtime_errors": 0
     },
@@ -207,8 +207,8 @@
       "algorithm": "bfs",
       "source": 9,
       "n_gold_steps": 40,
-      "n_failures": 29,
-      "step_accuracy": 0.275,
+      "n_failures": 25,
+      "step_accuracy": 0.375,
       "first_error_step": 1,
       "n_invalid_or_runtime_errors": 0
     },
@@ -216,8 +216,8 @@
       "algorithm": "bfs",
       "source": 2,
       "n_gold_steps": 40,
-      "n_failures": 29,
-      "step_accuracy": 0.275,
+      "n_failures": 22,
+      "step_accuracy": 0.45,
       "first_error_step": 1,
       "n_invalid_or_runtime_errors": 0
     },
@@ -225,8 +225,8 @@
       "algorithm": "bfs",
       "source": 7,
       "n_gold_steps": 40,
-      "n_failures": 24,
-      "step_accuracy": 0.4,
+      "n_failures": 23,
+      "step_accuracy": 0.425,
       "first_error_step": 1,
       "n_invalid_or_runtime_errors": 0
     },
@@ -234,8 +234,8 @@
       "algorithm": "bfs",
       "source": 0,
       "n_gold_steps": 40,
-      "n_failures": 30,
-      "step_accuracy": 0.25,
+      "n_failures": 25,
+      "step_accuracy": 0.375,
       "first_error_step": 1,
       "n_invalid_or_runtime_errors": 0
     }
