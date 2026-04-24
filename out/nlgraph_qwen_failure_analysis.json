@@ -1,0 +1,87 @@
+{
+  "n_samples": 2,
+  "total_gold_steps": 16,
+  "total_matches": 11,
+  "total_failures": 5,
+  "overall_step_accuracy": 0.6875,
+  "overall_failure_rate": 0.3125,
+  "samples_with_any_error": 2,
+  "mean_first_error_step": 2.0,
+  "error_type_counts": {
+    "wrong_operation": 5
+  },
+  "failure_rate_by_algorithm": {
+    "bfs": 0.125,
+    "dfs": 0.5
+  },
+  "failure_rate_by_step_bucket": {
+    "early": 0.3333333333333333,
+    "middle": 0.25,
+    "late": 0.3333333333333333
+  },
+  "failure_rate_by_step_index": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 1.0,
+    "3": 0.0,
+    "4": 0.5,
+    "5": 0.0,
+    "6": 0.5,
+    "7": 0.5
+  },
+  "failure_rate_by_gold_operation_type": {
+    "dequeue": 1.0,
+    "enqueue": 0.0,
+    "pop": 1.0,
+    "push": 0.6666666666666666,
+    "set_parent": 0.16666666666666666,
+    "visit": 0.0
+  },
+  "top_operation_confusions": [
+    {
+      "gold_operation": "dequeue(1)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    },
+    {
+      "gold_operation": "pop(10)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    },
+    {
+      "gold_operation": "push(8)",
+      "predicted_operation": "8",
+      "count": 1
+    },
+    {
+      "gold_operation": "push(0)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(0, 8)",
+      "predicted_operation": "set_parent(0, 10)",
+      "count": 1
+    }
+  ],
+  "per_sample": [
+    {
+      "algorithm": "bfs",
+      "source": 1,
+      "n_gold_steps": 8,
+      "n_failures": 1,
+      "step_accuracy": 0.875,
+      "first_error_step": 2,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "dfs",
+      "source": 10,
+      "n_gold_steps": 8,
+      "n_failures": 4,
+      "step_accuracy": 0.5,
+      "first_error_step": 2,
+      "n_invalid_or_runtime_errors": 0
+    }
+  ]
+}

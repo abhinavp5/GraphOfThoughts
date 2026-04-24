@@ -1,0 +1,705 @@
+[
+  {
+    "graph": "(0)-[1]->(4) (0)-[2]->(6) (1)-[4]->(2) (1)-[5]->(5) (1)-[4]->(8) (2)-[3]->(3) (3)-[2]->(4) (3)-[9]->(7) (8)-[2]->(9)",
+    "algorithm": "weighted_shortest_path",
+    "source": 1,
+    "gold_steps": [
+      {
+        "step": 0,
+        "operation": "init_source(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 1,
+        "operation": "settle(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 2,
+        "operation": "relax(1, 5, 5)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 3,
+        "operation": "relax(1, 2, 4)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 4,
+        "operation": "relax(1, 8, 4)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 5,
+        "operation": "settle(2)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 6,
+        "operation": "relax(2, 3, 7)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 7,
+        "operation": "settle(8)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      }
+    ],
+    "predicted_steps": [
+      {
+        "step": 0,
+        "operation_predicted": "enqueue(1)",
+        "operation_gold": "init_source(1)",
+        "match": false,
+        "applied": true,
+        "operation": "init_source(1)",
+        "state": {
+          "visited": [],
+          "frontier": [
+            1
+          ],
+          "distances": {
+            "1": 0
+          },
+          "parent": {
+            "1": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 1,
+        "operation_predicted": "set_parent(1, None)",
+        "operation_gold": "settle(1)",
+        "match": false,
+        "applied": true,
+        "operation": "settle(1)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [],
+          "distances": {
+            "1": 0
+          },
+          "parent": {
+            "1": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 2,
+        "operation_predicted": "set_parent(1, None)",
+        "operation_gold": "relax(1, 5, 5)",
+        "match": false,
+        "applied": true,
+        "operation": "relax(1, 5, 5)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [
+            5
+          ],
+          "distances": {
+            "1": 0,
+            "5": 5
+          },
+          "parent": {
+            "1": null,
+            "5": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            5,
+            5
+          ]
+        ]
+      },
+      {
+        "step": 3,
+        "operation_predicted": "",
+        "operation_gold": "relax(1, 2, 4)",
+        "match": false,
+        "applied": true,
+        "operation": "relax(1, 2, 4)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [
+            5,
+            2
+          ],
+          "distances": {
+            "1": 0,
+            "5": 5,
+            "2": 4
+          },
+          "parent": {
+            "1": null,
+            "5": "1",
+            "2": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            5,
+            5
+          ],
+          [
+            1,
+            2,
+            4
+          ]
+        ]
+      },
+      {
+        "step": 4,
+        "operation_predicted": "",
+        "operation_gold": "relax(1, 8, 4)",
+        "match": false,
+        "applied": true,
+        "operation": "relax(1, 8, 4)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [
+            5,
+            2,
+            8
+          ],
+          "distances": {
+            "1": 0,
+            "5": 5,
+            "2": 4,
+            "8": 4
+          },
+          "parent": {
+            "1": null,
+            "5": "1",
+            "2": "1",
+            "8": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            5,
+            5
+          ],
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            1,
+            8,
+            4
+          ]
+        ]
+      },
+      {
+        "step": 5,
+        "operation_predicted": "set_parent(1, 0)",
+        "operation_gold": "settle(2)",
+        "match": false,
+        "applied": true,
+        "operation": "settle(2)",
+        "state": {
+          "visited": [
+            1,
+            2
+          ],
+          "frontier": [
+            5,
+            8
+          ],
+          "distances": {
+            "1": 0,
+            "5": 5,
+            "2": 4,
+            "8": 4
+          },
+          "parent": {
+            "1": null,
+            "5": "1",
+            "2": "1",
+            "8": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            5,
+            5
+          ],
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            1,
+            8,
+            4
+          ]
+        ]
+      },
+      {
+        "step": 6,
+        "operation_predicted": "",
+        "operation_gold": "relax(2, 3, 7)",
+        "match": false,
+        "applied": true,
+        "operation": "relax(2, 3, 7)",
+        "state": {
+          "visited": [
+            1,
+            2
+          ],
+          "frontier": [
+            5,
+            8,
+            3
+          ],
+          "distances": {
+            "1": 0,
+            "5": 5,
+            "2": 4,
+            "8": 4,
+            "3": 7
+          },
+          "parent": {
+            "1": null,
+            "5": "1",
+            "2": "1",
+            "8": "1",
+            "3": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            5,
+            5
+          ],
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            1,
+            8,
+            4
+          ],
+          [
+            2,
+            3,
+            3
+          ]
+        ]
+      },
+      {
+        "step": 7,
+        "operation_predicted": "",
+        "operation_gold": "settle(8)",
+        "match": false,
+        "applied": true,
+        "operation": "settle(8)",
+        "state": {
+          "visited": [
+            1,
+            2,
+            8
+          ],
+          "frontier": [
+            5,
+            3
+          ],
+          "distances": {
+            "1": 0,
+            "5": 5,
+            "2": 4,
+            "8": 4,
+            "3": 7
+          },
+          "parent": {
+            "1": null,
+            "5": "1",
+            "2": "1",
+            "8": "1",
+            "3": "2"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            5,
+            5
+          ],
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            1,
+            8,
+            4
+          ],
+          [
+            2,
+            3,
+            3
+          ]
+        ]
+      }
+    ],
+    "benchmark_meta": {
+      "id": "gl_dijkstra_001",
+      "task": null
+    }
+  },
+  {
+    "graph": "(0)->(2) (0)->(3) (0)->(4) (0)->(8) (1)->(2) (1)->(3) (1)->(5) (1)->(6) (1)->(9) (2)->(5) (2)->(9) (3)->(6) (3)->(7) (6)->(9) (7)->(8) (7)->(9) (8)->(9)",
+    "algorithm": "unweighted_traversal",
+    "source": 1,
+    "gold_steps": [
+      {
+        "step": 0,
+        "operation": "enqueue(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 1,
+        "operation": "set_parent(1, None)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 2,
+        "operation": "dequeue(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 3,
+        "operation": "visit(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 4,
+        "operation": "enqueue(2)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 5,
+        "operation": "set_parent(2, 1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 6,
+        "operation": "enqueue(3)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 7,
+        "operation": "set_parent(3, 1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      }
+    ],
+    "predicted_steps": [
+      {
+        "step": 0,
+        "operation_predicted": "enqueue(1)",
+        "operation_gold": "enqueue(1)",
+        "match": true,
+        "applied": true,
+        "operation": "enqueue(1)",
+        "state": {
+          "visited": [],
+          "frontier": [
+            1
+          ],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 1,
+        "operation_predicted": "set_parent(1, None)",
+        "operation_gold": "set_parent(1, None)",
+        "match": true,
+        "applied": true,
+        "operation": "set_parent(1, None)",
+        "state": {
+          "visited": [],
+          "frontier": [
+            1
+          ],
+          "distances": {},
+          "parent": {
+            "1": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 2,
+        "operation_predicted": "",
+        "operation_gold": "dequeue(1)",
+        "match": false,
+        "applied": true,
+        "operation": "dequeue(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "1": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 3,
+        "operation_predicted": "visit(1)",
+        "operation_gold": "visit(1)",
+        "match": true,
+        "applied": true,
+        "operation": "visit(1)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [],
+          "distances": {},
+          "parent": {
+            "1": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 4,
+        "operation_predicted": "",
+        "operation_gold": "enqueue(2)",
+        "match": false,
+        "applied": true,
+        "operation": "enqueue(2)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [
+            2
+          ],
+          "distances": {},
+          "parent": {
+            "1": null
+          }
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 5,
+        "operation_predicted": "set_parent(2, 1)",
+        "operation_gold": "set_parent(2, 1)",
+        "match": true,
+        "applied": true,
+        "operation": "set_parent(2, 1)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [
+            2
+          ],
+          "distances": {},
+          "parent": {
+            "1": null,
+            "2": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            2,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 6,
+        "operation_predicted": "",
+        "operation_gold": "enqueue(3)",
+        "match": false,
+        "applied": true,
+        "operation": "enqueue(3)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [
+            2,
+            3
+          ],
+          "distances": {},
+          "parent": {
+            "1": null,
+            "2": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            2,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 7,
+        "operation_predicted": "set_parent(3, 1)",
+        "operation_gold": "set_parent(3, 1)",
+        "match": true,
+        "applied": true,
+        "operation": "set_parent(3, 1)",
+        "state": {
+          "visited": [
+            1
+          ],
+          "frontier": [
+            2,
+            3
+          ],
+          "distances": {},
+          "parent": {
+            "1": null,
+            "2": "1",
+            "3": "1"
+          }
+        },
+        "induced_subgraph": [
+          [
+            1,
+            2,
+            null
+          ],
+          [
+            1,
+            3,
+            null
+          ]
+        ]
+      }
+    ],
+    "benchmark_meta": {
+      "id": "gl_bfs_001",
+      "task": null
+    }
+  }
+]
