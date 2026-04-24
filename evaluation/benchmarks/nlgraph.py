@@ -73,6 +73,8 @@ def main() -> None:
 
     raw = load_json(args.input)
     samples = normalize_nlgraph(raw)
+    # Only support for BFS rn
+    samples = [s for s in samples if s.get("algorithm") == "bfs"]
     if args.limit:
         samples = samples[: args.limit]
 

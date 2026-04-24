@@ -73,6 +73,9 @@ def main() -> None:
 
     raw = load_json(args.input)
     samples = normalize_glbench(raw)
+    # BFS-only: our StateExecutor vocabulary currently targets BFS-style traces.
+    # GLBench datasets can include shortest-path tasks with ops like relax/settle.
+    samples = [s for s in samples if s.get("algorithm") == "bfs"]
     if args.limit:
         samples = samples[: args.limit]
 
