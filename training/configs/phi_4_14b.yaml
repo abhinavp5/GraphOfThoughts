@@ -1,0 +1,42 @@
+# -----------------------------------------------------------------------
+# Microsoft Phi-4 (14B) — Graph of Thoughts SFT config
+#
+# Phi-4 tops its weight class on math and algorithmic reasoning benchmarks.
+# Reduced batch_size + increased gradient_accumulation keeps effective batch
+# size at 16 while halving per-step GPU memory relative to the 7B configs.
+# -----------------------------------------------------------------------
+
+model:
+  name: microsoft/phi-4
+  max_seq_length: 2048
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+
+training:
+  epochs: 3
+  batch_size: 2
+  gradient_accumulation_steps: 8
+  learning_rate: 1.0e-4
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  bf16: true
+  seed: 42
+  output_dir: checkpoints/phi-4-14b-got
+
+data:
+  train_dir: data/traces
+  train_pattern: "train_*.json"
+  val_pattern: "val_*.json"
+  negative_sample_ratio: 0.2
+  max_seq_length: 2048
+
+special_tokens:
+  - "<|CORRECTION|>"

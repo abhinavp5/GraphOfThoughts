@@ -1,0 +1,42 @@
+# -----------------------------------------------------------------------
+# Mistral 7B Instruct v0.3 — Graph of Thoughts SFT config
+#
+# Sliding-window attention architecture; a solid 7B alternate baseline
+# that confirms whether GoT fine-tuning results generalise across
+# attention implementations (full vs. sliding-window).
+# -----------------------------------------------------------------------
+
+model:
+  name: mistralai/Mistral-7B-Instruct-v0.3
+  max_seq_length: 2048
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+
+training:
+  epochs: 3
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  bf16: true
+  seed: 42
+  output_dir: checkpoints/mistral-7b-v03-got
+
+data:
+  train_dir: data/traces
+  train_pattern: "train_*.json"
+  val_pattern: "val_*.json"
+  negative_sample_ratio: 0.2
+  max_seq_length: 2048
+
+special_tokens:
+  - "<|CORRECTION|>"

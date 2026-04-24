@@ -1,0 +1,45 @@
+# -----------------------------------------------------------------------
+# Meta Llama 3.1-8B Instruct — Graph of Thoughts SFT config
+#
+# 8B sibling of the existing 1B baseline — establishes the Llama family
+# size-scaling curve for graph algorithm fine-tuning.
+#
+# Gated model: requires accepting the license at
+#   https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
+# and setting HF_TOKEN (or running `huggingface-cli login`).
+# -----------------------------------------------------------------------
+
+model:
+  name: meta-llama/Llama-3.1-8B-Instruct
+  max_seq_length: 2048
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+
+training:
+  epochs: 3
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  bf16: true
+  seed: 42
+  output_dir: checkpoints/llama-3.1-8b-got
+
+data:
+  train_dir: data/traces
+  train_pattern: "train_*.json"
+  val_pattern: "val_*.json"
+  negative_sample_ratio: 0.2
+  max_seq_length: 2048
+
+special_tokens:
+  - "<|CORRECTION|>"
