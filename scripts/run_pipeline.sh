@@ -8,6 +8,10 @@
 # tiny BFS / Erdős–Rényi test set, so `bash scripts/run_pipeline.sh` works
 # out of the box. Override anything via flags or env vars.
 #
+# Unified console log: default $OUT_DIR/pipeline_${TAG}_<timestamp>.log
+# Override with --log-file PATH or env PIPELINE_LOG.
+# W&B: set WANDB_PROJECT; aggregate metrics logged at end via scripts/log_pipeline_run.py
+#
 # Usage:
 #   bash scripts/run_pipeline.sh [options]
 #   bash scripts/run_pipeline.sh --help
@@ -40,6 +44,7 @@ SKIP_DATA="${SKIP_DATA:-0}"
 NLGRAPH_INPUT="${NLGRAPH_INPUT:-}"
 GLBENCH_INPUT="${GLBENCH_INPUT:-}"
 BENCH_LIMIT="${BENCH_LIMIT:-}"
+CLI_LOG_FILE="${CLI_LOG_FILE:-}"
 
 usage() {
   cat <<EOF
@@ -62,6 +67,10 @@ Options (all also settable as env vars):
   -d, --device DEV         auto | mps | cuda | cpu (default: $DEVICE)
   -t, --dtype DT           auto | float16 | bfloat16 | float32 (default: $DTYPE)
   -o, --out-dir DIR        Output dir (default: $OUT_DIR)
+      --log-file PATH      Tee full stdout/stderr to this file (default:
+                           \$OUT_DIR/pipeline_<TAG>_<timestamp>.log)
+                           Env PIPELINE_LOG overrides the default path if set
+                           (CLI --log-file takes precedence over PIPELINE_LOG).
       --free-running       Model's op drives state (default: teacher-forced)
       --few-shot N         Prepend N demo traces as in-context examples so
                            untrained base models learn the output grammar
@@ -74,6 +83,9 @@ Options (all also settable as env vars):
       --nlgraph-input F    Optional NLGraph JSON to evaluate via benchmark adapter
       --glbench-input F    Optional GLBench JSON to evaluate via benchmark adapter
       --bench-limit N      Optional sample cap for benchmark adapters
+
+  W&B: export WANDB_PROJECT=<name> before running; aggregate metrics from
+  pipe / NLGraph / GLBench are logged at end (requires wandb install + auth).
 
 Examples:
   # Zero-config baseline — base Qwen 0.5B on 5 BFS samples, teacher-forced
@@ -113,6 +125,7 @@ while [[ $# -gt 0 ]]; do
     -d|--device)     DEVICE="$2"; shift 2 ;;
     -t|--dtype)      DTYPE="$2"; shift 2 ;;
     -o|--out-dir)    OUT_DIR="$2"; shift 2 ;;
+    --log-file)      CLI_LOG_FILE="$2"; shift 2 ;;
     --free-running)  FREE_RUNNING=1; shift ;;
     --few-shot)      FEW_SHOT="$2"; shift 2 ;;
     --weighted)      WEIGHTED_FLAG="--weighted"; shift ;;
@@ -132,6 +145,50 @@ if [[ "$ALGORITHM" == "dijkstra" ]] && [[ -z "$WEIGHTED_FLAG" ]]; then
   echo "[note] --algorithm dijkstra implies --weighted; enabling."
   WEIGHTED_FLAG="--weighted"
 fi
+
+# Few-shot needs at least (few_shot + 1) samples in the file so demos and
+# target never overlap. Bump COUNT if user asked for more demos than samples.
+if [[ "$FEW_SHOT" != "0" ]] && (( COUNT <= FEW_SHOT )); then
+  NEW_COUNT=$((FEW_SHOT + 1))
+  echo "[note] --few-shot $FEW_SHOT needs at least $NEW_COUNT samples; bumping --count from $COUNT to $NEW_COUNT"
+  COUNT="$NEW_COUNT"
+fi
+
+TAG="${ALGORITHM}_${FAMILY}_n${N}_c${COUNT}_s${SEED}"
+if [[ "$FEW_SHOT" != "0" ]]; then
+  TAG="${TAG}_fs${FEW_SHOT}"
+fi
+
+RUN_ID="${TAG}_$(date +%Y%m%d_%H%M%S)"
+
+mkdir -p "$OUT_DIR"
+
+# Resolve unified log path: CLI > env PIPELINE_LOG > default
+if [[ -n "$CLI_LOG_FILE" ]]; then
+  PIPELINE_LOG_FILE="$CLI_LOG_FILE"
+elif [[ -n "${PIPELINE_LOG:-}" ]]; then
+  PIPELINE_LOG_FILE="$PIPELINE_LOG"
+else
+  PIPELINE_LOG_FILE="${OUT_DIR}/pipeline_${TAG}_$(date +%Y%m%d_%H%M%S).log"
+fi
+
+mkdir -p "$(dirname "$PIPELINE_LOG_FILE")"
+
+RUN_START="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+# Tee all subsequent output to console and log file
+exec > >(tee -a "$PIPELINE_LOG_FILE") 2>&1
+
+_log_abs() {
+  if command -v realpath &>/dev/null; then
+    realpath "$PIPELINE_LOG_FILE" 2>/dev/null || echo "$PIPELINE_LOG_FILE"
+  elif readlink -f "$PIPELINE_LOG_FILE" &>/dev/null; then
+    readlink -f "$PIPELINE_LOG_FILE"
+  else
+    echo "$PIPELINE_LOG_FILE"
+  fi
+}
+echo "[pipeline] Unified log: $(_log_abs)"
 
 # -------------------------------------------------------------------
 # Auto-detect device + dtype
@@ -180,6 +237,7 @@ else
   echo "  few-shot:  disabled (zero-shot)"
 fi
 echo "  out_dir:   $OUT_DIR"
+echo "  log_file:  $PIPELINE_LOG_FILE"
 [[ -n "$NLGRAPH_INPUT" ]] && echo "  nlgraph:   $NLGRAPH_INPUT"
 [[ -n "$GLBENCH_INPUT" ]] && echo "  glbench:   $GLBENCH_INPUT"
 
@@ -208,18 +266,6 @@ fi
 # -------------------------------------------------------------------
 # 1. Dataset generation
 # -------------------------------------------------------------------
-# Few-shot needs at least (few_shot + 1) samples in the file so demos and
-# target never overlap. Bump COUNT if user asked for more demos than samples.
-if [[ "$FEW_SHOT" != "0" ]] && (( COUNT <= FEW_SHOT )); then
-  NEW_COUNT=$((FEW_SHOT + 1))
-  echo "[note] --few-shot $FEW_SHOT needs at least $NEW_COUNT samples; bumping --count from $COUNT to $NEW_COUNT"
-  COUNT="$NEW_COUNT"
-fi
-
-TAG="${ALGORITHM}_${FAMILY}_n${N}_c${COUNT}_s${SEED}"
-if [[ "$FEW_SHOT" != "0" ]]; then
-  TAG="${TAG}_fs${FEW_SHOT}"
-fi
 TRACE_FILE="data/traces/pipe_${TAG}.json"
 
 if [[ "$SKIP_DATA" == "1" ]] && [[ -f "$TRACE_FILE" ]]; then
@@ -237,7 +283,6 @@ fi
 # -------------------------------------------------------------------
 # 2. Inference
 # -------------------------------------------------------------------
-mkdir -p "$OUT_DIR"
 PRED_FILE="$OUT_DIR/pred_${TAG}.json"
 
 banner "Inference → $PRED_FILE"
@@ -270,6 +315,11 @@ python -m evaluation.metrics.failure_analysis "$PRED_FILE" --out "$FAILURES_FILE
 # -------------------------------------------------------------------
 # 4. Optional benchmark integrations (NLGraph / GLBench)
 # -------------------------------------------------------------------
+NL_PREFIX=""
+NL_PRED=""
+NL_OA=""
+NL_FA=""
+
 if [[ -n "$NLGRAPH_INPUT" ]]; then
   NL_PREFIX="$OUT_DIR/nlgraph_${TAG}"
   banner "NLGraph benchmark → ${NL_PREFIX}_*.json"
@@ -285,7 +335,15 @@ if [[ -n "$NLGRAPH_INPUT" ]]; then
   [[ -n "$BENCH_LIMIT" ]] && NL_ARGS+=(--limit "$BENCH_LIMIT")
   [[ "$FREE_RUNNING" == "1" ]] && NL_ARGS+=(--free-running)
   python -m evaluation.benchmarks.nlgraph "${NL_ARGS[@]}"
+  NL_PRED="${NL_PREFIX}_predictions.json"
+  NL_OA="${NL_PREFIX}_operation_accuracy.json"
+  NL_FA="${NL_PREFIX}_failure_analysis.json"
 fi
+
+GL_PREFIX=""
+GL_PRED=""
+GL_OA=""
+GL_FA=""
 
 if [[ -n "$GLBENCH_INPUT" ]]; then
   GL_PREFIX="$OUT_DIR/glbench_${TAG}"
@@ -302,13 +360,123 @@ if [[ -n "$GLBENCH_INPUT" ]]; then
   [[ -n "$BENCH_LIMIT" ]] && GL_ARGS+=(--limit "$BENCH_LIMIT")
   [[ "$FREE_RUNNING" == "1" ]] && GL_ARGS+=(--free-running)
   python -m evaluation.benchmarks.glbench "${GL_ARGS[@]}"
+  GL_PRED="${GL_PREFIX}_predictions.json"
+  GL_OA="${GL_PREFIX}_operation_accuracy.json"
+  GL_FA="${GL_PREFIX}_failure_analysis.json"
 fi
 
 # -------------------------------------------------------------------
-# Done
+# 5. Run manifest (JSON) + optional W&B
 # -------------------------------------------------------------------
+RUN_END="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+GIT_COMMIT="$(git rev-parse HEAD 2>/dev/null || true)"
+
+MANIFEST_FILE="$OUT_DIR/run_manifest_${TAG}.json"
+
+if [[ "$FREE_RUNNING" == "1" ]]; then
+  JSON_FREE=true
+else
+  JSON_FREE=false
+fi
+
+# Build paths JSON (nlgraph / glbench blocks optional)
+export MANIFEST_FILE RUN_ID TAG RUN_START RUN_END PIPELINE_LOG_FILE
+export MODEL ADAPTER ALGORITHM FAMILY N COUNT LIMIT SEED DEVICE DTYPE
+export BENCH_LIMIT MAX_STEPS SMOKE_ONLY TRACE_FILE PRED_FILE METRICS_FILE FAILURES_FILE
+export NL_PREFIX NL_PRED NL_OA NL_FA GL_PREFIX GL_PRED GL_OA GL_FA
+export JSON_FREE
+export GIT_COMMIT="${GIT_COMMIT:-}"
+export NLGRAPH_INPUT="${NLGRAPH_INPUT:-}"
+export GLBENCH_INPUT="${GLBENCH_INPUT:-}"
+
+python <<'PY'
+import json, os
+
+def path_or_null(p: str) -> str | None:
+    return p if p else None
+
+git = os.environ.get("GIT_COMMIT", "").strip() or None
+
+pipe = {
+    "predictions": os.environ["PRED_FILE"],
+    "operation_accuracy": os.environ["METRICS_FILE"],
+    "failure_analysis": os.environ["FAILURES_FILE"],
+}
+
+nl = None
+if os.environ.get("NL_PREFIX", "").strip():
+    nl = {
+        "prefix": os.environ.get("NL_PREFIX", ""),
+        "predictions": os.environ.get("NL_PRED") or None,
+        "operation_accuracy": os.environ.get("NL_OA") or None,
+        "failure_analysis": os.environ.get("NL_FA") or None,
+    }
+
+gl = None
+if os.environ.get("GL_PREFIX", "").strip():
+    gl = {
+        "prefix": os.environ.get("GL_PREFIX", ""),
+        "predictions": os.environ.get("GL_PRED") or None,
+        "operation_accuracy": os.environ.get("GL_OA") or None,
+        "failure_analysis": os.environ.get("GL_FA") or None,
+    }
+
+bench = os.environ.get("BENCH_LIMIT", "").strip()
+cfg = {
+    "model": os.environ["MODEL"],
+    "adapter": os.environ.get("ADAPTER", "") or None,
+    "algorithm": os.environ["ALGORITHM"],
+    "family": os.environ["FAMILY"],
+    "n": int(os.environ["N"]),
+    "count": int(os.environ["COUNT"]),
+    "limit": int(os.environ["LIMIT"]),
+    "bench_limit": int(bench) if bench else None,
+    "max_steps": os.environ.get("MAX_STEPS") or None,
+    "device": os.environ["DEVICE"],
+    "dtype": os.environ["DTYPE"],
+    "free_running": os.environ.get("JSON_FREE", "false") == "true",
+    "smoke_only": bool(int(os.environ.get("SMOKE_ONLY", "0"))),
+    "out_dir": os.path.dirname(os.environ["PRED_FILE"]) or ".",
+    "trace_file": os.environ["TRACE_FILE"],
+    "nlgraph_input": path_or_null(os.environ.get("NLGRAPH_INPUT", "")),
+    "glbench_input": path_or_null(os.environ.get("GLBENCH_INPUT", "")),
+}
+
+manifest = {
+    "run_id": os.environ["RUN_ID"],
+    "tag": os.environ["TAG"],
+    "started_at": os.environ["RUN_START"],
+    "finished_at": os.environ["RUN_END"],
+    "git_commit": git,
+    "config": cfg,
+    "paths": {
+        "log_file": os.environ.get("PIPELINE_LOG_FILE", ""),
+        "trace_file": os.environ["TRACE_FILE"],
+        "pipe": pipe,
+        "nlgraph": nl,
+        "glbench": gl,
+    },
+}
+out = os.environ["MANIFEST_FILE"]
+with open(out, "w", encoding="utf-8") as f:
+    json.dump(manifest, f, indent=2)
+    f.write("\n")
+print(f"[pipeline] Wrote run manifest: {out}")
+PY
+
 banner "Done"
 echo "  trace file:  $TRACE_FILE"
 echo "  predictions: $PRED_FILE"
 echo "  metrics:     $METRICS_FILE"
 echo "  failures:    $FAILURES_FILE"
+echo "  manifest:    $MANIFEST_FILE"
+echo "  log file:    $PIPELINE_LOG_FILE"
+
+if [[ -n "${WANDB_PROJECT:-}" ]]; then
+  banner "Weights & Biases (WANDB_PROJECT=$WANDB_PROJECT)"
+  if python scripts/log_pipeline_run.py --manifest "$MANIFEST_FILE"; then
+    echo "[pipeline] W&B run completed."
+  else
+    echo "[pipeline][warn] W&B logging failed (see messages above). Continuing." >&2
+  fi
+fi
