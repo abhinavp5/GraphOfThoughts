@@ -12,11 +12,17 @@ from __future__ import annotations
 import copy
 from typing import Any
 
-# Operations emitted by the BFS solver. Import this wherever vocabulary
-# validation is needed (dataset loading, decoding, negative sampling).
-# TODO: consider extending with check_visited and terminate if BFS is
-#       modified to emit explicit state-query and halting operations (Option B).
-VALID_OPS: frozenset[str] = frozenset({"enqueue", "dequeue", "set_parent", "mark_visited"})
+# Operations emitted by solvers / traces.
+# Keep this aligned with the vocabulary used by:
+# - solvers/* (trace generation)
+# - training/* (teacher forcing formatting)
+# - inference/* (state-executor-in-the-loop)
+#
+# Backwards-compat: older traces and some scripts use `visit(x)` rather than
+# `mark_visited(x)`. We accept both as the same transition.
+VALID_OPS: frozenset[str] = frozenset(
+    {"enqueue", "dequeue", "set_parent", "mark_visited", "visit"}
+)
 
 
 # ---------------------------------------------------------------------------
@@ -116,7 +122,7 @@ class StateExecutor:
             if node in self._state["frontier"]:
                 self._state["frontier"].remove(node)
 
-        elif op == "mark_visited":
+        elif op in ("mark_visited", "visit"):
             node = args[0]
             if node not in self._state["visited"]:
                 self._state["visited"].append(node)
