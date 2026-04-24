@@ -96,9 +96,9 @@
     "predicted_steps": [
       {
         "step": 0,
-        "operation_predicted": "Initialize the algorithm state with the given parameters.",
+        "operation_predicted": "init_source(1)",
         "operation_gold": "init_source(1)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "init_source(1)",
         "state": {
@@ -117,9 +117,9 @@
       },
       {
         "step": 1,
-        "operation_predicted": "1 -> 2",
+        "operation_predicted": "settle(1)",
         "operation_gold": "settle(1)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "settle(1)",
         "state": {
@@ -138,7 +138,7 @@
       },
       {
         "step": 2,
-        "operation_predicted": "1->2",
+        "operation_predicted": "relax(1, 2, 4)",
         "operation_gold": "relax(1, 5, 5)",
         "match": false,
         "applied": true,
@@ -169,7 +169,7 @@
       },
       {
         "step": 3,
-        "operation_predicted": "1->5",
+        "operation_predicted": "visit(5)",
         "operation_gold": "relax(1, 2, 4)",
         "match": false,
         "applied": true,
@@ -208,7 +208,7 @@
       },
       {
         "step": 4,
-        "operation_predicted": "1->2",
+        "operation_predicted": "utoptimize(1, 2)",
         "operation_gold": "relax(1, 8, 4)",
         "match": false,
         "applied": true,
@@ -255,9 +255,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "1 is the shortest path to 8 with total weight 4.",
+        "operation_predicted": "settle(2)",
         "operation_gold": "settle(2)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "settle(2)",
         "state": {
@@ -302,7 +302,7 @@
       },
       {
         "step": 6,
-        "operation_predicted": "1->2",
+        "operation_predicted": "normalize(2)",
         "operation_gold": "relax(2, 3, 7)",
         "match": false,
         "applied": true,
@@ -357,7 +357,7 @@
       },
       {
         "step": 7,
-        "operation_predicted": "1->2",
+        "operation_predicted": "normalize(2)",
         "operation_gold": "settle(8)",
         "match": false,
         "applied": true,
@@ -513,7 +513,7 @@
     "predicted_steps": [
       {
         "step": 0,
-        "operation_predicted": "1 -> (0), 1 -> (2), 1 -> (3), 1 -> (4), 1 -> (8)",
+        "operation_predicted": "init_source(1)",
         "operation_gold": "enqueue(1)",
         "match": false,
         "applied": true,
@@ -530,7 +530,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "1 is processed",
+        "operation_predicted": "visit(1)",
         "operation_gold": "set_parent(1, None)",
         "match": false,
         "applied": true,
@@ -549,9 +549,9 @@
       },
       {
         "step": 2,
-        "operation_predicted": "1 is already in the queue, so no change needed.",
+        "operation_predicted": "dequeue(1)",
         "operation_gold": "dequeue(1)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "dequeue(1)",
         "state": {
@@ -566,9 +566,9 @@
       },
       {
         "step": 3,
-        "operation_predicted": "1 is already in the queue, so no change needed.",
+        "operation_predicted": "visit(1)",
         "operation_gold": "visit(1)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "visit(1)",
         "state": {
@@ -585,9 +585,9 @@
       },
       {
         "step": 4,
-        "operation_predicted": "1 is already in the frontier, no action needed.",
+        "operation_predicted": "enqueue(2)",
         "operation_gold": "enqueue(2)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(2)",
         "state": {
@@ -606,7 +606,7 @@
       },
       {
         "step": 5,
-        "operation_predicted": "1 is already in the frontier, so no change needed.",
+        "operation_predicted": "settle(1)",
         "operation_gold": "set_parent(2, 1)",
         "match": false,
         "applied": true,
@@ -634,9 +634,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "1->2",
+        "operation_predicted": "enqueue(3)",
         "operation_gold": "enqueue(3)",
-        "match": false,
+        "match": true,
         "applied": true,
         "operation": "enqueue(3)",
         "state": {
@@ -663,7 +663,7 @@
       },
       {
         "step": 7,
-        "operation_predicted": "1->(3)",
+        "operation_predicted": "settle(2)",
         "operation_gold": "set_parent(3, 1)",
         "match": false,
         "applied": true,
