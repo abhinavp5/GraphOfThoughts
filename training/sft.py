@@ -63,6 +63,9 @@ except ImportError:
 import yaml
 import torch
 
+import torch
+import torch.nn as nn
+
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
@@ -82,6 +85,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from training.dataset import GoTDataset, GoTDataCollator, load_traces
 from training.negative_sampling import CORRECTION_TOKEN
+from solvers.state_executor import VALID_OPS
 
 
 logging.basicConfig(
@@ -89,6 +93,86 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger("got.sft")
+
+
+# ---------------------------------------------------------------------------
+# Vocabulary-constrained trainer
+# ---------------------------------------------------------------------------
+
+def get_op_token_ids(tokenizer, valid_ops: frozenset[str]) -> set[int]:
+    """
+    Return the union of all token IDs produced when tokenizing each op name.
+
+    Handles multi-token op names (e.g. "enqueue" → ["en", "queue"]) by
+    including every sub-token.  At op-name positions the logit mask will
+    restrict the model to exactly this token set.
+    """
+    ids: set[int] = set()
+    for op in valid_ops:
+        token_ids = tokenizer(op, add_special_tokens=False)["input_ids"]
+        ids.update(token_ids)
+        logger.debug("op=%r → token_ids=%s", op, token_ids)
+    return ids
+
+
+class VocabConstrainedTrainer(Trainer):
+    """
+    Trainer subclass that enforces VALID_OPS at the logit level during SFT.
+
+    At every position where the ground-truth label token belongs to an op name,
+    logits for all other vocabulary entries are set to -inf before the
+    cross-entropy loss is computed.  This prevents probability mass from
+    accumulating on hallucinated operation names.
+
+    Parameters
+    ----------
+    valid_op_token_ids : set[int]
+        Token IDs (from get_op_token_ids) that are permitted at op positions.
+        All other kwargs are forwarded to Trainer.__init__.
+
+    # TODO: if Option B ops (check_visited, terminate) are added to the BFS
+    #       solver, extend valid_op_token_ids here — no other changes needed.
+    """
+
+    def __init__(self, *args, valid_op_token_ids: set[int], **kwargs):
+        super().__init__(*args, **kwargs)
+        self._op_token_ids: set[int] = valid_op_token_ids
+
+    def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
+        labels = inputs["labels"]                                    # (B, T)
+        model_inputs = {k: v for k, v in inputs.items() if k != "labels"}
+        outputs = model(**model_inputs)                              # no internal loss
+        logits = outputs.logits                                      # (B, T, V)
+
+        # Causal LM: logit at position i predicts token i+1
+        shift_logits = logits[..., :-1, :].contiguous()             # (B, T-1, V)
+        shift_labels = labels[..., 1:].contiguous()                  # (B, T-1)
+
+        vocab_size = shift_logits.shape[-1]
+        device = shift_logits.device
+
+        # Boolean vocab mask: True → token is a valid op sub-token
+        valid_vocab_mask = torch.zeros(vocab_size, dtype=torch.bool, device=device)
+        for tid in self._op_token_ids:
+            if 0 <= tid < vocab_size:
+                valid_vocab_mask[tid] = True
+
+        # Positions where the ground-truth label is an op token
+        op_ids_t = torch.tensor(sorted(self._op_token_ids), dtype=torch.long, device=device)
+        is_op_pos = torch.isin(shift_labels, op_ids_t)              # (B, T-1)
+
+        # At op positions, set logits for non-op tokens to -inf so loss
+        # ignores them and only pushes probability toward VALID_OPS tokens.
+        # Broadcast: (B, T-1, 1) & (1, 1, V) → (B, T-1, V)
+        apply_mask = is_op_pos.unsqueeze(-1) & ~valid_vocab_mask.unsqueeze(0).unsqueeze(0)
+        shift_logits = shift_logits.masked_fill(apply_mask, float("-inf"))
+
+        loss = nn.CrossEntropyLoss(ignore_index=-100)(
+            shift_logits.view(-1, vocab_size),
+            shift_labels.view(-1),
+        )
+
+        return (loss, outputs) if return_outputs else loss
 
 
 def _load_dotenv_if_present() -> None:
@@ -378,13 +462,22 @@ def train(config: dict):
         remove_unused_columns=False,
     )
 
-    # Trainer
-    trainer = Trainer(
+    # Build the op-token allow-list from the actual tokenizer
+    valid_op_token_ids = get_op_token_ids(tokenizer, VALID_OPS)
+    logger.info(
+        "VocabConstrainedTrainer: %d token(s) whitelisted for op positions: %s",
+        len(valid_op_token_ids),
+        valid_op_token_ids,
+    )
+
+    # Trainer — vocabulary-constrained so the model cannot hallucinate op names
+    trainer = VocabConstrainedTrainer(
         model=model,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         data_collator=collator,
+        valid_op_token_ids=valid_op_token_ids,
     )
 
     # Train

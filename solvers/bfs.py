@@ -21,9 +21,12 @@ def bfs(graph, source: Any) -> list[dict]:
       - enqueue(source)           — seed the queue
       - set_parent(source, None)  — source has no parent
       - dequeue(u)                — u is taken from the front
-      - visit(u)                  — u is marked visited
+      - mark_visited(u)           — u is marked visited
       - enqueue(v)                — v is a newly discovered neighbour
       - set_parent(v, u)          — v was reached from u
+
+    # TODO: consider adding check_visited(v) before each neighbor branch decision
+    #       and terminate() when the queue empties — see Option B in design notes.
     """
     executor = StateExecutor(graph, source)
 
@@ -42,7 +45,7 @@ def bfs(graph, source: Any) -> list[dict]:
         if u in visited:
             continue
 
-        executor.apply(f"visit({u})")
+        executor.apply(f"mark_visited({u})")
         visited.add(u)
 
         for v in sorted(graph.neighbors(u)):  # sorted for determinism

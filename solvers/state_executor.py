@@ -12,6 +12,12 @@ from __future__ import annotations
 import copy
 from typing import Any
 
+# Operations emitted by the BFS solver. Import this wherever vocabulary
+# validation is needed (dataset loading, decoding, negative sampling).
+# TODO: consider extending with check_visited and terminate if BFS is
+#       modified to emit explicit state-query and halting operations (Option B).
+VALID_OPS: frozenset[str] = frozenset({"enqueue", "dequeue", "set_parent", "mark_visited"})
+
 
 # ---------------------------------------------------------------------------
 # State representation
@@ -63,7 +69,7 @@ class StateExecutor:
 
         executor = StateExecutor(graph, source)
         record = executor.apply("enqueue(0)")   # step 0 — init
-        record = executor.apply("visit(1)")      # step 1
+        record = executor.apply("mark_visited(1)")  # step 1
         trace  = executor.trace                  # all records so far
     """
 
@@ -97,6 +103,9 @@ class StateExecutor:
         """Parse and apply a single operation string."""
         op, args = _parse_op(operation)
 
+        if op not in VALID_OPS:
+            raise ValueError(f"Unknown operation '{operation}'. VALID_OPS={set(VALID_OPS)}")
+
         if op == "enqueue":
             node = args[0]
             if node not in self._state["frontier"]:
@@ -107,55 +116,16 @@ class StateExecutor:
             if node in self._state["frontier"]:
                 self._state["frontier"].remove(node)
 
-        elif op == "push":  # DFS stack push
-            node = args[0]
-            if node not in self._state["frontier"]:
-                self._state["frontier"].append(node)
-
-        elif op == "pop":   # DFS stack pop
-            node = args[0]
-            if node in self._state["frontier"]:
-                self._state["frontier"].remove(node)
-
-        elif op == "visit":
+        elif op == "mark_visited":
             node = args[0]
             if node not in self._state["visited"]:
                 self._state["visited"].append(node)
-            # remove from frontier when visited
             if node in self._state["frontier"]:
                 self._state["frontier"].remove(node)
 
         elif op == "set_parent":
-            # set_parent(child, parent)
             child, parent = args[0], args[1]
             self._state["parent"][child] = parent
-
-        elif op == "init_source":
-            # init_source(node) — distance 0, no parent
-            node = args[0]
-            self._state["distances"][node] = 0
-            self._state["parent"][node] = None
-            if node not in self._state["frontier"]:
-                self._state["frontier"].append(node)
-
-        elif op == "relax":
-            # relax(u, v, new_dist) — update distance and parent for v
-            u, v, new_dist = args[0], args[1], args[2]
-            self._state["distances"][v] = new_dist
-            self._state["parent"][v] = u
-            if v not in self._state["frontier"]:
-                self._state["frontier"].append(v)
-
-        elif op == "settle":
-            # settle(node) — node finalized in Dijkstra
-            node = args[0]
-            if node not in self._state["visited"]:
-                self._state["visited"].append(node)
-            if node in self._state["frontier"]:
-                self._state["frontier"].remove(node)
-
-        else:
-            raise ValueError(f"Unknown operation: '{operation}'")
 
     # ------------------------------------------------------------------
     # Snapshot

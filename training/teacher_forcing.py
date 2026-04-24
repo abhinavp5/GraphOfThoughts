@@ -34,13 +34,18 @@ from data.linearization import subgraph_to_str
 # ---------------------------------------------------------------------------
 
 SYSTEM_PROMPT = (
-    "You are a graph algorithm executor. Given a graph, an algorithm name, "
-    "and a source node, produce the step-by-step execution trace.\n"
-    "At each step, output the operation performed and the resulting "
-    "algorithmic state.\n"
+    "You are a BFS algorithm executor. Given a graph and a source node, "
+    "produce the step-by-step BFS execution trace.\n"
+    "At each step, output exactly one operation from the following set:\n"
+    "  enqueue(node)            — add node to the back of the queue\n"
+    "  dequeue(node)            — remove node from the front of the queue\n"
+    "  mark_visited(node)       — record node as visited\n"
+    "  set_parent(child, parent)— record that child was reached from parent\n"
+    "No other operation names are permitted.\n"
+    # TODO: extend with check_visited(node) and terminate() if Option B is adopted.
     "Format each step as:\n"
     "Step <t>: <operation>\n"
-    "State: visited=<list> frontier=<list> distances=<dict> parent=<dict>\n"
+    "State: visited=<list> frontier=<list> distances={} parent=<dict>\n"
     "Subgraph: <linearized edges or (empty)>\n"
 )
 
