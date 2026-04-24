@@ -1,0 +1,82 @@
+[pipeline] Unified log: /sfs/gpfs/tardis/home/fwz8ya/GraphOfThoughts/out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260424_171612.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-0.5B-Instruct
+  adapter:   (none — base model)
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     100        seed=100
+  device:    cpu       dtype=float32
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out
+  log_file:  out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260424_171612.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mScaffolding smoke test (mock model, no ML deps)[0m
+Loading data/traces/test_bfs.json
+Running 3 samples in mock-model mode
+  [0] enqueue(1)  (partial_len=8)
+  [1] set_parent(1, None)  (partial_len=100)
+  [2] dequeue(1)  (partial_len=208)
+  [3] visit(1)  (partial_len=306)
+  [4] enqueue(2)  (partial_len=403)
+  [5] set_parent(2, 1)  (partial_len=503)
+  [6] enqueue(3)  (partial_len=616)
+  [7] set_parent(3, 1)  (partial_len=726)
+  [8] enqueue(5)  (partial_len=857)
+  [9] set_parent(5, 1)  (partial_len=985)
+  [10] enqueue(6)  (partial_len=1135)
+  [11] set_parent(6, 1)  (partial_len=1282)
+  [12] enqueue(9)  (partial_len=1450)
+  [13] set_parent(9, 1)  (partial_len=1615)
+  [14] dequeue(2)  (partial_len=1801)
+  [15] visit(2)  (partial_len=1978)
+  [16] enqueue(0)  (partial_len=2156)
+  [17] set_parent(0, 2)  (partial_len=2339)
+  [18] dequeue(3)  (partial_len=2543)
+  [19] visit(3)  (partial_len=2738)
+  [20] enqueue(7)  (partial_len=2934)
+  [21] set_parent(7, 3)  (partial_len=3135)
+  [22] dequeue(5)  (partial_len=3357)
+  [23] visit(5)  (partial_len=3570)
+  [24] dequeue(6)  (partial_len=3784)
+  [25] visit(6)  (partial_len=3997)
+  [26] dequeue(9)  (partial_len=4211)
+  [27] visit(9)  (partial_len=4424)
+  [28] enqueue(8)  (partial_len=4638)
+  [29] set_parent(8, 9)  (partial_len=4857)
+  [30] dequeue(0)  (partial_len=5097)
+  [31] visit(0)  (partial_len=5328)
+  [32] enqueue(4)  (partial_len=5560)
+  [33] set_parent(4, 0)  (partial_len=5797)
+  [34] dequeue(7)  (partial_len=6055)
+  [35] visit(7)  (partial_len=6304)
+  [36] dequeue(8)  (partial_len=6554)
+  [37] visit(8)  (partial_len=6803)
+  [38] dequeue(4)  (partial_len=7053)
+  [39] visit(4)  (partial_len=7304)
+  sample 0: PASS  (bfs, source=1, steps=40)
+  sample 1: PASS  (bfs, source=0, steps=40)
+  sample 2: PASS  (bfs, source=6, steps=40)
+
+All samples replay cleanly. Inference scaffolding is ready for a real LLM.
+
+[1;34m==>[0m [1mDataset generation → data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json[0m
+  1/5 samples generated
+  2/5 samples generated
+  3/5 samples generated
+  4/5 samples generated
+  5/5 samples generated
+
+Saved 5 traces to data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mInference → out/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/sfs/gpfs/tardis/home/fwz8ya/GraphOfThoughts/inference/run_inference.py", line 400, in <module>
+    main()
+  File "/sfs/gpfs/tardis/home/fwz8ya/GraphOfThoughts/inference/run_inference.py", line 330, in main
+    import torch
+ModuleNotFoundError: No module named 'torch'

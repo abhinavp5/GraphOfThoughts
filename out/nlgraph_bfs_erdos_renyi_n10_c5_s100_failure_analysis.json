@@ -1,71 +1,78 @@
 {
-  "n_samples": 2,
-  "total_gold_steps": 16,
-  "total_matches": 10,
-  "total_failures": 6,
-  "overall_step_accuracy": 0.625,
-  "overall_failure_rate": 0.375,
-  "samples_with_any_error": 2,
-  "mean_first_error_step": 3.0,
+  "n_samples": 1,
+  "total_gold_steps": 8,
+  "total_matches": 0,
+  "total_failures": 8,
+  "overall_step_accuracy": 0.0,
+  "overall_failure_rate": 1.0,
+  "samples_with_any_error": 1,
+  "mean_first_error_step": 0.0,
   "error_type_counts": {
-    "wrong_operation": 6
+    "wrong_operation": 8
   },
   "failure_rate_by_algorithm": {
-    "bfs": 0.375,
-    "dfs": 0.375
+    "bfs": 1.0
   },
   "failure_rate_by_step_bucket": {
-    "early": 0.16666666666666666,
-    "middle": 0.0,
-    "late": 0.8333333333333334
+    "early": 1.0,
+    "middle": 1.0,
+    "late": 1.0
   },
   "failure_rate_by_step_index": {
-    "0": 0.0,
-    "1": 0.5,
-    "2": 0.0,
-    "3": 0.0,
-    "4": 0.0,
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0,
+    "4": 1.0,
     "5": 1.0,
-    "6": 0.5,
+    "6": 1.0,
     "7": 1.0
   },
   "failure_rate_by_gold_operation_type": {
-    "dequeue": 0.0,
-    "enqueue": 0.0,
-    "pop": 0.0,
-    "push": 0.3333333333333333,
-    "set_parent": 0.8333333333333334,
-    "visit": 0.0
+    "dequeue": 1.0,
+    "enqueue": 1.0,
+    "set_parent": 1.0,
+    "visit": 1.0
   },
   "top_operation_confusions": [
     {
+      "gold_operation": "enqueue(1)",
+      "predicted_operation": "Enqueue(1)",
+      "count": 1
+    },
+    {
       "gold_operation": "set_parent(1, None)",
-      "predicted_operation": "dequeue(1)",
+      "predicted_operation": "1 is marked as visited",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(1)",
+      "predicted_operation": "1 -> 2",
+      "count": 1
+    },
+    {
+      "gold_operation": "visit(1)",
+      "predicted_operation": "1->2",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(2)",
+      "predicted_operation": "1 is marked as visited",
       "count": 1
     },
     {
       "gold_operation": "set_parent(2, 1)",
-      "predicted_operation": "settle(1)",
+      "predicted_operation": "1->2",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(3)",
+      "predicted_operation": "1->2",
       "count": 1
     },
     {
       "gold_operation": "set_parent(3, 1)",
-      "predicted_operation": "settle(2)",
-      "count": 1
-    },
-    {
-      "gold_operation": "set_parent(8, 10)",
-      "predicted_operation": "settle(8)",
-      "count": 1
-    },
-    {
-      "gold_operation": "push(0)",
-      "predicted_operation": "pop(8)",
-      "count": 1
-    },
-    {
-      "gold_operation": "set_parent(0, 8)",
-      "predicted_operation": "settle(8)",
+      "predicted_operation": "1->2",
       "count": 1
     }
   ],
@@ -74,18 +81,9 @@
       "algorithm": "bfs",
       "source": 1,
       "n_gold_steps": 8,
-      "n_failures": 3,
-      "step_accuracy": 0.625,
-      "first_error_step": 1,
-      "n_invalid_or_runtime_errors": 0
-    },
-    {
-      "algorithm": "dfs",
-      "source": 10,
-      "n_gold_steps": 8,
-      "n_failures": 3,
-      "step_accuracy": 0.625,
-      "first_error_step": 5,
+      "n_failures": 8,
+      "step_accuracy": 0.0,
+      "first_error_step": 0,
       "n_invalid_or_runtime_errors": 0
     }
   ]

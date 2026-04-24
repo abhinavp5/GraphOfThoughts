@@ -1,0 +1,132 @@
+[pipeline] Unified log: /sfs/gpfs/tardis/home/fwz8ya/GraphOfThoughts/out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260424_171243.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-0.5B-Instruct
+  adapter:   (none — base model)
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     100        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out
+  log_file:  out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260424_171243.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mScaffolding smoke test (mock model, no ML deps)[0m
+Loading data/traces/test_bfs.json
+Running 3 samples in mock-model mode
+  [0] enqueue(1)  (partial_len=8)
+  [1] set_parent(1, None)  (partial_len=100)
+  [2] dequeue(1)  (partial_len=208)
+  [3] visit(1)  (partial_len=306)
+  [4] enqueue(2)  (partial_len=403)
+  [5] set_parent(2, 1)  (partial_len=503)
+  [6] enqueue(3)  (partial_len=616)
+  [7] set_parent(3, 1)  (partial_len=726)
+  [8] enqueue(5)  (partial_len=857)
+  [9] set_parent(5, 1)  (partial_len=985)
+  [10] enqueue(6)  (partial_len=1135)
+  [11] set_parent(6, 1)  (partial_len=1282)
+  [12] enqueue(9)  (partial_len=1450)
+  [13] set_parent(9, 1)  (partial_len=1615)
+  [14] dequeue(2)  (partial_len=1801)
+  [15] visit(2)  (partial_len=1978)
+  [16] enqueue(0)  (partial_len=2156)
+  [17] set_parent(0, 2)  (partial_len=2339)
+  [18] dequeue(3)  (partial_len=2543)
+  [19] visit(3)  (partial_len=2738)
+  [20] enqueue(7)  (partial_len=2934)
+  [21] set_parent(7, 3)  (partial_len=3135)
+  [22] dequeue(5)  (partial_len=3357)
+  [23] visit(5)  (partial_len=3570)
+  [24] dequeue(6)  (partial_len=3784)
+  [25] visit(6)  (partial_len=3997)
+  [26] dequeue(9)  (partial_len=4211)
+  [27] visit(9)  (partial_len=4424)
+  [28] enqueue(8)  (partial_len=4638)
+  [29] set_parent(8, 9)  (partial_len=4857)
+  [30] dequeue(0)  (partial_len=5097)
+  [31] visit(0)  (partial_len=5328)
+  [32] enqueue(4)  (partial_len=5560)
+  [33] set_parent(4, 0)  (partial_len=5797)
+  [34] dequeue(7)  (partial_len=6055)
+  [35] visit(7)  (partial_len=6304)
+  [36] dequeue(8)  (partial_len=6554)
+  [37] visit(8)  (partial_len=6803)
+  [38] dequeue(4)  (partial_len=7053)
+  [39] visit(4)  (partial_len=7304)
+  sample 0: PASS  (bfs, source=1, steps=40)
+  sample 1: PASS  (bfs, source=0, steps=40)
+  sample 2: PASS  (bfs, source=6, steps=40)
+
+All samples replay cleanly. Inference scaffolding is ready for a real LLM.
+
+[1;34m==>[0m [1mDataset generation → data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json[0m
+  1/5 samples generated
+  2/5 samples generated
+  3/5 samples generated
+  4/5 samples generated
+  5/5 samples generated
+
+Saved 5 traces to data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mInference → out/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/sfs/gpfs/tardis/home/fwz8ya/GraphOfThoughts/inference/run_inference.py", line 400, in <module>
+    main()
+  File "/sfs/gpfs/tardis/home/fwz8ya/GraphOfThoughts/inference/run_inference.py", line 341, in main
+    model, tokenizer = load_model(
+                       ^^^^^^^^^^^
+  File "/sfs/gpfs/tardis/home/fwz8ya/GraphOfThoughts/inference/run_inference.py", line 114, in load_model
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2347, in _get_module
+    raise e
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/models/auto/modeling_auto.py", line 23, in <module>
+    from .auto_factory import (
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 43, in <module>
+    from ...generation import GenerationMixin
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2347, in _get_module
+    raise e
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/generation/utils.py", line 55, in <module>
+    from .candidate_generator import (
+  File "/home/fwz8ya/.local/lib/python3.11/site-packages/transformers/generation/candidate_generator.py", line 29, in <module>
+    from sklearn.metrics import roc_curve
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/sklearn/__init__.py", line 82, in <module>
+    from .base import clone
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/sklearn/base.py", line 17, in <module>
+    from .utils import _IS_32BIT
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/sklearn/utils/__init__.py", line 25, in <module>
+    from .fixes import parse_version, threadpool_info
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/sklearn/utils/fixes.py", line 19, in <module>
+    import scipy.stats
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/scipy/stats/__init__.py", line 485, in <module>
+    from ._stats_py import *
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/scipy/stats/_stats_py.py", line 39, in <module>
+    from scipy.spatial.distance import cdist
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/scipy/spatial/__init__.py", line 105, in <module>
+    from ._kdtree import *
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/scipy/spatial/_kdtree.py", line 4, in <module>
+    from ._ckdtree import cKDTree, cKDTreeNode
+ImportError: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.29' not found (required by /apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/site-packages/scipy/spatial/_ckdtree.cpython-311-x86_64-linux-gnu.so)
+Loading model Qwen/Qwen2.5-0.5B-Instruct

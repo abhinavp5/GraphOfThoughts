@@ -1,50 +1,50 @@
 {
   "n_samples": 5,
   "total_steps": 200,
-  "total_correct": 80,
-  "step_accuracy": 0.4,
+  "total_correct": 0,
+  "step_accuracy": 0.0,
   "trace_accuracy": 0.0,
-  "mean_first_error_step": 1.0,
+  "mean_first_error_step": 0.0,
   "mean_coverage": 1.0,
   "per_sample": [
     {
       "n_steps": 40,
-      "n_correct": 15,
-      "step_accuracy": 0.375,
+      "n_correct": 0,
+      "step_accuracy": 0.0,
       "trace_correct": false,
-      "first_error_step": 1,
+      "first_error_step": 0,
       "coverage": 1.0
     },
     {
       "n_steps": 40,
-      "n_correct": 15,
-      "step_accuracy": 0.375,
+      "n_correct": 0,
+      "step_accuracy": 0.0,
       "trace_correct": false,
-      "first_error_step": 1,
+      "first_error_step": 0,
       "coverage": 1.0
     },
     {
       "n_steps": 40,
-      "n_correct": 18,
-      "step_accuracy": 0.45,
+      "n_correct": 0,
+      "step_accuracy": 0.0,
       "trace_correct": false,
-      "first_error_step": 1,
+      "first_error_step": 0,
       "coverage": 1.0
     },
     {
       "n_steps": 40,
-      "n_correct": 17,
-      "step_accuracy": 0.425,
+      "n_correct": 0,
+      "step_accuracy": 0.0,
       "trace_correct": false,
-      "first_error_step": 1,
+      "first_error_step": 0,
       "coverage": 1.0
     },
     {
       "n_steps": 40,
-      "n_correct": 15,
-      "step_accuracy": 0.375,
+      "n_correct": 0,
+      "step_accuracy": 0.0,
       "trace_correct": false,
-      "first_error_step": 1,
+      "first_error_step": 0,
       "coverage": 1.0
     }
   ]

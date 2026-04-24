@@ -1,0 +1,47 @@
+{
+  "run_id": "bfs_erdos_renyi_n10_c5_s100_20260424_172123",
+  "tag": "bfs_erdos_renyi_n10_c5_s100",
+  "started_at": "2026-04-24T21:21:23Z",
+  "finished_at": "2026-04-24T21:25:30Z",
+  "git_commit": "9de22a710dc29a5fe4f5cff688b5b49ddc01d308",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "adapter": null,
+    "algorithm": "bfs",
+    "family": "erdos_renyi",
+    "n": 10,
+    "count": 5,
+    "limit": 100,
+    "bench_limit": 100,
+    "max_steps": null,
+    "device": "cuda",
+    "dtype": "float16",
+    "free_running": false,
+    "smoke_only": false,
+    "out_dir": "out",
+    "trace_file": "data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json",
+    "nlgraph_input": "data/benchmarks/nlgraph_eval.json",
+    "glbench_input": "data/benchmarks/glbench_eval.json"
+  },
+  "paths": {
+    "log_file": "out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260424_172123.log",
+    "trace_file": "data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json",
+    "pipe": {
+      "predictions": "out/pred_bfs_erdos_renyi_n10_c5_s100.json",
+      "operation_accuracy": "out/metrics_bfs_erdos_renyi_n10_c5_s100.json",
+      "failure_analysis": "out/failures_bfs_erdos_renyi_n10_c5_s100.json"
+    },
+    "nlgraph": {
+      "prefix": "out/nlgraph_bfs_erdos_renyi_n10_c5_s100",
+      "predictions": "out/nlgraph_bfs_erdos_renyi_n10_c5_s100_predictions.json",
+      "operation_accuracy": "out/nlgraph_bfs_erdos_renyi_n10_c5_s100_operation_accuracy.json",
+      "failure_analysis": "out/nlgraph_bfs_erdos_renyi_n10_c5_s100_failure_analysis.json"
+    },
+    "glbench": {
+      "prefix": "out/glbench_bfs_erdos_renyi_n10_c5_s100",
+      "predictions": "out/glbench_bfs_erdos_renyi_n10_c5_s100_predictions.json",
+      "operation_accuracy": "out/glbench_bfs_erdos_renyi_n10_c5_s100_operation_accuracy.json",
+      "failure_analysis": "out/glbench_bfs_erdos_renyi_n10_c5_s100_failure_analysis.json"
+    }
+  }
+}

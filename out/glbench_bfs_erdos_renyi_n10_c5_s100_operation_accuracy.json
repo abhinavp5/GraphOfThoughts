@@ -1,27 +1,10 @@
 {
-  "n_samples": 2,
-  "total_steps": 16,
-  "total_correct": 7,
-  "step_accuracy": 0.4375,
+  "n_samples": 0,
+  "total_steps": 0,
+  "total_correct": 0,
+  "step_accuracy": 0.0,
   "trace_accuracy": 0.0,
-  "mean_first_error_step": 1.0,
-  "mean_coverage": 1.0,
-  "per_sample": [
-    {
-      "n_steps": 8,
-      "n_correct": 3,
-      "step_accuracy": 0.375,
-      "trace_correct": false,
-      "first_error_step": 2,
-      "coverage": 1.0
-    },
-    {
-      "n_steps": 8,
-      "n_correct": 4,
-      "step_accuracy": 0.5,
-      "trace_correct": false,
-      "first_error_step": 0,
-      "coverage": 1.0
-    }
-  ]
+  "mean_first_error_step": null,
+  "mean_coverage": 0.0,
+  "per_sample": []
 }

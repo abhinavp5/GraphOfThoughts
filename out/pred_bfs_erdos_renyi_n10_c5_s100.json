@@ -2164,9 +2164,9 @@
     "predicted_steps": [
       {
         "step": 0,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "Enqueue(2)",
         "operation_gold": "enqueue(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(2)",
         "state": {
@@ -2181,7 +2181,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "dequeue(2)",
+        "operation_predicted": "2 is marked as visited",
         "operation_gold": "set_parent(2, None)",
         "match": false,
         "applied": true,
@@ -2200,9 +2200,9 @@
       },
       {
         "step": 2,
-        "operation_predicted": "dequeue(2)",
+        "operation_predicted": "2 is not marked as visited, so enqueue(2)",
         "operation_gold": "dequeue(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(2)",
         "state": {
@@ -2217,9 +2217,9 @@
       },
       {
         "step": 3,
-        "operation_predicted": "mark_visited(2)",
+        "operation_predicted": "2 is visited [2]",
         "operation_gold": "mark_visited(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(2)",
         "state": {
@@ -2236,9 +2236,9 @@
       },
       {
         "step": 4,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "2 is a leaf node, no need to process further.",
         "operation_gold": "enqueue(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(3)",
         "state": {
@@ -2257,9 +2257,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "set_parent(3, 2)",
+        "operation_predicted": "2->3",
         "operation_gold": "set_parent(3, 2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(3, 2)",
         "state": {
@@ -2285,9 +2285,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "2->3",
         "operation_gold": "enqueue(4)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(4)",
         "state": {
@@ -2314,9 +2314,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "set_parent(4, 2)",
+        "operation_predicted": "2->3",
         "operation_gold": "set_parent(4, 2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(4, 2)",
         "state": {
@@ -2349,9 +2349,9 @@
       },
       {
         "step": 8,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "2->3",
         "operation_gold": "enqueue(8)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -2385,7 +2385,7 @@
       },
       {
         "step": 9,
-        "operation_predicted": "dequeue(3)",
+        "operation_predicted": "2->8",
         "operation_gold": "set_parent(8, 2)",
         "match": false,
         "applied": true,
@@ -2427,9 +2427,9 @@
       },
       {
         "step": 10,
-        "operation_predicted": "dequeue(3)",
+        "operation_predicted": "2->8",
         "operation_gold": "dequeue(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(3)",
         "state": {
@@ -2468,7 +2468,7 @@
       },
       {
         "step": 11,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "3->8",
         "operation_gold": "mark_visited(3)",
         "match": false,
         "applied": true,
@@ -2510,7 +2510,7 @@
       },
       {
         "step": 12,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "2 is marked as visited, so no further steps are needed.",
         "operation_gold": "enqueue(1)",
         "match": false,
         "applied": true,
@@ -2553,7 +2553,7 @@
       },
       {
         "step": 13,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "1 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(1, 3)",
         "match": false,
         "applied": true,
@@ -2602,9 +2602,9 @@
       },
       {
         "step": 14,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "1 is already in the queue, so no change needed.",
         "operation_gold": "enqueue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(7)",
         "state": {
@@ -2652,7 +2652,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "1 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(7, 3)",
         "match": false,
         "applied": true,
@@ -2708,9 +2708,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "1 is already visited, so no change needed.",
         "operation_gold": "enqueue(9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(9)",
         "state": {
@@ -2765,7 +2765,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "9 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(9, 3)",
         "match": false,
         "applied": true,
@@ -2828,9 +2828,9 @@
       },
       {
         "step": 18,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "9 is marked as visited",
         "operation_gold": "dequeue(4)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(4)",
         "state": {
@@ -2890,7 +2890,7 @@
       },
       {
         "step": 19,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "1 is marked as visited",
         "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
@@ -2953,9 +2953,9 @@
       },
       {
         "step": 20,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "2 is already visited, no need to process further.",
         "operation_gold": "enqueue(5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(5)",
         "state": {
@@ -3017,7 +3017,7 @@
       },
       {
         "step": 21,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "5 is already in the visited list, so skip this step.",
         "operation_gold": "set_parent(5, 4)",
         "match": false,
         "applied": true,
@@ -3087,7 +3087,7 @@
       },
       {
         "step": 22,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "5 is already in the visited list, so skip this step.",
         "operation_gold": "dequeue(8)",
         "match": false,
         "applied": true,
@@ -3156,7 +3156,7 @@
       },
       {
         "step": 23,
-        "operation_predicted": "8",
+        "operation_predicted": "5 is already visited, so skip this step.",
         "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
@@ -3226,7 +3226,7 @@
       },
       {
         "step": 24,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "2 is already visited, so no further steps are needed.",
         "operation_gold": "dequeue(1)",
         "match": false,
         "applied": true,
@@ -3295,7 +3295,7 @@
       },
       {
         "step": 25,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "1 is not in subgraph (2), so skip this step.",
         "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
@@ -3365,7 +3365,7 @@
       },
       {
         "step": 26,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "2 is already visited, so no further steps.",
         "operation_gold": "enqueue(0)",
         "match": false,
         "applied": true,
@@ -3436,9 +3436,9 @@
       },
       {
         "step": 27,
-        "operation_predicted": "set_parent(0, 1)",
+        "operation_predicted": "0 is not in the graph, so no further steps can be taken.",
         "operation_gold": "set_parent(0, 1)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(0, 1)",
         "state": {
@@ -3513,7 +3513,7 @@
       },
       {
         "step": 28,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "0 is already visited, so skip this step.",
         "operation_gold": "dequeue(7)",
         "match": false,
         "applied": true,
@@ -3589,7 +3589,7 @@
       },
       {
         "step": 29,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "1 is already marked as visited, so no further operations can be performed.",
         "operation_gold": "mark_visited(7)",
         "match": false,
         "applied": true,
@@ -3666,7 +3666,7 @@
       },
       {
         "step": 30,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "1 is not in the graph, so skip this step.",
         "operation_gold": "dequeue(9)",
         "match": false,
         "applied": true,
@@ -3742,7 +3742,7 @@
       },
       {
         "step": 31,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is not in the graph, so no further steps can be taken.",
         "operation_gold": "mark_visited(9)",
         "match": false,
         "applied": true,
@@ -3819,9 +3819,9 @@
       },
       {
         "step": 32,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is not in graph, so no further steps can be taken.",
         "operation_gold": "enqueue(6)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(6)",
         "state": {
@@ -3897,7 +3897,7 @@
       },
       {
         "step": 33,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "6 is already in the queue, so skip it",
         "operation_gold": "set_parent(6, 9)",
         "match": false,
         "applied": true,
@@ -3981,7 +3981,7 @@
       },
       {
         "step": 34,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "6 is already in the queue, so skip it",
         "operation_gold": "dequeue(5)",
         "match": false,
         "applied": true,
@@ -4064,7 +4064,7 @@
       },
       {
         "step": 35,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "Mark visited(5)",
         "operation_gold": "mark_visited(5)",
         "match": false,
         "applied": true,
@@ -4148,7 +4148,7 @@
       },
       {
         "step": 36,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "1 is not in graph, so skip this step.",
         "operation_gold": "dequeue(0)",
         "match": false,
         "applied": true,
@@ -4231,7 +4231,7 @@
       },
       {
         "step": 37,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "0 is already visited, no further steps needed.",
         "operation_gold": "mark_visited(0)",
         "match": false,
         "applied": true,
@@ -4315,7 +4315,7 @@
       },
       {
         "step": 38,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "0 is not in the graph, so no further steps can be taken.",
         "operation_gold": "dequeue(6)",
         "match": false,
         "applied": true,
@@ -4397,7 +4397,7 @@
       },
       {
         "step": 39,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "0 is not in the graph, so no further steps can be taken.",
         "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
@@ -6701,9 +6701,9 @@
     "predicted_steps": [
       {
         "step": 0,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "Enqueue(9)",
         "operation_gold": "enqueue(9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(9)",
         "state": {
@@ -6718,7 +6718,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "dequeue(9)",
+        "operation_predicted": "9 is marked as visited",
         "operation_gold": "set_parent(9, None)",
         "match": false,
         "applied": true,
@@ -6737,9 +6737,9 @@
       },
       {
         "step": 2,
-        "operation_predicted": "dequeue(9)",
+        "operation_predicted": "9 is visited [9]",
         "operation_gold": "dequeue(9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(9)",
         "state": {
@@ -6754,9 +6754,9 @@
       },
       {
         "step": 3,
-        "operation_predicted": "mark_visited(9)",
+        "operation_predicted": "9 is visited [9]",
         "operation_gold": "mark_visited(9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(9)",
         "state": {
@@ -6773,9 +6773,9 @@
       },
       {
         "step": 4,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "9 is visited, so no further operations needed.",
         "operation_gold": "enqueue(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(0)",
         "state": {
@@ -6794,9 +6794,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "set_parent(0, 9)",
+        "operation_predicted": "0 is not in parent dictionary, so it's a new node",
         "operation_gold": "set_parent(0, 9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(0, 9)",
         "state": {
@@ -6822,9 +6822,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "0 is not in the frontier, so it's added to the frontier.",
         "operation_gold": "enqueue(4)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(4)",
         "state": {
@@ -6851,9 +6851,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "set_parent(4, 9)",
+        "operation_predicted": "0 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(4, 9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(4, 9)",
         "state": {
@@ -6886,9 +6886,9 @@
       },
       {
         "step": 8,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "0 is marked as visited",
         "operation_gold": "enqueue(5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(5)",
         "state": {
@@ -6922,7 +6922,7 @@
       },
       {
         "step": 9,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "9 is already in the parent dictionary, so no change needed.",
         "operation_gold": "set_parent(5, 9)",
         "match": false,
         "applied": true,
@@ -6964,9 +6964,9 @@
       },
       {
         "step": 10,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "0 is marked as visited",
         "operation_gold": "enqueue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(7)",
         "state": {
@@ -7007,7 +7007,7 @@
       },
       {
         "step": 11,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "7 is already visited, so skip this step.",
         "operation_gold": "set_parent(7, 9)",
         "match": false,
         "applied": true,
@@ -7056,9 +7056,9 @@
       },
       {
         "step": 12,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "7 is marked as visited",
         "operation_gold": "enqueue(8)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -7106,7 +7106,7 @@
       },
       {
         "step": 13,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "8 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(8, 9)",
         "match": false,
         "applied": true,
@@ -7162,9 +7162,9 @@
       },
       {
         "step": 14,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "8 is already visited, so no further steps needed.",
         "operation_gold": "dequeue(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(0)",
         "state": {
@@ -7217,7 +7217,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "9 is visited[9]",
         "operation_gold": "mark_visited(0)",
         "match": false,
         "applied": true,
@@ -7273,9 +7273,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "9 is already visited, so no changes made.",
         "operation_gold": "enqueue(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(2)",
         "state": {
@@ -7330,7 +7330,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "9 is already visited, so no change needed.",
         "operation_gold": "set_parent(2, 0)",
         "match": false,
         "applied": true,
@@ -7393,7 +7393,7 @@
       },
       {
         "step": 18,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "0 is already in the queue, so no change needed.",
         "operation_gold": "dequeue(4)",
         "match": false,
         "applied": true,
@@ -7455,7 +7455,7 @@
       },
       {
         "step": 19,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "0 is already visited, so no change needed.",
         "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
@@ -7518,7 +7518,7 @@
       },
       {
         "step": 20,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "0 is already marked as visited, so no further operations are performed.",
         "operation_gold": "enqueue(3)",
         "match": false,
         "applied": true,
@@ -7582,7 +7582,7 @@
       },
       {
         "step": 21,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "3 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(3, 4)",
         "match": false,
         "applied": true,
@@ -7652,7 +7652,7 @@
       },
       {
         "step": 22,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "4 is already in the queue, so no change needed.",
         "operation_gold": "dequeue(5)",
         "match": false,
         "applied": true,
@@ -7721,7 +7721,7 @@
       },
       {
         "step": 23,
-        "operation_predicted": "ellen_visited(5)",
+        "operation_predicted": "Mark visited(5)",
         "operation_gold": "mark_visited(5)",
         "match": false,
         "applied": true,
@@ -7791,9 +7791,9 @@
       },
       {
         "step": 24,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "0 is already visited, so no further steps needed.",
         "operation_gold": "enqueue(1)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(1)",
         "state": {
@@ -7862,7 +7862,7 @@
       },
       {
         "step": 25,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "1 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(1, 5)",
         "match": false,
         "applied": true,
@@ -7939,7 +7939,7 @@
       },
       {
         "step": 26,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is marked as visited",
         "operation_gold": "dequeue(7)",
         "match": false,
         "applied": true,
@@ -8015,7 +8015,7 @@
       },
       {
         "step": 27,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "9 is already visited, skip this step.",
         "operation_gold": "mark_visited(7)",
         "match": false,
         "applied": true,
@@ -8092,7 +8092,7 @@
       },
       {
         "step": 28,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "1st call of bfs() finished. State: visited=[9, 0, 4, 5, 7, 8, 2, 3, 1] frontier=[8, 2, 3,",
         "operation_gold": "dequeue(8)",
         "match": false,
         "applied": true,
@@ -8168,7 +8168,7 @@
       },
       {
         "step": 29,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "9 is already visited, so skip this step.",
         "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
@@ -8245,9 +8245,9 @@
       },
       {
         "step": 30,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "9 is the final state, no more nodes can be added to the queue.",
         "operation_gold": "enqueue(6)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(6)",
         "state": {
@@ -8323,7 +8323,7 @@
       },
       {
         "step": 31,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "Set parent for 6",
         "operation_gold": "set_parent(6, 8)",
         "match": false,
         "applied": true,
@@ -8407,7 +8407,7 @@
       },
       {
         "step": 32,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "1st call of bfs() finished.",
         "operation_gold": "dequeue(2)",
         "match": false,
         "applied": true,
@@ -8490,7 +8490,7 @@
       },
       {
         "step": 33,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "9 is visited[9]",
         "operation_gold": "mark_visited(2)",
         "match": false,
         "applied": true,
@@ -8574,7 +8574,7 @@
       },
       {
         "step": 34,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "1st BFS call completed. State: visited=[9, 0, 4, 5, 7, 8, 2, 6], frontier=[], distances={}, parent={9: None, 0: 9",
         "operation_gold": "dequeue(3)",
         "match": false,
         "applied": true,
@@ -8657,9 +8657,9 @@
       },
       {
         "step": 35,
-        "operation_predicted": "mark_visited(3)",
+        "operation_predicted": "9 is visited[9]",
         "operation_gold": "mark_visited(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(3)",
         "state": {
@@ -8741,7 +8741,7 @@
       },
       {
         "step": 36,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "1 is not in graph, so skip this step.",
         "operation_gold": "dequeue(1)",
         "match": false,
         "applied": true,
@@ -8824,7 +8824,7 @@
       },
       {
         "step": 37,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "9 is visited[9]",
         "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
@@ -8908,7 +8908,7 @@
       },
       {
         "step": 38,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "1 is not in graph, so no further steps can be taken.",
         "operation_gold": "dequeue(6)",
         "match": false,
         "applied": true,
@@ -8990,7 +8990,7 @@
       },
       {
         "step": 39,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "9 is the final state.",
         "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
@@ -11168,9 +11168,9 @@
     "predicted_steps": [
       {
         "step": 0,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "Enqueue (2)",
         "operation_gold": "enqueue(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(2)",
         "state": {
@@ -11185,7 +11185,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "dequeue(2)",
+        "operation_predicted": "2 is marked as visited",
         "operation_gold": "set_parent(2, None)",
         "match": false,
         "applied": true,
@@ -11204,9 +11204,9 @@
       },
       {
         "step": 2,
-        "operation_predicted": "dequeue(2)",
+        "operation_predicted": "2 is not marked as visited, so enqueue(2)",
         "operation_gold": "dequeue(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(2)",
         "state": {
@@ -11221,9 +11221,9 @@
       },
       {
         "step": 3,
-        "operation_predicted": "mark_visited(2)",
+        "operation_predicted": "2 is visited [2]",
         "operation_gold": "mark_visited(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(2)",
         "state": {
@@ -11240,9 +11240,9 @@
       },
       {
         "step": 4,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "2 is a leaf node, no need to process further.",
         "operation_gold": "enqueue(6)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(6)",
         "state": {
@@ -11261,9 +11261,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "set_parent(6, 2)",
+        "operation_predicted": "2->6",
         "operation_gold": "set_parent(6, 2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(6, 2)",
         "state": {
@@ -11289,9 +11289,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "2->6",
         "operation_gold": "enqueue(8)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -11318,9 +11318,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "set_parent(8, 2)",
+        "operation_predicted": "2->8",
         "operation_gold": "set_parent(8, 2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(8, 2)",
         "state": {
@@ -11353,9 +11353,9 @@
       },
       {
         "step": 8,
-        "operation_predicted": "dequeue(6)",
+        "operation_predicted": "2->8",
         "operation_gold": "dequeue(6)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(6)",
         "state": {
@@ -11387,7 +11387,7 @@
       },
       {
         "step": 9,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "2->8",
         "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
@@ -11422,9 +11422,9 @@
       },
       {
         "step": 10,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "2->8",
         "operation_gold": "enqueue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(7)",
         "state": {
@@ -11458,9 +11458,9 @@
       },
       {
         "step": 11,
-        "operation_predicted": "set_parent(7, 6)",
+        "operation_predicted": "2 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(7, 6)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(7, 6)",
         "state": {
@@ -11500,7 +11500,7 @@
       },
       {
         "step": 12,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "7 is not in the subgraph, so no further operations needed.",
         "operation_gold": "dequeue(8)",
         "match": false,
         "applied": true,
@@ -11541,7 +11541,7 @@
       },
       {
         "step": 13,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "7 is already visited, so skip this step.",
         "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
@@ -11583,9 +11583,9 @@
       },
       {
         "step": 14,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "2 is already in the visited list, so no further operations are needed.",
         "operation_gold": "enqueue(1)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(1)",
         "state": {
@@ -11626,7 +11626,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "1 is not in the parent dictionary, so it's added.",
         "operation_gold": "set_parent(1, 8)",
         "match": false,
         "applied": true,
@@ -11675,9 +11675,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "1 is not in the parent dictionary, so it's added.",
         "operation_gold": "enqueue(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(3)",
         "state": {
@@ -11725,7 +11725,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "3 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(3, 8)",
         "match": false,
         "applied": true,
@@ -11781,7 +11781,7 @@
       },
       {
         "step": 18,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "3 is already in the queue, so no action needed.",
         "operation_gold": "enqueue(5)",
         "match": false,
         "applied": true,
@@ -11838,7 +11838,7 @@
       },
       {
         "step": 19,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "1 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(5, 8)",
         "match": false,
         "applied": true,
@@ -11901,9 +11901,9 @@
       },
       {
         "step": 20,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "1 is marked as visited",
         "operation_gold": "dequeue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(7)",
         "state": {
@@ -11963,7 +11963,7 @@
       },
       {
         "step": 21,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is marked as visited",
         "operation_gold": "mark_visited(7)",
         "match": false,
         "applied": true,
@@ -12026,7 +12026,7 @@
       },
       {
         "step": 22,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "2 is already visited, no need to process further.",
         "operation_gold": "dequeue(1)",
         "match": false,
         "applied": true,
@@ -12088,7 +12088,7 @@
       },
       {
         "step": 23,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "2 is already visited, no action needed.",
         "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
@@ -12151,7 +12151,7 @@
       },
       {
         "step": 24,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "2 is already visited, no need to process further.",
         "operation_gold": "enqueue(0)",
         "match": false,
         "applied": true,
@@ -12215,9 +12215,9 @@
       },
       {
         "step": 25,
-        "operation_predicted": "set_parent(0, 1)",
+        "operation_predicted": "1 is already in the queue, no need to process it again.",
         "operation_gold": "set_parent(0, 1)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(0, 1)",
         "state": {
@@ -12285,9 +12285,9 @@
       },
       {
         "step": 26,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "0 is already visited, so skip this step.",
         "operation_gold": "enqueue(9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(9)",
         "state": {
@@ -12356,7 +12356,7 @@
       },
       {
         "step": 27,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "9 is the final state, which means we have finished exploring all reachable states from the source node 2.",
         "operation_gold": "set_parent(9, 1)",
         "match": false,
         "applied": true,
@@ -12433,9 +12433,9 @@
       },
       {
         "step": 28,
-        "operation_predicted": "dequeue(3)",
+        "operation_predicted": "9 is visited[9]",
         "operation_gold": "dequeue(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(3)",
         "state": {
@@ -12509,7 +12509,7 @@
       },
       {
         "step": 29,
-        "operation_predicted": "8",
+        "operation_predicted": "1 is already in the queue, so no change needed.",
         "operation_gold": "mark_visited(3)",
         "match": false,
         "applied": true,
@@ -12586,9 +12586,9 @@
       },
       {
         "step": 30,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "1 is not in the graph, so skip this step.",
         "operation_gold": "enqueue(4)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(4)",
         "state": {
@@ -12664,7 +12664,7 @@
       },
       {
         "step": 31,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "4 is already in the queue, so skip this step.",
         "operation_gold": "set_parent(4, 3)",
         "match": false,
         "applied": true,
@@ -12748,7 +12748,7 @@
       },
       {
         "step": 32,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "4 is already in the queue, so skip this step.",
         "operation_gold": "dequeue(5)",
         "match": false,
         "applied": true,
@@ -12831,9 +12831,9 @@
       },
       {
         "step": 33,
-        "operation_predicted": "mark_visited(5)",
+        "operation_predicted": "Mark visited(5)",
         "operation_gold": "mark_visited(5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(5)",
         "state": {
@@ -12915,7 +12915,7 @@
       },
       {
         "step": 34,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "1 is not in graph, so skip this step.",
         "operation_gold": "dequeue(0)",
         "match": false,
         "applied": true,
@@ -12998,7 +12998,7 @@
       },
       {
         "step": 35,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "Mark visited(0)",
         "operation_gold": "mark_visited(0)",
         "match": false,
         "applied": true,
@@ -13082,7 +13082,7 @@
       },
       {
         "step": 36,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "1 is not in graph",
         "operation_gold": "dequeue(9)",
         "match": false,
         "applied": true,
@@ -13165,7 +13165,7 @@
       },
       {
         "step": 37,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "4 is already in the queue, so no further operations can be performed.",
         "operation_gold": "mark_visited(9)",
         "match": false,
         "applied": true,
@@ -13249,7 +13249,7 @@
       },
       {
         "step": 38,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "1 is not in graph, so skip this step.",
         "operation_gold": "dequeue(4)",
         "match": false,
         "applied": true,
@@ -13331,7 +13331,7 @@
       },
       {
         "step": 39,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "Mark visited(4)",
         "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
@@ -15565,9 +15565,9 @@
     "predicted_steps": [
       {
         "step": 0,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "Enqueue(7)",
         "operation_gold": "enqueue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(7)",
         "state": {
@@ -15582,7 +15582,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "7 is marked as visited",
         "operation_gold": "set_parent(7, None)",
         "match": false,
         "applied": true,
@@ -15601,9 +15601,9 @@
       },
       {
         "step": 2,
-        "operation_predicted": "dequeue(7)",
+        "operation_predicted": "7 is visited [7]",
         "operation_gold": "dequeue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(7)",
         "state": {
@@ -15618,9 +15618,9 @@
       },
       {
         "step": 3,
-        "operation_predicted": "mark_visited(7)",
+        "operation_predicted": "7 is visited [7]",
         "operation_gold": "mark_visited(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(7)",
         "state": {
@@ -15637,9 +15637,9 @@
       },
       {
         "step": 4,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "7 is visited, so no further operations needed.",
         "operation_gold": "enqueue(5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(5)",
         "state": {
@@ -15658,9 +15658,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "set_parent(5, 7)",
+        "operation_predicted": "5 is not in the parent dictionary, so it's a new node.",
         "operation_gold": "set_parent(5, 7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(5, 7)",
         "state": {
@@ -15686,9 +15686,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "5 is not in the queue, so enqueue(5)",
         "operation_gold": "enqueue(8)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -15715,9 +15715,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "set_parent(8, 7)",
+        "operation_predicted": "5 is already in the frontier, so no change needed.",
         "operation_gold": "set_parent(8, 7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(8, 7)",
         "state": {
@@ -15750,9 +15750,9 @@
       },
       {
         "step": 8,
-        "operation_predicted": "dequeue(5)",
+        "operation_predicted": "5 is already in the queue, so no change needed.",
         "operation_gold": "dequeue(5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(5)",
         "state": {
@@ -15784,7 +15784,7 @@
       },
       {
         "step": 9,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "7->8",
         "operation_gold": "mark_visited(5)",
         "match": false,
         "applied": true,
@@ -15819,7 +15819,7 @@
       },
       {
         "step": 10,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "enqueue(6)",
         "operation_gold": "enqueue(0)",
         "match": false,
         "applied": true,
@@ -15855,9 +15855,9 @@
       },
       {
         "step": 11,
-        "operation_predicted": "set_parent(0, 5)",
+        "operation_predicted": "0 is not in parent dictionary, so no change needed.",
         "operation_gold": "set_parent(0, 5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(0, 5)",
         "state": {
@@ -15897,9 +15897,9 @@
       },
       {
         "step": 12,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "0 is marked as visited",
         "operation_gold": "enqueue(1)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(1)",
         "state": {
@@ -15940,7 +15940,7 @@
       },
       {
         "step": 13,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(1, 5)",
         "match": false,
         "applied": true,
@@ -15989,9 +15989,9 @@
       },
       {
         "step": 14,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is marked as visited",
         "operation_gold": "enqueue(6)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(6)",
         "state": {
@@ -16039,7 +16039,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(6, 5)",
         "match": false,
         "applied": true,
@@ -16095,7 +16095,7 @@
       },
       {
         "step": 16,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "6 is already in the queue, so no change needed.",
         "operation_gold": "dequeue(8)",
         "match": false,
         "applied": true,
@@ -16150,7 +16150,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "7 is already visited, so skip this step.",
         "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
@@ -16206,9 +16206,9 @@
       },
       {
         "step": 18,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "0 is not in the graph, so no further steps can be taken.",
         "operation_gold": "enqueue(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(3)",
         "state": {
@@ -16263,7 +16263,7 @@
       },
       {
         "step": 19,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "3 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(3, 8)",
         "match": false,
         "applied": true,
@@ -16326,9 +16326,9 @@
       },
       {
         "step": 20,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "3 is already in the queue, so no change needed.",
         "operation_gold": "enqueue(9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(9)",
         "state": {
@@ -16390,7 +16390,7 @@
       },
       {
         "step": 21,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "9 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(9, 8)",
         "match": false,
         "applied": true,
@@ -16460,9 +16460,9 @@
       },
       {
         "step": 22,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "8 is already visited, so skip this step.",
         "operation_gold": "dequeue(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(0)",
         "state": {
@@ -16529,7 +16529,7 @@
       },
       {
         "step": 23,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "Mark visited(0)",
         "operation_gold": "mark_visited(0)",
         "match": false,
         "applied": true,
@@ -16599,7 +16599,7 @@
       },
       {
         "step": 24,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "0 is already visited, no further steps needed.",
         "operation_gold": "dequeue(1)",
         "match": false,
         "applied": true,
@@ -16668,7 +16668,7 @@
       },
       {
         "step": 25,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "0 is already visited, skip this step.",
         "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
@@ -16738,9 +16738,9 @@
       },
       {
         "step": 26,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "0 is not in subgraph (empty)",
         "operation_gold": "enqueue(4)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(4)",
         "state": {
@@ -16809,7 +16809,7 @@
       },
       {
         "step": 27,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "4 is already in state 1, so no change needed.",
         "operation_gold": "set_parent(4, 1)",
         "match": false,
         "applied": true,
@@ -16886,7 +16886,7 @@
       },
       {
         "step": 28,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "4 is already in the queue, so skip this step.",
         "operation_gold": "dequeue(6)",
         "match": false,
         "applied": true,
@@ -16962,7 +16962,7 @@
       },
       {
         "step": 29,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "Mark visited(6)",
         "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
@@ -17039,9 +17039,9 @@
       },
       {
         "step": 30,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "1 enqueue(9)",
         "operation_gold": "enqueue(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(2)",
         "state": {
@@ -17117,7 +17117,7 @@
       },
       {
         "step": 31,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "2 is already in the queue, so skip this step.",
         "operation_gold": "set_parent(2, 6)",
         "match": false,
         "applied": true,
@@ -17201,7 +17201,7 @@
       },
       {
         "step": 32,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "2nd dequeue() - state is empty",
         "operation_gold": "dequeue(3)",
         "match": false,
         "applied": true,
@@ -17284,9 +17284,9 @@
       },
       {
         "step": 33,
-        "operation_predicted": "mark_visited(3)",
+        "operation_predicted": "Mark visited(3)",
         "operation_gold": "mark_visited(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(3)",
         "state": {
@@ -17368,7 +17368,7 @@
       },
       {
         "step": 34,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "1 enqueue(8)",
         "operation_gold": "dequeue(9)",
         "match": false,
         "applied": true,
@@ -17451,7 +17451,7 @@
       },
       {
         "step": 35,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "Mark visited(9)",
         "operation_gold": "mark_visited(9)",
         "match": false,
         "applied": true,
@@ -17535,7 +17535,7 @@
       },
       {
         "step": 36,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "4th step: enqueue(4)",
         "operation_gold": "dequeue(4)",
         "match": false,
         "applied": true,
@@ -17618,7 +17618,7 @@
       },
       {
         "step": 37,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "4 is already visited, no action needed.",
         "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
@@ -17702,7 +17702,7 @@
       },
       {
         "step": 38,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "4 is already visited, skip this step.",
         "operation_gold": "dequeue(2)",
         "match": false,
         "applied": true,
@@ -17784,7 +17784,7 @@
       },
       {
         "step": 39,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "Mark visited(2)",
         "operation_gold": "mark_visited(2)",
         "match": false,
         "applied": true,
@@ -20018,9 +20018,9 @@
     "predicted_steps": [
       {
         "step": 0,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "Enqueue(0)",
         "operation_gold": "enqueue(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(0)",
         "state": {
@@ -20035,7 +20035,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "0 is marked as visited",
         "operation_gold": "set_parent(0, None)",
         "match": false,
         "applied": true,
@@ -20054,9 +20054,9 @@
       },
       {
         "step": 2,
-        "operation_predicted": "dequeue(0)",
+        "operation_predicted": "0 is marked as visited",
         "operation_gold": "dequeue(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(0)",
         "state": {
@@ -20071,9 +20071,9 @@
       },
       {
         "step": 3,
-        "operation_predicted": "mark_visited(0)",
+        "operation_predicted": "0 is marked as visited",
         "operation_gold": "mark_visited(0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(0)",
         "state": {
@@ -20090,9 +20090,9 @@
       },
       {
         "step": 4,
-        "operation_predicted": "enqueue(4)",
+        "operation_predicted": "0 is in its own subgraph, so no further operations needed.",
         "operation_gold": "enqueue(4)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(4)",
         "state": {
@@ -20111,9 +20111,9 @@
       },
       {
         "step": 5,
-        "operation_predicted": "set_parent(4, 0)",
+        "operation_predicted": "4 is not in the parent dictionary, so it's a new node.",
         "operation_gold": "set_parent(4, 0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(4, 0)",
         "state": {
@@ -20139,9 +20139,9 @@
       },
       {
         "step": 6,
-        "operation_predicted": "enqueue(7)",
+        "operation_predicted": "0->4",
         "operation_gold": "enqueue(7)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(7)",
         "state": {
@@ -20168,9 +20168,9 @@
       },
       {
         "step": 7,
-        "operation_predicted": "set_parent(7, 0)",
+        "operation_predicted": "4 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(7, 0)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "set_parent(7, 0)",
         "state": {
@@ -20203,9 +20203,9 @@
       },
       {
         "step": 8,
-        "operation_predicted": "enqueue(8)",
+        "operation_predicted": "4 is already visited, so no change needed.",
         "operation_gold": "enqueue(8)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(8)",
         "state": {
@@ -20239,7 +20239,7 @@
       },
       {
         "step": 9,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "8 is already visited, so no change needed.",
         "operation_gold": "set_parent(8, 0)",
         "match": false,
         "applied": true,
@@ -20281,9 +20281,9 @@
       },
       {
         "step": 10,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "0 is marked as visited",
         "operation_gold": "enqueue(9)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(9)",
         "state": {
@@ -20324,7 +20324,7 @@
       },
       {
         "step": 11,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "9 is marked as visited",
         "operation_gold": "set_parent(9, 0)",
         "match": false,
         "applied": true,
@@ -20373,9 +20373,9 @@
       },
       {
         "step": 12,
-        "operation_predicted": "dequeue(4)",
+        "operation_predicted": "0 is marked as visited",
         "operation_gold": "dequeue(4)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "dequeue(4)",
         "state": {
@@ -20421,7 +20421,7 @@
       },
       {
         "step": 13,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "4 is marked as visited",
         "operation_gold": "mark_visited(4)",
         "match": false,
         "applied": true,
@@ -20470,9 +20470,9 @@
       },
       {
         "step": 14,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "4 is already visited, so no further operations needed.",
         "operation_gold": "enqueue(3)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(3)",
         "state": {
@@ -20520,7 +20520,7 @@
       },
       {
         "step": 15,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "3 is not in the current state, so no operation performed.",
         "operation_gold": "set_parent(3, 4)",
         "match": false,
         "applied": true,
@@ -20576,9 +20576,9 @@
       },
       {
         "step": 16,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "3 is already in the queue, so no change needed.",
         "operation_gold": "enqueue(5)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(5)",
         "state": {
@@ -20633,7 +20633,7 @@
       },
       {
         "step": 17,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "3 is already in the queue, so skip this step.",
         "operation_gold": "set_parent(5, 4)",
         "match": false,
         "applied": true,
@@ -20696,7 +20696,7 @@
       },
       {
         "step": 18,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "4 is already in the queue, so no change needed.",
         "operation_gold": "dequeue(7)",
         "match": false,
         "applied": true,
@@ -20758,7 +20758,7 @@
       },
       {
         "step": 19,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "4 is already visited, so skip this step.",
         "operation_gold": "mark_visited(7)",
         "match": false,
         "applied": true,
@@ -20821,7 +20821,7 @@
       },
       {
         "step": 20,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "4 is already visited, so no further operations needed.",
         "operation_gold": "dequeue(8)",
         "match": false,
         "applied": true,
@@ -20883,7 +20883,7 @@
       },
       {
         "step": 21,
-        "operation_predicted": "enqueue(9)",
+        "operation_predicted": "4 is already visited, so skip this step.",
         "operation_gold": "mark_visited(8)",
         "match": false,
         "applied": true,
@@ -20946,7 +20946,7 @@
       },
       {
         "step": 22,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "4 is already visited, so no further operations needed.",
         "operation_gold": "dequeue(9)",
         "match": false,
         "applied": true,
@@ -21008,7 +21008,7 @@
       },
       {
         "step": 23,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "4 is already visited, no need to update any state.",
         "operation_gold": "mark_visited(9)",
         "match": false,
         "applied": true,
@@ -21071,7 +21071,7 @@
       },
       {
         "step": 24,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "0 is the final state, no more nodes can be added to the queue.",
         "operation_gold": "enqueue(2)",
         "match": false,
         "applied": true,
@@ -21135,7 +21135,7 @@
       },
       {
         "step": 25,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "2 is already in the queue, so no change needed.",
         "operation_gold": "set_parent(2, 9)",
         "match": false,
         "applied": true,
@@ -21205,7 +21205,7 @@
       },
       {
         "step": 26,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "2 is not in the graph, so skip this step.",
         "operation_gold": "dequeue(3)",
         "match": false,
         "applied": true,
@@ -21274,7 +21274,7 @@
       },
       {
         "step": 27,
-        "operation_predicted": "3)->(4)",
+        "operation_predicted": "3 is already visited, skip this step.",
         "operation_gold": "mark_visited(3)",
         "match": false,
         "applied": true,
@@ -21344,9 +21344,9 @@
       },
       {
         "step": 28,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "3 is already visited, skip this step.",
         "operation_gold": "enqueue(1)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(1)",
         "state": {
@@ -21415,7 +21415,7 @@
       },
       {
         "step": 29,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is already in the queue, so no action needed.",
         "operation_gold": "set_parent(1, 3)",
         "match": false,
         "applied": true,
@@ -21492,9 +21492,9 @@
       },
       {
         "step": 30,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is already in the queue, so no action needed.",
         "operation_gold": "enqueue(6)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "enqueue(6)",
         "state": {
@@ -21570,7 +21570,7 @@
       },
       {
         "step": 31,
-        "operation_predicted": "enqueue(6)",
+        "operation_predicted": "1 is already in the queue, so skip it",
         "operation_gold": "set_parent(6, 3)",
         "match": false,
         "applied": true,
@@ -21654,7 +21654,7 @@
       },
       {
         "step": 32,
-        "operation_predicted": "enqueue(0)",
+        "operation_predicted": "3 is already in the queue, so skip this step.",
         "operation_gold": "dequeue(5)",
         "match": false,
         "applied": true,
@@ -21737,7 +21737,7 @@
       },
       {
         "step": 33,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "4 is already visited, skip this step.",
         "operation_gold": "mark_visited(5)",
         "match": false,
         "applied": true,
@@ -21821,7 +21821,7 @@
       },
       {
         "step": 34,
-        "operation_predicted": "enqueue(5)",
+        "operation_predicted": "1st call of bfs() finished. State: visited=[0, 4, 7, 8, 9, 3, 5, 6], frontier=[2, 1, 6], distances={}, parent",
         "operation_gold": "dequeue(2)",
         "match": false,
         "applied": true,
@@ -21904,9 +21904,9 @@
       },
       {
         "step": 35,
-        "operation_predicted": "mark_visited(2)",
+        "operation_predicted": "4 is already visited, skip this step.",
         "operation_gold": "mark_visited(2)",
-        "match": true,
+        "match": false,
         "applied": true,
         "operation": "mark_visited(2)",
         "state": {
@@ -21988,7 +21988,7 @@
       },
       {
         "step": 36,
-        "operation_predicted": "enqueue(2)",
+        "operation_predicted": "1 is not in graph, so skip this step.",
         "operation_gold": "dequeue(1)",
         "match": false,
         "applied": true,
@@ -22071,7 +22071,7 @@
       },
       {
         "step": 37,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "4 is already visited, no need to process further.",
         "operation_gold": "mark_visited(1)",
         "match": false,
         "applied": true,
@@ -22155,7 +22155,7 @@
       },
       {
         "step": 38,
-        "operation_predicted": "enqueue(1)",
+        "operation_predicted": "1 is not in graph, so skip this step.",
         "operation_gold": "dequeue(6)",
         "match": false,
         "applied": true,
@@ -22237,7 +22237,7 @@
       },
       {
         "step": 39,
-        "operation_predicted": "enqueue(3)",
+        "operation_predicted": "Mark visited(6)",
         "operation_gold": "mark_visited(6)",
         "match": false,
         "applied": true,
