@@ -109,6 +109,21 @@ Each run writes three artefacts to `out/`:
 - the model's predictions JSON
 - the metrics JSON
 
+With current pipeline updates, runs also emit:
+- failure analysis JSON (`out/failures_<tag>.json`)
+- run manifest JSON (`out/run_manifest_<tag>.json`)
+- optional NLGraph / GLBench outputs when `--nlgraph-input` / `--glbench-input` are set
+
+Benchmark usage:
+
+```bash
+bash scripts/run_pipeline.sh \
+  --model Qwen/Qwen2.5-0.5B-Instruct \
+  --nlgraph-input data/benchmarks/nlgraph_eval.json \
+  --glbench-input data/benchmarks/glbench_eval.json \
+  --bench-limit 100
+```
+
 
 
 ### Evaluation: Operation accuracy
@@ -123,6 +138,53 @@ Prints and optionally writes:
 - `trace_accuracy` — fraction of traces with 100% matching ops
 - `mean_first_error_step` — average depth at which the first mismatch occurs
 - `mean_coverage` — fraction of gold steps the model attempted
+
+### Evaluation: Failure analysis
+
+```bash
+python -m evaluation.metrics.failure_analysis out/preds_llama.json \
+  --out out/failures_llama.json
+```
+
+### Evaluation: State consistency
+
+```bash
+python -m evaluation.metrics.state_consistency out/preds_llama.json \
+  --out out/state_consistency_llama.json
+```
+
+### Evaluation: Structural generalization
+
+```bash
+python -m evaluation.metrics.structural_generalization out/preds_llama.json \
+  --train-max-n 20 \
+  --out out/structural_generalization_llama.json
+```
+
+### Stage-2 recovery training (minimal DAgger loop)
+
+Collect recovery examples from free-running rollouts:
+
+```bash
+python -m training.dagger collect \
+  --model Qwen/Qwen2.5-0.5B-Instruct \
+  --trace-dir data/traces \
+  --trace-pattern "train_*.json" \
+  --out data/traces/dagger_recovery_bfs.json
+```
+
+Fine-tune on collected recovery examples:
+
+```bash
+python -m training.dagger finetune \
+  --model Qwen/Qwen2.5-0.5B-Instruct \
+  --recovery-json data/traces/dagger_recovery_bfs.json \
+  --output-dir checkpoints/dagger-bfs-stage2
+```
+
+### Final reproduction (BFS-only)
+
+See `BFS_FINAL_PROTOCOL.md` and `FINAL_EXECUTION_CHECKLIST.md` for the frozen BFS-only run protocol, final figure list, and done criteria.
 
 ```
 
