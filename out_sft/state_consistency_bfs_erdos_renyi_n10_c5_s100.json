@@ -1,0 +1,49 @@
+{
+  "n_samples": 5,
+  "comparable_steps": 200,
+  "state_consistency": 1.0,
+  "subgraph_consistency": 1.0,
+  "joint_consistency": 1.0,
+  "per_sample": [
+    {
+      "algorithm": "bfs",
+      "source": 2,
+      "comparable_steps": 40,
+      "state_consistency": 1.0,
+      "subgraph_consistency": 1.0,
+      "joint_consistency": 1.0
+    },
+    {
+      "algorithm": "bfs",
+      "source": 9,
+      "comparable_steps": 40,
+      "state_consistency": 1.0,
+      "subgraph_consistency": 1.0,
+      "joint_consistency": 1.0
+    },
+    {
+      "algorithm": "bfs",
+      "source": 2,
+      "comparable_steps": 40,
+      "state_consistency": 1.0,
+      "subgraph_consistency": 1.0,
+      "joint_consistency": 1.0
+    },
+    {
+      "algorithm": "bfs",
+      "source": 7,
+      "comparable_steps": 40,
+      "state_consistency": 1.0,
+      "subgraph_consistency": 1.0,
+      "joint_consistency": 1.0
+    },
+    {
+      "algorithm": "bfs",
+      "source": 0,
+      "comparable_steps": 40,
+      "state_consistency": 1.0,
+      "subgraph_consistency": 1.0,
+      "joint_consistency": 1.0
+    }
+  ]
+}
