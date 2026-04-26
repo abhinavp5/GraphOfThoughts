@@ -1,0 +1,10 @@
+{
+  "n_samples": 0,
+  "total_steps": 0,
+  "total_correct": 0,
+  "step_accuracy": 0.0,
+  "trace_accuracy": 0.0,
+  "mean_first_error_step": null,
+  "mean_coverage": 0.0,
+  "per_sample": []
+}

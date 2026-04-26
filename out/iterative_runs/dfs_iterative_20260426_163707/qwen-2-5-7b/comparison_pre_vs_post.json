@@ -1,0 +1,33 @@
+{
+  "model_label": "qwen-2-5-7b",
+  "base_model": "Qwen/Qwen2.5-7B-Instruct",
+  "paths": {
+    "model_root": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b",
+    "pre_adapter_dir": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/pre_sft_adapter",
+    "recovery_json": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/dagger/recovery_traces_dfs_erdos_renyi_n10_c5_s100.json",
+    "post_model_dir": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/post_retrain_model",
+    "pre_eval_dir": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre",
+    "post_eval_dir": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post"
+  },
+  "pre": {
+    "step_accuracy": 0.11151079136690648,
+    "failure_rate": 0.8884892086330936,
+    "mean_first_error_step": 1.0,
+    "nlgraph_step_accuracy": 0.25,
+    "glbench_step_accuracy": 0.0
+  },
+  "post": {
+    "step_accuracy": 0.43884892086330934,
+    "failure_rate": 0.5611510791366906,
+    "mean_first_error_step": 1.0,
+    "nlgraph_step_accuracy": 0.375,
+    "glbench_step_accuracy": 0.0
+  },
+  "delta": {
+    "step_accuracy": 0.32733812949640284,
+    "failure_rate": -0.32733812949640295,
+    "mean_first_error_step": 0.0,
+    "nlgraph_step_accuracy": 0.125,
+    "glbench_step_accuracy": 0.0
+  }
+}
