@@ -1,0 +1,55 @@
+[pipeline] Unified log: /sfs/weka/scratch/uhz7mq/GraphOfThoughts/out/dagger_eval_corrected/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_144651.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-7B-Instruct
+  adapter:   out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     5        seed=100
+  device:    cuda       dtype=bfloat16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out/dagger_eval_corrected
+  log_file:  out/dagger_eval_corrected/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_144651.log
+
+[1;34m==>[0m [1mDataset (reusing data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json)[0m
+
+[1;34m==>[0m [1mInference → out/dagger_eval_corrected/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/sfs/weka/scratch/uhz7mq/GraphOfThoughts/inference/run_inference.py", line 412, in <module>
+    main()
+  File "/sfs/weka/scratch/uhz7mq/GraphOfThoughts/inference/run_inference.py", line 353, in main
+    model, tokenizer = load_model(
+                       ^^^^^^^^^^^
+  File "/sfs/weka/scratch/uhz7mq/GraphOfThoughts/inference/run_inference.py", line 114, in load_model
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/transformers/__init__.py", line 30, in <module>
+    from . import dependency_versions_check
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/transformers/dependency_versions_check.py", line 16, in <module>
+    from .utils.versions import require_version, require_version_core
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/transformers/utils/__init__.py", line 76, in <module>
+    from .hub import (
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/transformers/utils/hub.py", line 29, in <module>
+    from huggingface_hub import (
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/huggingface_hub/__init__.py", line 1156, in __getattr__
+    submod = importlib.import_module(submod_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/apps/software/standard/core/miniforge/24.3.0-py3.11/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/huggingface_hub/hf_api.py", line 35, in <module>
+    import httpcore
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/httpcore/__init__.py", line 1, in <module>
+    from ._api import request, stream
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/httpcore/_api.py", line 7, in <module>
+    from ._sync.connection_pool import ConnectionPool
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/httpcore/_sync/__init__.py", line 1, in <module>
+    from .connection import HTTPConnection
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 16, in <module>
+    from .http11 import HTTP11Connection
+  File "/home/uhz7mq/.local/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 10, in <module>
+    import h11
+ModuleNotFoundError: No module named 'h11'
+Loading model Qwen/Qwen2.5-7B-Instruct + adapter out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model
+Error importing huggingface_hub.hf_api: No module named 'h11'

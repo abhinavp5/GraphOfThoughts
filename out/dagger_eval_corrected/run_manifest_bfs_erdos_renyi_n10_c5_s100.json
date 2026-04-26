@@ -1,0 +1,37 @@
+{
+  "run_id": "bfs_erdos_renyi_n10_c5_s100_20260426_145437",
+  "tag": "bfs_erdos_renyi_n10_c5_s100",
+  "started_at": "2026-04-26T18:54:37Z",
+  "finished_at": "2026-04-26T19:05:20Z",
+  "git_commit": "d1cf2cf1e30e85a8d7497d45639407b361fadf18",
+  "config": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "adapter": "out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model",
+    "algorithm": "bfs",
+    "family": "erdos_renyi",
+    "n": 10,
+    "count": 5,
+    "limit": 5,
+    "bench_limit": null,
+    "max_steps": null,
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "free_running": false,
+    "smoke_only": false,
+    "out_dir": "out/dagger_eval_corrected",
+    "trace_file": "data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json",
+    "nlgraph_input": null,
+    "glbench_input": null
+  },
+  "paths": {
+    "log_file": "out/dagger_eval_corrected/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_145437.log",
+    "trace_file": "data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json",
+    "pipe": {
+      "predictions": "out/dagger_eval_corrected/pred_bfs_erdos_renyi_n10_c5_s100.json",
+      "operation_accuracy": "out/dagger_eval_corrected/metrics_bfs_erdos_renyi_n10_c5_s100.json",
+      "failure_analysis": "out/dagger_eval_corrected/failures_bfs_erdos_renyi_n10_c5_s100.json"
+    },
+    "nlgraph": null,
+    "glbench": null
+  }
+}
