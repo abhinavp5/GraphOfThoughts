@@ -112,11 +112,16 @@ def collect(args: argparse.Namespace) -> None:
                 continue
             wrong = p.get("operation_predicted")
             correct = gold[t]["operation"]
+            if not wrong:
+                continue
             if wrong == correct:
                 continue
-            if not p.get("applied") or "state" not in p:
-                continue
-            prompt = _build_recovery_prompt(sample, p["state"], wrong)
+
+            # Option B: include invalid-op failures too.
+            # If the wrong op could not be applied, we cannot snapshot a "wrong" state.
+            # Instead, use the gold state at step t as the recovery context.
+            used_state = p.get("state") if (p.get("applied") and "state" in p) else gold[t].get("state", {})
+            prompt = _build_recovery_prompt(sample, used_state, wrong)
             out.append(
                 {
                     "graph": sample["graph"],
@@ -125,7 +130,8 @@ def collect(args: argparse.Namespace) -> None:
                     "step": t,
                     "wrong_operation": wrong,
                     "correct_operation": correct,
-                    "state": p["state"],
+                    "state": used_state,
+                    "wrong_applied": bool(p.get("applied")),
                     "prompt": prompt,
                     "target": correct,
                 }
