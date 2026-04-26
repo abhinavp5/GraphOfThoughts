@@ -195,9 +195,13 @@ def finetune(args: argparse.Namespace) -> None:
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
+    if CORRECTION_TOKEN not in tokenizer.get_vocab():
+        tokenizer.add_special_tokens({"additional_special_tokens": [CORRECTION_TOKEN]})
     model = AutoModelForCausalLM.from_pretrained(
         args.model, torch_dtype=torch.bfloat16, device_map="auto"
     )
+    if len(tokenizer) != model.get_input_embeddings().num_embeddings:
+        model.resize_token_embeddings(len(tokenizer))
 
     lora_config = LoraConfig(
         task_type=TaskType.CAUSAL_LM,
