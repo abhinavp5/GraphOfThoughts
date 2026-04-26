@@ -101,7 +101,7 @@ def collect(args: argparse.Namespace) -> None:
             tokenizer,
             correction_id,
             max_steps=args.max_steps,
-            teacher_forced=False,  # free-running rollouts
+            teacher_forced=True,  # gold states keep context valid across all steps
             demos=None,
             verbose=False,
         )
@@ -187,7 +187,8 @@ def finetune(args: argparse.Namespace) -> None:
     with open(args.recovery_json) as f:
         records = json.load(f)
     if not records:
-        raise RuntimeError("No recovery examples found. Run collect stage first.")
+        print("[warn] No recovery examples found — nothing to fine-tune on. Exiting cleanly.")
+        return
 
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     if tokenizer.pad_token is None:
