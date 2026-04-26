@@ -186,6 +186,50 @@ def _run_pipeline_eval(
     _run(cmd, cwd=repo_root)
 
 
+def _resolve_post_eval_targets(
+    *,
+    base_model: str,
+    pre_adapter_dir: Path,
+    retrained_model_dir: Path | None,
+    model_label: str,
+    algorithm: str,
+) -> tuple[str, str | None, str | None]:
+    """
+    Decide how to run post-eval robustly.
+
+    Cases:
+      1) retrained_model_dir has adapter_config.json:
+         -> evaluate as base + SFT adapter + DAgger adapter stack
+      2) retrained_model_dir has full model files (e.g., config.json):
+         -> evaluate by loading model from retrained_model_dir directly
+      3) retrain missing/empty:
+         -> fallback to base + SFT adapter only
+    """
+    if retrained_model_dir is None:
+        print(f"[warn] {model_label} / {algorithm}: no retrained model dir; post-eval uses pre adapter only.")
+        return base_model, str(pre_adapter_dir), None
+
+    dagger_cfg = retrained_model_dir / "adapter_config.json"
+    if dagger_cfg.is_file():
+        return base_model, str(pre_adapter_dir), str(retrained_model_dir)
+
+    full_model_cfg = retrained_model_dir / "config.json"
+    if full_model_cfg.is_file():
+        print(
+            f"[info] {model_label} / {algorithm}: "
+            "post_retrain_model is full-model format (no adapter_config.json); "
+            "post-eval will load model directly from retrained directory."
+        )
+        return str(retrained_model_dir), None, None
+
+    print(
+        f"[warn] {model_label} / {algorithm}: "
+        f"post_retrain_model missing adapter/full-model config at {retrained_model_dir}; "
+        "falling back to pre adapter for post-eval."
+    )
+    return base_model, str(pre_adapter_dir), None
+
+
 def _run_consistency_reports(
     *,
     repo_root: Path,
@@ -417,47 +461,33 @@ def _run_single_algorithm(args: argparse.Namespace, *, repo_root: Path, algorith
         # 5) Post-retrain evaluation
         # - If retrain ran: evaluate base_model + SFT adapter + DAgger adapter (stacked).
         # - If retrain was skipped: evaluate the same (base_model + pre_adapter_dir) again to keep the pipeline moving.
-        if retrained_model_dir is not None:
-            _run_pipeline_eval(
-                repo_root=repo_root,
-                model=base_model,
-                adapter=str(pre_adapter_dir),
-                dagger_adapter=str(retrained_model_dir),
-                algorithm=algorithm,
-                family=args.family,
-                n=args.n,
-                count=args.count,
-                seed=args.seed,
-                limit=args.limit,
-                bench_limit=args.bench_limit,
-                device=args.device,
-                dtype=args.dtype,
-                out_dir=post_eval_dir,
-                nlgraph_input=args.nlgraph_input,
-                glbench_input=args.glbench_input,
-                skip_smoke=bool(args.skip_smoke),
-                skip_data=True,
-            )
-        else:
-            _run_pipeline_eval(
-                repo_root=repo_root,
-                model=base_model,
-                adapter=str(pre_adapter_dir),
-                algorithm=algorithm,
-                family=args.family,
-                n=args.n,
-                count=args.count,
-                seed=args.seed,
-                limit=args.limit,
-                bench_limit=args.bench_limit,
-                device=args.device,
-                dtype=args.dtype,
-                out_dir=post_eval_dir,
-                nlgraph_input=args.nlgraph_input,
-                glbench_input=args.glbench_input,
-                skip_smoke=bool(args.skip_smoke),
-                skip_data=True,
-            )
+        post_model_for_eval, post_adapter_for_eval, post_dagger_for_eval = _resolve_post_eval_targets(
+            base_model=base_model,
+            pre_adapter_dir=pre_adapter_dir,
+            retrained_model_dir=retrained_model_dir,
+            model_label=model_label,
+            algorithm=algorithm,
+        )
+        _run_pipeline_eval(
+            repo_root=repo_root,
+            model=post_model_for_eval,
+            adapter=post_adapter_for_eval,
+            dagger_adapter=post_dagger_for_eval,
+            algorithm=algorithm,
+            family=args.family,
+            n=args.n,
+            count=args.count,
+            seed=args.seed,
+            limit=args.limit,
+            bench_limit=args.bench_limit,
+            device=args.device,
+            dtype=args.dtype,
+            out_dir=post_eval_dir,
+            nlgraph_input=args.nlgraph_input,
+            glbench_input=args.glbench_input,
+            skip_smoke=bool(args.skip_smoke),
+            skip_data=True,
+        )
 
         # Optional extra reports for pre/post
         for phase, eval_dir in (("pre", pre_eval_dir), ("post", post_eval_dir)):
@@ -691,47 +721,33 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
         for algo in _BASE_ALGOS:
             tag = _tag(algo, args.family, args.n, args.count, args.seed)
             post_eval_dir = model_root / f"eval_post_{algo}"
-            if retrained_model_dir is not None:
-                _run_pipeline_eval(
-                    repo_root=repo_root,
-                    model=base_model,
-                    adapter=str(pre_adapter_dir),
-                    dagger_adapter=str(retrained_model_dir),
-                    algorithm=algo,
-                    family=args.family,
-                    n=args.n,
-                    count=args.count,
-                    seed=args.seed,
-                    limit=args.limit,
-                    bench_limit=args.bench_limit,
-                    device=args.device,
-                    dtype=args.dtype,
-                    out_dir=post_eval_dir,
-                    nlgraph_input=args.nlgraph_input,
-                    glbench_input=args.glbench_input,
-                    skip_smoke=bool(args.skip_smoke),
-                    skip_data=True,
-                )
-            else:
-                _run_pipeline_eval(
-                    repo_root=repo_root,
-                    model=base_model,
-                    adapter=str(pre_adapter_dir),
-                    algorithm=algo,
-                    family=args.family,
-                    n=args.n,
-                    count=args.count,
-                    seed=args.seed,
-                    limit=args.limit,
-                    bench_limit=args.bench_limit,
-                    device=args.device,
-                    dtype=args.dtype,
-                    out_dir=post_eval_dir,
-                    nlgraph_input=args.nlgraph_input,
-                    glbench_input=args.glbench_input,
-                    skip_smoke=bool(args.skip_smoke),
-                    skip_data=True,
-                )
+            post_model_for_eval, post_adapter_for_eval, post_dagger_for_eval = _resolve_post_eval_targets(
+                base_model=base_model,
+                pre_adapter_dir=pre_adapter_dir,
+                retrained_model_dir=retrained_model_dir,
+                model_label=model_label,
+                algorithm=algo,
+            )
+            _run_pipeline_eval(
+                repo_root=repo_root,
+                model=post_model_for_eval,
+                adapter=post_adapter_for_eval,
+                dagger_adapter=post_dagger_for_eval,
+                algorithm=algo,
+                family=args.family,
+                n=args.n,
+                count=args.count,
+                seed=args.seed,
+                limit=args.limit,
+                bench_limit=args.bench_limit,
+                device=args.device,
+                dtype=args.dtype,
+                out_dir=post_eval_dir,
+                nlgraph_input=args.nlgraph_input,
+                glbench_input=args.glbench_input,
+                skip_smoke=bool(args.skip_smoke),
+                skip_data=True,
+            )
 
             _run_consistency_reports(
                 repo_root=repo_root,
