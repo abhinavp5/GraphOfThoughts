@@ -16,6 +16,7 @@ from pathlib import Path
 
 import torch
 from torch.utils.data import Dataset
+from peft import LoraConfig, TaskType, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments, set_seed
 
 from inference.run_inference import load_model, run_one_sample
@@ -194,7 +195,20 @@ def finetune(args: argparse.Namespace) -> None:
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    model = AutoModelForCausalLM.from_pretrained(args.model, torch_dtype=torch.bfloat16, device_map="auto")
+    model = AutoModelForCausalLM.from_pretrained(
+        args.model, dtype=torch.bfloat16, device_map="auto"
+    )
+
+    lora_config = LoraConfig(
+        task_type=TaskType.CAUSAL_LM,
+        r=args.lora_r,
+        lora_alpha=args.lora_alpha,
+        lora_dropout=args.lora_dropout,
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+        bias="none",
+    )
+    model = get_peft_model(model, lora_config)
+    model.print_trainable_parameters()
 
     ds = RecoveryDataset(records, tokenizer, max_len=args.max_seq_len)
     collator = Collator(tokenizer.pad_token_id)
@@ -215,9 +229,10 @@ def finetune(args: argparse.Namespace) -> None:
     )
     trainer = Trainer(model=model, args=targs, train_dataset=ds, data_collator=collator)
     trainer.train()
-    trainer.save_model(args.output_dir)
+    # Save only the LoRA adapter — avoids OOM from gathering full 7B weight shards.
+    model.save_pretrained(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
-    print(f"Saved DAgger stage-2 model to {args.output_dir}")
+    print(f"Saved DAgger stage-2 LoRA adapter to {args.output_dir}")
 
 
 def parse_args() -> argparse.Namespace:
@@ -246,6 +261,9 @@ def parse_args() -> argparse.Namespace:
     f.add_argument("--grad-accum", type=int, default=4)
     f.add_argument("--lr", type=float, default=1e-5)
     f.add_argument("--max-seq-len", type=int, default=1024)
+    f.add_argument("--lora-r", type=int, default=16)
+    f.add_argument("--lora-alpha", type=int, default=32)
+    f.add_argument("--lora-dropout", type=float, default=0.05)
     return ap.parse_args()
 
 
