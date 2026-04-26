@@ -1,5 +1,5 @@
 """
-Minimal DAgger-style stage-2 pipeline for BFS.
+Minimal DAgger-style stage-2 pipeline for graph algorithms.
 
 Two stages:
   1) collect: run free-running rollouts and extract (incorrect_state -> gold_recovery_op)
@@ -23,12 +23,50 @@ from training.dataset import load_traces
 from training.negative_sampling import CORRECTION_TOKEN
 
 
+_ALGO_SPECS: dict[str, dict[str, object]] = {
+    "bfs": {
+        "name": "BFS",
+        "ops": [
+            "enqueue(node)            — add node to the back of the queue",
+            "dequeue(node)            — remove node from the front of the queue",
+            "mark_visited(node)       — record node as visited",
+            "set_parent(child, parent)— record that child was reached from parent",
+        ],
+    },
+    "dfs": {
+        "name": "DFS",
+        "ops": [
+            "push(node)               — push node onto the stack",
+            "pop(node)                — pop node from the stack",
+            "visit(node)              — record node as visited",
+            "set_parent(child, parent)— record that child was reached from parent",
+        ],
+    },
+    "dijkstra": {
+        "name": "DIJKSTRA",
+        "ops": [
+            "init_source(node)        — set distance(node)=0 and enqueue it",
+            "settle(node)             — mark node's distance as final",
+            "relax(u, v, new_dist)    — update distance(v) via u and record predecessor",
+        ],
+    },
+}
+
+
 def _build_recovery_prompt(sample: dict, state: dict, wrong_op: str) -> str:
+    algo = str(sample.get("algorithm", "")).strip().lower()
+    if algo not in _ALGO_SPECS:
+        raise ValueError(f"Unknown sample['algorithm']={sample.get('algorithm')!r}; expected one of {sorted(_ALGO_SPECS)}")
+    spec = _ALGO_SPECS[algo]
+    op_lines = "\n".join(f"  {line}" for line in spec["ops"])  # type: ignore[index]
     return (
-        "You are a graph algorithm executor for BFS.\n"
+        f"You are a graph algorithm executor for {spec['name']}.\n"
         f"Graph: {sample['graph']}\n"
-        f"Algorithm: BFS\n"
+        f"Algorithm: {spec['name']}\n"
         f"Source: {sample['source']}\n"
+        "At each step, output exactly one operation from the following set:\n"
+        f"{op_lines}\n"
+        "No other operation names are permitted.\n"
         f"Current state: visited={state.get('visited', [])} "
         f"frontier={state.get('frontier', [])} distances={state.get('distances', {})} "
         f"parent={state.get('parent', {})}\n"
@@ -175,7 +213,7 @@ def finetune(args: argparse.Namespace) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    ap = argparse.ArgumentParser(description="Minimal DAgger-style stage-2 training for BFS.")
+    ap = argparse.ArgumentParser(description="Minimal DAgger-style stage-2 training for graph algorithms.")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     c = sub.add_parser("collect", help="Collect recovery examples from free-running rollouts.")

@@ -20,8 +20,29 @@ from typing import Any
 #
 # Backwards-compat: older traces and some scripts use `visit(x)` rather than
 # `mark_visited(x)`. We accept both as the same transition.
+#
+# This executor supports the operations emitted by:
+# - solvers/bfs.py
+# - solvers/dfs.py
+# - solvers/dijkstra.py
 VALID_OPS: frozenset[str] = frozenset(
-    {"enqueue", "dequeue", "set_parent", "mark_visited", "visit"}
+    {
+        # BFS
+        "enqueue",
+        "dequeue",
+        "mark_visited",
+        # DFS
+        "push",
+        "pop",
+        # Dijkstra
+        "init_source",
+        "settle",
+        "relax",
+        # Shared
+        "set_parent",
+        # Compat
+        "visit",
+    }
 )
 
 
@@ -112,12 +133,12 @@ class StateExecutor:
         if op not in VALID_OPS:
             raise ValueError(f"Unknown operation '{operation}'. VALID_OPS={set(VALID_OPS)}")
 
-        if op == "enqueue":
+        if op in ("enqueue", "push"):
             node = args[0]
             if node not in self._state["frontier"]:
                 self._state["frontier"].append(node)
 
-        elif op == "dequeue":
+        elif op in ("dequeue", "pop"):
             node = args[0]
             if node in self._state["frontier"]:
                 self._state["frontier"].remove(node)
@@ -132,6 +153,27 @@ class StateExecutor:
         elif op == "set_parent":
             child, parent = args[0], args[1]
             self._state["parent"][child] = parent
+
+        elif op == "init_source":
+            node = args[0]
+            self._state["distances"][node] = 0
+            if node not in self._state["frontier"]:
+                self._state["frontier"].append(node)
+
+        elif op == "settle":
+            node = args[0]
+            if node not in self._state["visited"]:
+                self._state["visited"].append(node)
+            if node in self._state["frontier"]:
+                self._state["frontier"].remove(node)
+
+        elif op == "relax":
+            # relax(u, v, new_dist): update v's distance and predecessor
+            u, v, new_dist = args[0], args[1], args[2]
+            self._state["distances"][v] = new_dist
+            self._state["parent"][v] = u
+            if v not in self._state["frontier"] and v not in self._state["visited"]:
+                self._state["frontier"].append(v)
 
     # ------------------------------------------------------------------
     # Snapshot
