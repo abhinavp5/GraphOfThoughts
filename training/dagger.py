@@ -70,7 +70,7 @@ def _build_recovery_prompt(sample: dict, state: dict, wrong_op: str) -> str:
         f"Current state: visited={state.get('visited', [])} "
         f"frontier={state.get('frontier', [])} distances={state.get('distances', {})} "
         f"parent={state.get('parent', {})}\n"
-        f"Previous wrong operation: {wrong_op}\n"
+        f"Previous wrong operation: {wrong_op if wrong_op else '(no output)'}\n"
         "Output exactly one line as the recovery operation:\n"
     )
 
@@ -101,9 +101,10 @@ def collect(args: argparse.Namespace) -> None:
             tokenizer,
             correction_id,
             max_steps=args.max_steps,
-            teacher_forced=True,  # gold states keep context valid across all steps
+            teacher_forced=False,
+            dagger_fallback=True,  # on invalid op: apply gold, continue collecting
             demos=None,
-            verbose=False,
+            verbose=args.verbose,
         )
         gold = sample["steps"]
         for p in pred:
@@ -112,7 +113,7 @@ def collect(args: argparse.Namespace) -> None:
                 continue
             wrong = p.get("operation_predicted")
             correct = gold[t]["operation"]
-            if not wrong:
+            if wrong is None:
                 continue
             if wrong == correct:
                 continue
@@ -234,6 +235,7 @@ def parse_args() -> argparse.Namespace:
     c.add_argument("--device", default="auto")
     c.add_argument("--dtype", default="float16", choices=["float16", "bfloat16", "float32"])
     c.add_argument("--seed", type=int, default=42)
+    c.add_argument("--verbose", action="store_true", help="Print each step's prediction during rollout.")
 
     f = sub.add_parser("finetune", help="Fine-tune on collected recovery examples.")
     f.add_argument("--model", required=True)

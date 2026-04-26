@@ -197,6 +197,7 @@ def run_one_sample(
     teacher_forced: bool = True,
     demos: Optional[list[dict]] = None,
     verbose: bool = False,
+    dagger_fallback: bool = False,
 ) -> list[dict]:
     """
     Run GoT inference on one (graph, algorithm, source) sample.
@@ -209,6 +210,11 @@ def run_one_sample(
       • teacher_forced=False: the executor is advanced with the MODEL's op
         (when valid); an invalid op terminates the run. Use this for
         free-running traces where you want to measure drift.
+
+    dagger_fallback: only active when teacher_forced=False. On an invalid op,
+        instead of stopping the run, the gold op is silently applied so the
+        state executor stays live and subsequent steps can still be collected.
+        Set to True when gathering DAgger recovery examples.
     """
     graph_str = sample["graph"]
     algorithm = sample["algorithm"]
@@ -278,6 +284,12 @@ def run_one_sample(
             predicted.append(entry)
             if verbose:
                 print(f"  [{t}] INVALID op={op!r}: {e}")
+            if dagger_fallback and gold_op is not None:
+                # Apply gold op so the state executor stays live for later steps.
+                executor.apply(gold_op)
+                if verbose:
+                    print(f"  [{t}] dagger fallback → applied gold={gold_op!r}")
+                continue
             break
 
         predicted.append(entry)

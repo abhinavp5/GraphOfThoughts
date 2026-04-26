@@ -100,9 +100,16 @@ def build_partial_completion(trace: list[dict]) -> str:
 def extract_operation(generated_text: str) -> str:
     """
     Given text generated after a `Step <t>: ` prime, return just the
-    operation string on the first line (stripped).
+    operation string on the first non-blank line (stripped).
+
+    Skips leading blank lines because chat models (e.g. Qwen2.5) sometimes
+    emit a leading newline before the actual operation token.
     """
-    return generated_text.split("\n", 1)[0].strip()
+    for line in generated_text.split("\n"):
+        stripped = line.strip()
+        if stripped:
+            return stripped
+    return ""
 
 
 __all__ = [
