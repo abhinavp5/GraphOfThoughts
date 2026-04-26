@@ -108,8 +108,14 @@ def load_model(
     adapter: Optional[str] = None,
     device: str = "auto",
     dtype=None,
+    dagger_adapter: Optional[str] = None,
 ):
-    """Load tokenizer + model (optionally with a LoRA adapter)."""
+    """Load tokenizer + model (optionally with one or two stacked LoRA adapters).
+
+    adapter:        SFT LoRA adapter path (loaded as "sft").
+    dagger_adapter: DAgger LoRA adapter path (loaded as "dagger", stacked on top of SFT).
+                    Requires adapter to be set.
+    """
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -134,7 +140,12 @@ def load_model(
     if len(tokenizer) != model.get_input_embeddings().num_embeddings:
         model.resize_token_embeddings(len(tokenizer))
 
-    if adapter:
+    if adapter and dagger_adapter:
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, adapter, adapter_name="sft")
+        model.load_adapter(dagger_adapter, adapter_name="dagger")
+        model.set_adapter(["sft", "dagger"])
+    elif adapter:
         from peft import PeftModel
         model = PeftModel.from_pretrained(model, adapter)
 
@@ -310,7 +321,9 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--model", required=True,
                     help="HF model id or local path to the base causal LM.")
     ap.add_argument("--adapter", default=None,
-                    help="Optional LoRA adapter directory (PEFT).")
+                    help="Optional SFT LoRA adapter directory (PEFT).")
+    ap.add_argument("--dagger-adapter", default=None,
+                    help="Optional DAgger LoRA adapter directory to stack on top of --adapter.")
     ap.add_argument("--trace", required=True,
                     help="Path to a JSON gold trace file (array of trace dicts).")
     ap.add_argument("--out", required=True,
@@ -349,9 +362,15 @@ def main() -> None:
         "float32": torch.float32,
     }
 
-    print(f"Loading model {args.model}" + (f" + adapter {args.adapter}" if args.adapter else ""))
+    desc = args.model
+    if args.adapter:
+        desc += f" + sft={args.adapter}"
+    if args.dagger_adapter:
+        desc += f" + dagger={args.dagger_adapter}"
+    print(f"Loading model {desc}")
     model, tokenizer = load_model(
-        args.model, args.adapter, args.device, dtype_map[args.dtype]
+        args.model, args.adapter, args.device, dtype_map[args.dtype],
+        dagger_adapter=args.dagger_adapter,
     )
 
     correction_id = tokenizer.convert_tokens_to_ids(CORRECTION_TOKEN)

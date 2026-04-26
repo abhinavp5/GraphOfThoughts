@@ -25,6 +25,7 @@ cd "$(dirname "$0")/.."
 # -------------------------------------------------------------------
 MODEL="${MODEL:-Qwen/Qwen2.5-0.5B-Instruct}"
 ADAPTER="${ADAPTER:-}"
+DAGGER_ADAPTER="${DAGGER_ADAPTER:-}"
 ALGORITHM="${ALGORITHM:-bfs}"
 FAMILY="${FAMILY:-erdos_renyi}"
 N="${N:-10}"
@@ -114,7 +115,8 @@ EOF
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -m|--model)      MODEL="$2"; shift 2 ;;
-    -a|--adapter)    ADAPTER="$2"; shift 2 ;;
+    -a|--adapter)        ADAPTER="$2"; shift 2 ;;
+    --dagger-adapter)    DAGGER_ADAPTER="$2"; shift 2 ;;
     -A|--algorithm)  ALGORITHM="$2"; shift 2 ;;
     -f|--family)     FAMILY="$2"; shift 2 ;;
     -n|--n)          N="$2"; shift 2 ;;
@@ -295,8 +297,9 @@ INF_ARGS=(
   --dtype "$DTYPE"
   --verbose
 )
-[[ -n "$ADAPTER" ]]     && INF_ARGS+=(--adapter "$ADAPTER")
-[[ -n "$MAX_STEPS" ]]   && INF_ARGS+=(--max-steps "$MAX_STEPS")
+[[ -n "$ADAPTER" ]]         && INF_ARGS+=(--adapter "$ADAPTER")
+[[ -n "$DAGGER_ADAPTER" ]]  && INF_ARGS+=(--dagger-adapter "$DAGGER_ADAPTER")
+[[ -n "$MAX_STEPS" ]]       && INF_ARGS+=(--max-steps "$MAX_STEPS")
 [[ "$FREE_RUNNING" == "1" ]] && INF_ARGS+=(--free-running)
 [[ "$FEW_SHOT" != "0" ]] && INF_ARGS+=(--few-shot "$FEW_SHOT")
 
@@ -330,8 +333,9 @@ if [[ -n "$NLGRAPH_INPUT" ]]; then
     --device "$DEVICE"
     --dtype "$DTYPE"
   )
-  [[ -n "$ADAPTER" ]] && NL_ARGS+=(--adapter "$ADAPTER")
-  [[ -n "$MAX_STEPS" ]] && NL_ARGS+=(--max-steps "$MAX_STEPS")
+  [[ -n "$ADAPTER" ]]        && NL_ARGS+=(--adapter "$ADAPTER")
+  [[ -n "$DAGGER_ADAPTER" ]] && NL_ARGS+=(--dagger-adapter "$DAGGER_ADAPTER")
+  [[ -n "$MAX_STEPS" ]]      && NL_ARGS+=(--max-steps "$MAX_STEPS")
   [[ -n "$BENCH_LIMIT" ]] && NL_ARGS+=(--limit "$BENCH_LIMIT")
   [[ "$FREE_RUNNING" == "1" ]] && NL_ARGS+=(--free-running)
   python -m evaluation.benchmarks.nlgraph "${NL_ARGS[@]}"
@@ -355,8 +359,9 @@ if [[ -n "$GLBENCH_INPUT" ]]; then
     --device "$DEVICE"
     --dtype "$DTYPE"
   )
-  [[ -n "$ADAPTER" ]] && GL_ARGS+=(--adapter "$ADAPTER")
-  [[ -n "$MAX_STEPS" ]] && GL_ARGS+=(--max-steps "$MAX_STEPS")
+  [[ -n "$ADAPTER" ]]        && GL_ARGS+=(--adapter "$ADAPTER")
+  [[ -n "$DAGGER_ADAPTER" ]] && GL_ARGS+=(--dagger-adapter "$DAGGER_ADAPTER")
+  [[ -n "$MAX_STEPS" ]]      && GL_ARGS+=(--max-steps "$MAX_STEPS")
   [[ -n "$BENCH_LIMIT" ]] && GL_ARGS+=(--limit "$BENCH_LIMIT")
   [[ "$FREE_RUNNING" == "1" ]] && GL_ARGS+=(--free-running)
   python -m evaluation.benchmarks.glbench "${GL_ARGS[@]}"
@@ -381,7 +386,7 @@ fi
 
 # Build paths JSON (nlgraph / glbench blocks optional)
 export MANIFEST_FILE RUN_ID TAG RUN_START RUN_END PIPELINE_LOG_FILE
-export MODEL ADAPTER ALGORITHM FAMILY N COUNT LIMIT SEED DEVICE DTYPE
+export MODEL ADAPTER DAGGER_ADAPTER ALGORITHM FAMILY N COUNT LIMIT SEED DEVICE DTYPE
 export BENCH_LIMIT MAX_STEPS SMOKE_ONLY TRACE_FILE PRED_FILE METRICS_FILE FAILURES_FILE
 export NL_PREFIX NL_PRED NL_OA NL_FA GL_PREFIX GL_PRED GL_OA GL_FA
 export JSON_FREE

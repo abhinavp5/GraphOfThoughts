@@ -196,7 +196,7 @@ def finetune(args: argparse.Namespace) -> None:
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(
-        args.model, dtype=torch.bfloat16, device_map="auto"
+        args.model, torch_dtype=torch.bfloat16, device_map="auto"
     )
 
     lora_config = LoraConfig(
@@ -207,7 +207,19 @@ def finetune(args: argparse.Namespace) -> None:
         target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
         bias="none",
     )
-    model = get_peft_model(model, lora_config)
+
+    if args.sft_adapter:
+        # Stack DAgger on top of the frozen SFT adapter so recovery training
+        # starts from the SFT-adapted distribution rather than the base model.
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, args.sft_adapter, adapter_name="sft")
+        for p in model.parameters():
+            p.requires_grad = False
+        model.add_adapter("dagger", lora_config)
+        print("[info] Loaded SFT adapter (frozen) + added trainable DAgger adapter on top.")
+    else:
+        model = get_peft_model(model, lora_config)
+
     model.print_trainable_parameters()
 
     ds = RecoveryDataset(records, tokenizer, max_len=args.max_seq_len)
@@ -229,8 +241,12 @@ def finetune(args: argparse.Namespace) -> None:
     )
     trainer = Trainer(model=model, args=targs, train_dataset=ds, data_collator=collator)
     trainer.train()
-    # Save only the LoRA adapter — avoids OOM from gathering full 7B weight shards.
-    model.save_pretrained(args.output_dir)
+    # Save only the DAgger LoRA adapter — avoids OOM from gathering full 7B weight shards.
+    os.makedirs(args.output_dir, exist_ok=True)
+    if args.sft_adapter:
+        model.save_pretrained(args.output_dir, selected_adapters=["dagger"])
+    else:
+        model.save_pretrained(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
     print(f"Saved DAgger stage-2 LoRA adapter to {args.output_dir}")
 
@@ -254,6 +270,10 @@ def parse_args() -> argparse.Namespace:
 
     f = sub.add_parser("finetune", help="Fine-tune on collected recovery examples.")
     f.add_argument("--model", required=True)
+    f.add_argument("--sft-adapter", default=None,
+                   help="Path to the SFT LoRA adapter to stack DAgger on top of (recommended). "
+                        "When provided, the SFT adapter is loaded frozen and a new DAgger adapter "
+                        "is trained on top, so recovery training starts from the SFT distribution.")
     f.add_argument("--recovery-json", required=True)
     f.add_argument("--output-dir", required=True)
     f.add_argument("--epochs", type=int, default=1)

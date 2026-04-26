@@ -143,6 +143,7 @@ def _run_pipeline_eval(
     glbench_input: str,
     skip_smoke: bool,
     skip_data: bool,
+    dagger_adapter: str | None = None,
 ) -> None:
     cmd = [
         "bash",
@@ -176,6 +177,8 @@ def _run_pipeline_eval(
     ]
     if adapter:
         cmd.extend(["--adapter", adapter])
+    if dagger_adapter:
+        cmd.extend(["--dagger-adapter", dagger_adapter])
     if skip_smoke:
         cmd.append("--skip-smoke")
     if skip_data:
@@ -392,6 +395,8 @@ def _run_single_algorithm(args: argparse.Namespace, *, repo_root: Path, algorith
                     "finetune",
                     "--model",
                     base_model,
+                    "--sft-adapter",
+                    str(pre_adapter_dir),
                     "--recovery-json",
                     str(recovery_json),
                     "--output-dir",
@@ -410,13 +415,14 @@ def _run_single_algorithm(args: argparse.Namespace, *, repo_root: Path, algorith
             retrained_model_dir = post_model_dir
 
         # 5) Post-retrain evaluation
-        # - If retrain ran: evaluate base_model + DAgger LoRA adapter (post_retrain_model is a LoRA adapter, not a full model).
+        # - If retrain ran: evaluate base_model + SFT adapter + DAgger adapter (stacked).
         # - If retrain was skipped: evaluate the same (base_model + pre_adapter_dir) again to keep the pipeline moving.
         if retrained_model_dir is not None:
             _run_pipeline_eval(
                 repo_root=repo_root,
                 model=base_model,
-                adapter=str(retrained_model_dir),
+                adapter=str(pre_adapter_dir),
+                dagger_adapter=str(retrained_model_dir),
                 algorithm=algorithm,
                 family=args.family,
                 n=args.n,
@@ -662,6 +668,8 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
                     "finetune",
                     "--model",
                     base_model,
+                    "--sft-adapter",
+                    str(pre_adapter_dir),
                     "--recovery-json",
                     str(merged_recovery_json),
                     "--output-dir",
@@ -679,7 +687,7 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
             )
             retrained_model_dir = post_model_dir
 
-        # 5) Post-retrain evaluation on ALL 3 algorithms
+        # 5) Post-retrain evaluation on ALL 3 algorithms (base + SFT adapter + DAgger adapter stacked)
         for algo in _BASE_ALGOS:
             tag = _tag(algo, args.family, args.n, args.count, args.seed)
             post_eval_dir = model_root / f"eval_post_{algo}"
@@ -687,7 +695,8 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
                 _run_pipeline_eval(
                     repo_root=repo_root,
                     model=base_model,
-                    adapter=str(retrained_model_dir),
+                    adapter=str(pre_adapter_dir),
+                    dagger_adapter=str(retrained_model_dir),
                     algorithm=algo,
                     family=args.family,
                     n=args.n,

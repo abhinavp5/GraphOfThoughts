@@ -30,7 +30,8 @@ def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", required=True, help="GLBench JSON file path.")
     ap.add_argument("--model", required=True, help="HF model id or local model path.")
-    ap.add_argument("--adapter", default=None, help="Optional LoRA adapter directory.")
+    ap.add_argument("--adapter", default=None, help="Optional SFT LoRA adapter directory.")
+    ap.add_argument("--dagger-adapter", default=None, help="Optional DAgger LoRA adapter to stack on top of --adapter.")
     ap.add_argument("--out-prefix", required=True, help="Output prefix (no extension).")
     ap.add_argument("--limit", type=int, default=None, help="Run first N records.")
     ap.add_argument("--device", default="auto")
@@ -84,6 +85,7 @@ def main() -> None:
         adapter=args.adapter,
         device=args.device,
         dtype=dtype_map[args.dtype],
+        dagger_adapter=args.dagger_adapter,
     )
 
     correction_id = tokenizer.convert_tokens_to_ids(CORRECTION_TOKEN)
