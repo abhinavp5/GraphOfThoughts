@@ -1,0 +1,37 @@
+{
+  "run_id": "dfs_erdos_renyi_n10_c5_s100_20260426_161256",
+  "tag": "dfs_erdos_renyi_n10_c5_s100",
+  "started_at": "2026-04-26T20:12:56Z",
+  "finished_at": "2026-04-26T20:20:50Z",
+  "git_commit": "a6dedee5afb73e8d322a7ab102ce6b8ba2952c26",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "adapter": null,
+    "algorithm": "dfs",
+    "family": "erdos_renyi",
+    "n": 10,
+    "count": 5,
+    "limit": 5,
+    "bench_limit": null,
+    "max_steps": null,
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "free_running": false,
+    "smoke_only": false,
+    "out_dir": "out/baseline_dfs",
+    "trace_file": "data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json",
+    "nlgraph_input": null,
+    "glbench_input": null
+  },
+  "paths": {
+    "log_file": "out/baseline_dfs/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_161256.log",
+    "trace_file": "data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json",
+    "pipe": {
+      "predictions": "out/baseline_dfs/pred_dfs_erdos_renyi_n10_c5_s100.json",
+      "operation_accuracy": "out/baseline_dfs/metrics_dfs_erdos_renyi_n10_c5_s100.json",
+      "failure_analysis": "out/baseline_dfs/failures_dfs_erdos_renyi_n10_c5_s100.json"
+    },
+    "nlgraph": null,
+    "glbench": null
+  }
+}

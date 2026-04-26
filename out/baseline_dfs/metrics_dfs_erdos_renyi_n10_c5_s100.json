@@ -1,0 +1,51 @@
+{
+  "n_samples": 5,
+  "total_steps": 278,
+  "total_correct": 20,
+  "step_accuracy": 0.07194244604316546,
+  "trace_accuracy": 0.0,
+  "mean_first_error_step": 0.0,
+  "mean_coverage": 1.0,
+  "per_sample": [
+    {
+      "n_steps": 52,
+      "n_correct": 4,
+      "step_accuracy": 0.07692307692307693,
+      "trace_correct": false,
+      "first_error_step": 0,
+      "coverage": 1.0
+    },
+    {
+      "n_steps": 61,
+      "n_correct": 2,
+      "step_accuracy": 0.03278688524590164,
+      "trace_correct": false,
+      "first_error_step": 0,
+      "coverage": 1.0
+    },
+    {
+      "n_steps": 52,
+      "n_correct": 4,
+      "step_accuracy": 0.07692307692307693,
+      "trace_correct": false,
+      "first_error_step": 0,
+      "coverage": 1.0
+    },
+    {
+      "n_steps": 64,
+      "n_correct": 5,
+      "step_accuracy": 0.078125,
+      "trace_correct": false,
+      "first_error_step": 0,
+      "coverage": 1.0
+    },
+    {
+      "n_steps": 49,
+      "n_correct": 5,
+      "step_accuracy": 0.10204081632653061,
+      "trace_correct": false,
+      "first_error_step": 0,
+      "coverage": 1.0
+    }
+  ]
+}
