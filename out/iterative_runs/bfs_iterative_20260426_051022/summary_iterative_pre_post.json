@@ -1,0 +1,32 @@
+{
+  "tag": "bfs_erdos_renyi_n10_c5_s100",
+  "algorithm": "bfs",
+  "family": "erdos_renyi",
+  "models": [
+    {
+      "model_label": "qwen-2-5-7b",
+      "base_model": "Qwen/Qwen2.5-7B-Instruct",
+      "pre": {
+        "step_accuracy": 0.025,
+        "failure_rate": 0.975,
+        "mean_first_error_step": 1.0,
+        "nlgraph_step_accuracy": 0.25,
+        "glbench_step_accuracy": 0.0
+      },
+      "post": {
+        "step_accuracy": 0.53,
+        "failure_rate": 0.47,
+        "mean_first_error_step": 1.0,
+        "nlgraph_step_accuracy": 0.375,
+        "glbench_step_accuracy": 0.0
+      },
+      "delta": {
+        "step_accuracy": 0.505,
+        "failure_rate": -0.505,
+        "mean_first_error_step": 0.0,
+        "nlgraph_step_accuracy": 0.125,
+        "glbench_step_accuracy": 0.0
+      }
+    }
+  ]
+}
