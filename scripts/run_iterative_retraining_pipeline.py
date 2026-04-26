@@ -410,13 +410,13 @@ def _run_single_algorithm(args: argparse.Namespace, *, repo_root: Path, algorith
             retrained_model_dir = post_model_dir
 
         # 5) Post-retrain evaluation
-        # - If retrain ran: evaluate the saved model directory directly.
+        # - If retrain ran: evaluate base_model + DAgger LoRA adapter (post_retrain_model is a LoRA adapter, not a full model).
         # - If retrain was skipped: evaluate the same (base_model + pre_adapter_dir) again to keep the pipeline moving.
         if retrained_model_dir is not None:
             _run_pipeline_eval(
                 repo_root=repo_root,
-                model=str(retrained_model_dir),
-                adapter=None,
+                model=base_model,
+                adapter=str(retrained_model_dir),
                 algorithm=algorithm,
                 family=args.family,
                 n=args.n,
@@ -686,8 +686,8 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
             if retrained_model_dir is not None:
                 _run_pipeline_eval(
                     repo_root=repo_root,
-                    model=str(retrained_model_dir),
-                    adapter=None,
+                    model=base_model,
+                    adapter=str(retrained_model_dir),
                     algorithm=algo,
                     family=args.family,
                     n=args.n,
