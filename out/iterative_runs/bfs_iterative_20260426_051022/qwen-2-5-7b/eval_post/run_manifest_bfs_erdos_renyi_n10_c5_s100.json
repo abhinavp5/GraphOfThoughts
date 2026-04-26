@@ -1,0 +1,47 @@
+{
+  "run_id": "bfs_erdos_renyi_n10_c5_s100_20260426_120950",
+  "tag": "bfs_erdos_renyi_n10_c5_s100",
+  "started_at": "2026-04-26T16:09:50Z",
+  "finished_at": "2026-04-26T16:19:25Z",
+  "git_commit": "23ba22b8b3fe6e592c269d789b74964688c681cd",
+  "config": {
+    "model": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model",
+    "adapter": null,
+    "algorithm": "bfs",
+    "family": "erdos_renyi",
+    "n": 10,
+    "count": 5,
+    "limit": 100,
+    "bench_limit": 100,
+    "max_steps": null,
+    "device": "cuda",
+    "dtype": "float16",
+    "free_running": false,
+    "smoke_only": false,
+    "out_dir": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post",
+    "trace_file": "data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json",
+    "nlgraph_input": "data/benchmarks/nlgraph_eval.json",
+    "glbench_input": "data/benchmarks/glbench_eval.json"
+  },
+  "paths": {
+    "log_file": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_120950.log",
+    "trace_file": "data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json",
+    "pipe": {
+      "predictions": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pred_bfs_erdos_renyi_n10_c5_s100.json",
+      "operation_accuracy": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/metrics_bfs_erdos_renyi_n10_c5_s100.json",
+      "failure_analysis": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/failures_bfs_erdos_renyi_n10_c5_s100.json"
+    },
+    "nlgraph": {
+      "prefix": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/nlgraph_bfs_erdos_renyi_n10_c5_s100",
+      "predictions": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/nlgraph_bfs_erdos_renyi_n10_c5_s100_predictions.json",
+      "operation_accuracy": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/nlgraph_bfs_erdos_renyi_n10_c5_s100_operation_accuracy.json",
+      "failure_analysis": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/nlgraph_bfs_erdos_renyi_n10_c5_s100_failure_analysis.json"
+    },
+    "glbench": {
+      "prefix": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/glbench_bfs_erdos_renyi_n10_c5_s100",
+      "predictions": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/glbench_bfs_erdos_renyi_n10_c5_s100_predictions.json",
+      "operation_accuracy": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/glbench_bfs_erdos_renyi_n10_c5_s100_operation_accuracy.json",
+      "failure_analysis": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/glbench_bfs_erdos_renyi_n10_c5_s100_failure_analysis.json"
+    }
+  }
+}

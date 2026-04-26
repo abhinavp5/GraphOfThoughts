@@ -1,0 +1,291 @@
+[pipeline] Unified log: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_120950.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model
+  adapter:   (none — base model)
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     100        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post
+  log_file:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_120950.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mDataset (reusing data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json)[0m
+
+[1;34m==>[0m [1mInference → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading model /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:01<07:26,  1.32s/it]Loading weights:   7%|▋         | 24/339 [00:01<00:13, 22.66it/s]Loading weights:  11%|█         | 36/339 [00:01<00:09, 32.39it/s]Loading weights:  14%|█▎        | 46/339 [00:01<00:07, 40.25it/s]Loading weights:  16%|█▌        | 55/339 [00:01<00:06, 42.10it/s]Loading weights:  19%|█▉        | 66/339 [00:02<00:05, 52.28it/s]Loading weights:  22%|██▏       | 76/339 [00:02<00:06, 42.63it/s]Loading weights:  26%|██▋       | 89/339 [00:02<00:04, 53.69it/s]Loading weights:  29%|██▊       | 97/339 [00:02<00:04, 55.73it/s]Loading weights:  32%|███▏      | 108/339 [00:02<00:04, 50.09it/s]Loading weights:  34%|███▍      | 115/339 [00:03<00:04, 50.55it/s]Loading weights:  37%|███▋      | 124/339 [00:03<00:04, 45.67it/s]Loading weights:  40%|████      | 137/339 [00:03<00:04, 42.77it/s]Loading weights:  44%|████▍     | 150/339 [00:03<00:03, 48.50it/s]Loading weights:  46%|████▌     | 156/339 [00:03<00:03, 48.84it/s]Loading weights:  50%|█████     | 170/339 [00:04<00:02, 59.00it/s]Loading weights:  52%|█████▏    | 177/339 [00:04<00:03, 48.29it/s]Loading weights:  55%|█████▍    | 186/339 [00:04<00:03, 46.85it/s]Loading weights:  58%|█████▊    | 197/339 [00:04<00:02, 52.65it/s]Loading weights:  60%|█████▉    | 203/339 [00:04<00:02, 53.80it/s]Loading weights:  62%|██████▏   | 209/339 [00:05<00:03, 37.78it/s]Loading weights:  67%|██████▋   | 226/339 [00:05<00:02, 55.89it/s]Loading weights:  69%|██████▊   | 233/339 [00:05<00:02, 45.33it/s]Loading weights:  72%|███████▏  | 245/339 [00:05<00:02, 45.72it/s]Loading weights:  76%|███████▋  | 259/339 [00:05<00:01, 53.85it/s]Loading weights:  80%|███████▉  | 270/339 [00:06<00:01, 57.96it/s]Loading weights:  83%|████████▎ | 281/339 [00:06<00:00, 59.34it/s]Loading weights:  85%|████████▍ | 288/339 [00:06<00:00, 57.73it/s]Loading weights:  88%|████████▊ | 300/339 [00:06<00:00, 69.60it/s]Loading weights:  91%|█████████ | 308/339 [00:06<00:00, 46.09it/s]Loading weights:  94%|█████████▎| 317/339 [00:07<00:00, 45.28it/s]Loading weights:  97%|█████████▋| 329/339 [00:07<00:00, 47.02it/s]Loading weights: 100%|██████████| 339/339 [00:07<00:00, 46.31it/s]
+Loading weights:   0%|          | 0/224 [00:00<?, ?it/s]Loading weights: 100%|██████████| 224/224 [00:00<00:00, 5612.15it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[1/5] bfs source=2 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [1] ✗ pred='mark_visited(2)'  gold='set_parent(2, None)'
+  [2] ✗ pred='enqueue(3)'  gold='dequeue(2)'
+  [3] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [4] ✓ pred='enqueue(3)'  gold='enqueue(3)'
+  [5] ✓ pred='set_parent(3, 2)'  gold='set_parent(3, 2)'
+  [6] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [7] ✗ pred='enqueue(8)'  gold='set_parent(4, 2)'
+  [8] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [9] ✗ pred='mark_visited(3)'  gold='set_parent(8, 2)'
+  [10] ✗ pred='mark_visited(2)'  gold='dequeue(3)'
+  [11] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [12] ✗ pred='enqueue(7)'  gold='enqueue(1)'
+  [13] ✓ pred='set_parent(1, 3)'  gold='set_parent(1, 3)'
+  [14] ✗ pred='enqueue(9)'  gold='enqueue(7)'
+  [15] ✓ pred='set_parent(7, 3)'  gold='set_parent(7, 3)'
+  [16] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [17] ✓ pred='set_parent(9, 3)'  gold='set_parent(9, 3)'
+  [18] ✓ pred='dequeue(4)'  gold='dequeue(4)'
+  [19] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+  [20] ✓ pred='enqueue(5)'  gold='enqueue(5)'
+  [21] ✓ pred='set_parent(5, 4)'  gold='set_parent(5, 4)'
+  [22] ✓ pred='dequeue(8)'  gold='dequeue(8)'
+  [23] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [24] ✗ pred='enqueue(2)'  gold='dequeue(1)'
+  [25] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [26] ✗ pred='enqueue(9)'  gold='enqueue(0)'
+  [27] ✗ pred='set_parent(0, 2)'  gold='set_parent(0, 1)'
+  [28] ✗ pred='(The algorithm ends here as all nodes have been visited)'  gold='dequeue(7)'
+  [29] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [30] ✗ pred='enqueue(6)'  gold='dequeue(9)'
+  [31] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [32] ✗ pred='enqueue(5)'  gold='enqueue(6)'
+  [33] ✓ pred='set_parent(6, 9)'  gold='set_parent(6, 9)'
+  [34] ✗ pred='All nodes have been visited.'  gold='dequeue(5)'
+  [35] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [36] ✗ pred='# All nodes have been visited, no more operations needed.'  gold='dequeue(0)'
+  [37] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [38] ✗ pred='enqueue(6)'  gold='dequeue(6)'
+  [39] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+[2/5] bfs source=9 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [1] ✗ pred='mark_visited(9)'  gold='set_parent(9, None)'
+  [2] ✓ pred='dequeue(9)'  gold='dequeue(9)'
+  [3] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [4] ✗ pred='enqueue(4)'  gold='enqueue(0)'
+  [5] ✓ pred='set_parent(0, 9)'  gold='set_parent(0, 9)'
+  [6] ✗ pred='enqueue(7)'  gold='enqueue(4)'
+  [7] ✗ pred='enqueue(7)'  gold='set_parent(4, 9)'
+  [8] ✗ pred='enqueue(7)'  gold='enqueue(5)'
+  [9] ✗ pred='enqueue(6)'  gold='set_parent(5, 9)'
+  [10] ✗ pred='dequeue(0)'  gold='enqueue(7)'
+  [11] ✗ pred='mark_visited(0)'  gold='set_parent(7, 9)'
+  [12] ✗ pred='mark_visited(0)'  gold='enqueue(8)'
+  [13] ✗ pred='mark_visited(0)'  gold='set_parent(8, 9)'
+  [14] ✗ pred='mark_visited(0)'  gold='dequeue(0)'
+  [15] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [16] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [17] ✓ pred='set_parent(2, 0)'  gold='set_parent(2, 0)'
+  [18] ✗ pred='enqueue(3)'  gold='dequeue(4)'
+  [19] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+  [20] ✗ pred='enqueue(9)'  gold='enqueue(3)'
+  [21] ✓ pred='set_parent(3, 4)'  gold='set_parent(3, 4)'
+  [22] ✗ pred='enqueue(9)'  gold='dequeue(5)'
+  [23] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [24] ✗ pred='enqueue(6)'  gold='enqueue(1)'
+  [25] ✓ pred='set_parent(1, 5)'  gold='set_parent(1, 5)'
+  [26] ✗ pred='enqueue(6)'  gold='dequeue(7)'
+  [27] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [28] ✗ pred='enqueue(6)'  gold='dequeue(8)'
+  [29] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [30] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [31] ✗ pred='set_parent(6, 1)'  gold='set_parent(6, 8)'
+  [32] ✓ pred='dequeue(2)'  gold='dequeue(2)'
+  [33] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [34] ✗ pred='(The algorithm ends here as all nodes have been visited)'  gold='dequeue(3)'
+  [35] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [36] ✗ pred='(No more nodes in the frontier, BFS completes)'  gold='dequeue(1)'
+  [37] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [38] ✗ pred='enqueue(9)'  gold='dequeue(6)'
+  [39] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+[3/5] bfs source=2 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [1] ✗ pred='0'  gold='set_parent(2, None)'
+  [2] ✗ pred='enqueue(6)'  gold='dequeue(2)'
+  [3] ✗ pred='enqueue(6)'  gold='mark_visited(2)'
+  [4] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [5] ✓ pred='set_parent(6, 2)'  gold='set_parent(6, 2)'
+  [6] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [7] ✗ pred='enqueue(7)'  gold='set_parent(8, 2)'
+  [8] ✗ pred='enqueue(7)'  gold='dequeue(6)'
+  [9] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+  [10] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [11] ✓ pred='set_parent(7, 6)'  gold='set_parent(7, 6)'
+  [12] ✗ pred='enqueue(2)'  gold='dequeue(8)'
+  [13] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [14] ✗ pred='enqueue(9)'  gold='enqueue(1)'
+  [15] ✓ pred='set_parent(1, 8)'  gold='set_parent(1, 8)'
+  [16] ✗ pred='enqueue(9)'  gold='enqueue(3)'
+  [17] ✗ pred='enqueue(9)'  gold='set_parent(3, 8)'
+  [18] ✗ pred='enqueue(9)'  gold='enqueue(5)'
+  [19] ✓ pred='set_parent(5, 8)'  gold='set_parent(5, 8)'
+  [20] ✗ pred='(Continuing in this manner for all nodes connected to the initial frontier)'  gold='dequeue(7)'
+  [21] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [22] ✗ pred='enqueue(9)'  gold='dequeue(1)'
+  [23] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [24] ✗ pred='enqueue(9)'  gold='enqueue(0)'
+  [25] ✗ pred='set_parent(0, 8)'  gold='set_parent(0, 1)'
+  [26] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [27] ✗ pred='set_parent(9, 8)'  gold='set_parent(9, 1)'
+  [28] ✗ pred='enqueue(4)'  gold='dequeue(3)'
+  [29] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [30] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [31] ✓ pred='set_parent(4, 3)'  gold='set_parent(4, 3)'
+  [32] ✗ pred='(The algorithm ends here as all nodes are visited)'  gold='dequeue(5)'
+  [33] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [34] ✗ pred='enqueue(2)'  gold='dequeue(0)'
+  [35] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [36] ✗ pred='enqueue(9)'  gold='dequeue(9)'
+  [37] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [38] ✗ pred='enqueue(4)'  gold='dequeue(4)'
+  [39] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+[4/5] bfs source=7 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [1] ✗ pred='mark_visited(7)'  gold='set_parent(7, None)'
+  [2] ✗ pred='enqueue(5)'  gold='dequeue(7)'
+  [3] ✗ pred='enqueue(5)'  gold='mark_visited(7)'
+  [4] ✓ pred='enqueue(5)'  gold='enqueue(5)'
+  [5] ✓ pred='set_parent(5, 7)'  gold='set_parent(5, 7)'
+  [6] ✗ pred='enqueue(6)'  gold='enqueue(8)'
+  [7] ✗ pred='enqueue(6)'  gold='set_parent(8, 7)'
+  [8] ✗ pred='enqueue(6)'  gold='dequeue(5)'
+  [9] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [10] ✗ pred='enqueue(6)'  gold='enqueue(0)'
+  [11] ✗ pred='set_parent(0, 8)'  gold='set_parent(0, 5)'
+  [12] ✗ pred='enqueue(6)'  gold='enqueue(1)'
+  [13] ✓ pred='set_parent(1, 5)'  gold='set_parent(1, 5)'
+  [14] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [15] ✓ pred='set_parent(6, 5)'  gold='set_parent(6, 5)'
+  [16] ✗ pred='(8 is already visited, so no action)'  gold='dequeue(8)'
+  [17] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [18] ✗ pred='enqueue(9)'  gold='enqueue(3)'
+  [19] ✗ pred='set_parent(3, 2)'  gold='set_parent(3, 8)'
+  [20] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [21] ✗ pred='set_parent(9, 1)'  gold='set_parent(9, 8)'
+  [22] ✗ pred='(Continuing in this manner, we would process nodes 0, 1, 6, and 3, marking them as visited and setting their parents as appropriate until all nodes are processed.)'  gold='dequeue(0)'
+  [23] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [24] ✗ pred='enqueue(4)'  gold='dequeue(1)'
+  [25] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [26] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [27] ✓ pred='set_parent(4, 1)'  gold='set_parent(4, 1)'
+  [28] ✗ pred='enqueue(2)'  gold='dequeue(6)'
+  [29] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+  [30] ✗ pred='(End of BFS)'  gold='enqueue(2)'
+  [31] ✓ pred='set_parent(2, 6)'  gold='set_parent(2, 6)'
+  [32] ✗ pred='(The algorithm ends here as all nodes have been visited)'  gold='dequeue(3)'
+  [33] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [34] ✗ pred='(All nodes are now visited, no more operations needed.)'  gold='dequeue(9)'
+  [35] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [36] ✗ pred='enqueue(4)'  gold='dequeue(4)'
+  [37] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+  [38] ✗ pred='enqueue(7)'  gold='dequeue(2)'
+  [39] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+[5/5] bfs source=0 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(0)'  gold='enqueue(0)'
+  [1] ✗ pred='0'  gold='set_parent(0, None)'
+  [2] ✓ pred='dequeue(0)'  gold='dequeue(0)'
+  [3] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [4] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [5] ✓ pred='set_parent(4, 0)'  gold='set_parent(4, 0)'
+  [6] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [7] ✗ pred='enqueue(8)'  gold='set_parent(7, 0)'
+  [8] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [9] ✗ pred='enqueue(9)'  gold='set_parent(8, 0)'
+  [10] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [11] ✗ pred='mark_visited(4)'  gold='set_parent(9, 0)'
+  [12] ✓ pred='dequeue(4)'  gold='dequeue(4)'
+  [13] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+  [14] ✗ pred='enqueue(5)'  gold='enqueue(3)'
+  [15] ✓ pred='set_parent(3, 4)'  gold='set_parent(3, 4)'
+  [16] ✗ pred='dequeue(7)'  gold='enqueue(5)'
+  [17] ✗ pred='set_parent(5, 8)'  gold='set_parent(5, 4)'
+  [18] ✓ pred='dequeue(7)'  gold='dequeue(7)'
+  [19] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [20] ✗ pred='(empty)'  gold='dequeue(8)'
+  [21] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [22] ✗ pred='enqueue(6)'  gold='dequeue(9)'
+  [23] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [24] ✗ pred='set_parent(3, 4)'  gold='enqueue(2)'
+  [25] ✓ pred='set_parent(2, 9)'  gold='set_parent(2, 9)'
+  [26] ✗ pred='(end of BFS)'  gold='dequeue(3)'
+  [27] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [28] ✗ pred='set_parent(6, 3)'  gold='enqueue(1)'
+  [29] ✓ pred='set_parent(1, 3)'  gold='set_parent(1, 3)'
+  [30] ✗ pred='(BFS completes as all nodes are visited)'  gold='enqueue(6)'
+  [31] ✓ pred='set_parent(6, 3)'  gold='set_parent(6, 3)'
+  [32] ✓ pred='dequeue(5)'  gold='dequeue(5)'
+  [33] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [34] ✗ pred='(All nodes have been visited, no more operations needed.)'  gold='dequeue(2)'
+  [35] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [36] ✗ pred='(All nodes have been visited, no more operations needed.)'  gold='dequeue(1)'
+  [37] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [38] ✗ pred='enqueue(6)'  gold='dequeue(6)'
+  [39] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+Saved 5 predictions to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pred_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mScoring → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/metrics_bfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:          5
+Total steps:      200
+Step accuracy:    0.5300
+Trace accuracy:   0.0000
+Mean first-error step: 1.00
+Mean coverage:    1.0000
+
+Wrote metrics to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/metrics_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mFailure analysis → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/failures_bfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:                 5
+Total gold steps:        200
+Overall step accuracy:   0.5300
+Overall failure rate:    0.4700
+Mean first-error step:   1.00
+
+Failure rate by phase:
+   early: 0.5231
+  middle: 0.4308
+    late: 0.4571
+
+Top operation confusions:
+  enqueue(3) -> enqueue(9) (n=3)
+  enqueue(0) -> enqueue(9) (n=2)
+  dequeue(9) -> enqueue(6) (n=2)
+  dequeue(6) -> enqueue(6) (n=2)
+  enqueue(1) -> enqueue(6) (n=2)
+  dequeue(3) -> (The algorithm ends here as all nodes have been visited) (n=2)
+  dequeue(4) -> enqueue(4) (n=2)
+  set_parent(2, None) -> mark_visited(2) (n=1)
+  dequeue(2) -> enqueue(3) (n=1)
+  set_parent(4, 2) -> enqueue(8) (n=1)
+
+Wrote failure analysis to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/failures_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mNLGraph benchmark → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/nlgraph_bfs_erdos_renyi_n10_c5_s100_*.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:01<06:23,  1.13s/it]Loading weights:   1%|          | 2/339 [00:01<03:17,  1.71it/s]Loading weights:   6%|▋         | 22/339 [00:01<00:11, 26.53it/s]Loading weights:   9%|▉         | 32/339 [00:01<00:08, 35.73it/s]Loading weights:  12%|█▏        | 41/339 [00:01<00:07, 37.29it/s]Loading weights:  16%|█▌        | 54/339 [00:01<00:06, 45.01it/s]Loading weights:  19%|█▉        | 66/339 [00:02<00:05, 54.37it/s]Loading weights:  22%|██▏       | 76/339 [00:02<00:04, 58.24it/s]Loading weights:  26%|██▌       | 88/339 [00:02<00:05, 46.15it/s]Loading weights:  30%|███       | 102/339 [00:02<00:04, 50.31it/s]Loading weights:  33%|███▎      | 112/339 [00:03<00:04, 54.70it/s]Loading weights:  35%|███▌      | 119/339 [00:03<00:03, 56.38it/s]Loading weights:  37%|███▋      | 126/339 [00:03<00:04, 43.03it/s]Loading weights:  40%|████      | 137/339 [00:03<00:05, 39.25it/s]Loading weights:  44%|████▍     | 149/339 [00:03<00:04, 44.11it/s]Loading weights:  46%|████▌     | 156/339 [00:04<00:03, 47.05it/s]Loading weights:  48%|████▊     | 162/339 [00:04<00:04, 36.71it/s]Loading weights:  51%|█████     | 173/339 [00:04<00:03, 42.90it/s]Loading weights:  55%|█████▍    | 185/339 [00:04<00:03, 41.76it/s]Loading weights:  58%|█████▊    | 197/339 [00:05<00:03, 43.06it/s]Loading weights:  62%|██████▏   | 209/339 [00:05<00:03, 41.75it/s]Loading weights:  65%|██████▌   | 221/339 [00:05<00:02, 47.00it/s]Loading weights:  69%|██████▊   | 233/339 [00:06<00:02, 37.54it/s]Loading weights:  73%|███████▎  | 246/339 [00:06<00:01, 46.55it/s]Loading weights:  76%|███████▌  | 257/339 [00:06<00:01, 47.00it/s]Loading weights:  78%|███████▊  | 263/339 [00:06<00:01, 48.16it/s]Loading weights:  80%|████████  | 272/339 [00:06<00:01, 53.60it/s]Loading weights:  83%|████████▎ | 280/339 [00:06<00:01, 42.26it/s]Loading weights:  86%|████████▋ | 293/339 [00:07<00:00, 54.38it/s]Loading weights:  90%|████████▉ | 304/339 [00:07<00:00, 50.96it/s]Loading weights:  92%|█████████▏| 312/339 [00:07<00:00, 55.60it/s]Loading weights:  94%|█████████▍| 319/339 [00:07<00:00, 39.14it/s]Loading weights:  97%|█████████▋| 329/339 [00:07<00:00, 46.12it/s]Loading weights: 100%|██████████| 339/339 [00:07<00:00, 42.68it/s]
+Loading weights:   0%|          | 0/224 [00:00<?, ?it/s]Loading weights: 100%|██████████| 224/224 [00:00<00:00, 5210.78it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Wrote predictions:       /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/nlgraph_bfs_erdos_renyi_n10_c5_s100_predictions.json
+Wrote operation metrics: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/nlgraph_bfs_erdos_renyi_n10_c5_s100_operation_accuracy.json
+Wrote failure analysis:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/nlgraph_bfs_erdos_renyi_n10_c5_s100_failure_analysis.json
+
+[1;34m==>[0m [1mGLBench benchmark → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/glbench_bfs_erdos_renyi_n10_c5_s100_*.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:01<06:24,  1.14s/it]Loading weights:   5%|▌         | 18/339 [00:01<00:16, 19.33it/s]Loading weights:  11%|█         | 36/339 [00:01<00:07, 39.99it/s]Loading weights:  14%|█▍        | 48/339 [00:01<00:05, 50.82it/s]Loading weights:  17%|█▋        | 59/339 [00:01<00:05, 55.51it/s]Loading weights:  20%|██        | 69/339 [00:01<00:04, 59.27it/s]Loading weights:  23%|██▎       | 78/339 [00:02<00:05, 45.59it/s]Loading weights:  26%|██▋       | 89/339 [00:02<00:04, 53.00it/s]Loading weights:  29%|██▊       | 97/339 [00:02<00:04, 56.28it/s]Loading weights:  31%|███       | 105/339 [00:02<00:05, 46.03it/s]Loading weights:  33%|███▎      | 113/339 [00:02<00:04, 45.81it/s]Loading weights:  37%|███▋      | 124/339 [00:02<00:03, 55.13it/s]Loading weights:  39%|███▊      | 131/339 [00:03<00:04, 48.81it/s]Loading weights:  40%|████      | 137/339 [00:03<00:05, 36.51it/s]Loading weights:  44%|████▍     | 149/339 [00:03<00:04, 41.15it/s]Loading weights:  47%|████▋     | 161/339 [00:03<00:04, 40.58it/s]Loading weights:  51%|█████     | 172/339 [00:04<00:03, 48.41it/s]Loading weights:  53%|█████▎    | 178/339 [00:04<00:03, 40.55it/s]Loading weights:  55%|█████▍    | 186/339 [00:04<00:03, 44.23it/s]Loading weights:  58%|█████▊    | 196/339 [00:04<00:03, 41.64it/s]Loading weights:  60%|██████    | 204/339 [00:04<00:02, 47.60it/s]Loading weights:  62%|██████▏   | 210/339 [00:05<00:03, 36.72it/s]Loading weights:  65%|██████▌   | 221/339 [00:05<00:02, 44.52it/s]Loading weights:  67%|██████▋   | 228/339 [00:05<00:02, 48.39it/s]Loading weights:  69%|██████▉   | 234/339 [00:05<00:02, 45.25it/s]Loading weights:  72%|███████▏  | 245/339 [00:05<00:02, 37.98it/s]Loading weights:  76%|███████▌  | 257/339 [00:06<00:02, 38.10it/s]Loading weights:  80%|███████▉  | 270/339 [00:06<00:01, 46.58it/s]Loading weights:  83%|████████▎ | 281/339 [00:06<00:01, 50.35it/s]Loading weights:  86%|████████▌ | 292/339 [00:06<00:00, 59.54it/s]Loading weights:  88%|████████▊ | 299/339 [00:06<00:00, 50.42it/s]Loading weights:  90%|████████▉ | 305/339 [00:07<00:00, 49.39it/s]Loading weights:  92%|█████████▏| 311/339 [00:07<00:00, 49.74it/s]Loading weights:  94%|█████████▎| 317/339 [00:07<00:00, 37.66it/s]Loading weights:  97%|█████████▋| 329/339 [00:07<00:00, 44.99it/s]Loading weights: 100%|██████████| 339/339 [00:07<00:00, 44.28it/s]
+Loading weights:   0%|          | 0/224 [00:00<?, ?it/s]Loading weights: 100%|██████████| 224/224 [00:00<00:00, 5359.67it/s]
+Wrote predictions:       /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/glbench_bfs_erdos_renyi_n10_c5_s100_predictions.json
+Wrote operation metrics: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/glbench_bfs_erdos_renyi_n10_c5_s100_operation_accuracy.json
+Wrote failure analysis:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/glbench_bfs_erdos_renyi_n10_c5_s100_failure_analysis.json
+[pipeline] Wrote run manifest: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/run_manifest_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mDone[0m
+  trace file:  data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json
+  predictions: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pred_bfs_erdos_renyi_n10_c5_s100.json
+  metrics:     /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/metrics_bfs_erdos_renyi_n10_c5_s100.json
+  failures:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/failures_bfs_erdos_renyi_n10_c5_s100.json
+  manifest:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/run_manifest_bfs_erdos_renyi_n10_c5_s100.json
+  log file:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_120950.log
