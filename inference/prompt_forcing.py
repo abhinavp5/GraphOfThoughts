@@ -31,7 +31,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from training.teacher_forcing import (
-    SYSTEM_PROMPT,
     format_prompt,
     format_trace_completion,
     _format_state,
@@ -107,7 +106,6 @@ def extract_operation(generated_text: str) -> str:
 
 
 __all__ = [
-    "SYSTEM_PROMPT",
     "format_prompt",
     "format_step_line",
     "build_partial_completion",
