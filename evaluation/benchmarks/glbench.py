@@ -50,7 +50,7 @@ def parse_args() -> argparse.Namespace:
 def normalize_glbench(records: list[dict]) -> list[dict]:
     # Common GLBench aliases found in graph reasoning exports.
     graph_keys = ["graph", "edge_text", "graph_text", "graph_linearized", "input_graph"]
-    algorithm_keys = ["algorithm", "task", "task_name", "query_type"]
+    algorithm_keys = ["algorithm", "query_type", "task", "task_name"]
     source_keys = ["source", "start", "query_node", "start_node"]
     steps_keys = ["steps", "gold_steps", "operations", "gold_operations", "target_operations"]
 
