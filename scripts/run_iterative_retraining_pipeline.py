@@ -30,6 +30,7 @@ import argparse
 import json
 import shutil
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -292,7 +293,7 @@ def _run_consistency_reports(
     pred = eval_dir / f"pred_{tag}.json"
     _run(
         [
-            "python",
+            sys.executable,
             "-m",
             "evaluation.metrics.state_consistency",
             str(pred),
@@ -303,7 +304,7 @@ def _run_consistency_reports(
     )
     _run(
         [
-            "python",
+            sys.executable,
             "-m",
             "evaluation.metrics.structural_generalization",
             str(pred),
@@ -418,7 +419,7 @@ def _run_single_algorithm(args: argparse.Namespace, *, repo_root: Path, algorith
 
         # 1) Initial SFT training
         _run(
-            ["python", "-m", "training.sft", "--config", str(config_copy)],
+            [sys.executable, "-m", "training.sft", "--config", str(config_copy)],
             cwd=repo_root,
         )
 
@@ -458,7 +459,7 @@ def _run_single_algorithm(args: argparse.Namespace, *, repo_root: Path, algorith
             recovery_json = dagger_dir / rec_name
             recovery_json_final = recovery_json
             collect_cmd: list[str | Path] = [
-                "python",
+                sys.executable,
                 "-m",
                 "training.dagger",
                 "collect",
@@ -503,7 +504,7 @@ def _run_single_algorithm(args: argparse.Namespace, *, repo_root: Path, algorith
             out_ft = post_model_dir if r == 1 else (model_root / f"post_retrain_model_r{r}")
             _run(
                 [
-                    "python",
+                    sys.executable,
                     "-m",
                     "training.dagger",
                     "finetune",
@@ -712,7 +713,7 @@ def _run_single_algorithm(args: argparse.Namespace, *, repo_root: Path, algorith
     fig_dir.mkdir(parents=True, exist_ok=True)
     _run(
         [
-            "python",
+            sys.executable,
             "-m",
             "plots.iterative_training_comparison",
             "--summary",
@@ -776,7 +777,7 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
 
         # 1) Initial SFT training
         _run(
-            ["python", "-m", "training.sft", "--config", str(config_copy)],
+            [sys.executable, "-m", "training.sft", "--config", str(config_copy)],
             cwd=repo_root,
         )
 
@@ -813,7 +814,7 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
 
             _run(
                 [
-                    "python",
+                    sys.executable,
                     "-m",
                     "training.dagger",
                     "collect",
@@ -870,7 +871,7 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
         else:
             _run(
                 [
-                    "python",
+                    sys.executable,
                     "-m",
                     "training.dagger",
                     "finetune",
@@ -980,7 +981,7 @@ def _run_mixed(args: argparse.Namespace, *, repo_root: Path, stamp: str) -> None
         print(f"[done] mixed summary ({algo}): {summary_path}")
         _run(
             [
-                "python",
+                sys.executable,
                 "-m",
                 "plots.iterative_training_comparison",
                 "--summary",
