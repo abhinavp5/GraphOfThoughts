@@ -53,7 +53,10 @@ import os
 import sys
 from pathlib import Path
 
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+except ImportError:  # optional; .env loading skipped on minimal/HPC interpreters
+    load_dotenv = None  # type: ignore[misc, assignment]
 
 try:
     import fcntl
@@ -177,7 +180,9 @@ class VocabConstrainedTrainer(Trainer):
 
 def _load_dotenv_if_present() -> None:
     # Make local runs "just work" with a repo-root .env.
-    # (No-op if the file isn't there.)
+    # (No-op if the file isn't there or python-dotenv isn't installed.)
+    if load_dotenv is None:
+        return
     repo_root = Path(__file__).resolve().parents[1]
     dotenv_path = repo_root / ".env"
     load_dotenv(dotenv_path=dotenv_path, override=False)
