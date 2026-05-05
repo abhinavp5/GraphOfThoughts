@@ -53,6 +53,7 @@ from inference.prompt_forcing import (
 )
 from solvers.state_executor import StateExecutor
 from training.negative_sampling import CORRECTION_TOKEN
+from evaluation.metrics.operation_normalize import operations_match
 
 # torch / transformers / peft are imported lazily inside load_model and
 # generate_next_op so that this module can be imported in environments
@@ -257,7 +258,9 @@ def run_one_sample(
         gold_op = gold_steps[t]["operation"] if t < gold_len else None
         if gold_op is not None:
             entry["operation_gold"] = gold_op
-            entry["match"] = (op == gold_op)
+            entry["match"] = operations_match(
+                op, gold_op, algorithm=algorithm
+            )
 
         if op == CORRECTION_TOKEN or saw_correction:
             entry["applied"] = False

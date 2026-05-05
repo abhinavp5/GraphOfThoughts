@@ -38,6 +38,12 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--dtype", choices=["float16", "bfloat16", "float32"], default="float16")
     ap.add_argument("--free-running", action="store_true")
     ap.add_argument("--max-steps", type=int, default=None)
+    ap.add_argument(
+        "--algorithm",
+        default="bfs",
+        choices=["bfs", "dfs"],
+        help="Evaluate only NLGraph records whose task algorithm matches (must match main pipeline algorithm).",
+    )
     return ap.parse_args()
 
 
@@ -74,8 +80,13 @@ def main() -> None:
 
     raw = load_json(args.input)
     samples = normalize_nlgraph(raw)
-    # Only support for BFS rn
-    samples = [s for s in samples if s.get("algorithm") == "bfs"]
+    want = str(args.algorithm).lower().strip()
+    samples = [s for s in samples if s.get("algorithm") == want]
+    if not samples:
+        raise SystemExit(
+            f"[nlgraph] No {want.upper()} records after normalization/filter. "
+            "Check task_algorithm/algorithm and graph/start/steps fields."
+        )
     if args.limit:
         samples = samples[: args.limit]
 

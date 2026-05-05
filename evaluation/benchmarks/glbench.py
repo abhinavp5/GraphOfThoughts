@@ -38,6 +38,12 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--dtype", choices=["float16", "bfloat16", "float32"], default="float16")
     ap.add_argument("--free-running", action="store_true")
     ap.add_argument("--max-steps", type=int, default=None)
+    ap.add_argument(
+        "--algorithm",
+        default="bfs",
+        choices=["bfs", "dfs", "dijkstra"],
+        help="Evaluate only GLBench rows whose query_type/algorithm matches this task.",
+    )
     return ap.parse_args()
 
 
@@ -74,9 +80,13 @@ def main() -> None:
 
     raw = load_json(args.input)
     samples = normalize_glbench(raw)
-    # BFS-only: our StateExecutor vocabulary currently targets BFS-style traces.
-    # GLBench datasets can include shortest-path tasks with ops like relax/settle.
-    samples = [s for s in samples if s.get("algorithm") == "bfs"]
+    want = str(args.algorithm).lower().strip()
+    samples = [s for s in samples if s.get("algorithm") == want]
+    if not samples:
+        raise SystemExit(
+            f"[glbench] No {want} records after normalization/filter. "
+            "Check query_type / target_operations and graph fields in the JSON."
+        )
     if args.limit:
         samples = samples[: args.limit]
 

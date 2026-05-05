@@ -37,6 +37,8 @@ from training.teacher_forcing import (
     _format_subgraph,
 )
 
+from evaluation.metrics.operation_normalize import extract_operation_call
+
 
 def build_few_shot_messages(
     graph_str: str,
@@ -99,17 +101,14 @@ def build_partial_completion(trace: list[dict]) -> str:
 
 def extract_operation(generated_text: str) -> str:
     """
-    Given text generated after a `Step <t>: ` prime, return just the
-    operation string on the first non-blank line (stripped).
+    Given text generated after a `Step <t>: ` prime, return an operation
+    string ``op(args)`` suitable for the state executor and metrics.
 
-    Skips leading blank lines because chat models (e.g. Qwen2.5) sometimes
-    emit a leading newline before the actual operation token.
+    Models often emit a ``Step t:`` prefix, wrong casing, or even a short
+    natural-language line; we therefore parse the first well-formed
+    ``name(args)`` call when possible.
     """
-    for line in generated_text.split("\n"):
-        stripped = line.strip()
-        if stripped:
-            return stripped
-    return ""
+    return extract_operation_call(generated_text)
 
 
 __all__ = [
