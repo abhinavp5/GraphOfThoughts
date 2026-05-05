@@ -85,7 +85,13 @@ def collect(args: argparse.Namespace) -> None:
         "bfloat16": torch.bfloat16,
         "float32": torch.float32,
     }
-    model, tokenizer = load_model(args.model, args.adapter, args.device, dtype_map[args.dtype])
+    model, tokenizer = load_model(
+        args.model,
+        args.adapter,
+        args.device,
+        dtype_map[args.dtype],
+        dagger_adapter=args.dagger_adapter,
+    )
     correction_id = tokenizer.convert_tokens_to_ids(CORRECTION_TOKEN)
     if correction_id == tokenizer.unk_token_id:
         correction_id = None
@@ -271,6 +277,11 @@ def parse_args() -> argparse.Namespace:
     c.add_argument("--dtype", default="float16", choices=["float16", "bfloat16", "float32"])
     c.add_argument("--seed", type=int, default=42)
     c.add_argument("--verbose", action="store_true", help="Print each step's prediction during rollout.")
+    c.add_argument(
+        "--dagger-adapter",
+        default=None,
+        help="Optional existing DAgger LoRA dir to stack on --adapter during rollout (multi-round DAgger).",
+    )
 
     f = sub.add_parser("finetune", help="Fine-tune on collected recovery examples.")
     f.add_argument("--model", required=True)

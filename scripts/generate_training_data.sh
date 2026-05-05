@@ -4,6 +4,7 @@
 #
 # Usage:
 #   bash scripts/generate_training_data.sh
+#   NODE_COUNT=10 bash scripts/generate_training_data.sh   # n=10 training/eval alignment
 #
 # Output goes to data/traces/train_*.json and data/traces/val_*.json
 # -----------------------------------------------------------------------
@@ -22,11 +23,13 @@ TRAIN_COUNT_HARD=50
 VAL_COUNT_REGULAR=20
 VAL_COUNT_HARD=10
 
-NODE_COUNT=15
+# Default 15; override e.g. NODE_COUNT=10 to match `run_iterative_retraining_pipeline.py --n 10`.
+NODE_COUNT="${NODE_COUNT:-15}"
 SEED=42
 
 echo "================================================================="
 echo "  Graph of Thoughts — Training Data Generation"
+echo "  NODE_COUNT=${NODE_COUNT}"
 echo "================================================================="
 echo ""
 
