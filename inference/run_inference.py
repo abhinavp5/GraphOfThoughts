@@ -104,6 +104,23 @@ def reconstruct_graph(graph_str: str) -> nx.Graph:
 # Model loading
 # ---------------------------------------------------------------------------
 
+def _resolve_peft_adapter_dir(path: Optional[str]) -> Optional[str]:
+    """PEFT checkpoints may live directly under ``path`` or under ``path/dagger``."""
+    from pathlib import Path
+
+    if not path:
+        return path
+    p = Path(path)
+    if not p.is_dir():
+        return path
+    if (p / "adapter_config.json").is_file():
+        return str(p)
+    nested = p / "dagger"
+    if nested.is_dir() and (nested / "adapter_config.json").is_file():
+        return str(nested)
+    return path
+
+
 def load_model(
     model_id: str,
     adapter: Optional[str] = None,
@@ -141,19 +158,21 @@ def load_model(
     if len(tokenizer) != model.get_input_embeddings().num_embeddings:
         model.resize_token_embeddings(len(tokenizer))
 
-    if adapter and dagger_adapter:
+    adapter_resolved = _resolve_peft_adapter_dir(adapter)
+    dagger_resolved = _resolve_peft_adapter_dir(dagger_adapter)
+
+    if adapter_resolved and dagger_resolved:
         from peft import PeftModel
-        model = PeftModel.from_pretrained(model, adapter, adapter_name="sft")
-        model.load_adapter(dagger_adapter, adapter_name="dagger")
+        model = PeftModel.from_pretrained(model, adapter_resolved, adapter_name="sft")
+        model.load_adapter(dagger_resolved, adapter_name="dagger")
         try:
             model.set_adapter(["sft", "dagger"])
         except TypeError:
-            # Older PEFT versions do not support list composition here.
-            # Fall back to the trainable adapter.
+            # Older PEFT rejects list composition here; dagger alone is stacked on frozen SFT.
             model.set_adapter("dagger")
-    elif adapter:
+    elif adapter_resolved:
         from peft import PeftModel
-        model = PeftModel.from_pretrained(model, adapter)
+        model = PeftModel.from_pretrained(model, adapter_resolved)
 
     model.eval()
     return model, tokenizer

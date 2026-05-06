@@ -14,6 +14,8 @@ __pycache__/
 # Generated trace data (reproducible via scripts/generate_training_data.sh)
 data/traces/train_*.json
 data/traces/val_*.json
+# Pipeline eval traces (can be 10MB–600MB+; regenerate via run_pipeline / data gen scripts)
+data/traces/pipe_*.json
 
 # Training checkpoints & outputs
 checkpoints/
