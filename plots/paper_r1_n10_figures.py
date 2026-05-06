@@ -46,20 +46,23 @@ def fig_step_accuracy_bundle(*, root: Path, out_base: Path) -> None:
     main_d = _step_acc(_load_json(dfs / f"metrics_{tag_d}.json"))
     nl_b = _step_acc(_load_json(bfs / f"nlgraph_{tag_b}_operation_accuracy.json"))
     nl_d = _step_acc(_load_json(dfs / f"nlgraph_{tag_d}_operation_accuracy.json"))
-    gl_path = dfs / f"glbench_{tag_d}_operation_accuracy.json"
-    gl_d = _step_acc(_load_json(gl_path)) if gl_path.is_file() else float("nan")
+    gl_path_b = bfs / f"glbench_{tag_b}_operation_accuracy.json"
+    gl_path_d = dfs / f"glbench_{tag_d}_operation_accuracy.json"
+    gl_b = _step_acc(_load_json(gl_path_b)) if gl_path_b.is_file() else float("nan")
+    gl_d = _step_acc(_load_json(gl_path_d)) if gl_path_d.is_file() else float("nan")
 
     labels = [
         "Pipeline\nBFS",
         "Pipeline\nDFS",
         "NLGraph\nBFS",
         "NLGraph\nDFS",
+        "GLBench\nBFS",
         "GLBench\nDFS",
     ]
-    vals = [main_b, main_d, nl_b, nl_d, gl_d]
-    colors = ["#0072B2", "#D55E00", "#56B4E9", "#E69F00", "#009E73"]
+    vals = [main_b, main_d, nl_b, nl_d, gl_b, gl_d]
+    colors = ["#0072B2", "#D55E00", "#56B4E9", "#E69F00", "#6A994E", "#009E73"]
 
-    fig, ax = plt.subplots(figsize=(7.2, 3.8))
+    fig, ax = plt.subplots(figsize=(8.4, 3.8))
     x = range(len(labels))
     bars = ax.bar(list(x), vals, color=colors, edgecolor="#333333", linewidth=0.5)
     for i, (v, b) in enumerate(zip(vals, bars)):

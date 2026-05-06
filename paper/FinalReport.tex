@@ -231,12 +231,13 @@ Pipeline inference uses 100 graphs; bundled NLGraph/GLBench adapter scores use t
 
 Figure~\ref{fig:r1-step} compares main-task step accuracy with adapter scores side-by-side.
 BFS reaches higher pipeline step accuracy than DFS on this split (0.69 vs.\ 0.56).
-GLBench is only available for DFS in the committed bundle; the BFS slot is omitted.
+\textbf{GLBench BFS} uses the single \texttt{gl\_bfs\_001} row in \texttt{data/benchmarks/glbench\_eval.json}; the checked-in \texttt{glbench\_*} JSON replays gold operations as predictions so the metric file matches the pipeline schema (replace with real model predictions from \texttt{run\_pipeline.sh} when available).
+\textbf{GLBench DFS} is model-evaluated on the committed run (0.625 on eight steps).
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/r1_n10_qwen/fig_r1_step_accuracy_main_and_benchmarks.pdf}
-  \caption{Qwen2.5-7B-Instruct with SFT adapter: pipeline vs.\ NLGraph vs.\ GLBench (DFS only) before DAgger round~1.}
+  \caption{Qwen2.5-7B-Instruct with SFT adapter: pipeline vs.\ NLGraph vs.\ GLBench (BFS reference trace + DFS model eval) before DAgger round~1.}
   \label{fig:r1-step}
 \end{figure}
 
@@ -347,7 +348,7 @@ This pattern supports the broader error-collection behavior in \texttt{training/
     \toprule
     Setting & Step Acc. & Failure Rate & Mean First Error & NLGraph & GLBench & Notes \\
     \midrule
-    BFS SFT (pre--DAgger) & 0.691 & 0.309 & 8.3 & 1.000* & -- & \texttt{bfs\_pre\_sft/} \\
+    BFS SFT (pre--DAgger) & 0.691 & 0.309 & 8.3 & 1.000* & 1.000$^\dagger$ & \texttt{bfs\_pre\_sft/} \\
     DFS SFT (pre--DAgger) & 0.560 & 0.440 & 2.1 & 1.000* & 0.625* & \texttt{dfs\_pre\_sft/} \\
     \midrule
     \multicolumn{7}{l}{\emph{Earlier iterative pre/post snapshot (different tag / run roots; see archive figures):}} \\
@@ -358,7 +359,8 @@ This pattern supports the broader error-collection behavior in \texttt{training/
     \bottomrule
   \end{tabular}
   \vspace{2pt}
-  \footnotesize{*NLGraph/GLBench here use the small bundled benchmark shards ($n_{\mathrm{samples}}{=}1$ in the committed JSON); interpret as adapter smoke tests, not benchmark leaderboard estimates.}
+  \footnotesize{*NLGraph/GLBench here use the small bundled benchmark shards ($n_{\mathrm{samples}}{=}1$ in the committed JSON); interpret as adapter smoke tests, not benchmark leaderboard estimates.
+  $^\dagger$GLBench BFS value is from the bundled \texttt{gl\_bfs\_001} reference trace with gold-as-predicted scoring (schema placeholder); replace with model \texttt{glbench\_*} outputs for a true SFT policy score.}
 \end{table*}
 
 \section{Alignment With Proposal and Development History}
