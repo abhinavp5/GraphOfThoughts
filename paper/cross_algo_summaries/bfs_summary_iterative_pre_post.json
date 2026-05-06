@@ -1,0 +1,31 @@
+{
+  "created_at_utc": "2026-05-05T00:00:00+00:00",
+  "tag": "bfs_cross_algo_paper_stub",
+  "algorithm": "bfs",
+  "models": [
+    {
+      "model_label": "qwen_stub",
+      "pre": {
+        "step_accuracy": 0.025,
+        "failure_rate": 0.975,
+        "mean_first_error_step": 1.0,
+        "nlgraph_step_accuracy": 0.25,
+        "glbench_step_accuracy": 0.0
+      },
+      "post": {
+        "step_accuracy": 0.53,
+        "failure_rate": 0.47,
+        "mean_first_error_step": 1.0,
+        "nlgraph_step_accuracy": 0.375,
+        "glbench_step_accuracy": 0.5
+      },
+      "delta": {
+        "step_accuracy": 0.505,
+        "failure_rate": -0.505,
+        "mean_first_error_step": 0.0,
+        "nlgraph_step_accuracy": 0.125,
+        "glbench_step_accuracy": 0.5
+      }
+    }
+  ]
+}

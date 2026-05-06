@@ -100,7 +100,17 @@ def fig_step_accuracy_bundle(
         "GLBench = BFS SFT+DAgger R1 on glbench_eval_quick2x (2 BFS + 2 DFS rows, teacher-forced)",
         fontsize=8.5,
     )
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.06, 1, 1))
+    fig.text(
+        0.5,
+        0.01,
+        "Green bars (positions 5–6): GLBench step accuracy. Bars 1–4: pipeline / NLGraph.",
+        ha="center",
+        fontsize=7.5,
+        style="italic",
+        color="#333333",
+        transform=fig.transFigure,
+    )
     _save_both(fig, out_base / "fig_r1_step_accuracy_main_and_benchmarks")
     plt.close(fig)
 

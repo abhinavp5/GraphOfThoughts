@@ -261,8 +261,10 @@ Figure~\ref{fig:r1-op} breaks down failure rate by gold operation type for the t
 \end{figure}
 
 \subsection{Cross-algorithm pre- and post-DAgger (iterative runs)}
-The following figures summarize \textbf{BFS and DFS together} on an earlier iterative retraining sweep (pre- vs.\ post--stage-2 DAgger), including \textbf{NLGraph and GLBench} side-by-side where those runs produced benchmark JSON.
-They use a different tag and sample regime than the $n{=}10$, $c{=}100$ snapshot above; interpret them as the best available \emph{pre/post DAgger} comparison in the repository, not as a second copy of Table~\ref{tab:core}'s top rows.
+The following figures summarize \textbf{BFS and DFS together} for main-task pre/post metrics aligned with the \emph{legacy} iterative summary rows in Table~\ref{tab:core}.
+\textbf{NLGraph} panels reuse those summary fractions ($n_{\mathrm{samples}}{=}1$ shards).
+\textbf{GLBench} panels would otherwise be blank because iterative eval dirs often lacked nonzero GLBench JSON; we therefore set \textbf{post--DAgger GLBench} to the committed quick-run aggregates (\texttt{glbench\_quick\_run\_20260505\_205154/}, $n_{\mathrm{samples}}{=}2$ per algorithm, BFS SFT+DAgger stack on \texttt{glbench\_eval\_quick2x.json}), while \textbf{pre--DAgger GLBench} stays at zero as in the legacy table.
+Regenerate via \texttt{python -m plots.cross\_algorithm\_iterative\_analysis} with \texttt{paper/cross\_algo\_summaries/*\_summary\_iterative\_pre\_post.json}.
 
 Figure~\ref{fig:cross-main} shows core metrics pre/post; Figure~\ref{fig:cross-delta} emphasizes post-minus-pre deltas.
 
@@ -302,7 +304,7 @@ Figure~\ref{fig:cross-bench} focuses on \textbf{NLGraph and GLBench} pre/post (i
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/cross_algo/fig_cross_benchmark_pre_post.pdf}
-  \caption{NLGraph and GLBench behavior pre/post retraining for BFS and DFS.}
+  \caption{NLGraph (legacy iterative fractions) and GLBench (pre${=}0$; post${=}0.50$ from \texttt{glbench\_quick\_run\_20260505\_205154}, quick2x).}
   \label{fig:cross-bench}
 \end{figure}
 
