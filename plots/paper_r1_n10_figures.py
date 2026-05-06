@@ -31,7 +31,21 @@ def _save_both(fig, base: Path) -> None:
         print(f"Wrote {p}")
 
 
-def fig_step_accuracy_bundle(*, root: Path, out_base: Path) -> None:
+def _resolve_glbench_quick_dir(root: Path, explicit: Path | None) -> Path | None:
+    """Directory with ``glbench_{bfs,dfs}_operation_accuracy.json`` from ``run_glbench_quick.sh``."""
+    if explicit is not None:
+        p = explicit if explicit.is_absolute() else (root / explicit)
+        return p if p.is_dir() else None
+    candidates = sorted(root.glob("glbench_quick_run_*"))
+    return candidates[-1] if candidates else None
+
+
+def fig_step_accuracy_bundle(
+    *,
+    root: Path,
+    out_base: Path,
+    glbench_quick_dir: Path | None = None,
+) -> None:
     import matplotlib.pyplot as plt
 
     from plots.style import apply_paper_style
@@ -46,10 +60,16 @@ def fig_step_accuracy_bundle(*, root: Path, out_base: Path) -> None:
     main_d = _step_acc(_load_json(dfs / f"metrics_{tag_d}.json"))
     nl_b = _step_acc(_load_json(bfs / f"nlgraph_{tag_b}_operation_accuracy.json"))
     nl_d = _step_acc(_load_json(dfs / f"nlgraph_{tag_d}_operation_accuracy.json"))
-    gl_path_b = bfs / f"glbench_{tag_b}_operation_accuracy.json"
-    gl_path_d = dfs / f"glbench_{tag_d}_operation_accuracy.json"
-    gl_b = _step_acc(_load_json(gl_path_b)) if gl_path_b.is_file() else float("nan")
-    gl_d = _step_acc(_load_json(gl_path_d)) if gl_path_d.is_file() else float("nan")
+    gq = _resolve_glbench_quick_dir(root, glbench_quick_dir)
+    if gq and (gq / "glbench_bfs_operation_accuracy.json").is_file():
+        gl_b = _step_acc(_load_json(gq / "glbench_bfs_operation_accuracy.json"))
+        gl_d = _step_acc(_load_json(gq / "glbench_dfs_operation_accuracy.json"))
+        print(f"[fig] GLBench bars from {gq.name} (quick2x / run_glbench_quick.sh)")
+    else:
+        gl_path_b = bfs / f"glbench_{tag_b}_operation_accuracy.json"
+        gl_path_d = dfs / f"glbench_{tag_d}_operation_accuracy.json"
+        gl_b = _step_acc(_load_json(gl_path_b)) if gl_path_b.is_file() else float("nan")
+        gl_d = _step_acc(_load_json(gl_path_d)) if gl_path_d.is_file() else float("nan")
 
     labels = [
         "Pipeline\nBFS",
@@ -77,8 +97,7 @@ def fig_step_accuracy_bundle(*, root: Path, out_base: Path) -> None:
     ax.set_ylabel("Step accuracy")
     ax.set_title(
         "Qwen2.5-7B-Instruct: pipeline / NLGraph = pre–DAgger SFT; "
-        "GLBench BFS = SFT+DAgger R1 (BFS run) on gl_bfs_001; "
-        "GLBench DFS = pre–DAgger SFT (DFS run) on gl_dfs_001",
+        "GLBench = BFS SFT+DAgger R1 on glbench_eval_quick2x (2 BFS + 2 DFS rows, teacher-forced)",
         fontsize=8.5,
     )
     fig.tight_layout()
@@ -101,6 +120,13 @@ def main() -> None:
         help="Root with bfs_pre_sft/ and dfs_pre_sft/",
     )
     ap.add_argument("--out-dir", type=Path, default=Path("paper/figures/r1_n10_qwen"))
+    ap.add_argument(
+        "--glbench-quick-dir",
+        type=Path,
+        default=None,
+        help="Subdir of metrics-root with glbench_*_operation_accuracy.json "
+        "(default: latest glbench_quick_run_*).",
+    )
     args = ap.parse_args()
 
     root = args.metrics_root.resolve()
@@ -108,7 +134,7 @@ def main() -> None:
     if not (root / "bfs_pre_sft").is_dir():
         raise FileNotFoundError(f"Missing {root / 'bfs_pre_sft'}")
 
-    fig_step_accuracy_bundle(root=root, out_base=out)
+    fig_step_accuracy_bundle(root=root, out_base=out, glbench_quick_dir=args.glbench_quick_dir)
 
     tag_b = "bfs_erdos_renyi_n10_c100_s100"
     tag_d = "dfs_erdos_renyi_n10_c100_s100"
