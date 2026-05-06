@@ -1,0 +1,47 @@
+{
+  "n_samples": 1,
+  "total_gold_steps": 8,
+  "total_matches": 8,
+  "total_failures": 0,
+  "overall_step_accuracy": 1.0,
+  "overall_failure_rate": 0.0,
+  "samples_with_any_error": 0,
+  "mean_first_error_step": null,
+  "error_type_counts": {},
+  "failure_rate_by_algorithm": {
+    "bfs": 0.0
+  },
+  "failure_rate_by_step_bucket": {
+    "early": 0.0,
+    "middle": 0.0,
+    "late": 0.0
+  },
+  "failure_rate_by_step_index": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0
+  },
+  "failure_rate_by_gold_operation_type": {
+    "dequeue": 0.0,
+    "enqueue": 0.0,
+    "set_parent": 0.0,
+    "visit": 0.0
+  },
+  "top_operation_confusions": [],
+  "per_sample": [
+    {
+      "algorithm": "bfs",
+      "source": 1,
+      "n_gold_steps": 8,
+      "n_failures": 0,
+      "step_accuracy": 1.0,
+      "first_error_step": null,
+      "n_invalid_or_runtime_errors": 0
+    }
+  ]
+}

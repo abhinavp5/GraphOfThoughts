@@ -37,3 +37,4 @@ wandb/
 =3.0
 out/
 out/
+data/traces/pipe_*.json

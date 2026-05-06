@@ -145,7 +145,12 @@ def load_model(
         from peft import PeftModel
         model = PeftModel.from_pretrained(model, adapter, adapter_name="sft")
         model.load_adapter(dagger_adapter, adapter_name="dagger")
-        model.set_adapter(["sft", "dagger"])
+        try:
+            model.set_adapter(["sft", "dagger"])
+        except TypeError:
+            # Older PEFT versions do not support list composition here.
+            # Fall back to the trainable adapter.
+            model.set_adapter("dagger")
     elif adapter:
         from peft import PeftModel
         model = PeftModel.from_pretrained(model, adapter)
