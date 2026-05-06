@@ -105,7 +105,11 @@ def reconstruct_graph(graph_str: str) -> nx.Graph:
 # ---------------------------------------------------------------------------
 
 def _resolve_peft_adapter_dir(path: Optional[str]) -> Optional[str]:
-    """PEFT checkpoints may live directly under ``path`` or under ``path/dagger``."""
+    """Locate a directory containing ``adapter_config.json`` for PEFT load.
+
+    Tries, in order: ``path``; ``path/dagger``; newest ``path/checkpoint-*`` (HF
+    Trainer); any immediate subdirectory with ``adapter_config.json``.
+    """
     from pathlib import Path
 
     if not path:
@@ -113,11 +117,27 @@ def _resolve_peft_adapter_dir(path: Optional[str]) -> Optional[str]:
     p = Path(path)
     if not p.is_dir():
         return path
-    if (p / "adapter_config.json").is_file():
+
+    def _has_cfg(d: Path) -> bool:
+        return d.is_dir() and (d / "adapter_config.json").is_file()
+
+    if _has_cfg(p):
         return str(p)
-    nested = p / "dagger"
-    if nested.is_dir() and (nested / "adapter_config.json").is_file():
-        return str(nested)
+    if _has_cfg(p / "dagger"):
+        return str(p / "dagger")
+    checkpoints = sorted(
+        p.glob("checkpoint-*"),
+        key=lambda x: x.name,
+        reverse=True,
+    )
+    for cp in checkpoints:
+        if _has_cfg(cp):
+            return str(cp)
+    for sub in sorted(p.iterdir()):
+        if sub.name.startswith("."):
+            continue
+        if _has_cfg(sub):
+            return str(sub)
     return path
 
 
