@@ -226,18 +226,20 @@ The current report presents the strongest available committed artifacts (baselin
 
 \section{Results}
 \subsection{Qwen2.5-7B SFT snapshot (committed n=10 metrics)}
-This section uses JSON artifacts checked in under \texttt{paper/r1\_n10\_metrics/}: Erd\H{o}s--R\'enyi graphs with $n{=}10$, count 100, seed 100 (\texttt{*\_n10\_c100\_s100}), after SFT and \emph{before} the first DAgger recovery fine-tune (``pre--round-1 DAgger'').
+This section uses JSON artifacts checked in under \texttt{paper/r1\_n10\_metrics/}: Erd\H{o}s--R\'enyi graphs with $n{=}10$, count 100, seed 100 (\texttt{*\_n10\_c100\_s100}).
+Unless noted, pipeline and NLGraph numbers are after SFT and \emph{before} the first DAgger recovery fine-tune (``pre--round-1 DAgger''); the GLBench BFS bar is an exception and uses the BFS-run SFT+DAgger R1 stack (Figure~\ref{fig:r1-step}).
 Pipeline inference uses 100 graphs; bundled NLGraph/GLBench adapter scores use the small evaluation shards shipped with the repository (often $n_{\mathrm{samples}}{=}1$), so benchmark bars should be read as sanity checks, not large-scale leaderboard numbers.
 
 Figure~\ref{fig:r1-step} compares main-task step accuracy with adapter scores side-by-side.
 BFS reaches higher pipeline step accuracy than DFS on this split (0.69 vs.\ 0.56).
-\textbf{GLBench BFS} uses the single \texttt{gl\_bfs\_001} row in \texttt{data/benchmarks/glbench\_eval.json}; the checked-in \texttt{glbench\_*} JSON replays gold operations as predictions so the metric file matches the pipeline schema (replace with real model predictions from \texttt{run\_pipeline.sh} when available).
-\textbf{GLBench DFS} is model-evaluated on the committed run (0.625 on eight steps).
+\textbf{GLBench BFS} is model-evaluated on \texttt{gl\_bfs\_001} using the BFS-run SFT + DAgger R1 stack (\texttt{scripts/run\_glbench\_quick.sh}; teacher-forced, eight gold steps), yielding 0.50 step accuracy in the checked-in snapshot---while pipeline and NLGraph bars remain \emph{pre--DAgger} SFT.
+\textbf{GLBench DFS} is model-evaluated with the DFS SFT adapter only (pre--DAgger): 0.625 on eight steps.
+The same BFS+DAgger stack achieves 0.50 on \texttt{gl\_dfs\_001} if evaluated for curiosity, but Figure~\ref{fig:r1-step} follows the DFS-trained checkpoint for the DFS GLBench bar.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/r1_n10_qwen/fig_r1_step_accuracy_main_and_benchmarks.pdf}
-  \caption{Qwen2.5-7B-Instruct with SFT adapter: pipeline vs.\ NLGraph vs.\ GLBench (BFS reference trace + DFS model eval) before DAgger round~1.}
+  \caption{Pipeline and NLGraph use pre--DAgger SFT; GLBench BFS uses BFS SFT+DAgger R1 on \texttt{gl\_bfs\_001}; GLBench DFS uses pre--DAgger DFS SFT on \texttt{gl\_dfs\_001} (bundled shards, $n_{\mathrm{samples}}{=}1$).}
   \label{fig:r1-step}
 \end{figure}
 
@@ -342,25 +344,29 @@ This pattern supports the broader error-collection behavior in \texttt{training/
 
 \begin{table*}[t]
   \centering
-  \caption{Metrics aligned with committed JSON in \texttt{paper/r1\_n10\_metrics/} (Qwen2.5-7B SFT, pre--DAgger round~1; $n{=}10$, 100 pipeline graphs).}
+  \caption{Main pipeline metrics come from \texttt{metrics\_*}; NLGraph/GLBench columns come from \texttt{nlgraph\_*\_operation\_accuracy.json} and \texttt{glbench\_*\_operation\_accuracy.json} under \texttt{paper/r1\_n10\_metrics/}. Qwen2.5-7B-Instruct with SFT adapter, pre--DAgger round~1; Erd\H{o}s--R\'enyi $n{=}10$, count 100, seed 100.}
   \label{tab:core}
   \begin{tabular}{lcccccc}
     \toprule
-    Setting & Step Acc. & Failure Rate & Mean First Error & NLGraph & GLBench & Notes \\
+    Setting & Pipe.\ step acc & Pipe.\ fail.\ rate & Mean 1st err.\ step & NLGraph acc & GLBench acc & Artifact prefix \\
     \midrule
-    BFS SFT (pre--DAgger) & 0.691 & 0.309 & 8.3 & 1.000* & 1.000$^\dagger$ & \texttt{bfs\_pre\_sft/} \\
-    DFS SFT (pre--DAgger) & 0.560 & 0.440 & 2.1 & 1.000* & 0.625* & \texttt{dfs\_pre\_sft/} \\
+    BFS & 0.691 & 0.309 & 8.26 & 1.000\textsuperscript{*} & 0.500\textsuperscript{$\dagger$} & \texttt{bfs\_pre\_sft/} \\
+    DFS & 0.560 & 0.440 & 2.12 & 1.000\textsuperscript{*} & 0.625\textsuperscript{*} & \texttt{dfs\_pre\_sft/} \\
     \midrule
-    \multicolumn{7}{l}{\emph{Earlier iterative pre/post snapshot (different tag / run roots; see archive figures):}} \\
-    BFS pre-DAgger & 0.025 & 0.975 & 1.0 & 0.250 & 0.000 & Legacy summary row \\
-    BFS post-DAgger & 0.530 & 0.470 & 1.0 & 0.375 & 0.000 & Legacy summary row \\
-    DFS pre-DAgger & 0.112 & 0.888 & 1.0 & 0.250 & 0.000 & Legacy summary row \\
-    DFS post-DAgger & 0.439 & 0.561 & 1.0 & 0.375 & 0.000 & Legacy summary row \\
+    \multicolumn{7}{l}{\emph{Legacy iterative runs (different tag / roots; same spirit as Figures~\ref{fig:cross-main}--\ref{fig:cross-bench}):}} \\
+    BFS pre-DAgger & 0.025 & 0.975 & 1.0 & 0.250 & 0.000 & summary \\
+    BFS post-DAgger & 0.530 & 0.470 & 1.0 & 0.375 & 0.000 & summary \\
+    DFS pre-DAgger & 0.112 & 0.888 & 1.0 & 0.250 & 0.000 & summary \\
+    DFS post-DAgger & 0.439 & 0.561 & 1.0 & 0.375 & 0.000 & summary \\
     \bottomrule
   \end{tabular}
-  \vspace{2pt}
-  \footnotesize{*NLGraph/GLBench here use the small bundled benchmark shards ($n_{\mathrm{samples}}{=}1$ in the committed JSON); interpret as adapter smoke tests, not benchmark leaderboard estimates.
-  $^\dagger$GLBench BFS value is from the bundled \texttt{gl\_bfs\_001} reference trace with gold-as-predicted scoring (schema placeholder); replace with model \texttt{glbench\_*} outputs for a true SFT policy score.}
+  \vspace{4pt}
+  \begin{minipage}{\linewidth}
+  \footnotesize
+  \textbf{Pipeline columns} are from \texttt{failures\_*} (\texttt{overall\_step\_accuracy}, \texttt{overall\_failure\_rate}, \texttt{mean\_first\_error\_step}) on 100 pipeline graphs per algorithm.
+  \textbf{\textsuperscript{*} NLGraph and GLBench (DFS)} use the bundled benchmark shards committed with this repo ($n_{\mathrm{samples}}{=}1$ for NLGraph and one GLBench row per algorithm in the eval JSON); treat as adapter smoke tests, not scaled benchmarks.
+  \textbf{\textsuperscript{$\dagger$} GLBench (BFS)} is model-evaluated on \texttt{gl\_bfs\_001} with the BFS-run SFT + DAgger R1 adapter stack (same setting as \texttt{scripts/run\_glbench\_quick.sh}), not the pre--DAgger SFT used for the pipeline columns in this row.
+  \end{minipage}
 \end{table*}
 
 \section{Alignment With Proposal and Development History}

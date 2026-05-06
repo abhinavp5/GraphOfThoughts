@@ -75,7 +75,12 @@ def fig_step_accuracy_bundle(*, root: Path, out_base: Path) -> None:
     ax.set_xticklabels(labels, fontsize=8)
     ax.set_ylim(0, 1.08)
     ax.set_ylabel("Step accuracy")
-    ax.set_title("Qwen2.5-7B SFT (pre–DAgger round 1): n=10, 100 pipeline graphs")
+    ax.set_title(
+        "Qwen2.5-7B-Instruct: pipeline / NLGraph = pre–DAgger SFT; "
+        "GLBench BFS = SFT+DAgger R1 (BFS run) on gl_bfs_001; "
+        "GLBench DFS = pre–DAgger SFT (DFS run) on gl_dfs_001",
+        fontsize=8.5,
+    )
     fig.tight_layout()
     _save_both(fig, out_base / "fig_r1_step_accuracy_main_and_benchmarks")
     plt.close(fig)

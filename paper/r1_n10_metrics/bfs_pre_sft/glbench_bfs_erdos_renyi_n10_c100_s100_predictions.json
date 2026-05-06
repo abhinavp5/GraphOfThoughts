@@ -100,7 +100,7 @@
       },
       {
         "step": 1,
-        "operation_predicted": "set_parent(1, None)"
+        "operation_predicted": "mark_visited(1)"
       },
       {
         "step": 2,
@@ -108,7 +108,7 @@
       },
       {
         "step": 3,
-        "operation_predicted": "visit(1)"
+        "operation_predicted": "enqueue(0)"
       },
       {
         "step": 4,
@@ -116,7 +116,7 @@
       },
       {
         "step": 5,
-        "operation_predicted": "set_parent(2, 1)"
+        "operation_predicted": "dequeue(2)"
       },
       {
         "step": 6,
@@ -124,7 +124,7 @@
       },
       {
         "step": 7,
-        "operation_predicted": "set_parent(3, 1)"
+        "operation_predicted": "visit(3)"
       }
     ]
   }
