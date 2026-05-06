@@ -1,0 +1,33 @@
+[pipeline] Unified log: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_pre/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_033307.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-7B-Instruct
+  adapter:   /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/pre_sft_adapter
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     100        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_pre
+  log_file:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_pre/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_033307.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mDataset generation → data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json[0m
+  1/5 samples generated
+  2/5 samples generated
+  3/5 samples generated
+  4/5 samples generated
+  5/5 samples generated
+
+Saved 5 traces to data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mInference → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_pre/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/inference/run_inference.py", line 48, in <module>
+    from inference.prompt_forcing import (
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/inference/prompt_forcing.py", line 33, in <module>
+    from training.teacher_forcing import (
+ImportError: cannot import name 'SYSTEM_PROMPT' from 'training.teacher_forcing' (/sfs/weka/scratch/mzu9pt/GraphOfThoughts/training/teacher_forcing.py)

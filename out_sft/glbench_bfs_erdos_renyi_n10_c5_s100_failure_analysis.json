@@ -1,0 +1,17 @@
+{
+  "n_samples": 0,
+  "total_gold_steps": 0,
+  "total_matches": 0,
+  "total_failures": 0,
+  "overall_step_accuracy": 0.0,
+  "overall_failure_rate": 0.0,
+  "samples_with_any_error": 0,
+  "mean_first_error_step": null,
+  "error_type_counts": {},
+  "failure_rate_by_algorithm": {},
+  "failure_rate_by_step_bucket": {},
+  "failure_rate_by_step_index": {},
+  "failure_rate_by_gold_operation_type": {},
+  "top_operation_confusions": [],
+  "per_sample": []
+}

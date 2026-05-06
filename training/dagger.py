@@ -1,5 +1,5 @@
 """
-Minimal DAgger-style stage-2 pipeline for BFS.
+Minimal DAgger-style stage-2 pipeline for graph algorithms.
 
 Two stages:
   1) collect: run free-running rollouts and extract (incorrect_state -> gold_recovery_op)
@@ -16,6 +16,7 @@ from pathlib import Path
 
 import torch
 from torch.utils.data import Dataset
+from peft import LoraConfig, TaskType, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments, set_seed
 
 from inference.run_inference import load_model, run_one_sample
@@ -23,16 +24,54 @@ from training.dataset import load_traces
 from training.negative_sampling import CORRECTION_TOKEN
 
 
+_ALGO_SPECS: dict[str, dict[str, object]] = {
+    "bfs": {
+        "name": "BFS",
+        "ops": [
+            "enqueue(node)            — add node to the back of the queue",
+            "dequeue(node)            — remove node from the front of the queue",
+            "mark_visited(node)       — record node as visited",
+            "set_parent(child, parent)— record that child was reached from parent",
+        ],
+    },
+    "dfs": {
+        "name": "DFS",
+        "ops": [
+            "push(node)               — push node onto the stack",
+            "pop(node)                — pop node from the stack",
+            "visit(node)              — record node as visited",
+            "set_parent(child, parent)— record that child was reached from parent",
+        ],
+    },
+    "dijkstra": {
+        "name": "DIJKSTRA",
+        "ops": [
+            "init_source(node)        — set distance(node)=0 and enqueue it",
+            "settle(node)             — mark node's distance as final",
+            "relax(u, v, new_dist)    — update distance(v) via u and record predecessor",
+        ],
+    },
+}
+
+
 def _build_recovery_prompt(sample: dict, state: dict, wrong_op: str) -> str:
+    algo = str(sample.get("algorithm", "")).strip().lower()
+    if algo not in _ALGO_SPECS:
+        raise ValueError(f"Unknown sample['algorithm']={sample.get('algorithm')!r}; expected one of {sorted(_ALGO_SPECS)}")
+    spec = _ALGO_SPECS[algo]
+    op_lines = "\n".join(f"  {line}" for line in spec["ops"])  # type: ignore[index]
     return (
-        "You are a graph algorithm executor for BFS.\n"
+        f"You are a graph algorithm executor for {spec['name']}.\n"
         f"Graph: {sample['graph']}\n"
-        f"Algorithm: BFS\n"
+        f"Algorithm: {spec['name']}\n"
         f"Source: {sample['source']}\n"
+        "At each step, output exactly one operation from the following set:\n"
+        f"{op_lines}\n"
+        "No other operation names are permitted.\n"
         f"Current state: visited={state.get('visited', [])} "
         f"frontier={state.get('frontier', [])} distances={state.get('distances', {})} "
         f"parent={state.get('parent', {})}\n"
-        f"Previous wrong operation: {wrong_op}\n"
+        f"Previous wrong operation: {wrong_op if wrong_op else '(no output)'}\n"
         "Output exactly one line as the recovery operation:\n"
     )
 
@@ -46,7 +85,13 @@ def collect(args: argparse.Namespace) -> None:
         "bfloat16": torch.bfloat16,
         "float32": torch.float32,
     }
-    model, tokenizer = load_model(args.model, args.adapter, args.device, dtype_map[args.dtype])
+    model, tokenizer = load_model(
+        args.model,
+        args.adapter,
+        args.device,
+        dtype_map[args.dtype],
+        dagger_adapter=args.dagger_adapter,
+    )
     correction_id = tokenizer.convert_tokens_to_ids(CORRECTION_TOKEN)
     if correction_id == tokenizer.unk_token_id:
         correction_id = None
@@ -63,9 +108,10 @@ def collect(args: argparse.Namespace) -> None:
             tokenizer,
             correction_id,
             max_steps=args.max_steps,
-            teacher_forced=False,  # free-running rollouts
+            teacher_forced=False,
+            dagger_fallback=True,  # on invalid op: apply gold, continue collecting
             demos=None,
-            verbose=False,
+            verbose=args.verbose,
         )
         gold = sample["steps"]
         for p in pred:
@@ -74,11 +120,16 @@ def collect(args: argparse.Namespace) -> None:
                 continue
             wrong = p.get("operation_predicted")
             correct = gold[t]["operation"]
+            if wrong is None:
+                continue
             if wrong == correct:
                 continue
-            if not p.get("applied") or "state" not in p:
-                continue
-            prompt = _build_recovery_prompt(sample, p["state"], wrong)
+
+            # Option B: include invalid-op failures too.
+            # If the wrong op could not be applied, we cannot snapshot a "wrong" state.
+            # Instead, use the gold state at step t as the recovery context.
+            used_state = p.get("state") if (p.get("applied") and "state" in p) else gold[t].get("state", {})
+            prompt = _build_recovery_prompt(sample, used_state, wrong)
             out.append(
                 {
                     "graph": sample["graph"],
@@ -87,7 +138,8 @@ def collect(args: argparse.Namespace) -> None:
                     "step": t,
                     "wrong_operation": wrong,
                     "correct_operation": correct,
-                    "state": p["state"],
+                    "state": used_state,
+                    "wrong_applied": bool(p.get("applied")),
                     "prompt": prompt,
                     "target": correct,
                 }
@@ -143,12 +195,42 @@ def finetune(args: argparse.Namespace) -> None:
     with open(args.recovery_json) as f:
         records = json.load(f)
     if not records:
-        raise RuntimeError("No recovery examples found. Run collect stage first.")
+        print("[warn] No recovery examples found — nothing to fine-tune on. Exiting cleanly.")
+        return
 
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    model = AutoModelForCausalLM.from_pretrained(args.model, torch_dtype=torch.bfloat16, device_map="auto")
+    if CORRECTION_TOKEN not in tokenizer.get_vocab():
+        tokenizer.add_special_tokens({"additional_special_tokens": [CORRECTION_TOKEN]})
+    model = AutoModelForCausalLM.from_pretrained(
+        args.model, torch_dtype=torch.bfloat16, device_map="auto"
+    )
+    if len(tokenizer) != model.get_input_embeddings().num_embeddings:
+        model.resize_token_embeddings(len(tokenizer))
+
+    lora_config = LoraConfig(
+        task_type=TaskType.CAUSAL_LM,
+        r=args.lora_r,
+        lora_alpha=args.lora_alpha,
+        lora_dropout=args.lora_dropout,
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+        bias="none",
+    )
+
+    if args.sft_adapter:
+        # Stack DAgger on top of the frozen SFT adapter so recovery training
+        # starts from the SFT-adapted distribution rather than the base model.
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, args.sft_adapter, adapter_name="sft")
+        for p in model.parameters():
+            p.requires_grad = False
+        model.add_adapter("dagger", lora_config)
+        print("[info] Loaded SFT adapter (frozen) + added trainable DAgger adapter on top.")
+    else:
+        model = get_peft_model(model, lora_config)
+
+    model.print_trainable_parameters()
 
     ds = RecoveryDataset(records, tokenizer, max_len=args.max_seq_len)
     collator = Collator(tokenizer.pad_token_id)
@@ -169,13 +251,18 @@ def finetune(args: argparse.Namespace) -> None:
     )
     trainer = Trainer(model=model, args=targs, train_dataset=ds, data_collator=collator)
     trainer.train()
-    trainer.save_model(args.output_dir)
+    # Save only the DAgger LoRA adapter — avoids OOM from gathering full 7B weight shards.
+    os.makedirs(args.output_dir, exist_ok=True)
+    if args.sft_adapter:
+        model.save_pretrained(args.output_dir, selected_adapters=["dagger"])
+    else:
+        model.save_pretrained(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
-    print(f"Saved DAgger stage-2 model to {args.output_dir}")
+    print(f"Saved DAgger stage-2 LoRA adapter to {args.output_dir}")
 
 
 def parse_args() -> argparse.Namespace:
-    ap = argparse.ArgumentParser(description="Minimal DAgger-style stage-2 training for BFS.")
+    ap = argparse.ArgumentParser(description="Minimal DAgger-style stage-2 training for graph algorithms.")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     c = sub.add_parser("collect", help="Collect recovery examples from free-running rollouts.")
@@ -189,9 +276,19 @@ def parse_args() -> argparse.Namespace:
     c.add_argument("--device", default="auto")
     c.add_argument("--dtype", default="float16", choices=["float16", "bfloat16", "float32"])
     c.add_argument("--seed", type=int, default=42)
+    c.add_argument("--verbose", action="store_true", help="Print each step's prediction during rollout.")
+    c.add_argument(
+        "--dagger-adapter",
+        default=None,
+        help="Optional existing DAgger LoRA dir to stack on --adapter during rollout (multi-round DAgger).",
+    )
 
     f = sub.add_parser("finetune", help="Fine-tune on collected recovery examples.")
     f.add_argument("--model", required=True)
+    f.add_argument("--sft-adapter", default=None,
+                   help="Path to the SFT LoRA adapter to stack DAgger on top of (recommended). "
+                        "When provided, the SFT adapter is loaded frozen and a new DAgger adapter "
+                        "is trained on top, so recovery training starts from the SFT distribution.")
     f.add_argument("--recovery-json", required=True)
     f.add_argument("--output-dir", required=True)
     f.add_argument("--epochs", type=int, default=1)
@@ -199,6 +296,9 @@ def parse_args() -> argparse.Namespace:
     f.add_argument("--grad-accum", type=int, default=4)
     f.add_argument("--lr", type=float, default=1e-5)
     f.add_argument("--max-seq-len", type=int, default=1024)
+    f.add_argument("--lora-r", type=int, default=16)
+    f.add_argument("--lora-alpha", type=int, default=32)
+    f.add_argument("--lora-dropout", type=float, default=0.05)
     return ap.parse_args()
 
 

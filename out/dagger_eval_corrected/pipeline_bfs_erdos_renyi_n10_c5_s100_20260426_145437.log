@@ -1,0 +1,273 @@
+[pipeline] Unified log: /sfs/weka/scratch/uhz7mq/GraphOfThoughts/out/dagger_eval_corrected/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_145437.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-7B-Instruct
+  adapter:   out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     5        seed=100
+  device:    cuda       dtype=bfloat16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out/dagger_eval_corrected
+  log_file:  out/dagger_eval_corrected/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_145437.log
+
+[1;34m==>[0m [1mDataset (reusing data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json)[0m
+
+[1;34m==>[0m [1mInference → out/dagger_eval_corrected/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading model Qwen/Qwen2.5-7B-Instruct + adapter out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [00:07<00:22,  7.49s/it]Fetching 4 files: 100%|██████████| 4/4 [00:07<00:00,  1.87s/it]
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:02<14:27,  2.57s/it]Loading weights:   1%|          | 4/339 [00:02<02:57,  1.89it/s]Loading weights:   2%|▏         | 6/339 [00:03<02:03,  2.71it/s]Loading weights:   5%|▍         | 16/339 [00:03<00:34,  9.25it/s]Loading weights:   6%|▌         | 19/339 [00:03<00:34,  9.22it/s]Loading weights:   8%|▊         | 28/339 [00:03<00:20, 15.04it/s]Loading weights:   9%|▉         | 31/339 [00:04<00:22, 13.42it/s]Loading weights:  12%|█▏        | 40/339 [00:04<00:15, 19.06it/s]Loading weights:  13%|█▎        | 43/339 [00:04<00:18, 16.00it/s]Loading weights:  15%|█▌        | 52/339 [00:05<00:13, 20.95it/s]Loading weights:  16%|█▌        | 55/339 [00:05<00:16, 17.33it/s]Loading weights:  19%|█▉        | 64/339 [00:05<00:12, 22.70it/s]Loading weights:  20%|█▉        | 67/339 [00:05<00:14, 18.39it/s]Loading weights:  22%|██▏       | 75/339 [00:06<00:11, 22.30it/s]Loading weights:  23%|██▎       | 78/339 [00:06<00:14, 18.14it/s]Loading weights:  26%|██▌       | 88/339 [00:06<00:12, 20.87it/s]Loading weights:  27%|██▋       | 91/339 [00:07<00:12, 19.56it/s]Loading weights:  29%|██▉       | 100/339 [00:07<00:09, 24.65it/s]Loading weights:  30%|███       | 103/339 [00:07<00:12, 19.47it/s]Loading weights:  33%|███▎      | 112/339 [00:07<00:09, 24.67it/s]Loading weights:  34%|███▍      | 115/339 [00:08<00:11, 19.28it/s]Loading weights:  37%|███▋      | 124/339 [00:08<00:08, 24.06it/s]Loading weights:  37%|███▋      | 127/339 [00:08<00:11, 19.14it/s]Loading weights:  40%|████      | 136/339 [00:08<00:08, 24.30it/s]Loading weights:  41%|████      | 139/339 [00:09<00:10, 19.34it/s]Loading weights:  44%|████▎     | 148/339 [00:09<00:09, 20.66it/s]Loading weights:  45%|████▍     | 151/339 [00:09<00:09, 20.41it/s]Loading weights:  47%|████▋     | 160/339 [00:10<00:07, 25.50it/s]Loading weights:  48%|████▊     | 163/339 [00:10<00:08, 19.99it/s]Loading weights:  51%|█████     | 172/339 [00:10<00:06, 24.78it/s]Loading weights:  52%|█████▏    | 175/339 [00:10<00:08, 19.60it/s]Loading weights:  54%|█████▍    | 183/339 [00:11<00:06, 23.66it/s]Loading weights:  55%|█████▍    | 186/339 [00:11<00:08, 18.79it/s]Loading weights:  58%|█████▊    | 195/339 [00:11<00:06, 23.45it/s]Loading weights:  58%|█████▊    | 198/339 [00:11<00:07, 19.01it/s]Loading weights:  61%|██████▏   | 208/339 [00:12<00:05, 24.49it/s]Loading weights:  62%|██████▏   | 211/339 [00:12<00:06, 18.79it/s]Loading weights:  65%|██████▍   | 220/339 [00:12<00:05, 23.17it/s]Loading weights:  66%|██████▌   | 223/339 [00:13<00:06, 18.55it/s]Loading weights:  68%|██████▊   | 232/339 [00:13<00:05, 19.74it/s]Loading weights:  69%|██████▉   | 235/339 [00:13<00:05, 18.51it/s]Loading weights:  72%|███████▏  | 244/339 [00:14<00:04, 23.35it/s]Loading weights:  73%|███████▎  | 247/339 [00:14<00:04, 18.65it/s]Loading weights:  76%|███████▌  | 256/339 [00:14<00:03, 22.86it/s]Loading weights:  76%|███████▋  | 259/339 [00:14<00:04, 17.81it/s]Loading weights:  79%|███████▉  | 268/339 [00:15<00:03, 22.50it/s]Loading weights:  80%|███████▉  | 271/339 [00:15<00:04, 16.79it/s]Loading weights:  83%|████████▎ | 280/339 [00:16<00:03, 17.46it/s]Loading weights:  83%|████████▎ | 282/339 [00:16<00:03, 16.71it/s]Loading weights:  86%|████████▌ | 291/339 [00:16<00:02, 22.04it/s]Loading weights:  87%|████████▋ | 294/339 [00:16<00:02, 17.94it/s]Loading weights:  90%|████████▉ | 304/339 [00:17<00:01, 24.40it/s]Loading weights:  91%|█████████ | 307/339 [00:17<00:01, 19.43it/s]Loading weights:  93%|█████████▎| 316/339 [00:17<00:00, 24.50it/s]Loading weights:  94%|█████████▍| 319/339 [00:18<00:01, 17.87it/s]Loading weights:  97%|█████████▋| 328/339 [00:18<00:00, 21.78it/s]Loading weights:  98%|█████████▊| 331/339 [00:18<00:00, 16.24it/s]Loading weights: 100%|██████████| 339/339 [00:18<00:00, 18.01it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[1/5] bfs source=2 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [1] ✗ pred='mark_visited(2)'  gold='set_parent(2, None)'
+  [2] ✗ pred='enqueue(3)'  gold='dequeue(2)'
+  [3] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [4] ✓ pred='enqueue(3)'  gold='enqueue(3)'
+  [5] ✓ pred='set_parent(3, 2)'  gold='set_parent(3, 2)'
+  [6] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [7] ✗ pred='enqueue(8)'  gold='set_parent(4, 2)'
+  [8] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [9] ✗ pred='mark_visited(3)'  gold='set_parent(8, 2)'
+  [10] ✗ pred='mark_visited(2)'  gold='dequeue(3)'
+  [11] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [12] ✗ pred='enqueue(7)'  gold='enqueue(1)'
+  [13] ✓ pred='set_parent(1, 3)'  gold='set_parent(1, 3)'
+  [14] ✗ pred='enqueue(9)'  gold='enqueue(7)'
+  [15] ✓ pred='set_parent(7, 3)'  gold='set_parent(7, 3)'
+  [16] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [17] ✓ pred='set_parent(9, 3)'  gold='set_parent(9, 3)'
+  [18] ✓ pred='dequeue(4)'  gold='dequeue(4)'
+  [19] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+  [20] ✓ pred='enqueue(5)'  gold='enqueue(5)'
+  [21] ✓ pred='set_parent(5, 4)'  gold='set_parent(5, 4)'
+  [22] ✓ pred='dequeue(8)'  gold='dequeue(8)'
+  [23] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [24] ✗ pred='enqueue(2)'  gold='dequeue(1)'
+  [25] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [26] ✗ pred='enqueue(9)'  gold='enqueue(0)'
+  [27] ✓ pred='set_parent(0, 1)'  gold='set_parent(0, 1)'
+  [28] ✗ pred='(The algorithm ends here as all nodes have been visited)'  gold='dequeue(7)'
+  [29] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [30] ✗ pred='enqueue(6)'  gold='dequeue(9)'
+  [31] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [32] ✗ pred='enqueue(5)'  gold='enqueue(6)'
+  [33] ✓ pred='set_parent(6, 9)'  gold='set_parent(6, 9)'
+  [34] ✗ pred='All nodes have been visited.'  gold='dequeue(5)'
+  [35] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [36] ✗ pred='# All nodes have been visited, no more operations needed.'  gold='dequeue(0)'
+  [37] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [38] ✗ pred='enqueue(6)'  gold='dequeue(6)'
+  [39] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+[2/5] bfs source=9 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [1] ✗ pred='mark_visited(9)'  gold='set_parent(9, None)'
+  [2] ✓ pred='dequeue(9)'  gold='dequeue(9)'
+  [3] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [4] ✗ pred='enqueue(4)'  gold='enqueue(0)'
+  [5] ✓ pred='set_parent(0, 9)'  gold='set_parent(0, 9)'
+  [6] ✗ pred='enqueue(7)'  gold='enqueue(4)'
+  [7] ✗ pred='enqueue(7)'  gold='set_parent(4, 9)'
+  [8] ✗ pred='enqueue(7)'  gold='enqueue(5)'
+  [9] ✗ pred='enqueue(6)'  gold='set_parent(5, 9)'
+  [10] ✗ pred='dequeue(0)'  gold='enqueue(7)'
+  [11] ✗ pred='mark_visited(0)'  gold='set_parent(7, 9)'
+  [12] ✗ pred='mark_visited(0)'  gold='enqueue(8)'
+  [13] ✗ pred='mark_visited(0)'  gold='set_parent(8, 9)'
+  [14] ✗ pred='mark_visited(0)'  gold='dequeue(0)'
+  [15] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [16] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [17] ✓ pred='set_parent(2, 0)'  gold='set_parent(2, 0)'
+  [18] ✗ pred='enqueue(3)'  gold='dequeue(4)'
+  [19] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+  [20] ✗ pred='enqueue(9)'  gold='enqueue(3)'
+  [21] ✓ pred='set_parent(3, 4)'  gold='set_parent(3, 4)'
+  [22] ✗ pred='enqueue(9)'  gold='dequeue(5)'
+  [23] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [24] ✗ pred='enqueue(6)'  gold='enqueue(1)'
+  [25] ✓ pred='set_parent(1, 5)'  gold='set_parent(1, 5)'
+  [26] ✗ pred='enqueue(6)'  gold='dequeue(7)'
+  [27] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [28] ✗ pred='enqueue(6)'  gold='dequeue(8)'
+  [29] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [30] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [31] ✗ pred='set_parent(6, 1)'  gold='set_parent(6, 8)'
+  [32] ✓ pred='dequeue(2)'  gold='dequeue(2)'
+  [33] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [34] ✗ pred='(The algorithm ends here as all nodes have been visited)'  gold='dequeue(3)'
+  [35] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [36] ✗ pred='(No more nodes in the frontier, BFS completes)'  gold='dequeue(1)'
+  [37] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [38] ✗ pred='enqueue(9)'  gold='dequeue(6)'
+  [39] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+[3/5] bfs source=2 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(2)'  gold='enqueue(2)'
+  [1] ✗ pred='0'  gold='set_parent(2, None)'
+  [2] ✗ pred='enqueue(6)'  gold='dequeue(2)'
+  [3] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [4] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [5] ✓ pred='set_parent(6, 2)'  gold='set_parent(6, 2)'
+  [6] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [7] ✗ pred='enqueue(7)'  gold='set_parent(8, 2)'
+  [8] ✗ pred='enqueue(7)'  gold='dequeue(6)'
+  [9] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+  [10] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [11] ✓ pred='set_parent(7, 6)'  gold='set_parent(7, 6)'
+  [12] ✗ pred='enqueue(2)'  gold='dequeue(8)'
+  [13] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [14] ✗ pred='enqueue(9)'  gold='enqueue(1)'
+  [15] ✓ pred='set_parent(1, 8)'  gold='set_parent(1, 8)'
+  [16] ✗ pred='enqueue(9)'  gold='enqueue(3)'
+  [17] ✗ pred='enqueue(9)'  gold='set_parent(3, 8)'
+  [18] ✗ pred='enqueue(9)'  gold='enqueue(5)'
+  [19] ✓ pred='set_parent(5, 8)'  gold='set_parent(5, 8)'
+  [20] ✓ pred='dequeue(7)'  gold='dequeue(7)'
+  [21] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [22] ✗ pred='enqueue(9)'  gold='dequeue(1)'
+  [23] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [24] ✗ pred='enqueue(9)'  gold='enqueue(0)'
+  [25] ✓ pred='set_parent(0, 1)'  gold='set_parent(0, 1)'
+  [26] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [27] ✗ pred='set_parent(9, 8)'  gold='set_parent(9, 1)'
+  [28] ✗ pred='enqueue(4)'  gold='dequeue(3)'
+  [29] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [30] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [31] ✓ pred='set_parent(4, 3)'  gold='set_parent(4, 3)'
+  [32] ✗ pred='(The algorithm ends here as all nodes are visited)'  gold='dequeue(5)'
+  [33] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [34] ✗ pred='enqueue(2)'  gold='dequeue(0)'
+  [35] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [36] ✗ pred='enqueue(9)'  gold='dequeue(9)'
+  [37] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [38] ✗ pred='enqueue(4)'  gold='dequeue(4)'
+  [39] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+[4/5] bfs source=7 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [1] ✗ pred='mark_visited(7)'  gold='set_parent(7, None)'
+  [2] ✗ pred='enqueue(5)'  gold='dequeue(7)'
+  [3] ✗ pred='enqueue(8)'  gold='mark_visited(7)'
+  [4] ✓ pred='enqueue(5)'  gold='enqueue(5)'
+  [5] ✓ pred='set_parent(5, 7)'  gold='set_parent(5, 7)'
+  [6] ✗ pred='enqueue(6)'  gold='enqueue(8)'
+  [7] ✗ pred='enqueue(6)'  gold='set_parent(8, 7)'
+  [8] ✗ pred='enqueue(6)'  gold='dequeue(5)'
+  [9] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [10] ✗ pred='enqueue(6)'  gold='enqueue(0)'
+  [11] ✗ pred='set_parent(0, 8)'  gold='set_parent(0, 5)'
+  [12] ✗ pred='enqueue(6)'  gold='enqueue(1)'
+  [13] ✓ pred='set_parent(1, 5)'  gold='set_parent(1, 5)'
+  [14] ✓ pred='enqueue(6)'  gold='enqueue(6)'
+  [15] ✓ pred='set_parent(6, 5)'  gold='set_parent(6, 5)'
+  [16] ✗ pred='(8 is already visited, so no action)'  gold='dequeue(8)'
+  [17] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [18] ✗ pred='enqueue(9)'  gold='enqueue(3)'
+  [19] ✗ pred='set_parent(3, 2)'  gold='set_parent(3, 8)'
+  [20] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [21] ✗ pred='set_parent(9, 1)'  gold='set_parent(9, 8)'
+  [22] ✗ pred='(Continuing in this manner until all nodes are processed)'  gold='dequeue(0)'
+  [23] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [24] ✗ pred='enqueue(4)'  gold='dequeue(1)'
+  [25] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [26] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [27] ✓ pred='set_parent(4, 1)'  gold='set_parent(4, 1)'
+  [28] ✗ pred='enqueue(2)'  gold='dequeue(6)'
+  [29] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+  [30] ✗ pred='(End of BFS)'  gold='enqueue(2)'
+  [31] ✓ pred='set_parent(2, 6)'  gold='set_parent(2, 6)'
+  [32] ✗ pred='(The algorithm ends here as all nodes have been visited)'  gold='dequeue(3)'
+  [33] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [34] ✗ pred='(No more nodes in the frontier)'  gold='dequeue(9)'
+  [35] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [36] ✗ pred='(No more nodes in the frontier, BFS completes)'  gold='dequeue(4)'
+  [37] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+  [38] ✗ pred='(No more nodes in the frontier, algorithm terminates)'  gold='dequeue(2)'
+  [39] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+[5/5] bfs source=0 gold_len=40 (zero-shot)
+  [0] ✓ pred='enqueue(0)'  gold='enqueue(0)'
+  [1] ✗ pred='0'  gold='set_parent(0, None)'
+  [2] ✓ pred='dequeue(0)'  gold='dequeue(0)'
+  [3] ✓ pred='mark_visited(0)'  gold='mark_visited(0)'
+  [4] ✓ pred='enqueue(4)'  gold='enqueue(4)'
+  [5] ✓ pred='set_parent(4, 0)'  gold='set_parent(4, 0)'
+  [6] ✓ pred='enqueue(7)'  gold='enqueue(7)'
+  [7] ✗ pred='enqueue(8)'  gold='set_parent(7, 0)'
+  [8] ✓ pred='enqueue(8)'  gold='enqueue(8)'
+  [9] ✗ pred='enqueue(9)'  gold='set_parent(8, 0)'
+  [10] ✓ pred='enqueue(9)'  gold='enqueue(9)'
+  [11] ✗ pred='mark_visited(4)'  gold='set_parent(9, 0)'
+  [12] ✓ pred='dequeue(4)'  gold='dequeue(4)'
+  [13] ✓ pred='mark_visited(4)'  gold='mark_visited(4)'
+  [14] ✗ pred='enqueue(5)'  gold='enqueue(3)'
+  [15] ✓ pred='set_parent(3, 4)'  gold='set_parent(3, 4)'
+  [16] ✗ pred='dequeue(7)'  gold='enqueue(5)'
+  [17] ✗ pred='set_parent(5, 8)'  gold='set_parent(5, 4)'
+  [18] ✓ pred='dequeue(7)'  gold='dequeue(7)'
+  [19] ✓ pred='mark_visited(7)'  gold='mark_visited(7)'
+  [20] ✗ pred='(empty)'  gold='dequeue(8)'
+  [21] ✓ pred='mark_visited(8)'  gold='mark_visited(8)'
+  [22] ✗ pred='enqueue(6)'  gold='dequeue(9)'
+  [23] ✓ pred='mark_visited(9)'  gold='mark_visited(9)'
+  [24] ✗ pred='set_parent(3, 4)'  gold='enqueue(2)'
+  [25] ✓ pred='set_parent(2, 9)'  gold='set_parent(2, 9)'
+  [26] ✗ pred='(end of BFS)'  gold='dequeue(3)'
+  [27] ✓ pred='mark_visited(3)'  gold='mark_visited(3)'
+  [28] ✗ pred='set_parent(6, 3)'  gold='enqueue(1)'
+  [29] ✓ pred='set_parent(1, 3)'  gold='set_parent(1, 3)'
+  [30] ✗ pred='dequeue(5)'  gold='enqueue(6)'
+  [31] ✓ pred='set_parent(6, 3)'  gold='set_parent(6, 3)'
+  [32] ✓ pred='dequeue(5)'  gold='dequeue(5)'
+  [33] ✓ pred='mark_visited(5)'  gold='mark_visited(5)'
+  [34] ✗ pred='(All nodes have been visited, no more operations needed.)'  gold='dequeue(2)'
+  [35] ✓ pred='mark_visited(2)'  gold='mark_visited(2)'
+  [36] ✗ pred='(The queue is now empty, and all nodes have been visited.)'  gold='dequeue(1)'
+  [37] ✓ pred='mark_visited(1)'  gold='mark_visited(1)'
+  [38] ✗ pred='enqueue(6)'  gold='dequeue(6)'
+  [39] ✓ pred='mark_visited(6)'  gold='mark_visited(6)'
+Saved 5 predictions to out/dagger_eval_corrected/pred_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mScoring → out/dagger_eval_corrected/metrics_bfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:          5
+Total steps:      200
+Step accuracy:    0.5500
+Trace accuracy:   0.0000
+Mean first-error step: 1.00
+Mean coverage:    1.0000
+
+Wrote metrics to out/dagger_eval_corrected/metrics_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mFailure analysis → out/dagger_eval_corrected/failures_bfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:                 5
+Total gold steps:        200
+Overall step accuracy:   0.5500
+Overall failure rate:    0.4500
+Mean first-error step:   1.00
+
+Failure rate by phase:
+   early: 0.5077
+  middle: 0.4000
+    late: 0.4429
+
+Top operation confusions:
+  enqueue(3) -> enqueue(9) (n=3)
+  enqueue(0) -> enqueue(9) (n=2)
+  dequeue(9) -> enqueue(6) (n=2)
+  dequeue(6) -> enqueue(6) (n=2)
+  enqueue(1) -> enqueue(6) (n=2)
+  dequeue(3) -> (The algorithm ends here as all nodes have been visited) (n=2)
+  set_parent(2, None) -> mark_visited(2) (n=1)
+  dequeue(2) -> enqueue(3) (n=1)
+  set_parent(4, 2) -> enqueue(8) (n=1)
+  set_parent(8, 2) -> mark_visited(3) (n=1)
+
+Wrote failure analysis to out/dagger_eval_corrected/failures_bfs_erdos_renyi_n10_c5_s100.json
+[pipeline] Wrote run manifest: out/dagger_eval_corrected/run_manifest_bfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mDone[0m
+  trace file:  data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json
+  predictions: out/dagger_eval_corrected/pred_bfs_erdos_renyi_n10_c5_s100.json
+  metrics:     out/dagger_eval_corrected/metrics_bfs_erdos_renyi_n10_c5_s100.json
+  failures:    out/dagger_eval_corrected/failures_bfs_erdos_renyi_n10_c5_s100.json
+  manifest:    out/dagger_eval_corrected/run_manifest_bfs_erdos_renyi_n10_c5_s100.json
+  log file:    out/dagger_eval_corrected/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_145437.log

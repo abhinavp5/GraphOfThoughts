@@ -26,6 +26,8 @@ import argparse
 import json
 from pathlib import Path
 
+from evaluation.metrics.operation_normalize import operations_match
+
 
 def per_step_matches(sample: dict) -> list[bool]:
     """
@@ -37,6 +39,7 @@ def per_step_matches(sample: dict) -> list[bool]:
     """
     gold = sample["gold_steps"]
     pred = sample.get("predicted_steps", [])
+    algo = sample.get("algorithm")
 
     # Index predicted by step number so we tolerate CORRECTION steps etc.
     pred_by_step: dict[int, dict] = {}
@@ -52,7 +55,13 @@ def per_step_matches(sample: dict) -> list[bool]:
         if p is None:
             matches.append(False)
             continue
-        matches.append(p.get("operation_predicted") == g["operation"])
+        matches.append(
+            operations_match(
+                p.get("operation_predicted"),
+                g.get("operation"),
+                algorithm=algo,
+            )
+        )
     return matches
 
 

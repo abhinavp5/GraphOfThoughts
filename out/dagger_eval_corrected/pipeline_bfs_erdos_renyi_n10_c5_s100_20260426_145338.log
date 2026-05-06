@@ -1,0 +1,22 @@
+[pipeline] Unified log: /sfs/weka/scratch/uhz7mq/GraphOfThoughts/out/dagger_eval_corrected/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_145338.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-7B-Instruct
+  adapter:   out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     5        seed=100
+  device:    cuda       dtype=bfloat16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out/dagger_eval_corrected
+  log_file:  out/dagger_eval_corrected/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_145338.log
+
+[1;34m==>[0m [1mDataset (reusing data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json)[0m
+
+[1;34m==>[0m [1mInference → out/dagger_eval_corrected/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/sfs/weka/scratch/uhz7mq/GraphOfThoughts/inference/run_inference.py", line 44, in <module>
+    import networkx as nx
+ModuleNotFoundError: No module named 'networkx'

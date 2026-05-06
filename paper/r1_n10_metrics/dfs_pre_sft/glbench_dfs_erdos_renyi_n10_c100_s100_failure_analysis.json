@@ -1,0 +1,65 @@
+{
+  "n_samples": 1,
+  "total_gold_steps": 8,
+  "total_matches": 5,
+  "total_failures": 3,
+  "overall_step_accuracy": 0.625,
+  "overall_failure_rate": 0.375,
+  "samples_with_any_error": 1,
+  "mean_first_error_step": 1.0,
+  "error_type_counts": {
+    "wrong_operation": 3
+  },
+  "failure_rate_by_algorithm": {
+    "dfs": 0.375
+  },
+  "failure_rate_by_step_bucket": {
+    "early": 0.3333333333333333,
+    "middle": 0.0,
+    "late": 0.6666666666666666
+  },
+  "failure_rate_by_step_index": {
+    "0": 0.0,
+    "1": 1.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 1.0,
+    "7": 1.0
+  },
+  "failure_rate_by_gold_operation_type": {
+    "pop": 0.0,
+    "push": 0.3333333333333333,
+    "set_parent": 0.6666666666666666,
+    "visit": 0.0
+  },
+  "top_operation_confusions": [
+    {
+      "gold_operation": "set_parent(10, None)",
+      "predicted_operation": "visit(10)",
+      "count": 1
+    },
+    {
+      "gold_operation": "push(0)",
+      "predicted_operation": "pop(8)",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(0, 8)",
+      "predicted_operation": "set_parent(0, 10)",
+      "count": 1
+    }
+  ],
+  "per_sample": [
+    {
+      "algorithm": "dfs",
+      "source": 10,
+      "n_gold_steps": 8,
+      "n_failures": 3,
+      "step_accuracy": 0.625,
+      "first_error_step": 1,
+      "n_invalid_or_runtime_errors": 0
+    }
+  ]
+}

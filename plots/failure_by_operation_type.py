@@ -1,8 +1,19 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 from pathlib import Path
+
+
+def _apply_style() -> None:
+    p = Path(__file__).resolve().parent / "style.py"
+    spec = importlib.util.spec_from_file_location("got_plots_style", p)
+    if spec is None or spec.loader is None:
+        return
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.apply_paper_style()
 
 
 def _load_rates(path: str) -> dict[str, float]:
@@ -22,6 +33,7 @@ def main() -> None:
         raise ValueError("--inputs and --labels must have same length")
 
     try:
+        _apply_style()
         import matplotlib.pyplot as plt
     except Exception as e:
         raise RuntimeError("matplotlib is required for plotting: pip install matplotlib") from e
@@ -34,21 +46,22 @@ def main() -> None:
     width = 0.8 / max(1, len(runs))
     xs = list(range(len(ops)))
 
+    palette = ("#0072B2", "#D55E00", "#009E73", "#CC79A7")
     fig, ax = plt.subplots(figsize=(10, 4.8))
     for i, (label, r) in enumerate(zip(args.labels, runs)):
         offsets = [x - 0.4 + width / 2 + i * width for x in xs]
         vals = [r.get(op, 0.0) for op in ops]
-        ax.bar(offsets, vals, width=width, label=label)
+        ax.bar(offsets, vals, width=width, label=label, color=palette[i % len(palette)])
 
     ax.set_xticks(xs)
     ax.set_xticklabels(ops, rotation=30, ha="right")
-    ax.set_ylim(0, 1)
+    ax.set_ylim(0, 1.05)
     ax.set_ylabel("Failure rate")
-    ax.set_title("Failure by Gold Operation Type")
-    ax.legend()
+    ax.set_title("Failure by gold operation type")
+    ax.legend(frameon=False)
     fig.tight_layout()
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(args.out, dpi=180)
+    fig.savefig(args.out, bbox_inches="tight")
     print(f"Wrote {args.out}")
 
 

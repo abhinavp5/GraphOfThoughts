@@ -1,0 +1,369 @@
+[pipeline] Unified log: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_161024.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/post_retrain_model
+  adapter:   (none — base model)
+  algorithm: dfs    family: erdos_renyi    n=10    count=5
+  limit:     100        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post
+  log_file:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_161024.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mDataset (reusing data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json)[0m
+
+[1;34m==>[0m [1mInference → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/pred_dfs_erdos_renyi_n10_c5_s100.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading model /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/post_retrain_model
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:01<10:04,  1.79s/it]Loading weights:   5%|▌         | 17/339 [00:01<00:26, 12.24it/s]Loading weights:   8%|▊         | 28/339 [00:02<00:15, 19.44it/s]Loading weights:  12%|█▏        | 41/339 [00:02<00:10, 27.85it/s]Loading weights:  16%|█▌        | 53/339 [00:02<00:07, 38.35it/s]Loading weights:  19%|█▉        | 65/339 [00:02<00:05, 47.03it/s]Loading weights:  22%|██▏       | 76/339 [00:03<00:07, 34.82it/s]Loading weights:  28%|██▊       | 94/339 [00:03<00:05, 45.24it/s]Loading weights:  30%|██▉       | 101/339 [00:03<00:05, 40.49it/s]Loading weights:  33%|███▎      | 113/339 [00:03<00:05, 41.14it/s]Loading weights:  37%|███▋      | 125/339 [00:04<00:05, 42.18it/s]Loading weights:  40%|████      | 137/339 [00:04<00:04, 49.29it/s]Loading weights:  42%|████▏     | 143/339 [00:04<00:03, 49.16it/s]Loading weights:  44%|████▍     | 149/339 [00:04<00:03, 48.17it/s]Loading weights:  47%|████▋     | 161/339 [00:04<00:04, 42.95it/s]Loading weights:  51%|█████     | 172/339 [00:05<00:03, 46.62it/s]Loading weights:  55%|█████▍    | 185/339 [00:05<00:03, 42.01it/s]Loading weights:  58%|█████▊    | 197/339 [00:05<00:02, 49.11it/s]Loading weights:  61%|██████▏   | 208/339 [00:05<00:03, 40.09it/s]Loading weights:  65%|██████▌   | 221/339 [00:06<00:02, 42.52it/s]Loading weights:  69%|██████▉   | 234/339 [00:06<00:02, 46.50it/s]Loading weights:  72%|███████▏  | 245/339 [00:06<00:01, 54.36it/s]Loading weights:  76%|███████▌  | 257/339 [00:06<00:01, 44.75it/s]Loading weights:  80%|███████▉  | 270/339 [00:07<00:01, 48.33it/s]Loading weights:  83%|████████▎ | 281/339 [00:07<00:01, 53.72it/s]Loading weights:  86%|████████▌ | 292/339 [00:07<00:00, 61.15it/s]Loading weights:  88%|████████▊ | 300/339 [00:07<00:00, 55.53it/s]Loading weights:  91%|█████████ | 307/339 [00:07<00:00, 47.13it/s]Loading weights:  94%|█████████▎| 317/339 [00:08<00:00, 49.49it/s]Loading weights:  97%|█████████▋| 329/339 [00:08<00:00, 49.69it/s]Loading weights: 100%|██████████| 339/339 [00:08<00:00, 40.89it/s]
+Loading weights:   0%|          | 0/224 [00:00<?, ?it/s]Loading weights: 100%|██████████| 224/224 [00:00<00:00, 4700.21it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[1/5] dfs source=2 gold_len=52 (zero-shot)
+  [0] ✓ pred='push(2)'  gold='push(2)'
+  [1] ✗ pred='visit(2)'  gold='set_parent(2, None)'
+  [2] ✗ pred='push(3)'  gold='pop(2)'
+  [3] ✓ pred='visit(2)'  gold='visit(2)'
+  [4] ✗ pred='push(3)'  gold='push(8)'
+  [5] ✓ pred='set_parent(8, 2)'  gold='set_parent(8, 2)'
+  [6] ✗ pred='pop(8)'  gold='push(4)'
+  [7] ✗ pred='pop(4)'  gold='set_parent(4, 2)'
+  [8] ✗ pred='pop(4)'  gold='push(3)'
+  [9] ✗ pred='pop(3)'  gold='set_parent(3, 2)'
+  [10] ✓ pred='pop(3)'  gold='pop(3)'
+  [11] ✓ pred='visit(3)'  gold='visit(3)'
+  [12] ✗ pred='pop(4)'  gold='push(9)'
+  [13] ✗ pred='pop(4)'  gold='set_parent(9, 3)'
+  [14] ✗ pred='pop(9)'  gold='push(7)'
+  [15] ✗ pred='pop(7)'  gold='set_parent(7, 3)'
+  [16] ✗ pred='pop(7)'  gold='push(1)'
+  [17] ✗ pred='pop(1)'  gold='set_parent(1, 3)'
+  [18] ✓ pred='pop(1)'  gold='pop(1)'
+  [19] ✓ pred='visit(1)'  gold='visit(1)'
+  [20] ✗ pred='pop(7)'  gold='push(9)'
+  [21] ✗ pred='9 is already in visited, skip.'  gold='set_parent(9, 1)'
+  [22] ✗ pred='(No further operations possible as all nodes are visited and no more neighbors to explore)'  gold='push(0)'
+  [23] ✗ pred='pop(0)'  gold='set_parent(0, 1)'
+  [24] ✓ pred='pop(0)'  gold='pop(0)'
+  [25] ✓ pred='visit(0)'  gold='visit(0)'
+  [26] ✗ pred='pop(7)'  gold='push(9)'
+  [27] ✗ pred='pop(9)'  gold='set_parent(9, 0)'
+  [28] ✓ pred='pop(9)'  gold='pop(9)'
+  [29] ✓ pred='visit(9)'  gold='visit(9)'
+  [30] ✗ pred='pop(7)'  gold='push(6)'
+  [31] ✗ pred='pop(6)'  gold='set_parent(6, 9)'
+  [32] ✗ pred='pop(6)'  gold='push(4)'
+  [33] ✗ pred='pop(4)'  gold='set_parent(4, 9)'
+  [34] ✓ pred='pop(4)'  gold='pop(4)'
+  [35] ✓ pred='visit(4)'  gold='visit(4)'
+  [36] ✗ pred='pop(6)'  gold='push(5)'
+  [37] ✓ pred='set_parent(5, 4)'  gold='set_parent(5, 4)'
+  [38] ✓ pred='pop(5)'  gold='pop(5)'
+  [39] ✓ pred='visit(5)'  gold='visit(5)'
+  [40] ✗ pred='pop(6)'  gold='push(8)'
+  [41] ✗ pred='set_parent(8, 4)'  gold='set_parent(8, 5)'
+  [42] ✓ pred='pop(8)'  gold='pop(8)'
+  [43] ✓ pred='visit(8)'  gold='visit(8)'
+  [44] ✗ pred='pop(7)'  gold='pop(6)'
+  [45] ✓ pred='visit(6)'  gold='visit(6)'
+  [46] ✗ pred='pop(7)'  gold='pop(9)'
+  [47] ✗ pred='visit(9)'  gold='pop(7)'
+  [48] ✓ pred='visit(7)'  gold='visit(7)'
+  [49] ✗ pred='pop(4)'  gold='pop(9)'
+  [50] ✗ pred='visit(9)'  gold='pop(4)'
+  [51] ✗ pred='visit(4)'  gold='pop(8)'
+[2/5] dfs source=9 gold_len=61 (zero-shot)
+  [0] ✓ pred='push(9)'  gold='push(9)'
+  [1] ✗ pred='visit(9)'  gold='set_parent(9, None)'
+  [2] ✗ pred='visit(9)'  gold='pop(9)'
+  [3] ✓ pred='visit(9)'  gold='visit(9)'
+  [4] ✗ pred='(no action possible as the stack is empty)'  gold='push(8)'
+  [5] ✓ pred='set_parent(8, 9)'  gold='set_parent(8, 9)'
+  [6] ✗ pred='pop(8)'  gold='push(7)'
+  [7] ✗ pred='pop(7)'  gold='set_parent(7, 9)'
+  [8] ✗ pred='pop(7)'  gold='push(5)'
+  [9] ✗ pred='pop(7)'  gold='set_parent(5, 9)'
+  [10] ✗ pred='pop(7)'  gold='push(4)'
+  [11] ✗ pred='pop(4)'  gold='set_parent(4, 9)'
+  [12] ✗ pred='pop(4)'  gold='push(0)'
+  [13] ✗ pred='pop(0)'  gold='set_parent(0, 9)'
+  [14] ✓ pred='pop(0)'  gold='pop(0)'
+  [15] ✓ pred='visit(0)'  gold='visit(0)'
+  [16] ✗ pred='pop(4)'  gold='push(8)'
+  [17] ✗ pred='(This is an error state, as 8 is already in the frontier. No action is taken.)'  gold='set_parent(8, 0)'
+  [18] ✗ pred='pop(8)'  gold='push(7)'
+  [19] ✗ pred='pop(7)'  gold='set_parent(7, 0)'
+  [20] ✗ pred='pop(7)'  gold='push(2)'
+  [21] ✗ pred='pop(2)'  gold='set_parent(2, 0)'
+  [22] ✓ pred='pop(2)'  gold='pop(2)'
+  [23] ✓ pred='visit(2)'  gold='visit(2)'
+  [24] ✗ pred='(empty)'  gold='push(7)'
+  [25] ✗ pred='(Already visited, no action)'  gold='set_parent(7, 2)'
+  [26] ✓ pred='pop(7)'  gold='pop(7)'
+  [27] ✓ pred='visit(7)'  gold='visit(7)'
+  [28] ✗ pred='pop(7)'  gold='push(8)'
+  [29] ✗ pred='set_parent(8, 2)'  gold='set_parent(8, 7)'
+  [30] ✗ pred='pop(8)'  gold='push(1)'
+  [31] ✓ pred='set_parent(1, 7)'  gold='set_parent(1, 7)'
+  [32] ✓ pred='pop(1)'  gold='pop(1)'
+  [33] ✓ pred='visit(1)'  gold='visit(1)'
+  [34] ✗ pred='(no more nodes to explore)'  gold='push(6)'
+  [35] ✓ pred='set_parent(6, 1)'  gold='set_parent(6, 1)'
+  [36] ✗ pred='pop(6)'  gold='push(5)'
+  [37] ✓ pred='set_parent(5, 1)'  gold='set_parent(5, 1)'
+  [38] ✗ pred='pop(5)'  gold='push(3)'
+  [39] ✓ pred='set_parent(3, 1)'  gold='set_parent(3, 1)'
+  [40] ✓ pred='pop(3)'  gold='pop(3)'
+  [41] ✓ pred='visit(3)'  gold='visit(3)'
+  [42] ✗ pred='pop(5)'  gold='push(4)'
+  [43] ✓ pred='set_parent(4, 3)'  gold='set_parent(4, 3)'
+  [44] ✓ pred='pop(4)'  gold='pop(4)'
+  [45] ✓ pred='visit(4)'  gold='visit(4)'
+  [46] ✗ pred='(no more nodes to explore)'  gold='pop(5)'
+  [47] ✓ pred='visit(5)'  gold='visit(5)'
+  [48] ✓ pred='pop(6)'  gold='pop(6)'
+  [49] ✓ pred='visit(6)'  gold='visit(6)'
+  [50] ✗ pred='pop(8)'  gold='push(8)'
+  [51] ✗ pred='visit(8)'  gold='set_parent(8, 6)'
+  [52] ✓ pred='pop(8)'  gold='pop(8)'
+  [53] ✓ pred='visit(8)'  gold='visit(8)'
+  [54] ✗ pred='pop(7)'  gold='pop(8)'
+  [55] ✗ pred='visit(8)'  gold='pop(7)'
+  [56] ✗ pred='visit(7)'  gold='pop(8)'
+  [57] ✗ pred='visit(7)'  gold='pop(4)'
+  [58] ✗ pred='visit(4)'  gold='pop(5)'
+  [59] ✗ pred='visit(5)'  gold='pop(7)'
+  [60] ✗ pred='visit(7)'  gold='pop(8)'
+[3/5] dfs source=2 gold_len=52 (zero-shot)
+  [0] ✓ pred='push(2)'  gold='push(2)'
+  [1] ✗ pred='visit(2)'  gold='set_parent(2, None)'
+  [2] ✗ pred='push(6)'  gold='pop(2)'
+  [3] ✓ pred='visit(2)'  gold='visit(2)'
+  [4] ✗ pred='push(6)'  gold='push(8)'
+  [5] ✓ pred='set_parent(8, 2)'  gold='set_parent(8, 2)'
+  [6] ✗ pred='pop(8)'  gold='push(6)'
+  [7] ✗ pred='pop(6)'  gold='set_parent(6, 2)'
+  [8] ✓ pred='pop(6)'  gold='pop(6)'
+  [9] ✓ pred='visit(6)'  gold='visit(6)'
+  [10] ✗ pred='pop(8)'  gold='push(7)'
+  [11] ✓ pred='set_parent(7, 6)'  gold='set_parent(7, 6)'
+  [12] ✓ pred='pop(7)'  gold='pop(7)'
+  [13] ✓ pred='visit(7)'  gold='visit(7)'
+  [14] ✓ pred='pop(8)'  gold='pop(8)'
+  [15] ✓ pred='visit(8)'  gold='visit(8)'
+  [16] ✓ pred='push(5)'  gold='push(5)'
+  [17] ✓ pred='set_parent(5, 8)'  gold='set_parent(5, 8)'
+  [18] ✗ pred='pop(5)'  gold='push(3)'
+  [19] ✗ pred='pop(3)'  gold='set_parent(3, 8)'
+  [20] ✗ pred='pop(3)'  gold='push(1)'
+  [21] ✗ pred='set_parent(1, 3)'  gold='set_parent(1, 8)'
+  [22] ✓ pred='pop(1)'  gold='pop(1)'
+  [23] ✓ pred='visit(1)'  gold='visit(1)'
+  [24] ✗ pred='pop(3)'  gold='push(9)'
+  [25] ✗ pred='set_parent(9, 8)'  gold='set_parent(9, 1)'
+  [26] ✗ pred='pop(9)'  gold='push(0)'
+  [27] ✓ pred='set_parent(0, 1)'  gold='set_parent(0, 1)'
+  [28] ✓ pred='pop(0)'  gold='pop(0)'
+  [29] ✓ pred='visit(0)'  gold='visit(0)'
+  [30] ✗ pred='pop(9)'  gold='push(9)'
+  [31] ✗ pred='9 is already in visited, skip'  gold='set_parent(9, 0)'
+  [32] ✗ pred='pop(9)'  gold='push(3)'
+  [33] ✗ pred='pop(3)'  gold='set_parent(3, 0)'
+  [34] ✓ pred='pop(3)'  gold='pop(3)'
+  [35] ✓ pred='visit(3)'  gold='visit(3)'
+  [36] ✗ pred='pop(9)'  gold='push(9)'
+  [37] ✗ pred='pop(9)'  gold='set_parent(9, 3)'
+  [38] ✗ pred='pop(9)'  gold='push(4)'
+  [39] ✓ pred='set_parent(4, 3)'  gold='set_parent(4, 3)'
+  [40] ✓ pred='pop(4)'  gold='pop(4)'
+  [41] ✓ pred='visit(4)'  gold='visit(4)'
+  [42] ✓ pred='pop(9)'  gold='pop(9)'
+  [43] ✓ pred='visit(9)'  gold='visit(9)'
+  [44] ✗ pred='pop(5)'  gold='push(5)'
+  [45] ✗ pred='visit(5)'  gold='set_parent(5, 9)'
+  [46] ✓ pred='pop(5)'  gold='pop(5)'
+  [47] ✓ pred='visit(5)'  gold='visit(5)'
+  [48] ✗ pred='pop(node)'  gold='pop(9)'
+  [49] ✗ pred='visit(9)'  gold='pop(9)'
+  [50] ✗ pred='visit(9)'  gold='pop(3)'
+  [51] ✗ pred='visit(3)'  gold='pop(5)'
+[4/5] dfs source=7 gold_len=64 (zero-shot)
+  [0] ✓ pred='push(7)'  gold='push(7)'
+  [1] ✗ pred='visit(7)'  gold='set_parent(7, None)'
+  [2] ✗ pred='visit(7)'  gold='pop(7)'
+  [3] ✓ pred='visit(7)'  gold='visit(7)'
+  [4] ✓ pred='push(8)'  gold='push(8)'
+  [5] ✓ pred='set_parent(8, 7)'  gold='set_parent(8, 7)'
+  [6] ✗ pred='pop(8)'  gold='push(5)'
+  [7] ✗ pred='pop(5)'  gold='set_parent(5, 7)'
+  [8] ✓ pred='pop(5)'  gold='pop(5)'
+  [9] ✓ pred='visit(5)'  gold='visit(5)'
+  [10] ✗ pred='pop(8)'  gold='push(6)'
+  [11] ✓ pred='set_parent(6, 5)'  gold='set_parent(6, 5)'
+  [12] ✗ pred='pop(6)'  gold='push(1)'
+  [13] ✗ pred='set_parent(1, 6)'  gold='set_parent(1, 5)'
+  [14] ✗ pred='pop(1)'  gold='push(0)'
+  [15] ✗ pred='pop(0)'  gold='set_parent(0, 5)'
+  [16] ✓ pred='pop(0)'  gold='pop(0)'
+  [17] ✓ pred='visit(0)'  gold='visit(0)'
+  [18] ✓ pred='push(8)'  gold='push(8)'
+  [19] ✗ pred='(This is a duplicate of Step 4, so no change in state or subgraph.)'  gold='set_parent(8, 0)'
+  [20] ✗ pred='pop(8)'  gold='push(6)'
+  [21] ✗ pred='(6 is already in the frontier, no action)'  gold='set_parent(6, 0)'
+  [22] ✓ pred='pop(6)'  gold='pop(6)'
+  [23] ✓ pred='visit(6)'  gold='visit(6)'
+  [24] ✗ pred='(empty)'  gold='push(2)'
+  [25] ✗ pred='set_parent(2, 0)'  gold='set_parent(2, 6)'
+  [26] ✗ pred='pop(2)'  gold='push(1)'
+  [27] ✗ pred='pop(1)'  gold='set_parent(1, 6)'
+  [28] ✓ pred='pop(1)'  gold='pop(1)'
+  [29] ✓ pred='visit(1)'  gold='visit(1)'
+  [30] ✗ pred='push(4)'  gold='push(9)'
+  [31] ✓ pred='set_parent(9, 1)'  gold='set_parent(9, 1)'
+  [32] ✗ pred='pop(9)'  gold='push(8)'
+  [33] ✗ pred='pop(8)'  gold='set_parent(8, 1)'
+  [34] ✗ pred='pop(8)'  gold='push(4)'
+  [35] ✗ pred='pop(8)'  gold='set_parent(4, 1)'
+  [36] ✓ pred='pop(4)'  gold='pop(4)'
+  [37] ✓ pred='visit(4)'  gold='visit(4)'
+  [38] ✗ pred='(no more nodes to explore)'  gold='push(9)'
+  [39] ✗ pred='pop(9)'  gold='set_parent(9, 4)'
+  [40] ✗ pred='pop(9)'  gold='push(2)'
+  [41] ✗ pred='pop(2)'  gold='set_parent(2, 4)'
+  [42] ✓ pred='pop(2)'  gold='pop(2)'
+  [43] ✓ pred='visit(2)'  gold='visit(2)'
+  [44] ✗ pred='pop(9)'  gold='push(3)'
+  [45] ✓ pred='set_parent(3, 2)'  gold='set_parent(3, 2)'
+  [46] ✓ pred='pop(3)'  gold='pop(3)'
+  [47] ✓ pred='visit(3)'  gold='visit(3)'
+  [48] ✗ pred='pop(9)'  gold='push(8)'
+  [49] ✗ pred='pop(8)'  gold='set_parent(8, 3)'
+  [50] ✓ pred='pop(8)'  gold='pop(8)'
+  [51] ✓ pred='visit(8)'  gold='visit(8)'
+  [52] ✗ pred='pop(9)'  gold='push(9)'
+  [53] ✗ pred='visit(9)'  gold='set_parent(9, 8)'
+  [54] ✓ pred='pop(9)'  gold='pop(9)'
+  [55] ✓ pred='visit(9)'  gold='visit(9)'
+  [56] ✗ pred='(no more nodes to process)'  gold='pop(9)'
+  [57] ✗ pred='visit(9)'  gold='pop(8)'
+  [58] ✗ pred='visit(8)'  gold='pop(9)'
+  [59] ✗ pred='pop(4)'  gold='pop(2)'
+  [60] ✗ pred='pop(3)'  gold='pop(8)'
+  [61] ✓ pred='pop(1)'  gold='pop(1)'
+  [62] ✗ pred='pop(0)'  gold='pop(6)'
+  [63] ✗ pred='pop(0)'  gold='pop(8)'
+[5/5] dfs source=0 gold_len=49 (zero-shot)
+  [0] ✓ pred='push(0)'  gold='push(0)'
+  [1] ✗ pred='visit(0)'  gold='set_parent(0, None)'
+  [2] ✗ pred='visit(0)'  gold='pop(0)'
+  [3] ✓ pred='visit(0)'  gold='visit(0)'
+  [4] ✗ pred='push(4)'  gold='push(9)'
+  [5] ✓ pred='set_parent(9, 0)'  gold='set_parent(9, 0)'
+  [6] ✗ pred='pop(9)'  gold='push(8)'
+  [7] ✗ pred='pop(9)'  gold='set_parent(8, 0)'
+  [8] ✗ pred='pop(8)'  gold='push(7)'
+  [9] ✗ pred='pop(7)'  gold='set_parent(7, 0)'
+  [10] ✗ pred='pop(7)'  gold='push(4)'
+  [11] ✗ pred='pop(4)'  gold='set_parent(4, 0)'
+  [12] ✓ pred='pop(4)'  gold='pop(4)'
+  [13] ✓ pred='visit(4)'  gold='visit(4)'
+  [14] ✗ pred='pop(7)'  gold='push(5)'
+  [15] ✓ pred='set_parent(5, 4)'  gold='set_parent(5, 4)'
+  [16] ✗ pred='pop(5)'  gold='push(3)'
+  [17] ✗ pred='pop(3)'  gold='set_parent(3, 4)'
+  [18] ✓ pred='pop(3)'  gold='pop(3)'
+  [19] ✓ pred='visit(3)'  gold='visit(3)'
+  [20] ✓ pred='push(6)'  gold='push(6)'
+  [21] ✓ pred='set_parent(6, 3)'  gold='set_parent(6, 3)'
+  [22] ✗ pred='pop(6)'  gold='push(1)'
+  [23] ✗ pred='pop(1)'  gold='set_parent(1, 3)'
+  [24] ✓ pred='pop(1)'  gold='pop(1)'
+  [25] ✓ pred='visit(1)'  gold='visit(1)'
+  [26] ✓ pred='pop(6)'  gold='pop(6)'
+  [27] ✓ pred='visit(6)'  gold='visit(6)'
+  [28] ✗ pred='pop(5)'  gold='push(5)'
+  [29] ✗ pred='pop(5)'  gold='set_parent(5, 6)'
+  [30] ✓ pred='pop(5)'  gold='pop(5)'
+  [31] ✓ pred='visit(5)'  gold='visit(5)'
+  [32] ✗ pred='pop(7)'  gold='push(8)'
+  [33] ✓ pred='set_parent(8, 5)'  gold='set_parent(8, 5)'
+  [34] ✓ pred='pop(8)'  gold='pop(8)'
+  [35] ✓ pred='visit(8)'  gold='visit(8)'
+  [36] ✗ pred='pop(7)'  gold='push(9)'
+  [37] ✗ pred='visit(9)'  gold='set_parent(9, 8)'
+  [38] ✓ pred='pop(9)'  gold='pop(9)'
+  [39] ✓ pred='visit(9)'  gold='visit(9)'
+  [40] ✗ pred='pop(7)'  gold='push(2)'
+  [41] ✗ pred='(no operation, as 2 is not connected to any visited nodes)'  gold='set_parent(2, 9)'
+  [42] ✓ pred='pop(2)'  gold='pop(2)'
+  [43] ✓ pred='visit(2)'  gold='visit(2)'
+  [44] ✗ pred='pop(7)'  gold='pop(5)'
+  [45] ✗ pred='visit(5)'  gold='pop(7)'
+  [46] ✓ pred='visit(7)'  gold='visit(7)'
+  [47] ✗ pred='pop(0)'  gold='pop(8)'
+  [48] ✗ pred='visit(8)'  gold='pop(9)'
+Saved 5 predictions to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/pred_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mScoring → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/metrics_dfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:          5
+Total steps:      278
+Step accuracy:    0.4388
+Trace accuracy:   0.0000
+Mean first-error step: 1.00
+Mean coverage:    1.0000
+
+Wrote metrics to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/metrics_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mFailure analysis → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/failures_dfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:                 5
+Total gold steps:        278
+Overall step accuracy:   0.4388
+Overall failure rate:    0.5612
+Mean first-error step:   1.00
+
+Failure rate by phase:
+   early: 0.5934
+  middle: 0.5714
+    late: 0.5208
+
+Top operation confusions:
+  push(7) -> pop(8) (n=4)
+  push(9) -> pop(7) (n=3)
+  push(3) -> pop(5) (n=3)
+  push(6) -> pop(8) (n=3)
+  push(9) -> pop(9) (n=3)
+  push(8) -> pop(9) (n=3)
+  set_parent(2, None) -> visit(2) (n=2)
+  push(4) -> pop(8) (n=2)
+  set_parent(1, 3) -> pop(1) (n=2)
+  set_parent(4, 9) -> pop(4) (n=2)
+
+Wrote failure analysis to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/failures_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mNLGraph benchmark → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/nlgraph_dfs_erdos_renyi_n10_c5_s100_*.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:00<05:02,  1.12it/s]Loading weights:   1%|          | 2/339 [00:01<02:47,  2.01it/s]Loading weights:   6%|▋         | 22/339 [00:01<00:10, 30.06it/s]Loading weights:   9%|▉         | 31/339 [00:01<00:08, 37.27it/s]Loading weights:  12%|█▏        | 41/339 [00:01<00:06, 46.23it/s]Loading weights:  16%|█▌        | 53/339 [00:01<00:05, 56.90it/s]Loading weights:  18%|█▊        | 61/339 [00:01<00:05, 47.77it/s]Loading weights:  22%|██▏       | 76/339 [00:02<00:06, 41.28it/s]Loading weights:  27%|██▋       | 90/339 [00:02<00:05, 45.09it/s]Loading weights:  30%|██▉       | 101/339 [00:02<00:04, 53.64it/s]Loading weights:  32%|███▏      | 108/339 [00:02<00:04, 52.04it/s]Loading weights:  34%|███▍      | 115/339 [00:03<00:05, 41.05it/s]Loading weights:  37%|███▋      | 126/339 [00:03<00:04, 44.14it/s]Loading weights:  40%|████      | 137/339 [00:03<00:04, 47.92it/s]Loading weights:  44%|████▍     | 149/339 [00:03<00:04, 40.65it/s]Loading weights:  48%|████▊     | 162/339 [00:04<00:03, 47.20it/s]Loading weights:  50%|████▉     | 168/339 [00:04<00:03, 48.28it/s]Loading weights:  51%|█████▏    | 174/339 [00:04<00:03, 43.25it/s]Loading weights:  55%|█████▍    | 185/339 [00:04<00:03, 50.04it/s]Loading weights:  58%|█████▊    | 197/339 [00:04<00:02, 47.88it/s]Loading weights:  61%|██████▏   | 208/339 [00:05<00:02, 48.57it/s]Loading weights:  65%|██████▌   | 221/339 [00:05<00:02, 46.12it/s]Loading weights:  68%|██████▊   | 232/339 [00:05<00:02, 45.81it/s]Loading weights:  71%|███████▏  | 242/339 [00:05<00:01, 53.10it/s]Loading weights:  73%|███████▎  | 249/339 [00:05<00:02, 43.84it/s]Loading weights:  76%|███████▌  | 257/339 [00:06<00:01, 46.86it/s]Loading weights:  79%|███████▉  | 268/339 [00:06<00:01, 47.99it/s]Loading weights:  83%|████████▎ | 281/339 [00:06<00:01, 51.68it/s]Loading weights:  86%|████████▌ | 292/339 [00:06<00:00, 47.99it/s]Loading weights:  88%|████████▊ | 300/339 [00:06<00:00, 52.28it/s]Loading weights:  90%|█████████ | 306/339 [00:07<00:00, 43.85it/s]Loading weights:  94%|█████████▎| 317/339 [00:07<00:00, 42.37it/s]Loading weights:  95%|█████████▍| 322/339 [00:07<00:00, 43.34it/s]Loading weights:  97%|█████████▋| 329/339 [00:07<00:00, 45.28it/s]Loading weights: 100%|██████████| 339/339 [00:07<00:00, 44.28it/s]
+Loading weights:   0%|          | 0/224 [00:00<?, ?it/s]Loading weights: 100%|██████████| 224/224 [00:00<00:00, 4317.78it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Wrote predictions:       /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/nlgraph_dfs_erdos_renyi_n10_c5_s100_predictions.json
+Wrote operation metrics: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/nlgraph_dfs_erdos_renyi_n10_c5_s100_operation_accuracy.json
+Wrote failure analysis:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/nlgraph_dfs_erdos_renyi_n10_c5_s100_failure_analysis.json
+
+[1;34m==>[0m [1mGLBench benchmark → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/glbench_dfs_erdos_renyi_n10_c5_s100_*.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:01<06:00,  1.07s/it]Loading weights:   1%|          | 2/339 [00:01<02:55,  1.91it/s]Loading weights:   9%|▊         | 29/339 [00:01<00:09, 33.93it/s]Loading weights:  12%|█▏        | 41/339 [00:01<00:07, 39.52it/s]Loading weights:  18%|█▊        | 60/339 [00:01<00:05, 54.65it/s]Loading weights:  20%|██        | 68/339 [00:01<00:04, 54.44it/s]Loading weights:  22%|██▏       | 76/339 [00:02<00:06, 39.94it/s]Loading weights:  26%|██▋       | 89/339 [00:02<00:05, 45.13it/s]Loading weights:  29%|██▉       | 100/339 [00:02<00:05, 46.86it/s]Loading weights:  31%|███▏      | 106/339 [00:02<00:04, 48.49it/s]Loading weights:  33%|███▎      | 113/339 [00:03<00:05, 42.41it/s]Loading weights:  35%|███▍      | 118/339 [00:03<00:05, 43.66it/s]Loading weights:  37%|███▋      | 125/339 [00:03<00:04, 44.98it/s]Loading weights:  40%|████      | 137/339 [00:03<00:03, 53.34it/s]Loading weights:  44%|████▍     | 149/339 [00:03<00:03, 47.85it/s]Loading weights:  46%|████▌     | 155/339 [00:03<00:04, 44.34it/s]Loading weights:  51%|█████     | 172/339 [00:04<00:03, 44.98it/s]Loading weights:  55%|█████▍    | 185/339 [00:04<00:02, 54.18it/s]Loading weights:  56%|█████▋    | 191/339 [00:04<00:02, 51.76it/s]Loading weights:  58%|█████▊    | 197/339 [00:04<00:03, 46.10it/s]Loading weights:  60%|█████▉    | 202/339 [00:04<00:03, 44.79it/s]Loading weights:  62%|██████▏   | 209/339 [00:05<00:02, 48.98it/s]Loading weights:  63%|██████▎   | 215/339 [00:05<00:02, 50.86it/s]Loading weights:  65%|██████▌   | 221/339 [00:05<00:02, 46.26it/s]Loading weights:  69%|██████▊   | 233/339 [00:05<00:02, 48.37it/s]Loading weights:  72%|███████▏  | 245/339 [00:05<00:01, 49.59it/s]Loading weights:  74%|███████▎  | 250/339 [00:05<00:01, 49.50it/s]Loading weights:  77%|███████▋  | 262/339 [00:06<00:01, 46.65it/s]Loading weights:  80%|███████▉  | 270/339 [00:06<00:01, 47.30it/s]Loading weights:  83%|████████▎ | 282/339 [00:06<00:01, 52.94it/s]Loading weights:  86%|████████▋ | 293/339 [00:06<00:00, 56.85it/s]Loading weights:  89%|████████▉ | 302/339 [00:06<00:00, 57.67it/s]Loading weights:  91%|█████████ | 308/339 [00:06<00:00, 52.99it/s]Loading weights:  94%|█████████▎| 317/339 [00:07<00:00, 40.77it/s]Loading weights:  97%|█████████▋| 329/339 [00:07<00:00, 49.14it/s]Loading weights: 100%|██████████| 339/339 [00:07<00:00, 45.24it/s]
+Loading weights:   0%|          | 0/224 [00:00<?, ?it/s]Loading weights: 100%|██████████| 224/224 [00:00<00:00, 4133.12it/s]
+Wrote predictions:       /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/glbench_dfs_erdos_renyi_n10_c5_s100_predictions.json
+Wrote operation metrics: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/glbench_dfs_erdos_renyi_n10_c5_s100_operation_accuracy.json
+Wrote failure analysis:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/glbench_dfs_erdos_renyi_n10_c5_s100_failure_analysis.json
+[pipeline] Wrote run manifest: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/run_manifest_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mDone[0m
+  trace file:  data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json
+  predictions: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/pred_dfs_erdos_renyi_n10_c5_s100.json
+  metrics:     /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/metrics_dfs_erdos_renyi_n10_c5_s100.json
+  failures:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/failures_dfs_erdos_renyi_n10_c5_s100.json
+  manifest:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/run_manifest_dfs_erdos_renyi_n10_c5_s100.json
+  log file:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_post/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_161024.log

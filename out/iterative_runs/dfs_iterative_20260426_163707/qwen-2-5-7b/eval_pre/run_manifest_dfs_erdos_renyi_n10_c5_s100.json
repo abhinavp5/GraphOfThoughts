@@ -1,0 +1,47 @@
+{
+  "run_id": "dfs_erdos_renyi_n10_c5_s100_20260426_155836",
+  "tag": "dfs_erdos_renyi_n10_c5_s100",
+  "started_at": "2026-04-26T19:58:36Z",
+  "finished_at": "2026-04-26T20:04:27Z",
+  "git_commit": "0b056d7533393493046124622a0f1314255dce6a",
+  "config": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "adapter": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/pre_sft_adapter",
+    "algorithm": "dfs",
+    "family": "erdos_renyi",
+    "n": 10,
+    "count": 5,
+    "limit": 100,
+    "bench_limit": 100,
+    "max_steps": null,
+    "device": "cuda",
+    "dtype": "float16",
+    "free_running": false,
+    "smoke_only": false,
+    "out_dir": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre",
+    "trace_file": "data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json",
+    "nlgraph_input": "data/benchmarks/nlgraph_eval.json",
+    "glbench_input": "data/benchmarks/glbench_eval.json"
+  },
+  "paths": {
+    "log_file": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_155836.log",
+    "trace_file": "data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json",
+    "pipe": {
+      "predictions": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/pred_dfs_erdos_renyi_n10_c5_s100.json",
+      "operation_accuracy": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/metrics_dfs_erdos_renyi_n10_c5_s100.json",
+      "failure_analysis": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/failures_dfs_erdos_renyi_n10_c5_s100.json"
+    },
+    "nlgraph": {
+      "prefix": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/nlgraph_dfs_erdos_renyi_n10_c5_s100",
+      "predictions": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/nlgraph_dfs_erdos_renyi_n10_c5_s100_predictions.json",
+      "operation_accuracy": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/nlgraph_dfs_erdos_renyi_n10_c5_s100_operation_accuracy.json",
+      "failure_analysis": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/nlgraph_dfs_erdos_renyi_n10_c5_s100_failure_analysis.json"
+    },
+    "glbench": {
+      "prefix": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/glbench_dfs_erdos_renyi_n10_c5_s100",
+      "predictions": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/glbench_dfs_erdos_renyi_n10_c5_s100_predictions.json",
+      "operation_accuracy": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/glbench_dfs_erdos_renyi_n10_c5_s100_operation_accuracy.json",
+      "failure_analysis": "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/glbench_dfs_erdos_renyi_n10_c5_s100_failure_analysis.json"
+    }
+  }
+}

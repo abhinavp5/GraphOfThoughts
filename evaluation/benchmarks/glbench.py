@@ -30,20 +30,27 @@ def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", required=True, help="GLBench JSON file path.")
     ap.add_argument("--model", required=True, help="HF model id or local model path.")
-    ap.add_argument("--adapter", default=None, help="Optional LoRA adapter directory.")
+    ap.add_argument("--adapter", default=None, help="Optional SFT LoRA adapter directory.")
+    ap.add_argument("--dagger-adapter", default=None, help="Optional DAgger LoRA adapter to stack on top of --adapter.")
     ap.add_argument("--out-prefix", required=True, help="Output prefix (no extension).")
     ap.add_argument("--limit", type=int, default=None, help="Run first N records.")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--dtype", choices=["float16", "bfloat16", "float32"], default="float16")
     ap.add_argument("--free-running", action="store_true")
     ap.add_argument("--max-steps", type=int, default=None)
+    ap.add_argument(
+        "--algorithm",
+        default="bfs",
+        choices=["bfs", "dfs", "dijkstra"],
+        help="Evaluate only GLBench rows whose query_type/algorithm matches this task.",
+    )
     return ap.parse_args()
 
 
 def normalize_glbench(records: list[dict]) -> list[dict]:
     # Common GLBench aliases found in graph reasoning exports.
     graph_keys = ["graph", "edge_text", "graph_text", "graph_linearized", "input_graph"]
-    algorithm_keys = ["algorithm", "task", "task_name", "query_type"]
+    algorithm_keys = ["algorithm", "query_type", "task", "task_name"]
     source_keys = ["source", "start", "query_node", "start_node"]
     steps_keys = ["steps", "gold_steps", "operations", "gold_operations", "target_operations"]
 
@@ -73,9 +80,13 @@ def main() -> None:
 
     raw = load_json(args.input)
     samples = normalize_glbench(raw)
-    # BFS-only: our StateExecutor vocabulary currently targets BFS-style traces.
-    # GLBench datasets can include shortest-path tasks with ops like relax/settle.
-    samples = [s for s in samples if s.get("algorithm") == "bfs"]
+    want = str(args.algorithm).lower().strip()
+    samples = [s for s in samples if s.get("algorithm") == want]
+    if not samples:
+        raise SystemExit(
+            f"[glbench] No {want} records after normalization/filter. "
+            "Check query_type / target_operations and graph fields in the JSON."
+        )
     if args.limit:
         samples = samples[: args.limit]
 
@@ -84,6 +95,7 @@ def main() -> None:
         adapter=args.adapter,
         device=args.device,
         dtype=dtype_map[args.dtype],
+        dagger_adapter=args.dagger_adapter,
     )
 
     correction_id = tokenizer.convert_tokens_to_ids(CORRECTION_TOKEN)

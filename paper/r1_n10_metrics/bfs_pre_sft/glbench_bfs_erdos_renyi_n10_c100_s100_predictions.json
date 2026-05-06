@@ -1,0 +1,131 @@
+[
+  {
+    "graph": "(0)->(2) (0)->(3) (0)->(4) (0)->(8) (1)->(2) (1)->(3) (1)->(5) (1)->(6) (1)->(9) (2)->(5) (2)->(9) (3)->(6) (3)->(7) (6)->(9) (7)->(8) (7)->(9) (8)->(9)",
+    "algorithm": "bfs",
+    "source": 1,
+    "gold_steps": [
+      {
+        "step": 0,
+        "operation": "enqueue(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 1,
+        "operation": "set_parent(1, None)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 2,
+        "operation": "dequeue(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 3,
+        "operation": "visit(1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 4,
+        "operation": "enqueue(2)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 5,
+        "operation": "set_parent(2, 1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 6,
+        "operation": "enqueue(3)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      },
+      {
+        "step": 7,
+        "operation": "set_parent(3, 1)",
+        "state": {
+          "visited": [],
+          "frontier": [],
+          "distances": {},
+          "parent": {}
+        },
+        "induced_subgraph": []
+      }
+    ],
+    "predicted_steps": [
+      {
+        "step": 0,
+        "operation_predicted": "enqueue(1)"
+      },
+      {
+        "step": 1,
+        "operation_predicted": "mark_visited(1)"
+      },
+      {
+        "step": 2,
+        "operation_predicted": "dequeue(1)"
+      },
+      {
+        "step": 3,
+        "operation_predicted": "enqueue(0)"
+      },
+      {
+        "step": 4,
+        "operation_predicted": "enqueue(2)"
+      },
+      {
+        "step": 5,
+        "operation_predicted": "dequeue(2)"
+      },
+      {
+        "step": 6,
+        "operation_predicted": "enqueue(3)"
+      },
+      {
+        "step": 7,
+        "operation_predicted": "visit(3)"
+      }
+    ]
+  }
+]

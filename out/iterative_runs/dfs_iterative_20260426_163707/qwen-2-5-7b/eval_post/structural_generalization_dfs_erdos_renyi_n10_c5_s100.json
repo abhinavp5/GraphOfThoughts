@@ -1,0 +1,26 @@
+{
+  "train_max_n": 10,
+  "in_distribution_step_accuracy": 0.43884892086330934,
+  "out_of_distribution_step_accuracy": 0.0,
+  "gap_ood_minus_id": -0.43884892086330934,
+  "grouped": {
+    "in_distribution": {
+      "steps": 278,
+      "correct": 122,
+      "samples": 5
+    },
+    "out_of_distribution": {
+      "steps": 0,
+      "correct": 0,
+      "samples": 0
+    }
+  },
+  "by_graph_size": {
+    "10": {
+      "steps": 278,
+      "correct": 122,
+      "samples": 5,
+      "step_accuracy": 0.43884892086330934
+    }
+  }
+}

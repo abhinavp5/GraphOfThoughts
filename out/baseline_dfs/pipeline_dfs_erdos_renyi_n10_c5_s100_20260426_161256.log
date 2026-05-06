@@ -1,0 +1,357 @@
+[pipeline] Unified log: /sfs/weka/scratch/uhz7mq/GraphOfThoughts/out/baseline_dfs/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_161256.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-0.5B-Instruct
+  adapter:   (none — base model)
+  algorithm: dfs    family: erdos_renyi    n=10    count=5
+  limit:     5        seed=100
+  device:    cuda       dtype=bfloat16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out/baseline_dfs
+  log_file:  out/baseline_dfs/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_161256.log
+
+[1;34m==>[0m [1mDataset generation → data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json[0m
+  1/5 samples generated
+  2/5 samples generated
+  3/5 samples generated
+  4/5 samples generated
+  5/5 samples generated
+
+Saved 5 traces to data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mInference → out/baseline_dfs/pred_dfs_erdos_renyi_n10_c5_s100.json[0m
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading model Qwen/Qwen2.5-0.5B-Instruct
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:00<01:02,  4.65it/s]Loading weights:  10%|█         | 30/290 [00:00<00:02, 118.59it/s]Loading weights:  22%|██▏       | 63/290 [00:00<00:01, 192.16it/s]Loading weights:  35%|███▍      | 101/290 [00:00<00:00, 247.97it/s]Loading weights:  47%|████▋     | 136/290 [00:00<00:00, 274.86it/s]Loading weights:  60%|█████▉    | 173/290 [00:00<00:00, 299.74it/s]Loading weights:  72%|███████▏  | 208/290 [00:00<00:00, 310.21it/s]Loading weights:  84%|████████▍ | 244/290 [00:00<00:00, 323.57it/s]Loading weights:  96%|█████████▌| 279/290 [00:01<00:00, 330.92it/s]Loading weights: 100%|██████████| 290/290 [00:01<00:00, 269.25it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[1/5] dfs source=2 gold_len=52 (zero-shot)
+  [0] ✗ pred='2: visited=[2], frontier=[], distances={}, parent={}'  gold='push(2)'
+  [1] ✗ pred='2 -> 3'  gold='set_parent(2, None)'
+  [2] ✗ pred='2 -> 3'  gold='pop(2)'
+  [3] ✗ pred='2 -> 3'  gold='visit(2)'
+  [4] ✗ pred='2->9'  gold='push(8)'
+  [5] ✗ pred='2->8'  gold='set_parent(8, 2)'
+  [6] ✗ pred='2->8'  gold='push(4)'
+  [7] ✗ pred='2->(4)'  gold='set_parent(4, 2)'
+  [8] ✗ pred='2->(9)'  gold='push(3)'
+  [9] ✗ pred='2->(3)'  gold='set_parent(3, 2)'
+  [10] ✗ pred='2->3'  gold='pop(3)'
+  [11] ✗ pred='2->(9)'  gold='visit(3)'
+  [12] ✗ pred="8 is not in the parent dictionary, so it's pushed to the parent dictionary."  gold='push(9)'
+  [13] ✗ pred='2->9'  gold='set_parent(9, 3)'
+  [14] ✗ pred='8->9'  gold='push(7)'
+  [15] ✗ pred='9 is not in the current state, so we continue with the next level of recursion.'  gold='set_parent(7, 3)'
+  [16] ✗ pred='2->9'  gold='push(1)'
+  [17] ✗ pred='1 is already in the current subtree, so no change.'  gold='set_parent(1, 3)'
+  [18] ✗ pred='1 is already in the current subtree, so no change.'  gold='pop(1)'
+  [19] ✓ pred='visit(1)'  gold='visit(1)'
+  [20] ✗ pred='2 is already visited, so no further operations can be performed.'  gold='push(9)'
+  [21] ✗ pred='9 is already in the current state, so no change.'  gold='set_parent(9, 1)'
+  [22] ✗ pred='2->(9)'  gold='push(0)'
+  [23] ✗ pred='1 is not in frontier, so continue to next level of recursion'  gold='set_parent(0, 1)'
+  [24] ✗ pred='2 is not in subgraph (0->1), so continue to next level of recursion.'  gold='pop(0)'
+  [25] ✗ pred='2 is not in subgraph (1), so continue to next iteration.'  gold='visit(0)'
+  [26] ✗ pred='2->9'  gold='push(9)'
+  [27] ✗ pred='9 is already in state 0, so no change.'  gold='set_parent(9, 0)'
+  [28] ✗ pred='2->9'  gold='pop(9)'
+  [29] ✗ pred='2->3'  gold='visit(9)'
+  [30] ✗ pred='29 is already pushed to the stack, so no further operations will be performed.'  gold='push(6)'
+  [31] ✗ pred="6 is not in the current state, so it's pushed to the stack."  gold='set_parent(6, 9)'
+  [32] ✗ pred='6 is not in subgraph (0->9), so ignore it.'  gold='push(4)'
+  [33] ✗ pred='4 is already in the current subtree, so skip it.'  gold='set_parent(4, 9)'
+  [34] ✗ pred='4 is already in the current subtree, so skip it.'  gold='pop(4)'
+  [35] ✓ pred='visit(4)'  gold='visit(4)'
+  [36] ✗ pred='4->9'  gold='push(5)'
+  [37] ✗ pred='5 is not in the graph, so skip this step.'  gold='set_parent(5, 4)'
+  [38] ✗ pred="5 is already in the queue, so it's not pushed again."  gold='pop(5)'
+  [39] ✓ pred='visit(5)'  gold='visit(5)'
+  [40] ✗ pred='Push(7)'  gold='push(8)'
+  [41] ✗ pred='Set parent 8 to 5'  gold='set_parent(8, 5)'
+  [42] ✗ pred="5 is already in the queue, so it's not pushed again."  gold='pop(8)'
+  [43] ✓ pred='visit(8)'  gold='visit(8)'
+  [44] ✗ pred='8 is already in the queue, so no further steps are taken.'  gold='pop(6)'
+  [45] ✗ pred='6 is not in the current state, so continue to next level of recursion.'  gold='visit(6)'
+  [46] ✗ pred='6 is not in the current state, so continue to next level of recursion.'  gold='pop(9)'
+  [47] ✗ pred='6 is not in the current state, so we continue to explore the rest of the graph.'  gold='pop(7)'
+  [48] ✗ pred='6 is not in the current state, so we continue to explore further.'  gold='visit(7)'
+  [49] ✗ pred='6 is not in the current state, so we continue to explore the rest of the graph.'  gold='pop(9)'
+  [50] ✗ pred='6 is not in the current state, so we continue to explore further.'  gold='pop(4)'
+  [51] ✗ pred='6 is not in the current state, so we continue to the next level of recursion.'  gold='pop(8)'
+[2/5] dfs source=9 gold_len=61 (zero-shot)
+  [0] ✗ pred='9: visited=[9], frontier=[], distances={}, parent={}'  gold='push(9)'
+  [1] ✗ pred='9 is pushed to the stack.'  gold='set_parent(9, None)'
+  [2] ✗ pred="9 is not in the stack, so it's pushed to the stack."  gold='pop(9)'
+  [3] ✗ pred='9 is visited [9]'  gold='visit(9)'
+  [4] ✗ pred='9 is not in any subgraph, so no further operations are performed.'  gold='push(8)'
+  [5] ✗ pred="8 is not in the parent dictionary, so it's pushed to the parent dictionary with no parent value."  gold='set_parent(8, 9)'
+  [6] ✗ pred='8 is not in the graph, so no further operations can be performed.'  gold='push(7)'
+  [7] ✗ pred='8 is already in the frontier, so no change needed.'  gold='set_parent(7, 9)'
+  [8] ✗ pred='8 is already in the frontier, so no change needed.'  gold='push(5)'
+  [9] ✗ pred='9 is already in the parent dictionary, so no change needed.'  gold='set_parent(5, 9)'
+  [10] ✗ pred="9 is not in the frontier, so it's pushed to the frontier"  gold='push(4)'
+  [11] ✗ pred='9 is already in the queue, so no change needed'  gold='set_parent(4, 9)'
+  [12] ✗ pred="9 is not in the frontier, so it's pushed to the frontier"  gold='push(0)'
+  [13] ✗ pred='9 is not in the frontier, so we can continue to explore its neighbors'  gold='set_parent(0, 9)'
+  [14] ✗ pred='9 is visited[9]'  gold='pop(0)'
+  [15] ✗ pred='9 is visited[9]'  gold='visit(0)'
+  [16] ✗ pred='9 is already visited, so no change needed.'  gold='push(8)'
+  [17] ✗ pred='9 is already in the frontier, so no change needed.'  gold='set_parent(8, 0)'
+  [18] ✗ pred='8->7'  gold='push(7)'
+  [19] ✗ pred='visit(7)'  gold='set_parent(7, 0)'
+  [20] ✗ pred='0 is already visited, so no further operations can be performed.'  gold='push(2)'
+  [21] ✗ pred='9 is already in the set of visited nodes, so no change occurs.'  gold='set_parent(2, 0)'
+  [22] ✗ pred='2 is already in the same subgraph, so no change needed.'  gold='pop(2)'
+  [23] ✗ pred='9 is already visited, so no further operations can be performed.'  gold='visit(2)'
+  [24] ✗ pred='9 is already visited, so no further operations can be performed.'  gold='push(7)'
+  [25] ✗ pred='9 is already in this subgraph, so no change needed.'  gold='set_parent(7, 2)'
+  [26] ✗ pred='2->7'  gold='pop(7)'
+  [27] ✗ pred='9 is already visited, so skip this step.'  gold='visit(7)'
+  [28] ✗ pred='9 is already visited, so skip this step.'  gold='push(8)'
+  [29] ✗ pred='8 is already in the queue, so no change needed.'  gold='set_parent(8, 7)'
+  [30] ✗ pred='8 is already in the set of visited nodes, so no further operations will be performed.'  gold='push(1)'
+  [31] ✗ pred='1 is pushed to the stack'  gold='set_parent(1, 7)'
+  [32] ✗ pred='1 is not in subgraph (0->2), so ignore it'  gold='pop(1)'
+  [33] ✗ pred='9 is visited[9]'  gold='visit(1)'
+  [34] ✗ pred='1 is not in subgraph (0->2), so continue to next level of recursion.'  gold='push(6)'
+  [35] ✗ pred="6 is not in the current state, so it's pushed to the stack"  gold='set_parent(6, 1)'
+  [36] ✗ pred='1 is not in subgraph (0->2), so ignore it'  gold='push(5)'
+  [37] ✗ pred="5 is already in the queue, so it's not pushed again."  gold='set_parent(5, 1)'
+  [38] ✗ pred='1 is not in subgraph (0->2), so ignore it'  gold='push(3)'
+  [39] ✗ pred='1st call of set_parent() for 3'  gold='set_parent(3, 1)'
+  [40] ✗ pred='1 push(4)'  gold='pop(3)'
+  [41] ✓ pred='visit(3)'  gold='visit(3)'
+  [42] ✗ pred='9 is visited[9]'  gold='push(4)'
+  [43] ✗ pred='Set parent(4, 3)'  gold='set_parent(4, 3)'
+  [44] ✗ pred='3->4'  gold='pop(4)'
+  [45] ✓ pred='visit(4)'  gold='visit(4)'
+  [46] ✗ pred='1 push(5)'  gold='pop(5)'
+  [47] ✗ pred='1'  gold='visit(5)'
+  [48] ✗ pred='1'  gold='pop(6)'
+  [49] ✗ pred='Visit(6)'  gold='visit(6)'
+  [50] ✗ pred='6 is not in the current state, so we continue to the next level of recursion.'  gold='push(8)'
+  [51] ✗ pred='Set parent(8, 6)'  gold='set_parent(8, 6)'
+  [52] ✗ pred='6 is already in the queue, so we skip this step.'  gold='pop(8)'
+  [53] ✗ pred='8 is already in the set of visited nodes, so no further operations can be performed.'  gold='visit(8)'
+  [54] ✗ pred='8 is already in the queue, so we can stop here.'  gold='pop(8)'
+  [55] ✗ pred='8 is already in the queue, so we can stop here.'  gold='pop(7)'
+  [56] ✗ pred='visit(7)'  gold='pop(8)'
+  [57] ✗ pred='8 is not in the current state, so we continue to explore the rest of the graph.'  gold='pop(4)'
+  [58] ✗ pred='visit(4)'  gold='pop(5)'
+  [59] ✗ pred='visit(5)'  gold='pop(7)'
+  [60] ✗ pred='9 is the only reachable node at this point. No further steps can be taken.'  gold='pop(8)'
+[3/5] dfs source=2 gold_len=52 (zero-shot)
+  [0] ✗ pred='2: visited=[2], frontier=[], distances={}, parent={}'  gold='push(2)'
+  [1] ✗ pred='2 -> 1'  gold='set_parent(2, None)'
+  [2] ✗ pred='2 -> 3'  gold='pop(2)'
+  [3] ✗ pred='2 -> 8'  gold='visit(2)'
+  [4] ✗ pred='2 -> 3'  gold='push(8)'
+  [5] ✗ pred="8 is not in parent dictionary, so it's a new node"  gold='set_parent(8, 2)'
+  [6] ✗ pred='8->9'  gold='push(6)'
+  [7] ✗ pred='8 is already in the frontier, so no change needed.'  gold='set_parent(6, 2)'
+  [8] ✗ pred='2->8'  gold='pop(6)'
+  [9] ✓ pred='visit(6)'  gold='visit(6)'
+  [10] ✗ pred="8 is not in the parent dictionary, so it's a leaf node."  gold='push(7)'
+  [11] ✗ pred='2->7'  gold='set_parent(7, 6)'
+  [12] ✗ pred='8 is already in the frontier, so no change needed.'  gold='pop(7)'
+  [13] ✓ pred='visit(7)'  gold='visit(7)'
+  [14] ✗ pred='2 is already in the queue, so no change needed.'  gold='pop(8)'
+  [15] ✗ pred='visit(6)'  gold='visit(8)'
+  [16] ✗ pred='8 is already visited, so no further operations needed.'  gold='push(5)'
+  [17] ✗ pred="5 is not in the parent dictionary, so it's added to the parent dictionary."  gold='set_parent(5, 8)'
+  [18] ✗ pred='5->(9)'  gold='push(3)'
+  [19] ✗ pred='5 is already in the queue, so no change needed.'  gold='set_parent(3, 8)'
+  [20] ✗ pred='3->8'  gold='push(1)'
+  [21] ✗ pred='3 is already in state 1, so no change needed.'  gold='set_parent(1, 8)'
+  [22] ✗ pred='1 is pushed to frontier [5, 3, 1]'  gold='pop(1)'
+  [23] ✗ pred='8 is already visited, so no further operations can be performed.'  gold='visit(1)'
+  [24] ✗ pred='2 is already visited, so no further operations can be performed.'  gold='push(9)'
+  [25] ✗ pred='1 is already in the same subgraph, so no change needed.'  gold='set_parent(9, 1)'
+  [26] ✗ pred='9 is already in the current state, so no change occurs.'  gold='push(0)'
+  [27] ✗ pred='1 is already in the subgraph, so no change needed.'  gold='set_parent(0, 1)'
+  [28] ✗ pred='1->2'  gold='pop(0)'
+  [29] ✗ pred='2 is already visited, so skip this step.'  gold='visit(0)'
+  [30] ✗ pred='29 is already pushed to the stack, so no further operations will be performed.'  gold='push(9)'
+  [31] ✗ pred='1 is not in graph, so skip this step.'  gold='set_parent(9, 0)'
+  [32] ✗ pred='1 push(3)'  gold='push(3)'
+  [33] ✗ pred='1'  gold='set_parent(3, 0)'
+  [34] ✗ pred='3 is already in the queue, so no further steps are needed.'  gold='pop(3)'
+  [35] ✓ pred='visit(3)'  gold='visit(3)'
+  [36] ✗ pred='2->3'  gold='push(9)'
+  [37] ✗ pred='9 is already in the queue, so no further operations will be performed.'  gold='set_parent(9, 3)'
+  [38] ✗ pred='3->9'  gold='push(4)'
+  [39] ✗ pred='4 is already in the queue, so skip this step.'  gold='set_parent(4, 3)'
+  [40] ✗ pred='4 is already in the graph, so skip it.'  gold='pop(4)'
+  [41] ✓ pred='visit(4)'  gold='visit(4)'
+  [42] ✗ pred='3->9'  gold='pop(9)'
+  [43] ✗ pred='3->4'  gold='visit(9)'
+  [44] ✗ pred='1'  gold='push(5)'
+  [45] ✗ pred='5 is already in the frontier, so skip this step.'  gold='set_parent(5, 9)'
+  [46] ✗ pred='5 is not in the current state, so we continue to explore further.'  gold='pop(5)'
+  [47] ✗ pred='9 is not in the current state, so continue to next level of recursion.'  gold='visit(5)'
+  [48] ✗ pred='5 is not in the current state, so we continue to explore further.'  gold='pop(9)'
+  [49] ✗ pred='5 is not in the current state, so continue to next level of recursion.'  gold='pop(9)'
+  [50] ✗ pred='5 is not in the graph, so we stop here.'  gold='pop(3)'
+  [51] ✗ pred='5 is not in the current state, so we continue to the next iteration.'  gold='pop(5)'
+[4/5] dfs source=7 gold_len=64 (zero-shot)
+  [0] ✗ pred='7: visited=[7], frontier=[], distances={}, parent={}'  gold='push(7)'
+  [1] ✗ pred='7 is pushed into the stack.'  gold='set_parent(7, None)'
+  [2] ✗ pred='7 -> 5'  gold='pop(7)'
+  [3] ✗ pred='7 is visited[7]'  gold='visit(7)'
+  [4] ✗ pred='7 is not in any subgraph, so no further operations are performed.'  gold='push(8)'
+  [5] ✗ pred='7 -> 8'  gold='set_parent(8, 7)'
+  [6] ✗ pred="8 is not in frontier, so it's pushed to frontier"  gold='push(5)'
+  [7] ✗ pred='7->(5)'  gold='set_parent(5, 7)'
+  [8] ✗ pred='5->6'  gold='pop(5)'
+  [9] ✗ pred='7->8'  gold='visit(5)'
+  [10] ✗ pred='7->8'  gold='push(6)'
+  [11] ✗ pred='7 is already in the parent dictionary, so no change needed.'  gold='set_parent(6, 5)'
+  [12] ✗ pred="6 is not in the parent dictionary, so it's pushed to the parent dictionary."  gold='push(1)'
+  [13] ✗ pred="1 is not in parent dictionary, so it's a new node"  gold='set_parent(1, 5)'
+  [14] ✗ pred='1->(4)'  gold='push(0)'
+  [15] ✗ pred="1 is not in parent dictionary, so it's a new node"  gold='set_parent(0, 5)'
+  [16] ✗ pred='5->6'  gold='pop(0)'
+  [17] ✓ pred='visit(0)'  gold='visit(0)'
+  [18] ✗ pred='7 is already visited, so no change needed.'  gold='push(8)'
+  [19] ✗ pred='visit(8)'  gold='set_parent(8, 0)'
+  [20] ✗ pred='visit(8)'  gold='push(6)'
+  [21] ✗ pred='6 is already in state 0, so no change needed.'  gold='set_parent(6, 0)'
+  [22] ✗ pred='6 is already in the current subtree, so skip this step.'  gold='pop(6)'
+  [23] ✓ pred='visit(6)'  gold='visit(6)'
+  [24] ✗ pred='7 is already visited, so no further operations needed.'  gold='push(2)'
+  [25] ✗ pred='2 is not in parent dictionary, so add it to parent'  gold='set_parent(2, 6)'
+  [26] ✗ pred='2 is not in frontier, so push it back to queue'  gold='push(1)'
+  [27] ✗ pred='1 is already in state 6, so no change needed.'  gold='set_parent(1, 6)'
+  [28] ✗ pred='1->(3)'  gold='pop(1)'
+  [29] ✗ pred='7 is already visited, so skip this step.'  gold='visit(1)'
+  [30] ✗ pred='7 is already visited, so skip this step.'  gold='push(9)'
+  [31] ✗ pred='Set parent(9, 6)'  gold='set_parent(9, 1)'
+  [32] ✗ pred='9 is already in the queue, so no further steps are needed.'  gold='push(8)'
+  [33] ✗ pred='1 is not in subgraph (8), so ignore it'  gold='set_parent(8, 1)'
+  [34] ✗ pred='8 is already in the current subtree, so skip this step.'  gold='push(4)'
+  [35] ✗ pred="4 is already in the queue, so it's not pushed again."  gold='set_parent(4, 1)'
+  [36] ✗ pred='4->(4)'  gold='pop(4)'
+  [37] ✓ pred='visit(4)'  gold='visit(4)'
+  [38] ✗ pred='7 is already in the queue, so no further operations will be performed.'  gold='push(9)'
+  [39] ✗ pred='1 is not in graph, so ignore this step.'  gold='set_parent(9, 4)'
+  [40] ✗ pred='4->9'  gold='push(2)'
+  [41] ✗ pred='Set parent(2, 9)'  gold='set_parent(2, 4)'
+  [42] ✗ pred='42.1 pop(2)'  gold='pop(2)'
+  [43] ✓ pred='visit(2)'  gold='visit(2)'
+  [44] ✗ pred='1 push(3)'  gold='push(3)'
+  [45] ✗ pred='Set parent(3, 2)'  gold='set_parent(3, 2)'
+  [46] ✗ pred='3->(3) -> (4)->(2) -> (4)->(9) -> (5)->(0) -> (6)->(1) -> (7)->(5) -> (8)->(9) ->'  gold='pop(3)'
+  [47] ✓ pred='visit(3)'  gold='visit(3)'
+  [48] ✗ pred='3->4'  gold='push(8)'
+  [49] ✗ pred='Set parent(8, 3)'  gold='set_parent(8, 3)'
+  [50] ✗ pred='8 is already in the stack, so we skip it.'  gold='pop(8)'
+  [51] ✗ pred='8 is not in the current state, so continue to next level of recursion.'  gold='visit(8)'
+  [52] ✗ pred='8 is already in the queue, so we can stop here.'  gold='push(9)'
+  [53] ✗ pred='9 is already in the queue, so we skip this step.'  gold='set_parent(9, 8)'
+  [54] ✗ pred='9 is already in the queue, so we can stop here.'  gold='pop(9)'
+  [55] ✗ pred='8 is already in the queue, so we can stop here.'  gold='visit(9)'
+  [56] ✗ pred='9 is already in the queue, so we can stop here.'  gold='pop(9)'
+  [57] ✗ pred='9 is not in the graph, so we stop here.'  gold='pop(8)'
+  [58] ✗ pred='8 is already in the queue, so we can stop here.'  gold='pop(9)'
+  [59] ✗ pred='7 is popped out of the frontier because it has no parent.'  gold='pop(2)'
+  [60] ✗ pred='7 is popped out of the frontier because it has no parent.'  gold='pop(8)'
+  [61] ✗ pred='7 is popped because it has no unvisited neighbors.'  gold='pop(1)'
+  [62] ✗ pred='7 is the only reachable node at this point. We can return to it using the parent dictionary.'  gold='pop(6)'
+  [63] ✗ pred='7 is popped out of the graph. The algorithm has finished executing.'  gold='pop(8)'
+[5/5] dfs source=0 gold_len=49 (zero-shot)
+  [0] ✗ pred='0: [visited=[0], frontier=[], distances={}, parent={}]'  gold='push(0)'
+  [1] ✗ pred='0 -> 4'  gold='set_parent(0, None)'
+  [2] ✗ pred='0 -> 4'  gold='pop(0)'
+  [3] ✗ pred='0 is not in any subgraph, so no further operations needed.'  gold='visit(0)'
+  [4] ✗ pred='0 is not in any subgraph, so no further operations are performed.'  gold='push(9)'
+  [5] ✗ pred="9 is not in parent dictionary, so it's added to parent dictionary with value None"  gold='set_parent(9, 0)'
+  [6] ✗ pred='0->9'  gold='push(8)'
+  [7] ✗ pred='8->9'  gold='set_parent(8, 0)'
+  [8] ✗ pred='8 is not in the graph, so no further operations can be performed.'  gold='push(7)'
+  [9] ✗ pred='visit(7)'  gold='set_parent(7, 0)'
+  [10] ✗ pred="9 is not in the frontier, so it's pushed to the frontier"  gold='push(4)'
+  [11] ✗ pred='4 is already in the queue, so no change needed.'  gold='set_parent(4, 0)'
+  [12] ✗ pred='4 -> 5'  gold='pop(4)'
+  [13] ✓ pred='visit(4)'  gold='visit(4)'
+  [14] ✗ pred='4->7'  gold='push(5)'
+  [15] ✗ pred="5 is not in parent dictionary, so it's pushed to parent dictionary"  gold='set_parent(5, 4)'
+  [16] ✗ pred='5->(6)'  gold='push(3)'
+  [17] ✗ pred='5 is already in the queue, so no change needed.'  gold='set_parent(3, 4)'
+  [18] ✗ pred='3->(6)'  gold='pop(3)'
+  [19] ✓ pred='visit(3)'  gold='visit(3)'
+  [20] ✗ pred='3->(6)'  gold='push(6)'
+  [21] ✗ pred='6 is already in the current subtree, so skip this step.'  gold='set_parent(6, 3)'
+  [22] ✗ pred='3->6'  gold='push(1)'
+  [23] ✗ pred='1 is already in the same subgraph with distance 3, so skip this step.'  gold='set_parent(1, 3)'
+  [24] ✗ pred='1->(3)'  gold='pop(1)'
+  [25] ✗ pred='4->5'  gold='visit(1)'
+  [26] ✗ pred='4->5'  gold='pop(6)'
+  [27] ✗ pred='4 is already visited, so skip this step.'  gold='visit(6)'
+  [28] ✗ pred='4->5'  gold='push(5)'
+  [29] ✗ pred='Set parent(5, 6)'  gold='set_parent(5, 6)'
+  [30] ✗ pred='5 is already in the current subtree, so skip this step.'  gold='pop(5)'
+  [31] ✓ pred='visit(5)'  gold='visit(5)'
+  [32] ✗ pred='1 push(8)'  gold='push(8)'
+  [33] ✗ pred='Set parent for 8 to 6'  gold='set_parent(8, 5)'
+  [34] ✗ pred='8 is already in the queue, so skip this step.'  gold='pop(8)'
+  [35] ✓ pred='visit(8)'  gold='visit(8)'
+  [36] ✗ pred='1 push(7)'  gold='push(9)'
+  [37] ✗ pred='9 is already in the queue, so skip this step.'  gold='set_parent(9, 8)'
+  [38] ✗ pred='9 is already in the queue, so skip this step.'  gold='pop(9)'
+  [39] ✓ pred='visit(9)'  gold='visit(9)'
+  [40] ✗ pred='1 push(7)'  gold='push(2)'
+  [41] ✗ pred='2 is not in the graph, so skip this step.'  gold='set_parent(2, 9)'
+  [42] ✗ pred='2 is not in frontier, so continue to next level of recursion'  gold='pop(2)'
+  [43] ✗ pred='2 is not in frontier, so continue to next state.'  gold='visit(2)'
+  [44] ✗ pred='2->(3)'  gold='pop(5)'
+  [45] ✗ pred='2->(3)'  gold='pop(7)'
+  [46] ✗ pred='2->(3)'  gold='visit(7)'
+  [47] ✗ pred='2->(3)'  gold='pop(8)'
+  [48] ✗ pred='visit(8)'  gold='pop(9)'
+Saved 5 predictions to out/baseline_dfs/pred_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mScoring → out/baseline_dfs/metrics_dfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:          5
+Total steps:      278
+Step accuracy:    0.0719
+Trace accuracy:   0.0000
+Mean first-error step: 0.00
+Mean coverage:    1.0000
+
+Wrote metrics to out/baseline_dfs/metrics_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mFailure analysis → out/baseline_dfs/failures_dfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:                 5
+Total gold steps:        278
+Overall step accuracy:   0.0719
+Overall failure rate:    0.9281
+Mean first-error step:   0.00
+
+Failure rate by phase:
+   early: 0.9560
+  middle: 0.9451
+    late: 0.8854
+
+Top operation confusions:
+  push(2) -> 2: visited=[2], frontier=[], distances={}, parent={} (n=2)
+  pop(2) -> 2 -> 3 (n=2)
+  push(9) -> 2 is already visited, so no further operations can be performed. (n=2)
+  push(7) -> 8 is not in the graph, so no further operations can be performed. (n=2)
+  push(4) -> 9 is not in the frontier, so it's pushed to the frontier (n=2)
+  set_parent(7, 0) -> visit(7) (n=2)
+  push(3) -> 1 push(3) (n=2)
+  pop(1) -> 1->(3) (n=2)
+  pop(9) -> 9 is already in the queue, so we can stop here. (n=2)
+  set_parent(2, None) -> 2 -> 3 (n=1)
+
+Wrote failure analysis to out/baseline_dfs/failures_dfs_erdos_renyi_n10_c5_s100.json
+[pipeline] Wrote run manifest: out/baseline_dfs/run_manifest_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mDone[0m
+  trace file:  data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json
+  predictions: out/baseline_dfs/pred_dfs_erdos_renyi_n10_c5_s100.json
+  metrics:     out/baseline_dfs/metrics_dfs_erdos_renyi_n10_c5_s100.json
+  failures:    out/baseline_dfs/failures_dfs_erdos_renyi_n10_c5_s100.json
+  manifest:    out/baseline_dfs/run_manifest_dfs_erdos_renyi_n10_c5_s100.json
+  log file:    out/baseline_dfs/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_161256.log

@@ -1,0 +1,10 @@
+{
+  "failure_rate_by_step_bucket": {"early": 0.45, "middle": 0.35, "late": 0.25},
+  "top_operation_confusions": [{"count": 120}, {"count": 95}, {"count": 80}],
+  "failure_rate_by_gold_operation_type": {
+    "enqueue": 0.22,
+    "dequeue": 0.31,
+    "set_parent": 0.18,
+    "mark_visited": 0.12
+  }
+}

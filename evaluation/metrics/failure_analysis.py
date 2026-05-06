@@ -21,6 +21,8 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from evaluation.metrics.operation_normalize import operations_match
+
 
 def _op_type(op: str | None) -> str:
     if not op:
@@ -108,7 +110,7 @@ def analyze(predictions: list[dict]) -> dict:
                 continue
 
             pred_op = p.get("operation_predicted")
-            is_match = pred_op == gold_op
+            is_match = operations_match(pred_op, gold_op, algorithm=algo)
             applied = bool(p.get("applied", False))
 
             if is_match:

@@ -1,0 +1,267 @@
+{
+  "n_samples": 5,
+  "total_gold_steps": 278,
+  "total_matches": 31,
+  "total_failures": 247,
+  "overall_step_accuracy": 0.11151079136690648,
+  "overall_failure_rate": 0.8884892086330936,
+  "samples_with_any_error": 5,
+  "mean_first_error_step": 1.0,
+  "error_type_counts": {
+    "wrong_operation": 247
+  },
+  "failure_rate_by_algorithm": {
+    "dfs": 0.8884892086330936
+  },
+  "failure_rate_by_step_bucket": {
+    "early": 0.8351648351648352,
+    "middle": 0.8901098901098901,
+    "late": 0.9375
+  },
+  "failure_rate_by_step_index": {
+    "0": 0.0,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 0.0,
+    "4": 1.0,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 0.8,
+    "12": 1.0,
+    "13": 0.8,
+    "14": 1.0,
+    "15": 0.6,
+    "16": 1.0,
+    "17": 0.8,
+    "18": 1.0,
+    "19": 0.8,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 0.6,
+    "24": 1.0,
+    "25": 0.6,
+    "26": 1.0,
+    "27": 0.8,
+    "28": 1.0,
+    "29": 0.6,
+    "30": 1.0,
+    "31": 0.8,
+    "32": 1.0,
+    "33": 0.8,
+    "34": 1.0,
+    "35": 0.6,
+    "36": 1.0,
+    "37": 1.0,
+    "38": 1.0,
+    "39": 1.0,
+    "40": 1.0,
+    "41": 1.0,
+    "42": 1.0,
+    "43": 1.0,
+    "44": 1.0,
+    "45": 1.0,
+    "46": 0.8,
+    "47": 1.0,
+    "48": 0.8,
+    "49": 1.0,
+    "50": 1.0,
+    "51": 1.0,
+    "52": 1.0,
+    "53": 0.5,
+    "54": 1.0,
+    "55": 0.5,
+    "56": 1.0,
+    "57": 1.0,
+    "58": 1.0,
+    "59": 1.0,
+    "60": 1.0,
+    "61": 1.0,
+    "62": 1.0,
+    "63": 1.0
+  },
+  "failure_rate_by_gold_operation_type": {
+    "pop": 1.0,
+    "push": 0.9342105263157895,
+    "set_parent": 1.0,
+    "visit": 0.48
+  },
+  "top_operation_confusions": [
+    {
+      "gold_operation": "push(8)",
+      "predicted_operation": "<missing>",
+      "count": 13
+    },
+    {
+      "gold_operation": "pop(8)",
+      "predicted_operation": "<missing>",
+      "count": 13
+    },
+    {
+      "gold_operation": "pop(9)",
+      "predicted_operation": "<missing>",
+      "count": 12
+    },
+    {
+      "gold_operation": "push(9)",
+      "predicted_operation": "<missing>",
+      "count": 11
+    },
+    {
+      "gold_operation": "push(5)",
+      "predicted_operation": "<missing>",
+      "count": 8
+    },
+    {
+      "gold_operation": "pop(5)",
+      "predicted_operation": "<missing>",
+      "count": 8
+    },
+    {
+      "gold_operation": "push(4)",
+      "predicted_operation": "<missing>",
+      "count": 7
+    },
+    {
+      "gold_operation": "pop(4)",
+      "predicted_operation": "<missing>",
+      "count": 7
+    },
+    {
+      "gold_operation": "pop(7)",
+      "predicted_operation": "<missing>",
+      "count": 7
+    },
+    {
+      "gold_operation": "pop(2)",
+      "predicted_operation": "<missing>",
+      "count": 6
+    },
+    {
+      "gold_operation": "push(3)",
+      "predicted_operation": "<missing>",
+      "count": 6
+    },
+    {
+      "gold_operation": "pop(3)",
+      "predicted_operation": "<missing>",
+      "count": 6
+    },
+    {
+      "gold_operation": "push(7)",
+      "predicted_operation": "<missing>",
+      "count": 6
+    },
+    {
+      "gold_operation": "push(1)",
+      "predicted_operation": "<missing>",
+      "count": 6
+    },
+    {
+      "gold_operation": "pop(1)",
+      "predicted_operation": "<missing>",
+      "count": 6
+    },
+    {
+      "gold_operation": "push(6)",
+      "predicted_operation": "<missing>",
+      "count": 6
+    },
+    {
+      "gold_operation": "pop(6)",
+      "predicted_operation": "<missing>",
+      "count": 6
+    },
+    {
+      "gold_operation": "pop(0)",
+      "predicted_operation": "<missing>",
+      "count": 5
+    },
+    {
+      "gold_operation": "visit(4)",
+      "predicted_operation": "<missing>",
+      "count": 5
+    },
+    {
+      "gold_operation": "push(0)",
+      "predicted_operation": "<missing>",
+      "count": 4
+    },
+    {
+      "gold_operation": "visit(5)",
+      "predicted_operation": "<missing>",
+      "count": 4
+    },
+    {
+      "gold_operation": "visit(6)",
+      "predicted_operation": "<missing>",
+      "count": 4
+    },
+    {
+      "gold_operation": "push(2)",
+      "predicted_operation": "<missing>",
+      "count": 4
+    },
+    {
+      "gold_operation": "set_parent(9, 1)",
+      "predicted_operation": "<missing>",
+      "count": 3
+    },
+    {
+      "gold_operation": "set_parent(8, 0)",
+      "predicted_operation": "<missing>",
+      "count": 3
+    }
+  ],
+  "per_sample": [
+    {
+      "algorithm": "dfs",
+      "source": 2,
+      "n_gold_steps": 52,
+      "n_failures": 45,
+      "step_accuracy": 0.1346153846153846,
+      "first_error_step": 1,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "dfs",
+      "source": 9,
+      "n_gold_steps": 61,
+      "n_failures": 54,
+      "step_accuracy": 0.11475409836065574,
+      "first_error_step": 1,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "dfs",
+      "source": 2,
+      "n_gold_steps": 52,
+      "n_failures": 45,
+      "step_accuracy": 0.1346153846153846,
+      "first_error_step": 1,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "dfs",
+      "source": 7,
+      "n_gold_steps": 64,
+      "n_failures": 60,
+      "step_accuracy": 0.0625,
+      "first_error_step": 1,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "dfs",
+      "source": 0,
+      "n_gold_steps": 49,
+      "n_failures": 43,
+      "step_accuracy": 0.12244897959183673,
+      "first_error_step": 1,
+      "n_invalid_or_runtime_errors": 0
+    }
+  ]
+}

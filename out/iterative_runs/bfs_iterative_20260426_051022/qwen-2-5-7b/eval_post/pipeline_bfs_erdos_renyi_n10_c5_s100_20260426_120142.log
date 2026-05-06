@@ -1,0 +1,46 @@
+[pipeline] Unified log: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_120142.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model
+  adapter:   (none — base model)
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     100        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post
+  log_file:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_120142.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mDataset (reusing data/traces/pipe_bfs_erdos_renyi_n10_c5_s100.json)[0m
+
+[1;34m==>[0m [1mInference → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/eval_post/pred_bfs_erdos_renyi_n10_c5_s100.json[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/inference/run_inference.py", line 412, in <module>
+    main()
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/inference/run_inference.py", line 353, in main
+    model, tokenizer = load_model(
+                       ^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/inference/run_inference.py", line 119, in load_model
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/venv/lib/python3.11/site-packages/transformers/models/auto/tokenization_auto.py", line 816, in from_pretrained
+    return tokenizer_class.from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/venv/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 1729, in from_pretrained
+    return cls._from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/venv/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 1918, in _from_pretrained
+    tokenizer = cls(*init_inputs, **init_kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/venv/lib/python3.11/site-packages/transformers/tokenization_utils_tokenizers.py", line 376, in __init__
+    raise ValueError(
+ValueError: Couldn't instantiate the backend tokenizer from one of: 
+(1) a `tokenizers` library serialization file, 
+(2) a slow tokenizer instance to convert or 
+(3) an equivalent slow tokenizer class to instantiate and convert. 
+You need to have sentencepiece or tiktoken installed to convert a slow tokenizer to a fast one.
+Loading model /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/bfs_iterative_20260426_051022/qwen-2-5-7b/post_retrain_model

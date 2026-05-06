@@ -31,12 +31,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from training.teacher_forcing import (
-    SYSTEM_PROMPT,
     format_prompt,
     format_trace_completion,
     _format_state,
     _format_subgraph,
 )
+
+from evaluation.metrics.operation_normalize import extract_operation_call
 
 
 def build_few_shot_messages(
@@ -100,14 +101,17 @@ def build_partial_completion(trace: list[dict]) -> str:
 
 def extract_operation(generated_text: str) -> str:
     """
-    Given text generated after a `Step <t>: ` prime, return just the
-    operation string on the first line (stripped).
+    Given text generated after a `Step <t>: ` prime, return an operation
+    string ``op(args)`` suitable for the state executor and metrics.
+
+    Models often emit a ``Step t:`` prefix, wrong casing, or even a short
+    natural-language line; we therefore parse the first well-formed
+    ``name(args)`` call when possible.
     """
-    return generated_text.split("\n", 1)[0].strip()
+    return extract_operation_call(generated_text)
 
 
 __all__ = [
-    "SYSTEM_PROMPT",
     "format_prompt",
     "format_step_line",
     "build_partial_completion",

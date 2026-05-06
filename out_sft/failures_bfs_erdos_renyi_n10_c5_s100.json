@@ -1,0 +1,243 @@
+{
+  "n_samples": 5,
+  "total_gold_steps": 200,
+  "total_matches": 124,
+  "total_failures": 76,
+  "overall_step_accuracy": 0.62,
+  "overall_failure_rate": 0.38,
+  "samples_with_any_error": 5,
+  "mean_first_error_step": 6.6,
+  "error_type_counts": {
+    "wrong_operation": 76
+  },
+  "failure_rate_by_algorithm": {
+    "bfs": 0.38
+  },
+  "failure_rate_by_step_bucket": {
+    "early": 0.2153846153846154,
+    "middle": 0.4153846153846154,
+    "late": 0.5
+  },
+  "failure_rate_by_step_index": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.2,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.2,
+    "7": 0.0,
+    "8": 0.6,
+    "9": 0.2,
+    "10": 0.8,
+    "11": 0.0,
+    "12": 0.8,
+    "13": 0.0,
+    "14": 0.8,
+    "15": 0.0,
+    "16": 1.0,
+    "17": 0.0,
+    "18": 0.8,
+    "19": 0.0,
+    "20": 0.8,
+    "21": 0.0,
+    "22": 1.0,
+    "23": 0.0,
+    "24": 1.0,
+    "25": 0.0,
+    "26": 0.8,
+    "27": 0.0,
+    "28": 1.0,
+    "29": 0.0,
+    "30": 0.8,
+    "31": 0.0,
+    "32": 1.0,
+    "33": 0.0,
+    "34": 1.0,
+    "35": 0.2,
+    "36": 1.0,
+    "37": 0.0,
+    "38": 1.0,
+    "39": 0.2
+  },
+  "failure_rate_by_gold_operation_type": {
+    "dequeue": 0.9,
+    "enqueue": 0.56,
+    "mark_visited": 0.04,
+    "set_parent": 0.02
+  },
+  "top_operation_confusions": [
+    {
+      "gold_operation": "dequeue(1)",
+      "predicted_operation": "(empty)",
+      "count": 3
+    },
+    {
+      "gold_operation": "dequeue(9)",
+      "predicted_operation": "(no further nodes to process)",
+      "count": 2
+    },
+    {
+      "gold_operation": "dequeue(5)",
+      "predicted_operation": "# All nodes have been visited, no more operations needed.",
+      "count": 2
+    },
+    {
+      "gold_operation": "enqueue(3)",
+      "predicted_operation": "(no action needed for this step)",
+      "count": 2
+    },
+    {
+      "gold_operation": "enqueue(1)",
+      "predicted_operation": "(empty)",
+      "count": 2
+    },
+    {
+      "gold_operation": "set_parent(8, 2)",
+      "predicted_operation": "# No parent set for 8, so no set_parent operation needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(3)",
+      "predicted_operation": "# No more nodes to process in this step",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(1)",
+      "predicted_operation": "(no operation needed for this step)",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(7)",
+      "predicted_operation": "enqueue(9)",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(9)",
+      "predicted_operation": "# No more nodes to process",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(4)",
+      "predicted_operation": "# No more nodes in the frontier, algorithm terminates",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(5)",
+      "predicted_operation": "(no further operations needed as no more nodes are connected to 4)",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(8)",
+      "predicted_operation": "(End of BFS)",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(0)",
+      "predicted_operation": "(no further nodes to process, algorithm terminates)",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(7)",
+      "predicted_operation": "0 is the target node, so the BFS traversal is complete.",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(6)",
+      "predicted_operation": "# All nodes have been visited, no more operations needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(0)",
+      "predicted_operation": "# All nodes have been visited, no more operations needed.",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(6)",
+      "predicted_operation": "(empty)",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(5)",
+      "predicted_operation": "# No action needed for 7 since it's not connected to 9",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(7)",
+      "predicted_operation": "# No more nodes to process in this level, move to the next level",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(8)",
+      "predicted_operation": "# No more nodes to process",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(0)",
+      "predicted_operation": "(No more nodes to process in the frontier)",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(2)",
+      "predicted_operation": "(no action, no children for 0)",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(4)",
+      "predicted_operation": "enqueue(8)",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(5)",
+      "predicted_operation": "(empty)",
+      "count": 1
+    }
+  ],
+  "per_sample": [
+    {
+      "algorithm": "bfs",
+      "source": 2,
+      "n_gold_steps": 40,
+      "n_failures": 16,
+      "step_accuracy": 0.6,
+      "first_error_step": 9,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "bfs",
+      "source": 9,
+      "n_gold_steps": 40,
+      "n_failures": 15,
+      "step_accuracy": 0.625,
+      "first_error_step": 8,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "bfs",
+      "source": 2,
+      "n_gold_steps": 40,
+      "n_failures": 14,
+      "step_accuracy": 0.65,
+      "first_error_step": 8,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "bfs",
+      "source": 7,
+      "n_gold_steps": 40,
+      "n_failures": 15,
+      "step_accuracy": 0.625,
+      "first_error_step": 6,
+      "n_invalid_or_runtime_errors": 0
+    },
+    {
+      "algorithm": "bfs",
+      "source": 0,
+      "n_gold_steps": 40,
+      "n_failures": 16,
+      "step_accuracy": 0.6,
+      "first_error_step": 2,
+      "n_invalid_or_runtime_errors": 0
+    }
+  ]
+}

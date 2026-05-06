@@ -1,0 +1,19 @@
+{
+  "n_samples": 1,
+  "total_steps": 8,
+  "total_correct": 8,
+  "step_accuracy": 1.0,
+  "trace_accuracy": 1.0,
+  "mean_first_error_step": null,
+  "mean_coverage": 1.0,
+  "per_sample": [
+    {
+      "n_steps": 8,
+      "n_correct": 8,
+      "step_accuracy": 1.0,
+      "trace_correct": true,
+      "first_error_step": null,
+      "coverage": 1.0
+    }
+  ]
+}

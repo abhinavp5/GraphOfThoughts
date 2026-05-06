@@ -1,0 +1,373 @@
+[pipeline] Unified log: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_155836.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-7B-Instruct
+  adapter:   /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/pre_sft_adapter
+  algorithm: dfs    family: erdos_renyi    n=10    count=5
+  limit:     100        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre
+  log_file:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_155836.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mDataset generation → data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json[0m
+  1/5 samples generated
+  2/5 samples generated
+  3/5 samples generated
+  4/5 samples generated
+  5/5 samples generated
+
+Saved 5 traces to data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mInference → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/pred_dfs_erdos_renyi_n10_c5_s100.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading model Qwen/Qwen2.5-7B-Instruct + adapter /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/pre_sft_adapter
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:00<02:36,  2.16it/s]Loading weights:   1%|          | 2/339 [00:00<01:51,  3.03it/s]Loading weights:   7%|▋         | 24/339 [00:00<00:06, 46.53it/s]Loading weights:  10%|█         | 34/339 [00:00<00:05, 56.87it/s]Loading weights:  13%|█▎        | 44/339 [00:01<00:04, 59.79it/s]Loading weights:  18%|█▊        | 60/339 [00:01<00:03, 73.31it/s]Loading weights:  22%|██▏       | 76/339 [00:01<00:03, 75.05it/s]Loading weights:  27%|██▋       | 90/339 [00:01<00:03, 80.94it/s]Loading weights:  30%|███       | 102/339 [00:01<00:03, 76.53it/s]Loading weights:  35%|███▌      | 120/339 [00:01<00:02, 97.24it/s]Loading weights:  39%|███▉      | 132/339 [00:02<00:02, 91.69it/s]Loading weights:  42%|████▏     | 144/339 [00:02<00:02, 93.42it/s]Loading weights:  46%|████▌     | 155/339 [00:02<00:02, 86.18it/s]Loading weights:  49%|████▊     | 165/339 [00:02<00:01, 88.33it/s]Loading weights:  52%|█████▏    | 175/339 [00:02<00:01, 88.09it/s]Loading weights:  57%|█████▋    | 194/339 [00:02<00:01, 101.68it/s]Loading weights:  61%|██████    | 206/339 [00:02<00:01, 99.13it/s] Loading weights:  64%|██████▎   | 216/339 [00:02<00:01, 94.24it/s]Loading weights:  68%|██████▊   | 230/339 [00:03<00:01, 99.83it/s]Loading weights:  71%|███████   | 241/339 [00:03<00:00, 101.00it/s]Loading weights:  74%|███████▍  | 252/339 [00:03<00:00, 99.64it/s] Loading weights:  77%|███████▋  | 262/339 [00:03<00:01, 74.94it/s]Loading weights:  80%|███████▉  | 271/339 [00:04<00:02, 28.56it/s]Loading weights:  83%|████████▎ | 282/339 [00:04<00:01, 34.19it/s]Loading weights:  86%|████████▋ | 293/339 [00:04<00:01, 39.76it/s]Loading weights:  90%|████████▉ | 305/339 [00:04<00:00, 42.32it/s]Loading weights:  94%|█████████▎| 317/339 [00:05<00:00, 40.71it/s]Loading weights:  97%|█████████▋| 329/339 [00:05<00:00, 44.93it/s]Loading weights: 100%|██████████| 339/339 [00:05<00:00, 61.76it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[1/5] dfs source=2 gold_len=52 (zero-shot)
+  [0] ✓ pred='push(2)'  gold='push(2)'
+  [1] ✗ pred=''  gold='set_parent(2, None)'
+  [2] ✗ pred=''  gold='pop(2)'
+  [3] ✓ pred='visit(2)'  gold='visit(2)'
+  [4] ✗ pred=''  gold='push(8)'
+  [5] ✗ pred=''  gold='set_parent(8, 2)'
+  [6] ✗ pred=''  gold='push(4)'
+  [7] ✗ pred=''  gold='set_parent(4, 2)'
+  [8] ✗ pred=''  gold='push(3)'
+  [9] ✗ pred=''  gold='set_parent(3, 2)'
+  [10] ✗ pred=''  gold='pop(3)'
+  [11] ✓ pred='visit(3)'  gold='visit(3)'
+  [12] ✗ pred=''  gold='push(9)'
+  [13] ✗ pred=''  gold='set_parent(9, 3)'
+  [14] ✗ pred=''  gold='push(7)'
+  [15] ✗ pred=''  gold='set_parent(7, 3)'
+  [16] ✗ pred=''  gold='push(1)'
+  [17] ✗ pred=''  gold='set_parent(1, 3)'
+  [18] ✗ pred=''  gold='pop(1)'
+  [19] ✓ pred='visit(1)'  gold='visit(1)'
+  [20] ✗ pred=''  gold='push(9)'
+  [21] ✗ pred=''  gold='set_parent(9, 1)'
+  [22] ✗ pred=''  gold='push(0)'
+  [23] ✗ pred=''  gold='set_parent(0, 1)'
+  [24] ✗ pred=''  gold='pop(0)'
+  [25] ✓ pred='visit(0)'  gold='visit(0)'
+  [26] ✗ pred=''  gold='push(9)'
+  [27] ✗ pred=''  gold='set_parent(9, 0)'
+  [28] ✗ pred=''  gold='pop(9)'
+  [29] ✓ pred='visit(9)'  gold='visit(9)'
+  [30] ✗ pred=''  gold='push(6)'
+  [31] ✗ pred=''  gold='set_parent(6, 9)'
+  [32] ✗ pred=''  gold='push(4)'
+  [33] ✗ pred=''  gold='set_parent(4, 9)'
+  [34] ✗ pred=''  gold='pop(4)'
+  [35] ✗ pred=''  gold='visit(4)'
+  [36] ✗ pred=''  gold='push(5)'
+  [37] ✗ pred=''  gold='set_parent(5, 4)'
+  [38] ✗ pred=''  gold='pop(5)'
+  [39] ✗ pred=''  gold='visit(5)'
+  [40] ✗ pred=''  gold='push(8)'
+  [41] ✗ pred=''  gold='set_parent(8, 5)'
+  [42] ✗ pred=''  gold='pop(8)'
+  [43] ✗ pred=''  gold='visit(8)'
+  [44] ✗ pred=''  gold='pop(6)'
+  [45] ✗ pred=''  gold='visit(6)'
+  [46] ✗ pred=''  gold='pop(9)'
+  [47] ✗ pred=''  gold='pop(7)'
+  [48] ✓ pred='visit(7)'  gold='visit(7)'
+  [49] ✗ pred=''  gold='pop(9)'
+  [50] ✗ pred=''  gold='pop(4)'
+  [51] ✗ pred=''  gold='pop(8)'
+[2/5] dfs source=9 gold_len=61 (zero-shot)
+  [0] ✓ pred='push(9)'  gold='push(9)'
+  [1] ✗ pred=''  gold='set_parent(9, None)'
+  [2] ✗ pred=''  gold='pop(9)'
+  [3] ✓ pred='visit(9)'  gold='visit(9)'
+  [4] ✗ pred=''  gold='push(8)'
+  [5] ✗ pred=''  gold='set_parent(8, 9)'
+  [6] ✗ pred=''  gold='push(7)'
+  [7] ✗ pred=''  gold='set_parent(7, 9)'
+  [8] ✗ pred=''  gold='push(5)'
+  [9] ✗ pred=''  gold='set_parent(5, 9)'
+  [10] ✗ pred=''  gold='push(4)'
+  [11] ✗ pred=''  gold='set_parent(4, 9)'
+  [12] ✗ pred=''  gold='push(0)'
+  [13] ✗ pred=''  gold='set_parent(0, 9)'
+  [14] ✗ pred=''  gold='pop(0)'
+  [15] ✓ pred='visit(0)'  gold='visit(0)'
+  [16] ✗ pred=''  gold='push(8)'
+  [17] ✗ pred=''  gold='set_parent(8, 0)'
+  [18] ✗ pred=''  gold='push(7)'
+  [19] ✗ pred=''  gold='set_parent(7, 0)'
+  [20] ✗ pred=''  gold='push(2)'
+  [21] ✗ pred=''  gold='set_parent(2, 0)'
+  [22] ✗ pred=''  gold='pop(2)'
+  [23] ✓ pred='visit(2)'  gold='visit(2)'
+  [24] ✗ pred=''  gold='push(7)'
+  [25] ✗ pred=''  gold='set_parent(7, 2)'
+  [26] ✗ pred=''  gold='pop(7)'
+  [27] ✓ pred='visit(7)'  gold='visit(7)'
+  [28] ✗ pred=''  gold='push(8)'
+  [29] ✗ pred=''  gold='set_parent(8, 7)'
+  [30] ✗ pred=''  gold='push(1)'
+  [31] ✗ pred=''  gold='set_parent(1, 7)'
+  [32] ✗ pred=''  gold='pop(1)'
+  [33] ✓ pred='visit(1)'  gold='visit(1)'
+  [34] ✗ pred=''  gold='push(6)'
+  [35] ✗ pred=''  gold='set_parent(6, 1)'
+  [36] ✗ pred=''  gold='push(5)'
+  [37] ✗ pred=''  gold='set_parent(5, 1)'
+  [38] ✗ pred=''  gold='push(3)'
+  [39] ✗ pred=''  gold='set_parent(3, 1)'
+  [40] ✗ pred=''  gold='pop(3)'
+  [41] ✗ pred=''  gold='visit(3)'
+  [42] ✗ pred=''  gold='push(4)'
+  [43] ✗ pred=''  gold='set_parent(4, 3)'
+  [44] ✗ pred=''  gold='pop(4)'
+  [45] ✗ pred=''  gold='visit(4)'
+  [46] ✗ pred=''  gold='pop(5)'
+  [47] ✗ pred=''  gold='visit(5)'
+  [48] ✗ pred=''  gold='pop(6)'
+  [49] ✗ pred=''  gold='visit(6)'
+  [50] ✗ pred=''  gold='push(8)'
+  [51] ✗ pred=''  gold='set_parent(8, 6)'
+  [52] ✗ pred=''  gold='pop(8)'
+  [53] ✓ pred='visit(8)'  gold='visit(8)'
+  [54] ✗ pred=''  gold='pop(8)'
+  [55] ✗ pred=''  gold='pop(7)'
+  [56] ✗ pred=''  gold='pop(8)'
+  [57] ✗ pred=''  gold='pop(4)'
+  [58] ✗ pred=''  gold='pop(5)'
+  [59] ✗ pred=''  gold='pop(7)'
+  [60] ✗ pred=''  gold='pop(8)'
+[3/5] dfs source=2 gold_len=52 (zero-shot)
+  [0] ✓ pred='push(2)'  gold='push(2)'
+  [1] ✗ pred=''  gold='set_parent(2, None)'
+  [2] ✗ pred=''  gold='pop(2)'
+  [3] ✓ pred='visit(2)'  gold='visit(2)'
+  [4] ✗ pred=''  gold='push(8)'
+  [5] ✗ pred=''  gold='set_parent(8, 2)'
+  [6] ✗ pred=''  gold='push(6)'
+  [7] ✗ pred=''  gold='set_parent(6, 2)'
+  [8] ✗ pred=''  gold='pop(6)'
+  [9] ✗ pred='.visitMethod(6)'  gold='visit(6)'
+  [10] ✗ pred=''  gold='push(7)'
+  [11] ✗ pred=''  gold='set_parent(7, 6)'
+  [12] ✗ pred=''  gold='pop(7)'
+  [13] ✓ pred='visit(7)'  gold='visit(7)'
+  [14] ✗ pred=''  gold='pop(8)'
+  [15] ✓ pred='visit(8)'  gold='visit(8)'
+  [16] ✗ pred=''  gold='push(5)'
+  [17] ✗ pred=''  gold='set_parent(5, 8)'
+  [18] ✗ pred=''  gold='push(3)'
+  [19] ✗ pred=''  gold='set_parent(3, 8)'
+  [20] ✗ pred=''  gold='push(1)'
+  [21] ✗ pred=''  gold='set_parent(1, 8)'
+  [22] ✗ pred=''  gold='pop(1)'
+  [23] ✓ pred='visit(1)'  gold='visit(1)'
+  [24] ✗ pred=''  gold='push(9)'
+  [25] ✗ pred=''  gold='set_parent(9, 1)'
+  [26] ✗ pred=''  gold='push(0)'
+  [27] ✗ pred=''  gold='set_parent(0, 1)'
+  [28] ✗ pred=''  gold='pop(0)'
+  [29] ✓ pred='visit(0)'  gold='visit(0)'
+  [30] ✗ pred=''  gold='push(9)'
+  [31] ✗ pred='<tool_call>'  gold='set_parent(9, 0)'
+  [32] ✗ pred=''  gold='push(3)'
+  [33] ✗ pred=''  gold='set_parent(3, 0)'
+  [34] ✗ pred=''  gold='pop(3)'
+  [35] ✓ pred='visit(3)'  gold='visit(3)'
+  [36] ✗ pred=''  gold='push(9)'
+  [37] ✗ pred=''  gold='set_parent(9, 3)'
+  [38] ✗ pred=''  gold='push(4)'
+  [39] ✗ pred=''  gold='set_parent(4, 3)'
+  [40] ✗ pred=''  gold='pop(4)'
+  [41] ✗ pred=''  gold='visit(4)'
+  [42] ✗ pred=''  gold='pop(9)'
+  [43] ✗ pred=''  gold='visit(9)'
+  [44] ✗ pred=''  gold='push(5)'
+  [45] ✗ pred=''  gold='set_parent(5, 9)'
+  [46] ✗ pred=''  gold='pop(5)'
+  [47] ✗ pred=''  gold='visit(5)'
+  [48] ✗ pred=''  gold='pop(9)'
+  [49] ✗ pred=''  gold='pop(9)'
+  [50] ✗ pred=''  gold='pop(3)'
+  [51] ✗ pred=''  gold='pop(5)'
+[4/5] dfs source=7 gold_len=64 (zero-shot)
+  [0] ✓ pred='push(7)'  gold='push(7)'
+  [1] ✗ pred=''  gold='set_parent(7, None)'
+  [2] ✗ pred=''  gold='pop(7)'
+  [3] ✓ pred='visit(7)'  gold='visit(7)'
+  [4] ✗ pred=''  gold='push(8)'
+  [5] ✗ pred=''  gold='set_parent(8, 7)'
+  [6] ✗ pred=''  gold='push(5)'
+  [7] ✗ pred=''  gold='set_parent(5, 7)'
+  [8] ✗ pred=''  gold='pop(5)'
+  [9] ✗ pred=''  gold='visit(5)'
+  [10] ✗ pred=''  gold='push(6)'
+  [11] ✗ pred=''  gold='set_parent(6, 5)'
+  [12] ✗ pred=''  gold='push(1)'
+  [13] ✗ pred=''  gold='set_parent(1, 5)'
+  [14] ✗ pred=''  gold='push(0)'
+  [15] ✗ pred=''  gold='set_parent(0, 5)'
+  [16] ✗ pred=''  gold='pop(0)'
+  [17] ✓ pred='visit(0)'  gold='visit(0)'
+  [18] ✗ pred=''  gold='push(8)'
+  [19] ✗ pred=''  gold='set_parent(8, 0)'
+  [20] ✗ pred=''  gold='push(6)'
+  [21] ✗ pred=''  gold='set_parent(6, 0)'
+  [22] ✗ pred=''  gold='pop(6)'
+  [23] ✗ pred=''  gold='visit(6)'
+  [24] ✗ pred=''  gold='push(2)'
+  [25] ✗ pred=''  gold='set_parent(2, 6)'
+  [26] ✗ pred=''  gold='push(1)'
+  [27] ✗ pred=''  gold='set_parent(1, 6)'
+  [28] ✗ pred=''  gold='pop(1)'
+  [29] ✗ pred=''  gold='visit(1)'
+  [30] ✗ pred=''  gold='push(9)'
+  [31] ✗ pred=''  gold='set_parent(9, 1)'
+  [32] ✗ pred=''  gold='push(8)'
+  [33] ✗ pred=''  gold='set_parent(8, 1)'
+  [34] ✗ pred=''  gold='push(4)'
+  [35] ✗ pred=''  gold='set_parent(4, 1)'
+  [36] ✗ pred=''  gold='pop(4)'
+  [37] ✗ pred=''  gold='visit(4)'
+  [38] ✗ pred=''  gold='push(9)'
+  [39] ✗ pred=''  gold='set_parent(9, 4)'
+  [40] ✗ pred=''  gold='push(2)'
+  [41] ✗ pred=''  gold='set_parent(2, 4)'
+  [42] ✗ pred=''  gold='pop(2)'
+  [43] ✗ pred=''  gold='visit(2)'
+  [44] ✗ pred=''  gold='push(3)'
+  [45] ✗ pred=''  gold='set_parent(3, 2)'
+  [46] ✗ pred=''  gold='pop(3)'
+  [47] ✗ pred=''  gold='visit(3)'
+  [48] ✗ pred=''  gold='push(8)'
+  [49] ✗ pred=''  gold='set_parent(8, 3)'
+  [50] ✗ pred=''  gold='pop(8)'
+  [51] ✗ pred=''  gold='visit(8)'
+  [52] ✗ pred=''  gold='push(9)'
+  [53] ✗ pred=''  gold='set_parent(9, 8)'
+  [54] ✗ pred=''  gold='pop(9)'
+  [55] ✓ pred='visit(9)'  gold='visit(9)'
+  [56] ✗ pred=''  gold='pop(9)'
+  [57] ✗ pred=''  gold='pop(8)'
+  [58] ✗ pred=''  gold='pop(9)'
+  [59] ✗ pred=''  gold='pop(2)'
+  [60] ✗ pred=''  gold='pop(8)'
+  [61] ✗ pred=''  gold='pop(1)'
+  [62] ✗ pred=''  gold='pop(6)'
+  [63] ✗ pred=''  gold='pop(8)'
+[5/5] dfs source=0 gold_len=49 (zero-shot)
+  [0] ✓ pred='push(0)'  gold='push(0)'
+  [1] ✗ pred=''  gold='set_parent(0, None)'
+  [2] ✗ pred=''  gold='pop(0)'
+  [3] ✓ pred='visit(0)'  gold='visit(0)'
+  [4] ✗ pred=''  gold='push(9)'
+  [5] ✗ pred=''  gold='set_parent(9, 0)'
+  [6] ✗ pred=''  gold='push(8)'
+  [7] ✗ pred=''  gold='set_parent(8, 0)'
+  [8] ✗ pred=''  gold='push(7)'
+  [9] ✗ pred=''  gold='set_parent(7, 0)'
+  [10] ✗ pred=''  gold='push(4)'
+  [11] ✗ pred=''  gold='set_parent(4, 0)'
+  [12] ✗ pred=''  gold='pop(4)'
+  [13] ✗ pred=''  gold='visit(4)'
+  [14] ✗ pred=''  gold='push(5)'
+  [15] ✗ pred=''  gold='set_parent(5, 4)'
+  [16] ✗ pred=''  gold='push(3)'
+  [17] ✗ pred=''  gold='set_parent(3, 4)'
+  [18] ✗ pred=''  gold='pop(3)'
+  [19] ✗ pred=''  gold='visit(3)'
+  [20] ✗ pred=''  gold='push(6)'
+  [21] ✗ pred=''  gold='set_parent(6, 3)'
+  [22] ✗ pred=''  gold='push(1)'
+  [23] ✗ pred=''  gold='set_parent(1, 3)'
+  [24] ✗ pred=''  gold='pop(1)'
+  [25] ✓ pred='visit(1)'  gold='visit(1)'
+  [26] ✗ pred=''  gold='pop(6)'
+  [27] ✗ pred=''  gold='visit(6)'
+  [28] ✗ pred=''  gold='push(5)'
+  [29] ✗ pred=''  gold='set_parent(5, 6)'
+  [30] ✗ pred=''  gold='pop(5)'
+  [31] ✓ pred='visit(5)'  gold='visit(5)'
+  [32] ✗ pred=''  gold='push(8)'
+  [33] ✗ pred=''  gold='set_parent(8, 5)'
+  [34] ✗ pred=''  gold='pop(8)'
+  [35] ✓ pred='visit(8)'  gold='visit(8)'
+  [36] ✗ pred=''  gold='push(9)'
+  [37] ✗ pred=''  gold='set_parent(9, 8)'
+  [38] ✗ pred=''  gold='pop(9)'
+  [39] ✗ pred=''  gold='visit(9)'
+  [40] ✗ pred=''  gold='push(2)'
+  [41] ✗ pred=''  gold='set_parent(2, 9)'
+  [42] ✗ pred=''  gold='pop(2)'
+  [43] ✗ pred=''  gold='visit(2)'
+  [44] ✗ pred=''  gold='pop(5)'
+  [45] ✗ pred=''  gold='pop(7)'
+  [46] ✓ pred='visit(7)'  gold='visit(7)'
+  [47] ✗ pred=''  gold='pop(8)'
+  [48] ✗ pred=''  gold='pop(9)'
+Saved 5 predictions to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/pred_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mScoring → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/metrics_dfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:          5
+Total steps:      278
+Step accuracy:    0.1115
+Trace accuracy:   0.0000
+Mean first-error step: 1.00
+Mean coverage:    1.0000
+
+Wrote metrics to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/metrics_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mFailure analysis → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/failures_dfs_erdos_renyi_n10_c5_s100.json[0m
+Samples:                 5
+Total gold steps:        278
+Overall step accuracy:   0.1115
+Overall failure rate:    0.8885
+Mean first-error step:   1.00
+
+Failure rate by phase:
+   early: 0.8352
+  middle: 0.8901
+    late: 0.9375
+
+Top operation confusions:
+  push(8) -> <missing> (n=13)
+  pop(8) -> <missing> (n=13)
+  pop(9) -> <missing> (n=12)
+  push(9) -> <missing> (n=11)
+  push(5) -> <missing> (n=8)
+  pop(5) -> <missing> (n=8)
+  push(4) -> <missing> (n=7)
+  pop(4) -> <missing> (n=7)
+  pop(7) -> <missing> (n=7)
+  pop(2) -> <missing> (n=6)
+
+Wrote failure analysis to /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/failures_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mNLGraph benchmark → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/nlgraph_dfs_erdos_renyi_n10_c5_s100_*.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:01<06:04,  1.08s/it]Loading weights:   5%|▌         | 17/339 [00:01<00:16, 19.53it/s]Loading weights:   8%|▊         | 27/339 [00:01<00:10, 30.36it/s]Loading weights:  11%|█         | 37/339 [00:01<00:07, 38.30it/s]Loading weights:  13%|█▎        | 45/339 [00:01<00:06, 44.87it/s]Loading weights:  16%|█▌        | 54/339 [00:01<00:05, 48.48it/s]Loading weights:  20%|██        | 68/339 [00:01<00:04, 67.19it/s]Loading weights:  23%|██▎       | 78/339 [00:02<00:05, 44.86it/s]Loading weights:  26%|██▋       | 89/339 [00:02<00:04, 54.75it/s]Loading weights:  29%|██▉       | 99/339 [00:02<00:03, 62.69it/s]Loading weights:  32%|███▏      | 108/339 [00:02<00:03, 58.75it/s]Loading weights:  34%|███▍      | 116/339 [00:02<00:04, 46.05it/s]Loading weights:  37%|███▋      | 126/339 [00:03<00:04, 50.45it/s]Loading weights:  41%|████      | 138/339 [00:03<00:03, 58.45it/s]Loading weights:  44%|████▍     | 150/339 [00:03<00:03, 59.29it/s]Loading weights:  47%|████▋     | 161/339 [00:03<00:03, 56.85it/s]Loading weights:  50%|████▉     | 168/339 [00:03<00:03, 55.63it/s]Loading weights:  51%|█████▏    | 174/339 [00:03<00:02, 56.45it/s]Loading weights:  54%|█████▍    | 184/339 [00:04<00:02, 55.95it/s]Loading weights:  58%|█████▊    | 196/339 [00:04<00:02, 52.27it/s]Loading weights:  62%|██████▏   | 209/339 [00:04<00:02, 45.09it/s]Loading weights:  65%|██████▌   | 222/339 [00:04<00:02, 55.09it/s]Loading weights:  69%|██████▊   | 233/339 [00:05<00:02, 51.53it/s]Loading weights:  72%|███████▏  | 245/339 [00:05<00:01, 50.31it/s]Loading weights:  76%|███████▌  | 257/339 [00:05<00:01, 60.03it/s]Loading weights:  78%|███████▊  | 265/339 [00:05<00:01, 63.31it/s]Loading weights:  81%|████████  | 273/339 [00:05<00:01, 56.20it/s]Loading weights:  83%|████████▎ | 280/339 [00:05<00:01, 48.01it/s]Loading weights:  84%|████████▍ | 286/339 [00:06<00:01, 32.26it/s]Loading weights:  87%|████████▋ | 294/339 [00:06<00:01, 33.65it/s]Loading weights:  90%|█████████ | 306/339 [00:06<00:00, 42.63it/s]Loading weights:  94%|█████████▎| 317/339 [00:06<00:00, 49.03it/s]Loading weights:  97%|█████████▋| 329/339 [00:06<00:00, 55.17it/s]Loading weights: 100%|██████████| 339/339 [00:06<00:00, 48.54it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Wrote predictions:       /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/nlgraph_dfs_erdos_renyi_n10_c5_s100_predictions.json
+Wrote operation metrics: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/nlgraph_dfs_erdos_renyi_n10_c5_s100_operation_accuracy.json
+Wrote failure analysis:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/nlgraph_dfs_erdos_renyi_n10_c5_s100_failure_analysis.json
+
+[1;34m==>[0m [1mGLBench benchmark → /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/glbench_dfs_erdos_renyi_n10_c5_s100_*.json[0m
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:00<04:01,  1.40it/s]Loading weights:   4%|▍         | 15/339 [00:00<00:13, 24.05it/s]Loading weights:   7%|▋         | 23/339 [00:00<00:10, 31.29it/s]Loading weights:   9%|▉         | 30/339 [00:01<00:08, 37.72it/s]Loading weights:  12%|█▏        | 41/339 [00:01<00:06, 44.32it/s]Loading weights:  16%|█▌        | 53/339 [00:01<00:05, 55.74it/s]Loading weights:  19%|█▉        | 65/339 [00:01<00:04, 58.19it/s]Loading weights:  22%|██▏       | 76/339 [00:02<00:06, 40.10it/s]Loading weights:  27%|██▋       | 90/339 [00:02<00:05, 47.14it/s]Loading weights:  30%|██▉       | 101/339 [00:02<00:05, 45.90it/s]Loading weights:  33%|███▎      | 113/339 [00:02<00:04, 50.59it/s]Loading weights:  37%|███▋      | 124/339 [00:02<00:03, 58.11it/s]Loading weights:  39%|███▊      | 131/339 [00:02<00:03, 55.19it/s]Loading weights:  41%|████      | 138/339 [00:03<00:04, 43.50it/s]Loading weights:  44%|████▍     | 149/339 [00:03<00:03, 48.71it/s]Loading weights:  47%|████▋     | 158/339 [00:03<00:03, 55.84it/s]Loading weights:  49%|████▊     | 165/339 [00:03<00:03, 48.93it/s]Loading weights:  51%|█████     | 172/339 [00:03<00:03, 48.02it/s]Loading weights:  53%|█████▎    | 178/339 [00:04<00:03, 45.05it/s]Loading weights:  55%|█████▍    | 185/339 [00:04<00:04, 36.85it/s]Loading weights:  58%|█████▊    | 198/339 [00:04<00:03, 41.48it/s]Loading weights:  62%|██████▏   | 209/339 [00:04<00:02, 48.31it/s]Loading weights:  63%|██████▎   | 215/339 [00:04<00:02, 48.13it/s]Loading weights:  65%|██████▌   | 222/339 [00:05<00:02, 44.15it/s]Loading weights:  69%|██████▊   | 233/339 [00:05<00:02, 42.42it/s]Loading weights:  72%|███████▏  | 245/339 [00:05<00:01, 48.35it/s]Loading weights:  76%|███████▌  | 257/339 [00:05<00:01, 43.54it/s]Loading weights:  79%|███████▉  | 269/339 [00:05<00:01, 54.01it/s]Loading weights:  81%|████████▏ | 276/339 [00:06<00:01, 55.64it/s]Loading weights:  83%|████████▎ | 283/339 [00:06<00:01, 45.09it/s]Loading weights:  88%|████████▊ | 298/339 [00:06<00:00, 52.92it/s]Loading weights:  90%|████████▉ | 305/339 [00:06<00:00, 52.16it/s]Loading weights:  92%|█████████▏| 311/339 [00:06<00:00, 53.06it/s]Loading weights:  94%|█████████▍| 318/339 [00:07<00:00, 45.04it/s]Loading weights:  97%|█████████▋| 329/339 [00:07<00:00, 47.70it/s]Loading weights: 100%|██████████| 339/339 [00:07<00:00, 46.90it/s]
+Wrote predictions:       /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/glbench_dfs_erdos_renyi_n10_c5_s100_predictions.json
+Wrote operation metrics: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/glbench_dfs_erdos_renyi_n10_c5_s100_operation_accuracy.json
+Wrote failure analysis:  /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/glbench_dfs_erdos_renyi_n10_c5_s100_failure_analysis.json
+[pipeline] Wrote run manifest: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/run_manifest_dfs_erdos_renyi_n10_c5_s100.json
+
+[1;34m==>[0m [1mDone[0m
+  trace file:  data/traces/pipe_dfs_erdos_renyi_n10_c5_s100.json
+  predictions: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/pred_dfs_erdos_renyi_n10_c5_s100.json
+  metrics:     /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/metrics_dfs_erdos_renyi_n10_c5_s100.json
+  failures:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/failures_dfs_erdos_renyi_n10_c5_s100.json
+  manifest:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/run_manifest_dfs_erdos_renyi_n10_c5_s100.json
+  log file:    /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/iterative_runs/dfs_iterative_20260426_163707/qwen-2-5-7b/eval_pre/pipeline_dfs_erdos_renyi_n10_c5_s100_20260426_155836.log

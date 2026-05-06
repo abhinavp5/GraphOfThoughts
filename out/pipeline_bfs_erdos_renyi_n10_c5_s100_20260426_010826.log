@@ -1,0 +1,22 @@
+[pipeline] Unified log: /sfs/weka/scratch/mzu9pt/GraphOfThoughts/out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_010826.log
+
+[1;34m==>[0m [1mGraph of Thoughts — pipeline run[0m
+  model:     Qwen/Qwen2.5-7B-Instruct
+  adapter:   checkpoints/qwen-2.5-7b-got
+  algorithm: bfs    family: erdos_renyi    n=10    count=5
+  limit:     5        seed=100
+  device:    cuda       dtype=float16
+  mode:      teacher-forced (gold drives state — default)
+  few-shot:  disabled (zero-shot)
+  out_dir:   out
+  log_file:  out/pipeline_bfs_erdos_renyi_n10_c5_s100_20260426_010826.log
+  nlgraph:   data/benchmarks/nlgraph_eval.json
+  glbench:   data/benchmarks/glbench_eval.json
+
+[1;34m==>[0m [1mScaffolding smoke test (mock model, no ML deps)[0m
+Traceback (most recent call last):
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/scripts/smoke_test_inference.py", line 25, in <module>
+    from inference.prompt_forcing import (
+  File "/sfs/weka/scratch/mzu9pt/GraphOfThoughts/inference/prompt_forcing.py", line 33, in <module>
+    from training.teacher_forcing import (
+ImportError: cannot import name 'SYSTEM_PROMPT' from 'training.teacher_forcing' (/sfs/weka/scratch/mzu9pt/GraphOfThoughts/training/teacher_forcing.py)

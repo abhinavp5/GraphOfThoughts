@@ -30,24 +30,60 @@ from data.linearization import subgraph_to_str
 
 
 # ---------------------------------------------------------------------------
-# System prompt
+# System prompts (per algorithm)
 # ---------------------------------------------------------------------------
 
-SYSTEM_PROMPT = (
-    "You are a BFS algorithm executor. Given a graph and a source node, "
-    "produce the step-by-step BFS execution trace.\n"
-    "At each step, output exactly one operation from the following set:\n"
-    "  enqueue(node)            — add node to the back of the queue\n"
-    "  dequeue(node)            — remove node from the front of the queue\n"
-    "  mark_visited(node)       — record node as visited\n"
-    "  set_parent(child, parent)— record that child was reached from parent\n"
-    "No other operation names are permitted.\n"
-    # TODO: extend with check_visited(node) and terminate() if Option B is adopted.
-    "Format each step as:\n"
-    "Step <t>: <operation>\n"
-    "State: visited=<list> frontier=<list> distances={} parent=<dict>\n"
-    "Subgraph: <linearized edges or (empty)>\n"
-)
+_PROMPTS: dict[str, str] = {
+    "bfs": (
+        "You are a BFS algorithm executor. Given a graph and a source node, "
+        "produce the step-by-step BFS execution trace.\n"
+        "At each step, output exactly one operation from the following set:\n"
+        "  enqueue(node)            — add node to the back of the queue\n"
+        "  dequeue(node)            — remove node from the front of the queue\n"
+        "  mark_visited(node)       — record node as visited\n"
+        "  set_parent(child, parent)— record that child was reached from parent\n"
+        "No other operation names are permitted.\n"
+        # TODO: extend with check_visited(node) and terminate() if Option B is adopted.
+        "Format each step as:\n"
+        "Step <t>: <operation>\n"
+        "State: visited=<list> frontier=<list> distances={} parent=<dict>\n"
+        "Subgraph: <linearized edges or (empty)>\n"
+    ),
+    "dfs": (
+        "You are a DFS algorithm executor. Given a graph and a source node, "
+        "produce the step-by-step DFS execution trace.\n"
+        "At each step, output exactly one operation from the following set:\n"
+        "  push(node)               — push node onto the stack\n"
+        "  pop(node)                — pop node from the stack\n"
+        "  visit(node)              — record node as visited\n"
+        "  set_parent(child, parent)— record that child was reached from parent\n"
+        "No other operation names are permitted.\n"
+        "Format each step as:\n"
+        "Step <t>: <operation>\n"
+        "State: visited=<list> frontier=<list> distances={} parent=<dict>\n"
+        "Subgraph: <linearized edges or (empty)>\n"
+    ),
+    "dijkstra": (
+        "You are a Dijkstra algorithm executor. Given a weighted graph and a source node, "
+        "produce the step-by-step Dijkstra execution trace.\n"
+        "At each step, output exactly one operation from the following set:\n"
+        "  init_source(node)        — set distance(node)=0 and enqueue it\n"
+        "  settle(node)             — mark node's distance as final\n"
+        "  relax(u, v, new_dist)    — update distance(v) via u and record predecessor\n"
+        "No other operation names are permitted.\n"
+        "Format each step as:\n"
+        "Step <t>: <operation>\n"
+        "State: visited=<list> frontier=<list> distances=<dict> parent=<dict>\n"
+        "Subgraph: <linearized edges or (empty)>\n"
+    ),
+}
+
+
+def _system_prompt_for(algorithm: str) -> str:
+    key = (algorithm or "").strip().lower()
+    if key not in _PROMPTS:
+        raise ValueError(f"Unknown algorithm {algorithm!r}. Expected one of {sorted(_PROMPTS)}")
+    return _PROMPTS[key]
 
 
 # ---------------------------------------------------------------------------
@@ -115,7 +151,7 @@ def format_prompt(graph_str: str, algorithm: str, source) -> list[dict]:
         f"Execute the algorithm step by step."
     )
     return [
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "system", "content": _system_prompt_for(algorithm)},
         {"role": "user", "content": user_content},
     ]
 

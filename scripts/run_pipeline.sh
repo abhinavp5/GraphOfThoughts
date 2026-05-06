@@ -25,6 +25,7 @@ cd "$(dirname "$0")/.."
 # -------------------------------------------------------------------
 MODEL="${MODEL:-Qwen/Qwen2.5-0.5B-Instruct}"
 ADAPTER="${ADAPTER:-}"
+DAGGER_ADAPTER="${DAGGER_ADAPTER:-}"
 ALGORITHM="${ALGORITHM:-bfs}"
 FAMILY="${FAMILY:-erdos_renyi}"
 N="${N:-10}"
@@ -55,7 +56,9 @@ Runs the full pipeline: data → inference → evaluation.
 Options (all also settable as env vars):
   -m, --model MODEL        HF model id or local path (default: $MODEL)
   -a, --adapter DIR        LoRA adapter directory (optional)
-  -A, --algorithm ALG      bfs | dfs | dijkstra (default: $ALGORITHM)
+  -A, --algorithm ALG      bfs | dfs | dijkstra | both | bfs+dfs
+                           (both / bfs+dfs = run BFS then DFS sequentially,
+                            same model/adapter, NLGraph+GLBench per algorithm)
   -f, --family FAM         Graph family (default: $FAMILY)
                            Regular: erdos_renyi, barabasi_albert, random_tree, grid
                            Hard:    bridge, bottleneck, high_girth
@@ -105,6 +108,15 @@ Examples:
 
   # Larger graphs (structural generalization spot check)
   bash scripts/run_pipeline.sh --n 50 --count 20 --limit 20
+
+  # Qwen + LoRA, main eval + both benchmarks, BFS and DFS in one go
+  bash scripts/run_pipeline.sh \\
+    --model Qwen/Qwen2.5-7B-Instruct \\
+    --adapter path/to/sft-adapter \\
+    --algorithm both \\
+    --nlgraph-input data/benchmarks/nlgraph_eval.json \\
+    --glbench-input data/benchmarks/glbench_eval.json \\
+    --limit 20 --bench-limit 50
 EOF
 }
 
@@ -114,7 +126,8 @@ EOF
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -m|--model)      MODEL="$2"; shift 2 ;;
-    -a|--adapter)    ADAPTER="$2"; shift 2 ;;
+    -a|--adapter)        ADAPTER="$2"; shift 2 ;;
+    --dagger-adapter)    DAGGER_ADAPTER="$2"; shift 2 ;;
     -A|--algorithm)  ALGORITHM="$2"; shift 2 ;;
     -f|--family)     FAMILY="$2"; shift 2 ;;
     -n|--n)          N="$2"; shift 2 ;;
@@ -139,6 +152,25 @@ while [[ $# -gt 0 ]]; do
     *) echo "Unknown flag: $1" >&2; usage; exit 2 ;;
   esac
 done
+
+# Run BFS then DFS in one invocation (shared model, adapter, benchmark files).
+if [[ "$ALGORITHM" == "both" ]] || [[ "$ALGORITHM" == "bfs+dfs" ]] || [[ "$ALGORITHM" == "bfs,dfs" ]]; then
+  _HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  _ME="${_HERE}/$(basename "${BASH_SOURCE[0]}")"
+  _ROOT="$(cd "${_HERE}/.." && pwd)"
+  export MODEL ADAPTER DAGGER_ADAPTER FAMILY N COUNT LIMIT SEED DEVICE DTYPE OUT_DIR MAX_STEPS
+  export FREE_RUNNING FEW_SHOT SMOKE_ONLY SKIP_SMOKE SKIP_DATA NLGRAPH_INPUT GLBENCH_INPUT BENCH_LIMIT
+  # Per-subrun default logs (TAG differs); a single --log-file would collide.
+  export CLI_LOG_FILE="" PIPELINE_LOG=""
+  for _ALG in bfs dfs; do
+    echo ""
+    echo "══════════════════════════════════════════════════════════════"
+    echo "  Sub-pipeline: algorithm=${_ALG}  (from --algorithm both)"
+    echo "══════════════════════════════════════════════════════════════"
+    ( cd "$_ROOT" && ALGORITHM="$_ALG" bash "$_ME" )
+  done
+  exit 0
+fi
 
 # Dijkstra implies weighted
 if [[ "$ALGORITHM" == "dijkstra" ]] && [[ -z "$WEIGHTED_FLAG" ]]; then
@@ -295,8 +327,9 @@ INF_ARGS=(
   --dtype "$DTYPE"
   --verbose
 )
-[[ -n "$ADAPTER" ]]     && INF_ARGS+=(--adapter "$ADAPTER")
-[[ -n "$MAX_STEPS" ]]   && INF_ARGS+=(--max-steps "$MAX_STEPS")
+[[ -n "$ADAPTER" ]]         && INF_ARGS+=(--adapter "$ADAPTER")
+[[ -n "$DAGGER_ADAPTER" ]]  && INF_ARGS+=(--dagger-adapter "$DAGGER_ADAPTER")
+[[ -n "$MAX_STEPS" ]]       && INF_ARGS+=(--max-steps "$MAX_STEPS")
 [[ "$FREE_RUNNING" == "1" ]] && INF_ARGS+=(--free-running)
 [[ "$FEW_SHOT" != "0" ]] && INF_ARGS+=(--few-shot "$FEW_SHOT")
 
@@ -330,14 +363,20 @@ if [[ -n "$NLGRAPH_INPUT" ]]; then
     --device "$DEVICE"
     --dtype "$DTYPE"
   )
-  [[ -n "$ADAPTER" ]] && NL_ARGS+=(--adapter "$ADAPTER")
-  [[ -n "$MAX_STEPS" ]] && NL_ARGS+=(--max-steps "$MAX_STEPS")
+  [[ -n "$ADAPTER" ]]        && NL_ARGS+=(--adapter "$ADAPTER")
+  [[ -n "$DAGGER_ADAPTER" ]] && NL_ARGS+=(--dagger-adapter "$DAGGER_ADAPTER")
+  [[ -n "$MAX_STEPS" ]]      && NL_ARGS+=(--max-steps "$MAX_STEPS")
   [[ -n "$BENCH_LIMIT" ]] && NL_ARGS+=(--limit "$BENCH_LIMIT")
   [[ "$FREE_RUNNING" == "1" ]] && NL_ARGS+=(--free-running)
-  python -m evaluation.benchmarks.nlgraph "${NL_ARGS[@]}"
-  NL_PRED="${NL_PREFIX}_predictions.json"
-  NL_OA="${NL_PREFIX}_operation_accuracy.json"
-  NL_FA="${NL_PREFIX}_failure_analysis.json"
+  if [[ "$ALGORITHM" == "bfs" || "$ALGORITHM" == "dfs" ]]; then
+    NL_ARGS+=(--algorithm "$ALGORITHM")
+    python -m evaluation.benchmarks.nlgraph "${NL_ARGS[@]}"
+    NL_PRED="${NL_PREFIX}_predictions.json"
+    NL_OA="${NL_PREFIX}_operation_accuracy.json"
+    NL_FA="${NL_PREFIX}_failure_analysis.json"
+  else
+    echo "[pipeline][warn] Skipping NLGraph: adapter supports bfs|dfs only (algorithm=$ALGORITHM)." >&2
+  fi
 fi
 
 GL_PREFIX=""
@@ -355,10 +394,12 @@ if [[ -n "$GLBENCH_INPUT" ]]; then
     --device "$DEVICE"
     --dtype "$DTYPE"
   )
-  [[ -n "$ADAPTER" ]] && GL_ARGS+=(--adapter "$ADAPTER")
-  [[ -n "$MAX_STEPS" ]] && GL_ARGS+=(--max-steps "$MAX_STEPS")
+  [[ -n "$ADAPTER" ]]        && GL_ARGS+=(--adapter "$ADAPTER")
+  [[ -n "$DAGGER_ADAPTER" ]] && GL_ARGS+=(--dagger-adapter "$DAGGER_ADAPTER")
+  [[ -n "$MAX_STEPS" ]]      && GL_ARGS+=(--max-steps "$MAX_STEPS")
   [[ -n "$BENCH_LIMIT" ]] && GL_ARGS+=(--limit "$BENCH_LIMIT")
   [[ "$FREE_RUNNING" == "1" ]] && GL_ARGS+=(--free-running)
+  GL_ARGS+=(--algorithm "$ALGORITHM")
   python -m evaluation.benchmarks.glbench "${GL_ARGS[@]}"
   GL_PRED="${GL_PREFIX}_predictions.json"
   GL_OA="${GL_PREFIX}_operation_accuracy.json"
@@ -381,7 +422,7 @@ fi
 
 # Build paths JSON (nlgraph / glbench blocks optional)
 export MANIFEST_FILE RUN_ID TAG RUN_START RUN_END PIPELINE_LOG_FILE
-export MODEL ADAPTER ALGORITHM FAMILY N COUNT LIMIT SEED DEVICE DTYPE
+export MODEL ADAPTER DAGGER_ADAPTER ALGORITHM FAMILY N COUNT LIMIT SEED DEVICE DTYPE
 export BENCH_LIMIT MAX_STEPS SMOKE_ONLY TRACE_FILE PRED_FILE METRICS_FILE FAILURES_FILE
 export NL_PREFIX NL_PRED NL_OA NL_FA GL_PREFIX GL_PRED GL_OA GL_FA
 export JSON_FREE

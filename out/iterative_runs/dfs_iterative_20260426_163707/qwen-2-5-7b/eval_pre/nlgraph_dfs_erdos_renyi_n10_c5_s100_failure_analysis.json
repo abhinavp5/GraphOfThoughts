@@ -1,0 +1,80 @@
+{
+  "n_samples": 1,
+  "total_gold_steps": 8,
+  "total_matches": 2,
+  "total_failures": 6,
+  "overall_step_accuracy": 0.25,
+  "overall_failure_rate": 0.75,
+  "samples_with_any_error": 1,
+  "mean_first_error_step": 1.0,
+  "error_type_counts": {
+    "wrong_operation": 6
+  },
+  "failure_rate_by_algorithm": {
+    "bfs": 0.75
+  },
+  "failure_rate_by_step_bucket": {
+    "early": 0.6666666666666666,
+    "middle": 0.5,
+    "late": 1.0
+  },
+  "failure_rate_by_step_index": {
+    "0": 0.0,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 0.0,
+    "4": 1.0,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0
+  },
+  "failure_rate_by_gold_operation_type": {
+    "dequeue": 1.0,
+    "enqueue": 0.6666666666666666,
+    "set_parent": 1.0,
+    "visit": 0.0
+  },
+  "top_operation_confusions": [
+    {
+      "gold_operation": "set_parent(1, None)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    },
+    {
+      "gold_operation": "dequeue(1)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(2)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(2, 1)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    },
+    {
+      "gold_operation": "enqueue(3)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    },
+    {
+      "gold_operation": "set_parent(3, 1)",
+      "predicted_operation": "<missing>",
+      "count": 1
+    }
+  ],
+  "per_sample": [
+    {
+      "algorithm": "bfs",
+      "source": 1,
+      "n_gold_steps": 8,
+      "n_failures": 6,
+      "step_accuracy": 0.25,
+      "first_error_step": 1,
+      "n_invalid_or_runtime_errors": 0
+    }
+  ]
+}
