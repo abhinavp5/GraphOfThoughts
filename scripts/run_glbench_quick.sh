@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# GLBench-only eval: one graph each for BFS and DFS in data/benchmarks/glbench_eval.json.
-# Fast on a spare GPU; writes small JSONs (predictions + metrics) under OUT_DIR.
+# GLBench-only eval: two BFS + two DFS rows (same tasks duplicated) in
+# data/benchmarks/glbench_eval_quick2x.json — ~2x the inference of a single row per algo.
+# Override with INPUT=data/benchmarks/glbench_eval.json for the minimal 1+1 shard.
+# Writes small JSONs (predictions + metrics) under OUT_DIR.
 #
 # Rivanna / shared clusters: use one conda env end-to-end and Conda's libstdc++.
 #   source "$(conda info --base)/etc/profile.d/conda.sh" && conda activate got
@@ -29,7 +31,7 @@ DAGGER_ADAPTER="${DAGGER_ADAPTER:-}"
 OUT_DIR="${OUT_DIR:-$ROOT/out/glbench_quick}"
 DEVICE="${DEVICE:-cuda}"
 DTYPE="${DTYPE:-float16}"
-INPUT="${INPUT:-data/benchmarks/glbench_eval.json}"
+INPUT="${INPUT:-data/benchmarks/glbench_eval_quick2x.json}"
 
 mkdir -p "$OUT_DIR"
 
@@ -54,7 +56,7 @@ run_algo () {
 run_algo bfs
 run_algo dfs
 
-echo "=== step_accuracy (no jq needed)"
+echo "=== step_accuracy and n_samples (no jq needed)"
 export OUT_DIR
 python -c '
 import json, os
@@ -63,7 +65,8 @@ out = Path(os.environ["OUT_DIR"])
 for algo in ("bfs", "dfs"):
     p = out / f"glbench_{algo}_operation_accuracy.json"
     if p.is_file():
-        print(algo, json.loads(p.read_text())["step_accuracy"])
+        d = json.loads(p.read_text())
+        print(algo, "step_accuracy=", d["step_accuracy"], " n_samples=", d.get("n_samples"))
     else:
         print(algo, "MISSING", p)
 '
