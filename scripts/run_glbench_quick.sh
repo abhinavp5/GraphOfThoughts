@@ -2,6 +2,12 @@
 # GLBench-only eval: one graph each for BFS and DFS in data/benchmarks/glbench_eval.json.
 # Fast on a spare GPU; writes small JSONs (predictions + metrics) under OUT_DIR.
 #
+# Rivanna / shared clusters: use one conda env end-to-end and Conda's libstdc++.
+#   source "$(conda info --base)/etc/profile.d/conda.sh" && conda activate got
+#   export PYTHONNOUSERSITE=1
+#   export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH:-}"
+# Otherwise you may see: ImportError: libstdc++.so.6: GLIBCXX_3.4.29 not found
+#
 # Example (SFT only):
 #   MODEL="Qwen/Qwen2.5-7B-Instruct" \
 #   ADAPTER="$HOME/out/.../pre_sft_adapter" \
@@ -48,4 +54,16 @@ run_algo () {
 run_algo bfs
 run_algo dfs
 
-echo "Done. Step accuracy: grep step_accuracy ${OUT_DIR}/glbench_*_operation_accuracy.json"
+echo "=== step_accuracy (no jq needed)"
+export OUT_DIR
+python -c '
+import json, os
+from pathlib import Path
+out = Path(os.environ["OUT_DIR"])
+for algo in ("bfs", "dfs"):
+    p = out / f"glbench_{algo}_operation_accuracy.json"
+    if p.is_file():
+        print(algo, json.loads(p.read_text())["step_accuracy"])
+    else:
+        print(algo, "MISSING", p)
+'
